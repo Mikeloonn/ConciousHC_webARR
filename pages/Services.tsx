@@ -1,40 +1,7 @@
 import React from 'react';
 import PageHeader from '../components/PageHeader';
 import SEO from '../components/SEO';
-import { IMAGES } from '../constants/images';
-
-const servicesList = [
-  {
-    title: 'Acupuntura',
-    description: 'Técnica milenaria china que implica la inserción de agujas finas en puntos específicos del cuerpo para aliviar el dolor y tratar diversas condiciones físicas y emocionales.',
-    image: IMAGES.services.acupuntura
-  },
-  {
-    title: 'Auriculoterapia',
-    description: 'Método de tratamiento en el cual se estimula la superficie externa de la oreja, o aurícula, para aliviar condiciones patológicas en otras partes del cuerpo.',
-    image: IMAGES.services.auriculoterapia
-  },
-  {
-    title: 'Fitoterapia',
-    description: 'Uso de productos de origen vegetal con finalidad terapéutica, ya sea para prevenir, para atenuar o para curar un estado patológico.',
-    image: IMAGES.services.fitoterapia
-  },
-  {
-    title: 'Ventosas (Cupping)',
-    description: 'Terapia antigua en la que se colocan copas especiales en la piel durante unos minutos para crear succión, facilitando el flujo sanguíneo y la relajación.',
-    image: IMAGES.services.ventosas
-  },
-  {
-    title: 'Masaje Tuina',
-    description: 'Rama de la medicina china tradicional que utiliza el masaje, la acupresión y otras formas de manipulación corporal.',
-    image: IMAGES.services.tuina
-  },
-  {
-    title: 'Moxibustión',
-    description: 'Terapia que consiste en quemar artemisa seca (moxa) en puntos particulares del cuerpo.',
-    image: IMAGES.services.moxibustion
-  }
-];
+import { servicesList, pricesList } from '../data/services';
 
 const Services: React.FC = () => {
   return (
@@ -82,15 +49,11 @@ const Services: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="text-textGray">
-                  {[
-                    { s: 'Consulta Inicial', d: '60 min', p: 'S/. 100' },
-                    { s: 'Sesión de Acupuntura', d: '45 min', p: 'S/. 80' },
-                    { s: 'Masaje Terapéutico', d: '50 min', p: 'S/. 90' },
-                  ].map((row, i) => (
+                  {pricesList.map((row, i) => (
                     <tr key={i} className="hover:bg-light">
-                      <td className="p-4 border border-gray-200">{row.s}</td>
-                      <td className="p-4 border border-gray-200 text-center">{row.d}</td>
-                      <td className="p-4 border border-gray-200 text-center font-bold text-primary">{row.p}</td>
+                      <td className="p-4 border border-gray-200">{row.name}</td>
+                      <td className="p-4 border border-gray-200 text-center">{row.duration}</td>
+                      <td className="p-4 border border-gray-200 text-center font-bold text-primary">{row.price}</td>
                     </tr>
                   ))}
                 </tbody>

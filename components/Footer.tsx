@@ -1,5 +1,6 @@
 import React from 'react';
 import { Clock } from 'lucide-react';
+import { footerLinks, footerAbout, footerHours, footerBottomLinks } from '../data/footer';
 
 const Footer: React.FC = () => {
   return (
@@ -9,10 +10,10 @@ const Footer: React.FC = () => {
           
           {/* Column 1: About */}
           <div>
-            <h2 className="text-xl font-bold mb-1 text-white">Nosotros</h2>
+            <h2 className="text-xl font-bold mb-1 text-white">{footerAbout.title}</h2>
             <div className="text-secondary text-xs mb-4">_____________</div>
             <p className="text-gray-300 text-sm leading-relaxed">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit quod voluptas itaque corporis possimus fugiat porro, explicabo at vitae labore!
+              {footerAbout.description}
             </p>
           </div>
 
@@ -21,7 +22,7 @@ const Footer: React.FC = () => {
             <h2 className="text-xl font-bold mb-1 text-white">Enlaces</h2>
             <div className="text-secondary text-xs mb-4">_____________</div>
             <div className="flex flex-col gap-2">
-              {['Servicios', 'Términos y condiciones', 'Privacidad', 'Testimonios'].map((item) => (
+              {footerLinks.map((item) => (
                 <a key={item} href="#" className="text-gray-400 hover:text-secondary text-sm transition-colors duration-200">
                   {item}
                 </a>
@@ -53,20 +54,15 @@ const Footer: React.FC = () => {
             <h2 className="text-xl font-bold mb-1 text-white">Horarios</h2>
             <div className="text-secondary text-xs mb-4">_____________</div>
             <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <Clock className="text-secondary w-8 h-8" />
-                <div>
-                  <p className="text-sm font-bold text-white">Lun. - Sáb.</p>
-                  <p className="text-xs text-gray-400">8:00AM - 8:00PM</p>
+              {footerHours.map((schedule, index) => (
+                <div key={index} className="flex items-center gap-4">
+                  <Clock className="text-secondary w-8 h-8" />
+                  <div>
+                    <p className="text-sm font-bold text-white">{schedule.label}</p>
+                    <p className="text-xs text-gray-400">{schedule.time}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <Clock className="text-secondary w-8 h-8" />
-                <div>
-                  <p className="text-sm font-bold text-white">Dom. - Festivos</p>
-                  <p className="text-xs text-gray-400">10:00AM - 5:00PM</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -77,9 +73,11 @@ const Footer: React.FC = () => {
             &copy; 2025 Acupuntura y Terapias Holísticas - Todos los derechos reservados
           </p>
           <div className="flex gap-4">
-            <a href="#" className="text-sm text-gray-300 hover:text-secondary font-bold">INICIO</a>
-            <a href="#" className="text-sm text-gray-300 hover:text-secondary font-bold">SOBRE NOSOTROS</a>
-            <a href="#" className="text-sm text-gray-300 hover:text-secondary font-bold">CONTACTO</a>
+            {footerBottomLinks.map((link, index) => (
+              <a key={index} href={link.href} className="text-sm text-gray-300 hover:text-secondary font-bold">
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
       </div>

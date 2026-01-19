@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #3D362F; /* --colora3 */
+  --color-secondary: #C5AC96; /* --colora0 */
+  --color-accent: #90806F; /* --colora4 */
+  --color-dark: #28241F; /* --colora5 */
+  --color-light: #f4f7f9; /* --colora1 */
+  --color-textGray: #555555; /* --colora6 */
+
+  --font-sans: 'Poppins', sans-serif;
+  --font-ubuntu: 'Ubuntu', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
