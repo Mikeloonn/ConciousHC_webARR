@@ -3,21 +3,22 @@ import { Link } from 'react-router-dom';
 import { Clock, MapPin, Calendar, CheckCircle } from 'lucide-react';
 import SEO from '../components/SEO';
 import { IMAGES } from '../constants/images';
+import TestimonialCarousel from '../components/TestimonialCarousel';
 
 const Home: React.FC = () => {
   return (
     <div className="w-full">
-      <SEO 
-        title="Inicio" 
-        description="Bienvenido a Medico. Especialistas en Acupuntura, Fisioterapia y Terapias Holísticas para tu bienestar integral en Lima." 
+      <SEO
+        title="Inicio"
+        description="Bienvenido a Medico. Especialistas en Acupuntura, Fisioterapia y Terapias Holísticas para tu bienestar integral en Lima."
       />
       {/* HERO SECTION */}
       <section className="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
         {/* Video Background Fallback to Image */}
         <div className="absolute inset-0 z-0">
-          <img 
+          <img
             src={IMAGES.heroBackground}
-            alt="Hero Background" 
+            alt="Hero Background"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gray-900/60 z-10"></div>
@@ -84,10 +85,10 @@ const Home: React.FC = () => {
             </div>
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-2xl transform rotate-1 hover:rotate-0 transition-transform duration-500">
-                <img 
-                   src={IMAGES.aboutHome}
-                   alt="About Us" 
-                   className="w-full h-auto"
+                <img
+                  src={IMAGES.aboutHome}
+                  alt="About Us"
+                  className="w-full h-auto"
                 />
                 {/* Simulated Play Button for Video */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -108,7 +109,7 @@ const Home: React.FC = () => {
             <h2 className="text-4xl font-bold text-dark mb-4">Nuestros servicios</h2>
             <div className="w-12 h-1 bg-primary rounded mx-auto"></div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { title: 'Acupuntura', img: IMAGES.services.acupuntura },
@@ -129,7 +130,7 @@ const Home: React.FC = () => {
               </div>
             ))}
           </div>
-          
+
           <div className="text-center mt-12">
             <Link to="/services" className="inline-block bg-primary text-white px-8 py-3 shadow-lg hover:bg-dark transition-colors duration-300">
               Ver más servicios
@@ -143,9 +144,9 @@ const Home: React.FC = () => {
         <div className="max-w-[1140px] mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
             <div className="md:col-span-2">
-              <img 
+              <img
                 src={IMAGES.specialist}
-                alt="Yeni Arriarán" 
+                alt="Yeni Arriarán"
                 className="w-full rounded-lg shadow-2xl"
               />
             </div>
@@ -167,6 +168,18 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* TESTIMONIALS SECTION */}
+      <section className="py-20 bg-light overflow-hidden">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="text-center mb-12 px-4">
+            <h2 className="text-3xl font-bold text-dark mb-2">Testimonios</h2>
+            <div className="w-12 h-1 bg-primary rounded mx-auto mb-4"></div>
+            <p className="text-textGray">Lo que dicen nuestros pacientes sobre nosotros</p>
+          </div>
+          <TestimonialCarousel />
+        </div>
+      </section>
+
       {/* PROMO VIDEO SECTION */}
       <section className="py-20 bg-dark text-white">
         <div className="max-w-[800px] mx-auto px-4 text-center">
@@ -175,10 +188,10 @@ const Home: React.FC = () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, ullam hic, quas ex rerum voluptatem ducimus temporibus neque ipsam, maxime esse cum amet.
           </p>
           <div className="aspect-w-16 aspect-h-9 w-full bg-black rounded-xl overflow-hidden shadow-2xl">
-             {/* Placeholder for iframe */}
-             <div className="w-full aspect-video bg-gray-800 flex items-center justify-center">
-                <span className="text-gray-500">Video Promocional Player</span>
-             </div>
+            {/* Placeholder for iframe */}
+            <div className="w-full aspect-video bg-gray-800 flex items-center justify-center">
+              <span className="text-gray-500">Video Promocional Player</span>
+            </div>
           </div>
         </div>
       </section>
@@ -201,12 +214,12 @@ const Home: React.FC = () => {
                   <input type="text" placeholder="Asunto" className="w-full border-b border-light py-2 px-3 focus:border-primary outline-none transition-colors" />
                 </div>
                 <textarea rows={4} placeholder="Déjanos tu mensaje" className="w-full border-b border-light py-2 px-3 focus:border-primary outline-none resize-none transition-colors"></textarea>
-                
+
                 <div className="flex items-start gap-2 text-sm text-textGray mt-4">
-                   <input type="checkbox" id="policy" className="mt-1" />
-                   <label htmlFor="policy">
-                     He leído y estoy de acuerdo con los <a href="#" className="text-primary hover:underline">términos y condiciones</a>.
-                   </label>
+                  <input type="checkbox" id="policy" className="mt-1" />
+                  <label htmlFor="policy">
+                    He leído y estoy de acuerdo con los <a href="#" className="text-primary hover:underline">términos y condiciones</a>.
+                  </label>
                 </div>
 
                 <button type="button" className="mt-6 bg-light text-textGray px-6 py-3 font-medium hover:bg-primary hover:text-white transition-all duration-300 shadow-md">
