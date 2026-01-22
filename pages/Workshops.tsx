@@ -4,52 +4,37 @@ import SEO from '../components/SEO';
 import { IMAGES } from '../constants/images';
 import { Check } from 'lucide-react';
 
-const servicesList = [
+const workshopsList = [
   {
-    title: 'Acupuntura',
-    description: 'Técnica milenaria china que implica la inserción de agujas finas en puntos específicos del cuerpo para aliviar el dolor y tratar diversas condiciones físicas y emocionales. Ideal para estrés, migrañas y dolores musculares.',
-    image: IMAGES.services.acupuntura
+    title: 'Yoga',
+    description: 'Nuestras clases de Yoga están diseñadas para unir cuerpo, mente y espíritu. A través de asanas (posturas), pranayama (respiración) y meditación, mejoramos la flexibilidad, reducimos el estrés y promovemos un estado de paz interior.',
+    image: IMAGES.workshops.yoga
   },
   {
-    title: 'Auriculoterapia',
-    description: 'Método de tratamiento en el cual se estimula la superficie externa de la oreja, o aurícula, para aliviar condiciones patológicas en otras partes del cuerpo. Excelente complemento para control de peso y ansiedad.',
-    image: IMAGES.services.auriculoterapia
+    title: 'Pilates',
+    description: 'El método Pilates se centra en el desarrollo de los músculos internos para mantener el equilibrio corporal y dar estabilidad y firmeza a la columna vertebral. Es ideal para rehabilitación y prevención de dolores de espalda.',
+    image: IMAGES.workshops.pilates
   },
   {
-    title: 'Fitoterapia',
-    description: 'Uso de productos de origen vegetal con finalidad terapéutica, ya sea para prevenir, para atenuar o para curar un estado patológico. Utilizamos hierbas seleccionadas y fórmulas tradicionales.',
-    image: IMAGES.services.fitoterapia
-  },
-  {
-    title: 'Ventosas (Cupping)',
-    description: 'Terapia antigua en la que se colocan copas especiales en la piel durante unos minutos para crear succión, facilitando el flujo sanguíneo, la relajación y el bienestar general.',
-    image: IMAGES.services.ventosas
-  },
-  {
-    title: 'Masaje Tuina',
-    description: 'Rama de la medicina china tradicional que utiliza el masaje, la acupresión y otras formas de manipulación corporal para desbloquear el Chi y restaurar el equilibrio.',
-    image: IMAGES.services.tuina
-  },
-  {
-    title: 'Moxibustión',
-    description: 'Terapia que consiste en quemar artemisa seca (moxa) en puntos particulares del cuerpo. El calor estimula el flujo de energía y fortalece el sistema inmunológico.',
-    image: IMAGES.services.moxibustion
+    title: 'Coach Transformacional',
+    description: 'Un proceso de acompañamiento reflexivo y creativo que te inspira a maximizar tu potencial personal y profesional. Trabajamos creencias limitantes, gestión emocional y logro de objetivos vitales.',
+    image: IMAGES.workshops.coaching
   }
 ];
 
-const Services: React.FC = () => {
+const Workshops: React.FC = () => {
   return (
     <div>
       <SEO 
-        title="Nuestros Servicios" 
-        description="Ofrecemos Acupuntura, Ventosas, Fitoterapia y Masajes Terapéuticos. Descubre nuestras tarifas y tratamientos holísticos." 
+        title="Talleres" 
+        description="Participa en nuestros talleres de Yoga, Pilates y Coaching Transformacional. Mejora tu bienestar físico y mental en grupo." 
       />
-      <PageHeader title="SERVICIOS" breadcrumb="Servicios" />
+      <PageHeader title="TALLERES" breadcrumb="Talleres" />
 
       <section className="py-20 bg-white">
         <div className="max-w-[1140px] mx-auto px-4">
           <div className="flex flex-col gap-24">
-            {servicesList.map((service, index) => (
+            {workshopsList.map((workshop, index) => (
               <div 
                 key={index} 
                 className={`flex flex-col ${index % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 md:gap-16`}
@@ -60,8 +45,8 @@ const Services: React.FC = () => {
                      <div className="absolute top-4 left-4 w-full h-full border-2 border-secondary rounded-2xl transform translate-x-2 translate-y-2 z-0"></div>
                      <div className="relative z-10 rounded-2xl overflow-hidden shadow-xl">
                         <img 
-                          src={service.image} 
-                          alt={service.title} 
+                          src={workshop.image} 
+                          alt={workshop.title} 
                           className="w-full h-[350px] md:h-[450px] object-cover transform group-hover:scale-105 transition-transform duration-700" 
                         />
                         {/* Overlay effect */}
@@ -74,13 +59,13 @@ const Services: React.FC = () => {
                 <div className="w-full md:w-1/2">
                   <div className="flex items-center gap-3 mb-4">
                      <div className="h-[2px] w-12 bg-secondary"></div>
-                     <span className="text-secondary font-bold uppercase tracking-wider text-sm">Terapia Holística</span>
+                     <span className="text-secondary font-bold uppercase tracking-wider text-sm">Bienestar & Movimiento</span>
                   </div>
                   <h3 className="text-3xl md:text-4xl font-bold text-dark mb-6">
-                    {service.title}
+                    {workshop.title}
                   </h3>
                   <p className="text-textGray text-lg leading-relaxed mb-8">
-                    {service.description}
+                    {workshop.description}
                   </p>
                   
                   <ul className="space-y-3 mb-8">
@@ -88,18 +73,18 @@ const Services: React.FC = () => {
                         <div className="bg-light p-1 rounded-full text-primary">
                            <Check size={16} strokeWidth={3} />
                         </div>
-                        <span>Atención personalizada</span>
+                        <span>Grupos reducidos</span>
                      </li>
                      <li className="flex items-center gap-3 text-textGray">
                         <div className="bg-light p-1 rounded-full text-primary">
                            <Check size={16} strokeWidth={3} />
                         </div>
-                        <span>Ambiente relajante y seguro</span>
+                        <span>Instructores certificados</span>
                      </li>
                   </ul>
 
                   <button className="bg-primary text-white px-8 py-3 rounded hover:bg-dark transition-colors duration-300 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                    Agendar Sesión
+                    Inscribirse
                   </button>
                 </div>
               </div>
@@ -111,4 +96,4 @@ const Services: React.FC = () => {
   );
 };
 
-export default Services;
+export default Workshops;

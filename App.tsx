@@ -10,6 +10,7 @@ import Services from './pages/Services';
 import Blogs from './pages/Blogs';
 import Contact from './pages/Contact';
 import { useEffect } from 'react';
+import Workshops from './pages/Workshops';
 
 const ScrollToTopRoute = () => {
   const { pathname } = useLocation();
@@ -33,6 +34,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/workshops" element={<Workshops />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
