@@ -14,7 +14,7 @@ export const IMAGES = {
   specialist: "https://picsum.photos/500/600?image=65",
   contactPreview: "https://picsum.photos/600/800?image=80",
 
-  // Testimonials
+   // Testimonials
   testimonials: [
     "https://picsum.photos/150/150?image=30",
     "https://picsum.photos/150/150?image=40",
@@ -22,7 +22,7 @@ export const IMAGES = {
     "https://picsum.photos/150/150?image=60",
     "https://picsum.photos/150/150?image=70",
   ],
-
+  
 
   // Reels Placeholders (Vertical 9:16 approx)
   reelPlaceholder: "https://picsum.photos/270/480?image=90",
