@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Clock } from 'lucide-react';
 import { footerLinks, footerAbout, footerHours, footerBottomLinks } from '../data/footer';
 
@@ -7,7 +8,7 @@ const Footer: React.FC = () => {
     <footer className="bg-dark text-white pt-16 pb-8">
       <div className="max-w-[1140px] mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          
+
           {/* Column 1: About */}
           <div>
             <h2 className="text-xl font-bold mb-1 text-white">{footerAbout.title}</h2>
@@ -19,29 +20,37 @@ const Footer: React.FC = () => {
 
           {/* Column 2: Links */}
           <div>
-            <h2 className="text-xl font-bold mb-1 text-white">Enlaces</h2>
+            <h2 className="text-xl font-bold mb-1 text-white">Legal</h2>
             <div className="text-secondary text-xs mb-4">_____________</div>
             <div className="flex flex-col gap-2">
-              {footerLinks.map((item) => (
-                <a key={item} href="#" className="text-gray-400 hover:text-secondary text-sm transition-colors duration-200">
-                  {item}
-                </a>
-              ))}
+              <Link to="/legal" className="text-gray-400 hover:text-secondary text-sm transition-colors duration-200">
+                Aviso Legal
+              </Link>
+              <Link to="/privacy" className="text-gray-400 hover:text-secondary text-sm transition-colors duration-200">
+                Política de Privacidad
+              </Link>
+              <Link to="/cookies" className="text-gray-400 hover:text-secondary text-sm transition-colors duration-200">
+                Política de Cookies
+              </Link>
+              <Link to="/services" className="text-gray-400 hover:text-secondary text-sm transition-colors duration-200">
+                Servicios
+              </Link>
             </div>
           </div>
+
 
           {/* Column 3: Subscribe */}
           <div>
             <h2 className="text-xl font-bold mb-1 text-white">Suscríbete</h2>
             <div className="text-secondary text-xs mb-4">_____________</div>
             <form className="flex flex-col gap-3">
-              <input 
-                type="email" 
-                placeholder="Correo electrónico" 
+              <input
+                type="email"
+                placeholder="Correo electrónico"
                 className="bg-primary/50 border border-gray-600 rounded px-4 py-2 text-sm focus:outline-none focus:border-secondary text-white placeholder-gray-400"
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="bg-accent hover:bg-secondary text-dark font-bold py-2 rounded transition-colors duration-300 text-sm uppercase"
               >
                 Suscribirse

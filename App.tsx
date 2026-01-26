@@ -11,6 +11,10 @@ import Blogs from './pages/Blogs';
 import Contact from './pages/Contact';
 import { useEffect } from 'react';
 import Workshops from './pages/Workshops';
+import LegalNotice from './pages/LegalNotice';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import CookiePolicy from './pages/CookiePolicy';
+import CookieBanner from './components/CookieBanner';
 
 const ScrollToTopRoute = () => {
   const { pathname } = useLocation();
@@ -37,10 +41,15 @@ const App: React.FC = () => {
             <Route path="/workshops" element={<Workshops />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/contact" element={<Contact />} />
+            {/* Legal Routes */}
+            <Route path="/legal" element={<LegalNotice />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/cookies" element={<CookiePolicy />} />
           </Routes>
         </div>
         <Footer />
         <ScrollToTop />
+        <CookieBanner />
       </div>
     </Router>
   );

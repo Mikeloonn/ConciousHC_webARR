@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import SEO from '../components/SEO';
 
 const Contact: React.FC = () => {
+  const [termsAccepted, setTermsAccepted] = useState(false);
+
   return (
     <div>
       <SEO 
@@ -64,7 +67,28 @@ const Contact: React.FC = () => {
                    </div>
                    <input type="text" placeholder="Asunto" className="w-full bg-light border border-transparent focus:border-primary focus:bg-white rounded py-3 px-4 outline-none transition-colors" />
                    <textarea rows={5} placeholder="Mensaje" className="w-full bg-light border border-transparent focus:border-primary focus:bg-white rounded py-3 px-4 outline-none resize-none transition-colors"></textarea>
-                   <button type="submit" className="bg-primary text-white font-bold py-3 px-8 rounded hover:bg-dark transition-colors w-full md:w-auto">
+                   
+                   {/* Terms Checkbox */}
+                   <div className="flex items-start gap-3 py-2">
+                     <input 
+                       type="checkbox" 
+                       id="terms" 
+                       className="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                       checked={termsAccepted}
+                       onChange={(e) => setTermsAccepted(e.target.checked)}
+                     />
+                     <label htmlFor="terms" className="text-sm text-textGray leading-tight select-none cursor-pointer">
+                       He leído y acepto la <Link to="/privacy" className="text-primary hover:underline">Política de Privacidad</Link> y consiento el tratamiento de mis datos.
+                     </label>
+                   </div>
+
+                   <button 
+                    type="submit" 
+                    disabled={!termsAccepted}
+                    className={`bg-primary text-white font-bold py-3 px-8 rounded transition-colors w-full md:w-auto ${
+                      !termsAccepted ? 'opacity-50 cursor-not-allowed' : 'hover:bg-dark cursor-pointer'
+                    }`}
+                   >
                       ENVIAR MENSAJE
                    </button>
                 </form>
