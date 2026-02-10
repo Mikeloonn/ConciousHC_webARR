@@ -18,7 +18,22 @@ export default {
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
         ubuntu: ['Ubuntu', 'sans-serif'],
-      }
+      },
+      keyframes: {
+        'slide-in-left': {
+          '0%': {
+            transform: 'translateX(-1000px)',
+            opacity: '0',
+          },
+          '100%': {
+            transform: 'translateX(0)',
+            opacity: '1',
+          },
+        },
+      },
+      animation: {
+        'slide-in-left': 'slide-in-left 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both',
+      },
     },
   },
   plugins: [],

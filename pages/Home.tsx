@@ -24,7 +24,7 @@ const Home: React.FC = () => {
           <div className="absolute inset-0 bg-gray-900/60 z-10"></div>
         </div>
 
-        <div className="relative z-20 px-4 max-w-4xl mx-auto mt-16 animate-fade-in-up">
+        <div className="relative z-20 px-4 max-w-4xl mx-auto mt-16 animate-slide-in-left">
           <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
             Acupuntura y Terapias Holísticas
           </h1>
