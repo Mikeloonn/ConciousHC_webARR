@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import logo from '../assets/images/logohc.jpg';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,11 +37,20 @@ const Navbar: React.FC = () => {
     >
       <div className="max-w-[1140px] mx-auto px-4 flex justify-between items-center relative">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-           <div className={`font-bold text-2xl ${isScrolled ? 'text-primary' : 'text-white'}`}>
-             MEDICO
+        <Link to="/" className="flex items-center gap-3 group">
+           <img 
+             src={logo} 
+             alt="Logo Conscious Healing Center" 
+             className="h-10 w-10 rounded-full object-cover border-2 border-secondary/20 transition-transform duration-300 group-hover:scale-110 shadow-sm"
+           />
+           <div className="flex flex-col">
+             <span className={`font-bold text-xl leading-none tracking-tight ${isScrolled ? 'text-primary' : 'text-white'}`}>
+               Conscious Healing
+             </span>
+             <span className={`text-[10px] font-medium uppercase tracking-[0.2em] ${isScrolled ? 'text-accent' : 'text-secondary'}`}>
+               Center
+             </span>
            </div>
-           {/* If you had an image logo: <img src="..." alt="Logo" className="h-10 w-auto" /> */}
         </Link>
 
         {/* Mobile Menu Toggle */}

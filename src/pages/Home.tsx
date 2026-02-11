@@ -180,22 +180,6 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* PROMO VIDEO SECTION */}
-      <section className="py-20 bg-dark text-white">
-        <div className="max-w-[800px] mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">Promociones del Mes</h2>
-          <p className="text-gray-300 mb-10">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, ullam hic, quas ex rerum voluptatem ducimus temporibus neque ipsam, maxime esse cum amet.
-          </p>
-          <div className="aspect-w-16 aspect-h-9 w-full bg-black rounded-xl overflow-hidden shadow-2xl">
-            {/* Placeholder for iframe */}
-            <div className="w-full aspect-video bg-gray-800 flex items-center justify-center">
-              <span className="text-gray-500">Video Promocional Player</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CONTACT FORM PREVIEW */}
       <section className="py-20 bg-light">
         <div className="max-w-[1140px] mx-auto px-4">
