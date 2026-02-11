@@ -74,6 +74,15 @@ const ReelsCarousel: React.FC<ReelsCarouselProps> = ({ title, items, direction =
     }
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsDown(true);
+    if (scrollContainerRef.current) {
+      setStartX(e.touches[0].pageX - scrollContainerRef.current.offsetLeft);
+      setScrollLeft(scrollContainerRef.current.scrollLeft);
+      setClickStartX(e.touches[0].pageX);
+    }
+  };
+
   const handleMouseLeave = () => {
     setIsDown(false);
     setIsPaused(false);
@@ -89,6 +98,17 @@ const ReelsCarousel: React.FC<ReelsCarouselProps> = ({ title, items, direction =
     }
   };
 
+  const handleTouchEnd = (e: React.TouchEvent, url: string) => {
+    setIsDown(false);
+    setIsPaused(false);
+    
+    // Usamos la posición final del touch para comparar
+    const endX = e.changedTouches[0].pageX;
+    if (Math.abs(endX - clickStartX) < 10) {
+      window.open(url, '_blank');
+    }
+  };
+
   const handleMouseEnter = () => {
     setIsPaused(true);
   };
@@ -97,6 +117,13 @@ const ReelsCarousel: React.FC<ReelsCarouselProps> = ({ title, items, direction =
     if (!isDown || !scrollContainerRef.current) return;
     e.preventDefault();
     const x = e.pageX - scrollContainerRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    scrollContainerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDown || !scrollContainerRef.current) return;
+    const x = e.touches[0].pageX - scrollContainerRef.current.offsetLeft;
     const walk = (x - startX) * 2;
     scrollContainerRef.current.scrollLeft = scrollLeft - walk;
   };
@@ -120,6 +147,8 @@ const ReelsCarousel: React.FC<ReelsCarouselProps> = ({ title, items, direction =
           onMouseLeave={handleMouseLeave}
           onMouseMove={handleMouseMove}
           onMouseEnter={handleMouseEnter}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
         >
           <div className="flex gap-40 px-4">
             {displayItems.map((item, index) => (
@@ -127,6 +156,7 @@ const ReelsCarousel: React.FC<ReelsCarouselProps> = ({ title, items, direction =
                 key={`${item.id}-${index}`} 
                 className="relative min-w-[260px] h-[460px] bg-black rounded-xl overflow-hidden shadow-lg transform transition-transform hover:scale-105"
                 onMouseUp={(e) => handleMouseUp(e, item.url)}
+                onTouchEnd={(e) => handleTouchEnd(e, item.url)}
               >
                 {/* Iframe con pointer-events-none para que no interfiera con el drag */}
                 <iframe 

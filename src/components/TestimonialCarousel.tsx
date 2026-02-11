@@ -86,12 +86,25 @@ const TestimonialCarousel: React.FC = () => {
     }
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsDown(true);
+    if (scrollContainerRef.current) {
+      setStartX(e.touches[0].pageX - scrollContainerRef.current.offsetLeft);
+      setScrollLeft(scrollContainerRef.current.scrollLeft);
+    }
+  };
+
   const handleMouseLeave = () => {
     setIsDown(false);
     setIsPaused(false);
   };
 
   const handleMouseUp = () => {
+    setIsDown(false);
+    setIsPaused(false);
+  };
+
+  const handleTouchEnd = () => {
     setIsDown(false);
     setIsPaused(false);
   };
@@ -105,6 +118,13 @@ const TestimonialCarousel: React.FC = () => {
     e.preventDefault();
     const x = e.pageX - scrollContainerRef.current.offsetLeft;
     const walk = (x - startX) * 2; // Velocidad del drag
+    scrollContainerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDown || !scrollContainerRef.current) return;
+    const x = e.touches[0].pageX - scrollContainerRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
     scrollContainerRef.current.scrollLeft = scrollLeft - walk;
   };
 
@@ -122,6 +142,9 @@ const TestimonialCarousel: React.FC = () => {
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onTouchMove={handleTouchMove}
       >
         <div className="flex gap-40 px-4">
           {items.map((item, index) => (
