@@ -30,7 +30,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTopRoute />
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen overflow-x-hidden">
         <TopBar />
         <Navbar />
         <div className="flex-grow">

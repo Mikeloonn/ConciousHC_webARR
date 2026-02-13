@@ -396,7 +396,7 @@ const Services: React.FC = () => {
                     {/* Image floated to one side */}
                     <div className={`w-full md:w-[450px] mb-8 md:mb-10 ${index % 2 === 0 ? 'md:float-left md:mr-12' : 'md:float-right md:ml-12'}`}>
                       <div className="relative group">
-                        <div className="absolute top-4 left-4 w-full h-full border-2 border-secondary/30 rounded-2xl transform translate-x-2 translate-y-2 z-0"></div>
+                        <div className="absolute inset-0 border-2 border-secondary/30 rounded-2xl translate-x-2 translate-y-2 z-0"></div>
                         <div className="relative z-10 rounded-2xl overflow-hidden shadow-xl">
                           <img 
                             src={service.image} 
@@ -425,7 +425,7 @@ const Services: React.FC = () => {
                   <div className={`flex flex-col ${index % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 md:gap-16`}>
                     <div className="w-full md:w-1/2">
                       <div className="relative group">
-                        <div className="absolute top-4 left-4 w-full h-full border-2 border-secondary/30 rounded-2xl transform translate-x-2 translate-y-2 z-0"></div>
+                        <div className="absolute inset-0 border-2 border-secondary/30 rounded-2xl translate-x-2 translate-y-2 z-0"></div>
                         <div className="relative z-10 rounded-2xl overflow-hidden shadow-xl">
                           <img src={service.image} alt={service.title} className="w-full h-[300px] object-cover" />
                         </div>

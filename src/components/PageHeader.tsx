@@ -29,7 +29,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, breadcrumb, children }) 
           </div>
         </div>
         {children && (
-          <div className="md:text-right">
+          <div className="md:text-right w-full md:w-auto overflow-hidden">
             {children}
           </div>
         )}
