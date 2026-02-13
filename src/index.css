@@ -25,7 +25,13 @@
   }
 }
 
-html { scroll-behavior: smooth; }
+html { 
+  scroll-behavior: smooth; 
+}
+
+body {
+  overflow-x: hidden;
+}
 
 @utility no-scrollbar {
   scrollbar-width: none;

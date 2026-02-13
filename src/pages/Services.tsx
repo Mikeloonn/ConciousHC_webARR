@@ -4,7 +4,14 @@ import SEO from '../components/SEO';
 import { IMAGES } from '../constants/images';
 import { Check } from 'lucide-react';
 
-const servicesList = [
+interface Service {
+  title: string;
+  image: string;
+  description?: string;
+  fullText?: React.ReactNode;
+}
+
+const servicesList: Service[] = [
   {
     title: 'Acupuntura',
     fullText: (
