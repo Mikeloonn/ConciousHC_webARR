@@ -387,7 +387,8 @@ const Services: React.FC = () => {
             {servicesList.map((service, index) => (
               <div 
                 key={index} 
-                className="block"
+                id={service.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').replace(/[()]/g, '')}
+                className="block scroll-mt-40"
               >
                 {/* Header of Service: Title and Category */}
                 <div className="flex items-center gap-3 mb-6">

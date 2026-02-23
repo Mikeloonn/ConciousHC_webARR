@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Clock, MapPin, Calendar, CheckCircle } from 'lucide-react';
+import { Clock, MapPin, Calendar, CheckCircle, ChevronDown } from 'lucide-react';
 import SEO from '../components/SEO';
 import { IMAGES } from '../constants/images';
 import TestimonialCarousel from '../components/TestimonialCarousel';
+import { servicesList } from '../data/services';
 
 const Home: React.FC = () => {
   return (
@@ -106,34 +107,95 @@ const Home: React.FC = () => {
       <section className="py-20 bg-light">
         <div className="max-w-[1140px] mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-dark mb-4">Nuestros servicios</h2>
-            <div className="w-12 h-1 bg-primary rounded mx-auto"></div>
+            <h2 className="text-4xl font-bold text-dark mb-4 uppercase tracking-wider">Nuestros servicios</h2>
+            <div className="w-24 h-1 bg-primary mx-auto"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { title: 'Acupuntura', img: IMAGES.services.acupuntura },
-              { title: 'Auriculoterapia', img: IMAGES.services.auriculoterapia },
-              { title: 'Fitoterapia', img: IMAGES.services.fitoterapia }
-            ].map((service, index) => (
-              <div key={index} className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <img src={service.img} alt={service.title} className="w-full h-48 object-cover" />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-dark mb-3">{service.title}</h3>
-                  <p className="text-textGray mb-4 text-sm">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora ipsum, quae voluptatem pariatur autem nam fuga delectus.
-                  </p>
-                  <Link to="/services" className="text-primary font-semibold hover:text-accent text-sm uppercase">
-                    Ver Detalles
-                  </Link>
-                </div>
-              </div>
-            ))}
+          <div className="flex flex-col gap-6">
+            {/* Fila 1 */}
+            <div className="flex flex-col md:flex-row h-[600px] md:h-[450px] gap-4">
+              {servicesList.slice(0, 3).map((service, index) => (
+                <Link 
+                  key={index} 
+                  to={`/services#${service.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').replace(/[()]/g, '')}`}
+                  className="group relative flex-[1] hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-xl shadow-lg"
+                >
+                  <img 
+                    src={service.image} 
+                    alt={service.title} 
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20 group-hover:via-black/60 transition-all duration-700"></div>
+                  
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                    <h3 className="text-2xl md:text-3xl font-bold text-white uppercase tracking-widest transition-transform duration-700 group-hover:-translate-y-2 group-hover:scale-105">
+                      {service.title}
+                    </h3>
+                    <div className="w-12 h-1 bg-secondary mb-6 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100"></div>
+                    
+                    {/* Previa de Texto con Máscara de Transparencia (Efecto Desvanecido) */}
+                    <div className="relative max-h-0 group-hover:max-h-40 overflow-hidden transition-all duration-700 ease-in-out">
+                      <p 
+                        className="text-gray-200 text-sm md:text-base leading-relaxed mb-2 [mask-image:linear-gradient(to_bottom,black_30%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_30%,transparent_100%)]"
+                      >
+                        {service.description}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-700 delay-300 flex flex-col items-center gap-2">
+                      <span className="inline-flex items-center gap-2 border border-white/40 text-white text-xs py-2 px-4 rounded-full uppercase tracking-tighter hover:bg-white hover:text-primary transition-all duration-300">
+                        Ver más <ChevronDown size={14} className="animate-bounce" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* Fila 2 */}
+            <div className="flex flex-col md:flex-row h-[600px] md:h-[450px] gap-4">
+              {servicesList.slice(3, 6).map((service, index) => (
+                <Link 
+                  key={index} 
+                  to={`/services#${service.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').replace(/[()]/g, '')}`}
+                  className="group relative flex-[1] hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-xl shadow-lg"
+                >
+                  <img 
+                    src={service.image} 
+                    alt={service.title} 
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20 group-hover:via-black/60 transition-all duration-700"></div>
+                  
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                    <h3 className="text-2xl md:text-3xl font-bold text-white uppercase tracking-widest transition-transform duration-700 group-hover:-translate-y-2 group-hover:scale-105">
+                      {service.title}
+                    </h3>
+                    <div className="w-12 h-1 bg-secondary mb-6 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100"></div>
+                    
+                    {/* Previa de Texto con Máscara de Transparencia (Efecto Desvanecido) */}
+                    <div className="relative max-h-0 group-hover:max-h-40 overflow-hidden transition-all duration-700 ease-in-out">
+                      <p 
+                        className="text-gray-200 text-sm md:text-base leading-relaxed mb-2 [mask-image:linear-gradient(to_bottom,black_30%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_30%,transparent_100%)]"
+                      >
+                        {service.description}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-700 delay-300 flex flex-col items-center gap-2">
+                      <span className="inline-flex items-center gap-2 border border-white/40 text-white text-xs py-2 px-4 rounded-full uppercase tracking-tighter hover:bg-white hover:text-primary transition-all duration-300">
+                        Ver más <ChevronDown size={14} className="animate-bounce" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
 
           <div className="text-center mt-12">
-            <Link to="/services" className="inline-block bg-primary text-white px-8 py-3 shadow-lg hover:bg-dark transition-colors duration-300">
-              Ver más servicios
+            <Link to="/services" className="inline-block bg-primary text-white px-10 py-4 rounded-full font-bold shadow-lg hover:bg-dark transition-all duration-300 transform hover:-translate-y-1">
+              Explorar Todos los Servicios
             </Link>
           </div>
         </div>
@@ -177,44 +239,6 @@ const Home: React.FC = () => {
             <p className="text-textGray">Lo que dicen nuestros pacientes sobre nosotros</p>
           </div>
           <TestimonialCarousel />
-        </div>
-      </section>
-
-      {/* CONTACT FORM PREVIEW */}
-      <section className="py-20 bg-light">
-        <div className="max-w-[1140px] mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-dark">Formulario de contacto</h2>
-          </div>
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
-            <div className="p-8 md:w-3/5">
-              <form className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input type="text" placeholder="Nombre" className="w-full border-b border-light py-2 px-3 focus:border-primary outline-none transition-colors" />
-                  <input type="email" placeholder="Correo electrónico" className="w-full border-b border-light py-2 px-3 focus:border-primary outline-none transition-colors" />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input type="tel" placeholder="Teléfono" className="w-full border-b border-light py-2 px-3 focus:border-primary outline-none transition-colors" />
-                  <input type="text" placeholder="Asunto" className="w-full border-b border-light py-2 px-3 focus:border-primary outline-none transition-colors" />
-                </div>
-                <textarea rows={4} placeholder="Déjanos tu mensaje" className="w-full border-b border-light py-2 px-3 focus:border-primary outline-none resize-none transition-colors"></textarea>
-
-                <div className="flex items-start gap-2 text-sm text-textGray mt-4">
-                  <input type="checkbox" id="policy" className="mt-1" />
-                  <label htmlFor="policy">
-                    He leído y estoy de acuerdo con los <a href="#" className="text-primary hover:underline">términos y condiciones</a>.
-                  </label>
-                </div>
-
-                <button type="button" className="mt-6 bg-light text-textGray px-6 py-3 font-medium hover:bg-primary hover:text-white transition-all duration-300 shadow-md">
-                  Enviar mensaje
-                </button>
-              </form>
-            </div>
-            <div className="md:w-2/5 relative">
-              <img src={IMAGES.contactPreview} alt="Contact" className="absolute inset-0 w-full h-full object-cover" />
-            </div>
-          </div>
         </div>
       </section>
     </div>
