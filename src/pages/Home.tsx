@@ -5,6 +5,7 @@ import SEO from '../components/SEO';
 import { IMAGES } from '../constants/images';
 import TestimonialCarousel from '../components/TestimonialCarousel';
 import { servicesList } from '../data/services';
+import heroVideo from '../assets/videos/videostudioloop.mp4';
 
 const Home: React.FC = () => {
   return (
@@ -15,13 +16,22 @@ const Home: React.FC = () => {
       />
       {/* HERO SECTION */}
       <section className="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
-        {/* Video Background Fallback to Image */}
+        {/* Video Background with Image Fallback */}
         <div className="absolute inset-0 z-0">
-          <img
-            src={IMAGES.heroBackground}
-            alt="Hero Background"
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-full h-full object-cover"
-          />
+          >
+            <source src={heroVideo} type="video/mp4" />
+            <img
+              src={IMAGES.heroBackground}
+              alt="Hero Background"
+              className="w-full h-full object-cover"
+            />
+          </video>
           <div className="absolute inset-0 bg-gray-900/60 z-10"></div>
         </div>
 
