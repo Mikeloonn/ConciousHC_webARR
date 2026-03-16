@@ -29,20 +29,19 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <header 
+    <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-md py-2' : 'bg-primary/90 py-4'
+        isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-md py-1' : 'bg-primary/90 py-2'
       }`}
     >
       <div className="max-w-[1140px] mx-auto px-4 flex justify-between items-center relative">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-           <img 
-             src={logo} 
-             alt="Logo Conscious Healing Center" 
-             className="h-10 w-10 rounded-full object-cover border-2 border-secondary/20 transition-transform duration-300 group-hover:scale-110 shadow-sm"
-           />
-           <div className="flex flex-col">
+           <img
+             src={logo}
+             alt="Logo Conscious Healing Center"
+             className="h-8 w-8 rounded-full object-cover border-2 border-secondary/20 transition-transform duration-300 group-hover:scale-110 shadow-sm"
+           />           <div className="flex flex-col">
              <span className={`font-bold text-xl leading-none tracking-tight ${isScrolled ? 'text-primary' : 'text-white'}`}>
                Conscious Healing
              </span>

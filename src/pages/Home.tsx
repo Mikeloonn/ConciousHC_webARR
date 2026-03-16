@@ -1,11 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Clock, MapPin, Calendar, CheckCircle, ChevronDown } from 'lucide-react';
+import { Stethoscope, HeartPulse, CheckCircle, ChevronDown } from 'lucide-react';
 import SEO from '../components/SEO';
 import { IMAGES } from '../constants/images';
 import TestimonialCarousel from '../components/TestimonialCarousel';
 import { servicesList } from '../data/services';
 import heroVideo from '../assets/videos/videostudioloop.mp4';
+
+// Custom BedPulse icon from user's camapulso.svg
+const BedPulseIcon = ({ size = 40 }: { size?: number }) => (
+  <svg 
+    width={size} 
+    height={size} 
+    viewBox="0 0 226 184" 
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g transform="translate(0, 184) scale(0.1, -0.1)">
+      <path d="M1636 1687 c-9 -12 -47 -92 -87 -177 -39 -85 -74 -159 -79 -164 -4 -4 -32 27 -61 70 -29 44 -57 82 -63 86 -6 4 -64 8 -128 8 -114 0 -118 -1 -134 -25 -15 -23 -15 -27 0 -50 16 -24 21 -25 115 -25 l98 0 62 -94 c73 -110 91 -129 123 -124 25 3 46 40 147 258 49 108 54 114 67 95 8 -11 35 -46 59 -77 l45 -58 119 0 c126 0 151 8 151 50 0 40 -26 50 -128 50 l-97 1 -55 75 c-95 132 -123 150 -154 101z"/>
+      <path d="M286 1488 c-14 -20 -16 -101 -16 -678 0 -577 2 -658 16 -678 18 -26 46 -28 68 -6 13 12 16 41 16 150 l0 134 800 0 800 0 0 -128 c0 -99 3 -132 16 -150 18 -26 46 -28 69 -6 14 15 16 57 13 393 l-3 376 -26 56 c-60 127 -166 198 -311 206 l-83 5 -17 -31 c-9 -17 -32 -40 -50 -51 l-33 -20 115 0 c100 0 122 -3 166 -24 59 -27 116 -90 132 -145 7 -22 12 -109 12 -210 l0 -171 -350 0 -350 0 0 258 c0 293 0 292 76 292 l40 0 -45 48 c-41 43 -49 47 -72 40 -39 -13 -79 -60 -90 -104 -4 -22 -9 -150 -9 -286 l0 -248 -400 0 -400 0 0 484 c0 427 -2 486 -16 500 -22 22 -50 20 -68 -6z"/>
+      <path d="M710 1151 c-152 -50 -225 -203 -163 -341 82 -183 337 -198 438 -26 70 120 25 281 -96 344 -49 25 -138 37 -179 23z m130 -109 c107 -53 107 -211 0 -264 -75 -38 -167 -8 -201 65 -23 53 -23 81 0 134 34 73 126 103 201 65z"/>
+    </g>
+  </svg>
+);
 
 const Home: React.FC = () => {
   return (
@@ -15,7 +32,7 @@ const Home: React.FC = () => {
         description="Bienvenido a Medico. Especialistas en Acupuntura, Fisioterapia y Terapias Holísticas para tu bienestar integral en Lima."
       />
       {/* HERO SECTION */}
-      <section className="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
+      <section className="relative h-[80vh] flex items-center justify-center text-center text-white overflow-hidden">
         {/* Video Background with Image Fallback */}
         <div className="absolute inset-0 z-0">
           <video
@@ -35,11 +52,11 @@ const Home: React.FC = () => {
           <div className="absolute inset-0 bg-gray-900/60 z-10"></div>
         </div>
 
-        <div className="relative z-20 px-4 max-w-4xl mx-auto mt-16 animate-slide-in-left">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+        <div className="relative z-20 px-4 max-w-4xl mx-auto mt-8 animate-slide-in-left">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
             Acupuntura y Terapias Holísticas
           </h1>
-          <h2 className="text-2xl md:text-3xl font-semibold text-secondary mb-6">
+          <h2 className="text-xl md:text-2xl font-semibold text-secondary mb-6">
             con Yeni Arriarán
           </h2>
           <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
@@ -51,22 +68,50 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* INFO BAR - Negative Margin to overlap Hero */}
-      <div className="relative z-30 -mt-16 px-4">
-        <div className="max-w-[900px] mx-auto bg-primary rounded-lg shadow-xl p-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Link to="/contact" className="group flex flex-col items-center justify-center text-white p-4 rounded transition-all hover:bg-accent hover:-translate-y-1">
-              <Clock size={40} className="mb-3 text-secondary" />
-              <h3 className="text-lg font-medium">Horario de Atención</h3>
-            </Link>
-            <Link to="/contact" className="group flex flex-col items-center justify-center text-white p-4 rounded transition-all hover:bg-accent hover:-translate-y-1">
-              <MapPin size={40} className="mb-3 text-secondary" />
-              <h3 className="text-lg font-medium">Ubicación</h3>
-            </Link>
-            <Link to="/contact" className="group flex flex-col items-center justify-center text-white p-4 rounded transition-all hover:bg-accent hover:-translate-y-1">
-              <Calendar size={40} className="mb-3 text-secondary" />
-              <h3 className="text-lg font-medium">Contacto</h3>
-            </Link>
+      {/* INFO BAR - Overlap Hero */}
+      <div className="relative z-30 -mt-20 px-4">
+        <div className="max-w-[1140px] mx-auto bg-white rounded-xl shadow-2xl p-8 md:p-10 border border-gray-100">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            
+            {/* Item 1 */}
+            <div className="flex items-start gap-5">
+              <div className="text-secondary bg-secondary/10 p-4 rounded-2xl flex-shrink-0">
+                <Stethoscope size={40} strokeWidth={1.5} />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-primary mb-2">Especialistas Expertos</h3>
+                <p className="text-textGray text-sm leading-relaxed">
+                  Profesionales certificados en Medicina Tradicional China para tu salud integral.
+                </p>
+              </div>
+            </div>
+
+            {/* Item 2 */}
+            <div className="flex items-start gap-5">
+              <div className="text-secondary bg-secondary/10 p-4 rounded-2xl flex-shrink-0">
+                <BedPulseIcon size={40} />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-primary mb-2">Salas de Tratamiento</h3>
+                <p className="text-textGray text-sm leading-relaxed">
+                  Ambientes diseñados para la relajación y el equilibrio de tu energía vital.
+                </p>
+              </div>
+            </div>
+
+            {/* Item 3 */}
+            <div className="flex items-start gap-5">
+              <div className="text-secondary bg-secondary/10 p-4 rounded-2xl flex-shrink-0">
+                <HeartPulse size={40} strokeWidth={1.5} />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-primary mb-2">Garantía de Cuidado</h3>
+                <p className="text-textGray text-sm leading-relaxed">
+                  Compromiso total con tu bienestar físico, mental y emocional en cada sesión.
+                </p>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -94,19 +139,16 @@ const Home: React.FC = () => {
                 Leer más
               </Link>
             </div>
-            <div className="relative">
-              <div className="rounded-2xl overflow-hidden shadow-2xl transform rotate-1 hover:rotate-0 transition-transform duration-500">
-                <img
-                  src={IMAGES.aboutHome}
-                  alt="About Us"
-                  className="w-full h-auto"
-                />
-                {/* Simulated Play Button for Video */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="bg-white/80 rounded-full p-4">
-                    <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[20px] border-l-primary border-b-[10px] border-b-transparent ml-1"></div>
-                  </div>
-                </div>
+            <div className="relative flex justify-center">
+              <div className="rounded-2xl overflow-hidden shadow-2xl transform rotate-1 hover:rotate-0 transition-transform duration-500 aspect-[9/16] w-full max-w-[320px]">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/geJt7ahL1-E?autoplay=0&mute=1"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
               </div>
             </div>
           </div>
