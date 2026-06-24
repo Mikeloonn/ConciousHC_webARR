@@ -7,12 +7,12 @@ import { IMAGES } from '../constants/images';
 const About: React.FC = () => {
   return (
     <div>
-      <SEO 
-        title="Sobre Nosotros" 
-        description="Conoce a Yeni Arriarán y la historia detrás de Conscious Healing Center. Nuestra misión y visión para un bienestar integral." 
+      <SEO
+        title="Sobre Nosotros"
+        description="Conoce a Yeni Arriarán y la historia detrás del Centro de Acupuntura y Terapias Holísticas. Nuestra misión y visión para un bienestar integral."
       />
       <PageHeader title="SOBRE NOSOTROS" breadcrumb="Sobre Nosotros" />
-      
+
       {/* SECCIÓN ESPECIALISTA */}
       <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-[1140px] mx-auto px-4">
@@ -22,10 +22,10 @@ const About: React.FC = () => {
               <div className="relative">
                 <div className="absolute inset-0 border-2 border-secondary/30 rounded-3xl translate-x-4 translate-y-4 z-0"></div>
                 <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
-                  <img 
-                    src={IMAGES.specialist} 
-                    alt="Yeni Arriarán - Terapeuta" 
-                    className="w-full h-[500px] md:h-[600px] object-cover" 
+                  <img
+                    src={IMAGES.specialist}
+                    alt="Yeni Arriarán - Terapeuta"
+                    className="w-full h-[500px] md:h-[600px] object-cover"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark/80 to-transparent p-8 text-white">
                     <p className="font-bold text-2xl">Yeni Arriarán</p>
@@ -42,7 +42,7 @@ const About: React.FC = () => {
                 <span className="text-secondary font-bold uppercase tracking-wider text-sm">Conoce a nuestra especialista</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-dark mb-8">Una búsqueda personal de bienestar</h2>
-              
+
               <div className="prose prose-lg text-textGray space-y-6 leading-relaxed">
                 <p className="text-xl font-medium text-primary italic">
                   "Soy Yeni Arriarán, terapeuta especializada en Medicina Tradicional China y terapias energéticas. Mi camino empezó desde un lugar muy personal."
@@ -69,7 +69,7 @@ const About: React.FC = () => {
       <section className="py-24 bg-light relative overflow-hidden">
         {/* Decoración de fondo */}
         <div className="absolute top-0 right-0 w-1/3 h-full bg-secondary/5 -skew-x-12 transform origin-top"></div>
-        
+
         <div className="max-w-[1140px] mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             {/* Misión */}
@@ -105,19 +105,19 @@ const About: React.FC = () => {
             <div className="w-24 h-1 bg-secondary mx-auto rounded-full"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-             {[
-               { title: "Atención Humana", desc: "No tratamos enfermedades, acompañamos a personas." },
-               { title: "Enfoque Integral", desc: "Equilibramos cuerpo, mente y energía vital." },
-               { title: "Paz y Conciencia", desc: "Un espacio diseñado para sanar sin prisas." }
-             ].map((item, idx) => (
-               <div key={idx} className="text-center group p-6">
-                  <div className="w-20 h-20 bg-light rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-inner">
-                    <CheckCircle size={32} />
-                  </div>
-                  <h4 className="text-xl font-bold text-dark mb-3">{item.title}</h4>
-                  <p className="text-textGray">{item.desc}</p>
-               </div>
-             ))}
+            {[
+              { title: "Atención Humana", desc: "No tratamos enfermedades, acompañamos a personas." },
+              { title: "Enfoque Integral", desc: "Equilibramos cuerpo, mente y energía vital." },
+              { title: "Paz y Conciencia", desc: "Un espacio diseñado para sanar sin prisas." }
+            ].map((item, idx) => (
+              <div key={idx} className="text-center group p-6">
+                <div className="w-20 h-20 bg-light rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-inner">
+                  <CheckCircle size={32} />
+                </div>
+                <h4 className="text-xl font-bold text-dark mb-3">{item.title}</h4>
+                <p className="text-textGray">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

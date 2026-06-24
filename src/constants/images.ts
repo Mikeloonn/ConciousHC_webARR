@@ -8,10 +8,17 @@ import moxibustionImg from '../assets/images/moxibustion.jpg';
 import yogaImg from '../assets/images/hathayoga.jpg';
 import pilatesImg from '../assets/images/Pilates.jpg';
 import coachingImg from '../assets/images/Coaching.jpg';
-import specialistImg from '../assets/images/conoceanuestraterapista.jpg';
+import specialistImg from '../assets/images/foto1.jpg';
+import specialistHomeImg from '../assets/images/foto2.jpg';
 import aboutHomeImg from '../assets/images/nuestteam.jpg';
 import contactPreviewImg from '../assets/images/tratopersonalizado.jpg';
 import heroBackgroundImg from '../assets/images/ejercicios.jpg';
+import review1 from '../assets/images/reseña1.png';
+import review2 from '../assets/images/reseña2.png';
+import review3 from '../assets/images/reseña3.png';
+import review4 from '../assets/images/reseña4.png';
+import review5 from '../assets/images/reseña5.png';
+import review6 from '../assets/images/reseña6.png';
 
 export const IMAGES = {
   // Global
@@ -21,17 +28,18 @@ export const IMAGES = {
   // Home
   aboutHome: aboutHomeImg,
   specialist: specialistImg,
+  specialistHome: specialistHomeImg, // <-- AGREGA ESTA LÍNEA
   contactPreview: contactPreviewImg,
 
-   // Testimonials
+  // Testimonials
   testimonials: [
-    "https://i.pravatar.cc/150?u=1",
-    "https://i.pravatar.cc/150?u=2",
-    "https://i.pravatar.cc/150?u=3",
-    "https://i.pravatar.cc/150?u=4",
-    "https://i.pravatar.cc/150?u=5",
+    review1,
+    review2,
+    review3,
+    review4,
+    review5,
+    review6,
   ],
-  
 
   // Reels Placeholders (Vertical 9:16 approx)
   reelPlaceholder: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=270&h=480&auto=format&fit=crop",

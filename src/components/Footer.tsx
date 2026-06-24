@@ -21,22 +21,22 @@ const Footer: React.FC = () => {
                 />
               </div>
               <div className="flex flex-col items-center">
-                <span className="font-bold text-xl leading-none tracking-tight text-white group-hover:text-secondary transition-colors duration-300">
-                  Conscious Healing
+                <span className="font-bold text-lg md:text-xl leading-none tracking-tight text-white group-hover:text-secondary transition-colors duration-300 text-center">
+                  Centro de Acupuntura
                 </span>
-                <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-secondary">
-                  Center
+                <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-secondary text-center mt-1">
+                  y Terapias Holísticas
                 </span>
               </div>
             </Link>
-            
+
             <h3 className="text-sm font-bold uppercase tracking-wider mb-3 text-white">
               ¡RECOMIENZA, PARA SEGUIR!
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
               Te inspira a recordar ese motivo especial que lo inicio todo y que cada día te impulsa a seguir adelante.
             </p>
-            
+
             <div className="flex gap-4">
               <a href="#" className="w-10 h-10 rounded-full border border-secondary/30 flex items-center justify-center text-secondary hover:bg-secondary hover:text-dark transition-all duration-300">
                 <Facebook size={18} />

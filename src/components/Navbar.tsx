@@ -30,29 +30,28 @@ const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-md py-1' : 'bg-primary/90 py-2'
-      }`}
+      className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-md py-1' : 'bg-primary/90 py-2'
+        }`}
     >
       <div className="max-w-[1140px] mx-auto px-4 flex justify-between items-center relative">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-           <img
-             src={logo}
-             alt="Logo Conscious Healing Center"
-             className="h-8 w-8 rounded-full object-cover border-2 border-secondary/20 transition-transform duration-300 group-hover:scale-110 shadow-sm"
-           />           <div className="flex flex-col">
-             <span className={`font-bold text-xl leading-none tracking-tight ${isScrolled ? 'text-primary' : 'text-white'}`}>
-               Conscious Healing
-             </span>
-             <span className={`text-[10px] font-medium uppercase tracking-[0.2em] ${isScrolled ? 'text-accent' : 'text-secondary'}`}>
-               Center
-             </span>
-           </div>
+          <img
+            src={logo}
+            alt="Logo Conscious Healing Center"
+            className="h-8 w-8 rounded-full object-cover border-2 border-secondary/20 transition-transform duration-300 group-hover:scale-110 shadow-sm"
+          />           <div className="flex flex-col">
+            <span className={`font-bold text-lg md:text-xl leading-none tracking-tight ${isScrolled ? 'text-primary' : 'text-white'}`}>
+              Centro de Acupuntura
+            </span>
+            <span className={`text-[10px] font-medium uppercase tracking-[0.15em] mt-1 ${isScrolled ? 'text-accent' : 'text-secondary'}`}>
+              y Terapias Holísticas
+            </span>
+          </div>
         </Link>
 
         {/* Mobile Menu Toggle */}
-        <button 
+        <button
           className={`md:hidden text-2xl ${isScrolled ? 'text-primary' : 'text-white'}`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
@@ -64,54 +63,50 @@ const Navbar: React.FC = () => {
           <ul className="flex gap-6">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <Link 
+                <Link
                   to={link.path}
-                  className={`text-sm font-medium uppercase tracking-wide transition-colors duration-300 ${
-                    isScrolled 
+                  className={`text-sm font-medium uppercase tracking-wide transition-colors duration-300 ${isScrolled
                       ? (location.pathname === link.path ? 'text-primary font-bold' : 'text-gray-600 hover:text-primary')
                       : (location.pathname === link.path ? 'text-secondary font-bold' : 'text-white hover:text-secondary')
-                  }`}
+                    }`}
                 >
                   {link.name}
                 </Link>
               </li>
             ))}
           </ul>
-          <Link 
-            to="/contact" 
-            className={`px-6 py-2 rounded-md text-sm font-bold uppercase transition-all duration-300 ${
-              isScrolled 
-                ? 'bg-primary text-white hover:bg-accent' 
+          <Link
+            to="/contact"
+            className={`px-6 py-2 rounded-md text-sm font-bold uppercase transition-all duration-300 ${isScrolled
+                ? 'bg-primary text-white hover:bg-accent'
                 : 'bg-white text-primary hover:bg-gray-100'
-            }`}
+              }`}
           >
             Agendar
           </Link>
         </nav>
 
         {/* Mobile Nav */}
-        <nav 
-          className={`absolute top-full right-0 w-64 bg-white shadow-xl rounded-bl-lg transform transition-transform duration-300 origin-top-right ${
-            isMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'
-          } md:hidden`}
+        <nav
+          className={`absolute top-full right-0 w-64 bg-white shadow-xl rounded-bl-lg transform transition-transform duration-300 origin-top-right ${isMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'
+            } md:hidden`}
         >
           <ul className="flex flex-col">
             {navLinks.map((link) => (
               <li key={link.name} className="border-b border-gray-100 last:border-none">
-                <Link 
+                <Link
                   to={link.path}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`block px-6 py-4 text-sm font-medium uppercase ${
-                    location.pathname === link.path ? 'text-primary bg-light' : 'text-gray-600 hover:bg-gray-50'
-                  }`}
+                  className={`block px-6 py-4 text-sm font-medium uppercase ${location.pathname === link.path ? 'text-primary bg-light' : 'text-gray-600 hover:bg-gray-50'
+                    }`}
                 >
                   {link.name}
                 </Link>
               </li>
             ))}
             <li className="p-4">
-              <Link 
-                to="/contact" 
+              <Link
+                to="/contact"
                 onClick={() => setIsMenuOpen(false)}
                 className="block w-full text-center px-6 py-3 bg-primary text-white rounded-md text-sm font-bold uppercase hover:bg-accent"
               >

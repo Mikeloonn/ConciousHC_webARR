@@ -9,17 +9,17 @@ import heroVideo from '../assets/videos/videostudioloop.mp4';
 
 // Custom BedPulse icon from user's camapulso.svg
 const BedPulseIcon = ({ size = 40 }: { size?: number }) => (
-  <svg 
-    width={size} 
-    height={size} 
-    viewBox="0 0 226 184" 
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 226 184"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g transform="translate(0, 184) scale(0.1, -0.1)">
-      <path d="M1636 1687 c-9 -12 -47 -92 -87 -177 -39 -85 -74 -159 -79 -164 -4 -4 -32 27 -61 70 -29 44 -57 82 -63 86 -6 4 -64 8 -128 8 -114 0 -118 -1 -134 -25 -15 -23 -15 -27 0 -50 16 -24 21 -25 115 -25 l98 0 62 -94 c73 -110 91 -129 123 -124 25 3 46 40 147 258 49 108 54 114 67 95 8 -11 35 -46 59 -77 l45 -58 119 0 c126 0 151 8 151 50 0 40 -26 50 -128 50 l-97 1 -55 75 c-95 132 -123 150 -154 101z"/>
-      <path d="M286 1488 c-14 -20 -16 -101 -16 -678 0 -577 2 -658 16 -678 18 -26 46 -28 68 -6 13 12 16 41 16 150 l0 134 800 0 800 0 0 -128 c0 -99 3 -132 16 -150 18 -26 46 -28 69 -6 14 15 16 57 13 393 l-3 376 -26 56 c-60 127 -166 198 -311 206 l-83 5 -17 -31 c-9 -17 -32 -40 -50 -51 l-33 -20 115 0 c100 0 122 -3 166 -24 59 -27 116 -90 132 -145 7 -22 12 -109 12 -210 l0 -171 -350 0 -350 0 0 258 c0 293 0 292 76 292 l40 0 -45 48 c-41 43 -49 47 -72 40 -39 -13 -79 -60 -90 -104 -4 -22 -9 -150 -9 -286 l0 -248 -400 0 -400 0 0 484 c0 427 -2 486 -16 500 -22 22 -50 20 -68 -6z"/>
-      <path d="M710 1151 c-152 -50 -225 -203 -163 -341 82 -183 337 -198 438 -26 70 120 25 281 -96 344 -49 25 -138 37 -179 23z m130 -109 c107 -53 107 -211 0 -264 -75 -38 -167 -8 -201 65 -23 53 -23 81 0 134 34 73 126 103 201 65z"/>
+      <path d="M1636 1687 c-9 -12 -47 -92 -87 -177 -39 -85 -74 -159 -79 -164 -4 -4 -32 27 -61 70 -29 44 -57 82 -63 86 -6 4 -64 8 -128 8 -114 0 -118 -1 -134 -25 -15 -23 -15 -27 0 -50 16 -24 21 -25 115 -25 l98 0 62 -94 c73 -110 91 -129 123 -124 25 3 46 40 147 258 49 108 54 114 67 95 8 -11 35 -46 59 -77 l45 -58 119 0 c126 0 151 8 151 50 0 40 -26 50 -128 50 l-97 1 -55 75 c-95 132 -123 150 -154 101z" />
+      <path d="M286 1488 c-14 -20 -16 -101 -16 -678 0 -577 2 -658 16 -678 18 -26 46 -28 68 -6 13 12 16 41 16 150 l0 134 800 0 800 0 0 -128 c0 -99 3 -132 16 -150 18 -26 46 -28 69 -6 14 15 16 57 13 393 l-3 376 -26 56 c-60 127 -166 198 -311 206 l-83 5 -17 -31 c-9 -17 -32 -40 -50 -51 l-33 -20 115 0 c100 0 122 -3 166 -24 59 -27 116 -90 132 -145 7 -22 12 -109 12 -210 l0 -171 -350 0 -350 0 0 258 c0 293 0 292 76 292 l40 0 -45 48 c-41 43 -49 47 -72 40 -39 -13 -79 -60 -90 -104 -4 -22 -9 -150 -9 -286 l0 -248 -400 0 -400 0 0 484 c0 427 -2 486 -16 500 -22 22 -50 20 -68 -6z" />
+      <path d="M710 1151 c-152 -50 -225 -203 -163 -341 82 -183 337 -198 438 -26 70 120 25 281 -96 344 -49 25 -138 37 -179 23z m130 -109 c107 -53 107 -211 0 -264 -75 -38 -167 -8 -201 65 -23 53 -23 81 0 134 34 73 126 103 201 65z" />
     </g>
   </svg>
 );
@@ -72,7 +72,7 @@ const Home: React.FC = () => {
       <div className="relative z-30 -mt-20 px-4">
         <div className="max-w-[1140px] mx-auto bg-white rounded-xl shadow-2xl p-8 md:p-10 border border-gray-100">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            
+
             {/* Item 1 */}
             <div className="flex items-start gap-5">
               <div className="text-secondary bg-secondary/10 p-4 rounded-2xl flex-shrink-0">
@@ -167,27 +167,27 @@ const Home: React.FC = () => {
             {/* Fila 1 */}
             <div className="flex flex-col md:flex-row h-[600px] md:h-[450px] gap-4">
               {servicesList.slice(0, 3).map((service, index) => (
-                <Link 
-                  key={index} 
+                <Link
+                  key={index}
                   to={`/services#${service.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').replace(/[()]/g, '')}`}
                   className="group relative flex-[1] hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-xl shadow-lg"
                 >
-                  <img 
-                    src={service.image} 
-                    alt={service.title} 
+                  <img
+                    src={service.image}
+                    alt={service.title}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20 group-hover:via-black/60 transition-all duration-700"></div>
-                  
+
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
                     <h3 className="text-2xl md:text-3xl font-bold text-white uppercase tracking-widest transition-transform duration-700 group-hover:-translate-y-2 group-hover:scale-105">
                       {service.title}
                     </h3>
                     <div className="w-12 h-1 bg-secondary mb-6 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100"></div>
-                    
+
                     {/* Previa de Texto con Máscara de Transparencia (Efecto Desvanecido) */}
                     <div className="relative max-h-0 group-hover:max-h-40 overflow-hidden transition-all duration-700 ease-in-out">
-                      <p 
+                      <p
                         className="text-gray-200 text-sm md:text-base leading-relaxed mb-2 [mask-image:linear-gradient(to_bottom,black_30%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_30%,transparent_100%)]"
                       >
                         {service.description}
@@ -207,27 +207,27 @@ const Home: React.FC = () => {
             {/* Fila 2 */}
             <div className="flex flex-col md:flex-row h-[600px] md:h-[450px] gap-4">
               {servicesList.slice(3, 6).map((service, index) => (
-                <Link 
-                  key={index} 
+                <Link
+                  key={index}
                   to={`/services#${service.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').replace(/[()]/g, '')}`}
                   className="group relative flex-[1] hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-xl shadow-lg"
                 >
-                  <img 
-                    src={service.image} 
-                    alt={service.title} 
+                  <img
+                    src={service.image}
+                    alt={service.title}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20 group-hover:via-black/60 transition-all duration-700"></div>
-                  
+
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
                     <h3 className="text-2xl md:text-3xl font-bold text-white uppercase tracking-widest transition-transform duration-700 group-hover:-translate-y-2 group-hover:scale-105">
                       {service.title}
                     </h3>
                     <div className="w-12 h-1 bg-secondary mb-6 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100"></div>
-                    
+
                     {/* Previa de Texto con Máscara de Transparencia (Efecto Desvanecido) */}
                     <div className="relative max-h-0 group-hover:max-h-40 overflow-hidden transition-all duration-700 ease-in-out">
-                      <p 
+                      <p
                         className="text-gray-200 text-sm md:text-base leading-relaxed mb-2 [mask-image:linear-gradient(to_bottom,black_30%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_30%,transparent_100%)]"
                       >
                         {service.description}
@@ -259,7 +259,7 @@ const Home: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
             <div className="md:col-span-2">
               <img
-                src={IMAGES.specialist}
+                src={IMAGES.specialistHome}
                 alt="Yeni Arriarán"
                 className="w-full rounded-lg shadow-2xl"
               />
