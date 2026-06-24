@@ -60,7 +60,7 @@ const Home: React.FC = () => {
             con Yeni Arriarán
           </h2>
           <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
-            Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus. Proin eget tortor.
+            Recupera tu armonía y vitalidad natural. Te acompañamos en tu camino hacia el bienestar integral a través de la acupuntura y un abordaje terapéutico personalizado.
           </p>
           <Link to="/services" className="inline-block border-2 border-white text-white px-8 py-3 rounded-md font-medium uppercase hover:bg-white hover:text-primary transition-all duration-300">
             Nuestros Servicios
@@ -126,7 +126,7 @@ const Home: React.FC = () => {
                 <div className="w-12 h-1 bg-primary rounded"></div>
               </div>
               <p className="text-textGray text-lg leading-relaxed mb-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, illo dolore enim vero aspernatur tempora sapiente corporis sunt deserunt animi.
+                En el Centro de Acupuntura y Terapias Holísticas nos dedicamos a restaurar tu bienestar y vitalidad de forma natural. Creemos que la salud real se logra cuando equilibramos el cuerpo, la mente y la energía, brindándote un espacio cálido y profesional diseñado para que encuentres el alivio y la paz que necesitas en tu día a día.
               </p>
               <ul className="space-y-2 mb-8">
                 {['Profesionales certificados', 'Atención personalizada', 'Ambiente relajante'].map((item) => (
@@ -269,10 +269,10 @@ const Home: React.FC = () => {
                 Conoce a nuestra Terapista
               </h2>
               <p className="text-lg text-textGray mb-6 leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Soy Yeni Arriarán, terapeuta especializada en Medicina Tradicional China y terapias energéticas. Tras años de alta exigencia en el sector financiero, un diagnóstico de adenoma hipofisario marcó un antes y un después en mi vida, impulsándome a buscar un camino de sanación más integral.
               </p>
               <p className="text-lg text-textGray mb-8 leading-relaxed">
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.
+                Así descubrí la Medicina Tradicional China, un enfoque que observa a la persona como un todo: cuerpo, emociones y energía. Hoy, mi misión es acompañarte a recuperar tu equilibrio y bienestar con un abordaje profesional, consciente y sobre todo, humano.
               </p>
               <Link to="/contact" className="btn btn-primary bg-primary text-white px-6 py-3 rounded hover:bg-accent transition-colors">
                 Contactar Especialista

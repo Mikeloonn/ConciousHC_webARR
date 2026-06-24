@@ -5,9 +5,10 @@ export const footerLinks = [
   'Testimonios'
 ];
 
+// REEMPLAZA ESTE BLOQUE EN src/data/footer.ts:
 export const footerAbout = {
   title: "Nosotros",
-  description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit quod voluptas itaque corporis possimus fugiat porro, explicabo at vitae labore!"
+  description: "Tu espacio de confianza para el equilibrio y bienestar integral. Combinamos la sabiduría de la Medicina Tradicional China y terapias holísticas para acompañarte a sanar y vivir en armonía."
 };
 
 export const footerHours = [
