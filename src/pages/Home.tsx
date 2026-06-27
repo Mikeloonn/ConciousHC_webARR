@@ -60,7 +60,7 @@ const Home: React.FC = () => {
             con Yeni Arriarán
           </h2>
           <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
-            Recupera tu armonía y vitalidad natural. Te acompañamos en tu camino hacia el bienestar integral a través de la acupuntura y un abordaje terapéutico personalizado.
+            Te acompañamos en tu camino hacia el bienestar integral a través de la acupuntura y un abordaje terapéutico personalizado.
           </p>
           <Link to="/services" className="inline-block border-2 border-white text-white px-8 py-3 rounded-md font-medium uppercase hover:bg-white hover:text-primary transition-all duration-300">
             Nuestros Servicios
