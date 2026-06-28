@@ -6,11 +6,11 @@ const TopBar: React.FC = () => {
     <div className="bg-primary text-white py-2 text-sm hidden md:block">
       <div className="max-w-[1140px] mx-auto px-4 flex justify-between items-center">
         <div className="flex gap-6">
-          <a href="tel:+51098765432" className="flex items-center gap-2 hover:text-secondary transition-colors duration-300">
-            <Phone size={14} /> <span>(+51) 098765432</span>
+          <a href="https://wa.me/34624253470" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-secondary transition-colors duration-300">
+            <Phone size={14} /> <span>+34 624 253 470</span>
           </a>
-          <a href="mailto:info@clinicamedico.com" className="flex items-center gap-2 hover:text-secondary transition-colors duration-300">
-            <Mail size={14} /> <span>info@clinicamedico.com</span>
+          <a href="mailto:acupunturaholisticayeni@gmail.com" className="flex items-center gap-2 hover:text-secondary transition-colors duration-300">
+            <Mail size={14} /> <span>acupunturaholisticayeni@gmail.com</span>
           </a>
         </div>
         <div className="flex gap-4">

@@ -19,6 +19,9 @@ import review3 from '../assets/images/reseña3.png';
 import review4 from '../assets/images/reseña4.png';
 import review5 from '../assets/images/reseña5.png';
 import review6 from '../assets/images/reseña6.png';
+import caratula1 from '../assets/images/caratula1.jpg';
+import caratula2 from '../assets/images/caratula2.jpg';
+import caratula3 from '../assets/images/caratula3.jpg';
 
 export const IMAGES = {
   // Global
@@ -53,6 +56,12 @@ export const IMAGES = {
     tuina: tuinaImg,
     moxibustion: moxibustionImg,
   },
+  
+  blogs: [
+    caratula1,
+    caratula2,
+    caratula3
+  ],
 
   // Workshops (Talleres)
   workshops: {
