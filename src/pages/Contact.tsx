@@ -29,7 +29,7 @@ const Contact: React.FC = () => {
 
     try {
       // Intentamos el envío por AJAX
-      await fetch("https://formsubmit.co/ajax/lastuserofworld2@gmail.com", {
+      await fetch("https://formsubmit.co/ajax/acupunturaholisticayeni@gmail.com", {
         method: "POST",
         body: formData
       });
