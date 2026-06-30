@@ -1,9 +1,33 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Star } from 'lucide-react';
-import { IMAGES } from '../constants/images';
 
+// Datos de reseñas reales de Google
+const googleReviews = [
+  {
+    id: 1,
+    author: 'Safa Kadhum',
+    initials: 'SK',
+    text: 'We had a truly fantastic experience at Acupuntura en Torremolinos – Yeni Arriarán. Both my mother and I felt very welcome from the start, and the atmosphere was calm and relaxing throughout. The treatment was professional and soothing, and we could immediately feel an improvement afterwards...',
+    link: 'https://www.google.com/search?q=Acupuntura+en+Torremolinos+-+Yeni+Arriar%C3%A1n#lrd=0x0:0x0,1,,,'
+  },
+  {
+    id: 2,
+    author: 'Franklin Jose Pacheco Quijada',
+    initials: 'FP',
+    text: 'Quiero agradecer profundamente a la Doctora Yeni Arriaran por su excelente trabajo con la acupuntura. Llegué con un dolor de espalda bastante fuerte y desde la primera sesión noté una gran mejoría. Para mi sorpresa, en la segunda sesión el dolor desapareció completamente. Fue muy profesional...',
+    link: 'https://www.google.com/search?q=Acupuntura+en+Torremolinos+-+Yeni+Arriar%C3%A1n#lrd=0x0:0x0,1,,,'
+  },
+  {
+    id: 3,
+    author: 'Edurne MGA',
+    initials: 'EM',
+    text: 'He ido a varios terapeutas de acupuntura, la técnica que utiliza Yeni me gustó mucho porque con 1 sola aguja, como mucho 2, es capaz de reducir en la misma sesión notoriamente la dolencia con la que llegas. El trato es muy humano y cercano.',
+    link: 'https://www.google.com/search?q=Acupuntura+en+Torremolinos+-+Yeni+Arriar%C3%A1n#lrd=0x0:0x0,1,,,'
+  }
+];
 
-const items = [...IMAGES.testimonials, ...IMAGES.testimonials, ...IMAGES.testimonials];
+// Triplicamos el array para que el efecto de scroll infinito funcione a la perfección sin saltos
+const displayReviews = [...googleReviews, ...googleReviews, ...googleReviews];
 
 const TestimonialCarousel: React.FC = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -11,22 +35,29 @@ const TestimonialCarousel: React.FC = () => {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [dragDistance, setDragDistance] = useState(0); // Para diferenciar entre "clic" y "arrastre"
   const animationRef = useRef<number>(0);
 
   // Lógica de Autoplay Infinito
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
-
+    
     const animate = () => {
       if (scrollContainer && !isDown && !isPaused) {
-        // Velocidad del auto-scroll
-        scrollContainer.scrollLeft += 1;
+        const singleSetWidth = scrollContainer.scrollWidth / 3;
 
-        // Resetear scroll para loop infinito invisible
-        // Si hemos scrolleado más de la mitad (un set completo de items), volvemos al inicio
-        // Asumimos que el contenido está triplicado para seguridad
-        if (scrollContainer.scrollLeft >= (scrollContainer.scrollWidth / 3) * 2) {
-          scrollContainer.scrollLeft = scrollContainer.scrollWidth / 3;
+        // Configuración inicial de posición
+        if (scrollContainer.scrollLeft === 0) {
+            scrollContainer.scrollLeft = singleSetWidth;
+        }
+
+        scrollContainer.scrollLeft += 1; // Velocidad del auto-scroll
+
+        // Reseteo transparente para hacer el loop infinito
+        if (scrollContainer.scrollLeft >= singleSetWidth * 2) {
+          scrollContainer.scrollLeft = singleSetWidth;
+        } else if (scrollContainer.scrollLeft <= 0) {
+          scrollContainer.scrollLeft = singleSetWidth;
         }
       }
       animationRef.current = requestAnimationFrame(animate);
@@ -34,95 +65,100 @@ const TestimonialCarousel: React.FC = () => {
 
     animationRef.current = requestAnimationFrame(animate);
 
-    return () => {
-      if (animationRef.current) cancelAnimationFrame(animationRef.current);
-    };
+    return () => cancelAnimationFrame(animationRef.current);
   }, [isDown, isPaused]);
 
-  // Eventos de Mouse/Touch para arrastrar (Drag)
+  // Manejadores para Arrastrar (Desktop)
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDown(true);
+    setDragDistance(0);
     if (scrollContainerRef.current) {
       setStartX(e.pageX - scrollContainerRef.current.offsetLeft);
       setScrollLeft(scrollContainerRef.current.scrollLeft);
     }
   };
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDown || !scrollContainerRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollContainerRef.current.offsetLeft;
+    const walk = (x - startX) * 1.5; // Multiplicador de velocidad de arrastre
+    setDragDistance(Math.abs(walk));
+    scrollContainerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  // Manejadores para Arrastrar (Mobile Touch)
   const handleTouchStart = (e: React.TouchEvent) => {
     setIsDown(true);
+    setDragDistance(0);
     if (scrollContainerRef.current) {
       setStartX(e.touches[0].pageX - scrollContainerRef.current.offsetLeft);
       setScrollLeft(scrollContainerRef.current.scrollLeft);
     }
   };
 
-  const handleMouseLeave = () => {
-    setIsDown(false);
-    setIsPaused(false);
-  };
-
-  const handleMouseUp = () => {
-    setIsDown(false);
-    setIsPaused(false);
-  };
-
-  const handleTouchEnd = () => {
-    setIsDown(false);
-    setIsPaused(false);
-  };
-
-  const handleMouseEnter = () => {
-    setIsPaused(true);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDown || !scrollContainerRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollContainerRef.current.offsetLeft;
-    const walk = (x - startX) * 2; // Velocidad del drag
-    scrollContainerRef.current.scrollLeft = scrollLeft - walk;
-  };
-
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDown || !scrollContainerRef.current) return;
     const x = e.touches[0].pageX - scrollContainerRef.current.offsetLeft;
-    const walk = (x - startX) * 2;
+    const walk = (x - startX) * 1.5;
+    setDragDistance(Math.abs(walk));
     scrollContainerRef.current.scrollLeft = scrollLeft - walk;
   };
 
+  // Clic en la tarjeta (Si arrastramos mucho, cancelamos el clic para que no abra la pestaña)
+  const handleClick = (e: React.MouseEvent, url: string) => {
+    e.preventDefault();
+    if (dragDistance < 10) {
+      window.open(url, '_blank');
+    }
+  };
+
   return (
-    <div className="relative group">
-      {/* Sombras laterales para indicar scroll */}
-      <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-light to-transparent z-10 pointer-events-none"></div>
-      <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-light to-transparent z-10 pointer-events-none"></div>
+    <div className="relative w-full overflow-hidden reveal-up">
+      {/* Sombras laterales para el efecto de desvanecimiento */}
+      <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#0a0a08] to-transparent z-10 pointer-events-none"></div>
+      <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#0a0a08] to-transparent z-10 pointer-events-none"></div>
 
       <div
         ref={scrollContainerRef}
-        className="flex overflow-x-hidden cursor-grab active:cursor-grabbing py-10 no-scrollbar"
+        className="flex gap-6 px-3 overflow-x-hidden cursor-grab active:cursor-grabbing no-scrollbar py-4"
         onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseLeave}
-        onMouseUp={handleMouseUp}
+        onMouseLeave={() => { setIsDown(false); setIsPaused(false); }}
+        onMouseUp={() => setIsDown(false)}
         onMouseMove={handleMouseMove}
-        onMouseEnter={handleMouseEnter}
+        onMouseEnter={() => setIsPaused(true)}
         onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
+        onTouchEnd={() => { setIsDown(false); setIsPaused(false); }}
         onTouchMove={handleTouchMove}
       >
-        <div className="flex gap-30 px-4 items-center">
-          {items.map((imgSrc, index) => (
-            <div
-              key={index}
-              // 👇 AQUÍ QUITAMOS EL bg-white, border, shadow y p-2
-              className="min-w-[300px] md:min-w-[350px] select-none transition-transform duration-300 transform hover:scale-105 flex items-center justify-center"
-            >
-              <img
-                src={imgSrc}
-                alt={`Testimonio ${index + 1}`}
-                className="w-full h-auto object-contain pointer-events-none"
-              />
+        {displayReviews.map((review, i) => (
+          <a
+            key={i}
+            href={review.link}
+            draggable={false} // Evita el fantasma de la URL en Chrome
+            onDragStart={(e) => e.preventDefault()} // Bloquea el drag nativo del HTML
+            onClick={(e) => handleClick(e, review.link)}
+            className="testimonial-card block w-[320px] md:w-[450px] shrink-0 transform transition-colors duration-500 hover:border-[#b3bda3]/30 select-none"
+          >
+            <div className="flex gap-1 mb-4 relative z-10 pointer-events-none">
+              {[...Array(5)].map((_, idx) => (
+                <Star key={idx} size={16} className="text-[#df9e53] fill-[#df9e53]" />
+              ))}
             </div>
-          ))}
-        </div>
+            <p className="text-[#d1d7c7]/60 text-sm leading-relaxed mb-8 relative z-10 line-clamp-6 pointer-events-none">
+              "{review.text}"
+            </p>
+            <div className="flex items-center gap-3 relative z-10 mt-auto pointer-events-none">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#93a07e]/20 to-[#df9e53]/20 flex items-center justify-center">
+                <span className="font-serif text-sm text-[#d1d7c7]">{review.initials}</span>
+              </div>
+              <div>
+                <div className="text-sm text-[#e8ebe3]">{review.author}</div>
+                <div className="text-xs text-[#b3bda3]/50">Reseña en Google</div>
+              </div>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   );

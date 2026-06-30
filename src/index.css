@@ -1,38 +1,59 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #3D362F; /* --colora3 */
-  --color-secondary: #C5AC96; /* --colora0 */
-  --color-accent: #90806F; /* --colora4 */
-  --color-dark: #28241F; /* --colora5 */
-  --color-light: #f4f7f9; /* --colora1 */
-  --color-textGray: #555555; /* --colora6 */
+  /* Nuevos colores del tema holístico */
+  --color-sage-50: #f6f7f4;
+  --color-sage-100: #e8ebe3;
+  --color-sage-200: #d1d7c7;
+  --color-sage-300: #b3bda3;
+  --color-sage-400: #93a07e;
+  --color-sage-500: #768463;
+  --color-sage-600: #5c694d;
+  --color-sage-700: #48533e;
+  --color-sage-800: #3b4434;
+  --color-sage-900: #333a2e;
+  
+  --color-warm-50: #fdf8f0;
+  --color-warm-100: #f9edda;
+  --color-warm-200: #f2d8b4;
+  --color-warm-300: #e9be84;
+  --color-warm-400: #df9e53;
+  --color-warm-500: #d88533;
+  --color-warm-600: #c96e28;
+  --color-warm-700: #a75523;
+  --color-warm-800: #864523;
+  --color-warm-900: #6d3a1f;
 
-  --font-sans: 'Poppins', sans-serif;
-  --font-ubuntu: 'Ubuntu', sans-serif;
+  --color-earth-50: #f9f6f2;
+  --color-earth-100: #f0e9df;
+  --color-earth-200: #e0d1be;
+  --color-earth-300: #cdb497;
+  --color-earth-400: #bc9674;
+  --color-earth-500: #af7e5a;
 
-  --animate-slide-in-left: slide-in-left 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-
-  @keyframes slide-in-left {
-    0% {
-      transform: translateX(-1000px);
-      opacity: 0;
-    }
-    100% {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
+  /* Nuevas fuentes */
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Inter', sans-serif;
 }
 
-html { 
-  scroll-behavior: smooth; 
-}
+html { font-size: 16px; }
+
+/* Configuraciones para el scroll suave de Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 
 body {
-  overflow-x: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #0a0a08;
+    color: #e8ebe3;
+    overflow-x: hidden;
+    cursor: none; 
 }
 
+@media (max-width: 768px) { body { cursor: auto; } }
+
+/* Utilidad para ocultar barras de scroll */
 @utility no-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -40,3 +61,260 @@ body {
     display: none;
   }
 }
+
+/* Custom Cursor */
+.cursor-dot {
+    width: 8px; height: 8px;
+    background: rgba(232, 235, 227, 0.9);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 99999;
+    mix-blend-mode: difference;
+    transition: transform 0.1s ease;
+}
+.cursor-ring {
+    width: 40px; height: 40px;
+    border: 1.5px solid rgba(232, 235, 227, 0.4);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 99998;
+    mix-blend-mode: difference;
+    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+}
+.cursor-ring.hover {
+    width: 60px; height: 60px;
+    border-color: rgba(232, 235, 227, 0.8);
+}
+
+/* Pantalla de Carga (Loader) */
+.loader {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: #0a0a08;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.loader-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    color: #e8ebe3;
+    opacity: 0;
+    letter-spacing: 0.3em;
+}
+.loader-line {
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #b3bda3, transparent);
+    margin-top: 2rem;
+}
+.loader-counter {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(232, 235, 227, 0.4);
+    margin-top: 1.5rem;
+    letter-spacing: 0.2em;
+}
+
+/* Efecto de granulado/ruido de fondo */
+.noise-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9990;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+}
+
+/* Enlaces del Menú */
+.nav-link {
+    position: relative;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(232, 235, 227, 0.5);
+    transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding: 0.25rem 0;
+    display: inline-block;
+    text-decoration: none;
+    outline: none !important;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #e8ebe3 !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, #b3bda3, #df9e53);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+}
+
+.scroll-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(180deg, rgba(232,235,227,0.4), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+}
+
+.section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(179, 189, 163, 0.6);
+}
+.section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    line-height: 1.1;
+}
+
+/* Tarjetas de Cristal (Servicios) */
+.glass-card {
+    background: rgba(232, 235, 227, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(232, 235, 227, 0.06);
+    border-radius: 1.5rem;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.glass-card:hover {
+    background: rgba(232, 235, 227, 0.06);
+    border-color: rgba(232, 235, 227, 0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.service-icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(179,189,163,0.15), transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+}
+.glass-card:hover .service-icon {
+    background: radial-gradient(circle, rgba(223,158,83,0.2), transparent);
+    box-shadow: 0 0 30px rgba(223,158,83,0.1);
+}
+
+.organic-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(179,189,163,0.2), transparent);
+}
+
+.gold-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(223,158,83,0.3), transparent);
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+/* Geometría Sagrada */
+.sacred-svg {
+    opacity: 0.06;
+    animation: rotateSlow 60s linear infinite;
+}
+@keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 8rem;
+    line-height: 0.5;
+    color: rgba(179, 189, 163, 0.15);
+}
+
+/* Tarjetas de Testimonios */
+.testimonial-card {
+    background: linear-gradient(135deg, rgba(232,235,227,0.03), rgba(232,235,227,0.01));
+    border: 1px solid rgba(232,235,227,0.05);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.testimonial-card::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    position: absolute;
+    top: 1rem; left: 1.5rem;
+    color: rgba(179,189,163,0.1);
+    line-height: 1;
+}
+
+/* Números Filosofía */
+.philosophy-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 8vw, 7rem);
+    font-weight: 200;
+    color: rgba(179, 189, 163, 0.08);
+    line-height: 1;
+}
+
+/* Marco animado para fotos */
+.about-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.5rem;
+}
+.about-image-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(179,189,163,0.1), transparent);
+    pointer-events: none;
+}
+.about-image-container img {
+    transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.about-image-container:hover img {
+    transform: scale(1.05);
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #0a0a08; }
+::-webkit-scrollbar-thumb { background: rgba(179,189,163,0.3); border-radius: 10px; }
