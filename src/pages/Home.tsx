@@ -21,54 +21,7 @@ const Home: React.FC = () => {
   const loaderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // 1. Scroll Suave (Lenis)
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-    });
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-    gsap.ticker.lagSmoothing(0);
-
-    // 2. Cursor Personalizado (Solo Desktop)
-    let mouseX = 0, mouseY = 0;
-    let ringX = 0, ringY = 0;
-    let cursorAnimId: number;
-
-    const onMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      if (cursorDotRef.current) {
-        gsap.to(cursorDotRef.current, { x: mouseX - 4, y: mouseY - 4, duration: 0.1 });
-      }
-    };
-
-    if (window.innerWidth > 768) {
-      window.addEventListener('mousemove', onMouseMove);
-      const animateCursorRing = () => {
-        ringX += (mouseX - ringX) * 0.15;
-        ringY += (mouseY - ringY) * 0.15;
-        if (cursorRingRef.current) {
-          cursorRingRef.current.style.transform = `translate(${ringX - 20}px, ${ringY - 20}px)`;
-        }
-        cursorAnimId = requestAnimationFrame(animateCursorRing);
-      };
-      animateCursorRing();
-    }
-
-    // 3. Three.js Services Canvas
+    // 1. Three.js Services Canvas
     let srvRenderer: THREE.WebGLRenderer, srvScene: THREE.Scene, srvCamera: THREE.PerspectiveCamera;
     let srvAnimId: number;
     let resizeObserverSrv: ResizeObserver;
@@ -132,7 +85,7 @@ const Home: React.FC = () => {
       }
     }
 
-    // 4. Three.js Therapist Canvas (Fondo de luciérnagas/energía)
+    // 2. Three.js Therapist Canvas (Fondo de luciérnagas/energía)
     let therRenderer: THREE.WebGLRenderer, therScene: THREE.Scene, therCamera: THREE.PerspectiveCamera;
     let therAnimId: number;
     let resizeObserverTher: ResizeObserver;
@@ -221,7 +174,7 @@ const Home: React.FC = () => {
       }
     }
 
-    // 5. GSAP Animations Function
+    // 3. GSAP Animations Function
     const initGSAPAnimations = () => {
       const heroTL = gsap.timeline({ delay: 0.2 });
       heroTL
@@ -260,14 +213,13 @@ const Home: React.FC = () => {
         gsap.fromTo(card, { opacity: 0, y: 80, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 1, delay: i * 0.1, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 88%' } });
       });
 
-      // Animación en cascada (stagger) para los textos de la Terapeuta
       gsap.fromTo('.therapist-stagger', 
         { opacity: 0, y: 40 },
         {
           opacity: 1, 
           y: 0, 
           duration: 1, 
-          stagger: 0.2, // Retraso entre cada párrafo
+          stagger: 0.2,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: '#terapeuta-trigger',
@@ -278,37 +230,44 @@ const Home: React.FC = () => {
       );
     };
 
-    // 6. Loader Sequence
+    // 4. Loader Sequence
     if (loaderRef.current) {
-      const loaderText = loaderRef.current.querySelector('.loader-text');
-      const loaderLine = loaderRef.current.querySelector('.loader-line');
-      const loaderCounter = loaderRef.current.querySelector('.loader-counter');
+      // COMPROBAMOS SI YA HA VISTO LA INTRO EN ESTA SESIÓN
+      const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
 
-      const loaderTL = gsap.timeline();
-      loaderTL
-        .to(loaderText, { opacity: 1, duration: 0.8, ease: 'power2.out' })
-        .to(loaderLine, { width: '200px', duration: 1.5, ease: 'power2.inOut' }, '-=0.3')
-        .to({}, { duration: 1.5, onUpdate: function () { if (loaderCounter) { loaderCounter.textContent = Math.round(this.progress() * 100) + '%'; } }, ease: 'power1.inOut' }, '-=1.5')
-        .to(loaderText, { opacity: 0, y: -20, duration: 0.4, ease: 'power2.in' })
-        .to([loaderLine, loaderCounter], { opacity: 0, duration: 0.3 }, '-=0.3')
-        .to(loaderRef.current, {
-          yPercent: -100, duration: 1, ease: 'power4.inOut',
-          onComplete: () => {
-            if (loaderRef.current) loaderRef.current.style.display = 'none';
-            initGSAPAnimations();
-          }
-        });
+      if (!hasSeenIntro) {
+        // ES LA PRIMERA VEZ: Mostramos animación completa
+        const loaderText = loaderRef.current.querySelector('.loader-text');
+        const loaderLine = loaderRef.current.querySelector('.loader-line');
+        const loaderCounter = loaderRef.current.querySelector('.loader-counter');
+
+        const loaderTL = gsap.timeline();
+        loaderTL
+          .to(loaderText, { opacity: 1, duration: 0.8, ease: 'power2.out' })
+          .to(loaderLine, { width: '200px', duration: 1.5, ease: 'power2.inOut' }, '-=0.3')
+          .to({}, { duration: 1.5, onUpdate: function () { if (loaderCounter) { loaderCounter.textContent = Math.round(this.progress() * 100) + '%'; } }, ease: 'power1.inOut' }, '-=1.5')
+          .to(loaderText, { opacity: 0, y: -20, duration: 0.4, ease: 'power2.in' })
+          .to([loaderLine, loaderCounter], { opacity: 0, duration: 0.3 }, '-=0.3')
+          .to(loaderRef.current, {
+            yPercent: -100, duration: 1, ease: 'power4.inOut',
+            onComplete: () => {
+              if (loaderRef.current) loaderRef.current.style.display = 'none';
+              sessionStorage.setItem('hasSeenIntro', 'true'); // Guardamos para que no se repita
+              initGSAPAnimations();
+            }
+          });
+      } else {
+        // YA LA VIO: Ocultamos el loader inmediatamente y lanzamos las animaciones de Hero
+        loaderRef.current.style.display = 'none';
+        initGSAPAnimations();
+      }
     }
 
     return () => {
-      lenis.destroy();
-      window.removeEventListener('mousemove', onMouseMove);
       if (resizeObserverSrv) resizeObserverSrv.disconnect();
       if (resizeObserverTher) resizeObserverTher.disconnect();
-      cancelAnimationFrame(cursorAnimId);
       cancelAnimationFrame(srvAnimId);
       cancelAnimationFrame(therAnimId);
-      ScrollTrigger.getAll().forEach(t => t.kill());
       if (srvRenderer) srvRenderer.dispose();
       if (therRenderer) therRenderer.dispose();
     };
@@ -318,7 +277,6 @@ const Home: React.FC = () => {
     <>
       <SEO title="Inicio" description="Bienvenido al Centro de Terapias Holísticas..." />
 
-      {/* LOADER */}
       <div ref={loaderRef} className="loader">
         <div className="loader-text font-serif text-[clamp(1.5rem,4vw,3rem)] text-[#e8ebe3] opacity-0 tracking-[0.3em]">
           TERAPIAS HOLÍSTICAS
@@ -327,17 +285,10 @@ const Home: React.FC = () => {
         <div className="loader-counter font-sans text-xs text-[#e8ebe3]/40 mt-6 tracking-widest">0%</div>
       </div>
 
-      {/* OVERLAYS GLOBALES */}
-      <div className="noise-overlay pointer-events-none"></div>
-      <div ref={cursorDotRef} className="cursor-dot hidden md:block"></div>
-      <div ref={cursorRingRef} className="cursor-ring hidden md:block"></div>
-
-      {/* CONTENIDO PRINCIPAL */}
-      <main className="bg-[#0a0a08] text-[#e8ebe3] w-full overflow-hidden">
+      <main className="w-full overflow-hidden">
         
         {/* HERO SECTION */}
         <section id="inicio" className="relative min-h-[100svh] flex items-center justify-center overflow-hidden w-full">
-          {/* Capa oscura sobre el video para que resalte el texto con gran contraste */}
           <div className="absolute inset-0 bg-[#0a0a08]/70 z-10 pointer-events-none"></div>
           
           <div className="absolute inset-0 z-0">
@@ -357,7 +308,6 @@ const Home: React.FC = () => {
             <polygon points="200,350 50,125 350,125" fill="none" stroke="rgba(179,189,163,0.15)" strokeWidth="0.3" />
           </svg>
 
-          {/* Textos Centrales */}
           <div className="hero-content text-center px-6 w-full max-w-4xl mx-auto z-30 pt-20">
             <div className="hero-subtitle mb-6 opacity-0 translate-y-[60px] text-xs tracking-[0.35em] uppercase text-[#e8ebe3]/50" id="hero-sub">Bienvenido a tu transformación</div>
             <div className="hero-line mx-auto mb-8 w-[60px] h-px bg-gradient-to-r from-[#b3bda3] to-transparent opacity-0 translate-y-[60px]" id="hero-line"></div>

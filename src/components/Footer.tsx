@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Facebook, Youtube, Instagram } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -9,38 +9,50 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Footer: React.FC = () => {
   const footerRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
   useEffect(() => {
-    if (footerRef.current && contentRef.current) {
-      gsap.fromTo(
-        contentRef.current,
-        { opacity: 0, y: 60 },
-        {
+    // Le damos un pequeñísimo margen de tiempo (100ms) para que React 
+    // termine de pintar la nueva página y la altura del documento sea la correcta.
+    const timer = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        // 1. Reseteamos las columnas por si se quedaron invisibles del cambio de página
+        gsap.set('.footer-col', { opacity: 0, y: 50 });
+
+        // 2. Creamos la animación en cascada (stagger)
+        gsap.to('.footer-col', {
           opacity: 1,
           y: 0,
-          duration: 1.5,
+          duration: 1,
+          stagger: 0.2, // Tiempo entre cada columna (Efecto Cascada)
           ease: 'power3.out',
           scrollTrigger: {
             trigger: footerRef.current,
-            start: 'top 90%',
+            start: 'top 95%', // Se activa en cuanto asoma el footer
             toggleActions: 'play none none reverse'
           },
-        }
-      );
-    }
-  }, []);
+        });
+
+        // 3. Forzamos a GSAP a recalcular todas las medidas de la página
+        ScrollTrigger.refresh();
+      }, footerRef);
+
+      return () => ctx.revert();
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [location.pathname]); // Este Hook se dispara CADA VEZ que cambias de página
 
   return (
     <footer ref={footerRef} className="relative pt-24 pb-12 overflow-hidden border-t border-sage-200/5 bg-[#0a0a08]" role="contentinfo">
       {/* Esfera de luz decorativa en el fondo */}
       <div className="orb w-[300px] h-[300px] bg-[#5c694d] top-0 left-1/3 opacity-5 pointer-events-none" aria-hidden="true"></div>
       
-      <div ref={contentRef} className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 opacity-0">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20">
           
           {/* Columna 1: Marca & Redes */}
-          <div>
+          <div className="footer-col opacity-0 text-left">
             <Link to="/" className="flex items-center gap-3 mb-6 focus:outline-none" data-hoverable="true">
               <img
                 src={logo}
@@ -73,7 +85,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Columna 2: Nosotros (Breve Intro) */}
-          <div className="text-left">
+          <div className="footer-col opacity-0 text-left">
             <h3 className="font-serif text-xl mb-4 text-sage-100">Nosotros</h3>
             <p className="text-[#d1d7c7]/40 text-sm leading-relaxed mb-6">
               Inspirados en la alquimia del bienestar natural, nos enfocamos en el potencial humano y el autoconocimiento. Creemos que la salud física es solo la puerta de entrada para una vida plenamente consciente.
@@ -81,7 +93,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Columna 3: Enlaces Legales */}
-          <div className="text-left">
+          <div className="footer-col opacity-0 text-left">
             <h3 className="font-serif text-xl mb-4 text-sage-100">Legal</h3>
             <nav className="flex flex-col gap-3" aria-label="Enlaces legales">
               <Link to="/legal" className="footer-link text-sm text-[#d1d7c7]/40 hover:text-[#e8ebe3] transition-colors" data-hoverable="true">Aviso Legal</Link>
@@ -92,7 +104,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Columna 4: Horarios */}
-          <div className="text-left">
+          <div className="footer-col opacity-0 text-left">
             <h3 className="font-serif text-xl mb-4 text-sage-100">Horarios</h3>
             <div className="space-y-3">
               <div>
