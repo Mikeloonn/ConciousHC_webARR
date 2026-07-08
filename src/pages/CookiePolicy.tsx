@@ -1,55 +1,122 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageHeader from '../components/PageHeader';
 import SEO from '../components/SEO';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const CookiePolicy: React.FC = () => {
+  
+  // Animación suave de aparición al hacer scroll
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray('.reveal-up').forEach((el: any) => {
+        gsap.fromTo(el,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1, 
+            y: 0, 
+            duration: 1.2, 
+            ease: 'power3.out',
+            scrollTrigger: { 
+              trigger: el, 
+              start: 'top 85%', 
+              toggleActions: 'play none none reverse' 
+            }
+          }
+        );
+      });
+    });
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div>
+    <main className="bg-[#0a0a08] text-[#e8ebe3] min-h-screen w-full overflow-hidden pb-24">
       <SEO 
         title="Política de Cookies" 
-        description="Información sobre el uso de cookies en Medico Clínica." 
+        description="Política de Cookies del Centro de Acupuntura y Terapias Holísticas. Información detallada sobre el uso de cookies en nuestra web." 
       />
       <PageHeader title="POLÍTICA DE COOKIES" breadcrumb="Cookies" />
       
-      <section className="py-20 bg-white">
-        <div className="max-w-[1140px] mx-auto px-4">
-          <div className="prose prose-lg text-textGray max-w-none">
+      <section className="relative py-16 md:py-24">
+        {/* Orbes decorativos de fondo */}
+        <div className="orb w-[400px] h-[400px] bg-[#93a07e] top-20 -left-32 parallax-layer z-0 opacity-10" data-speed="0.02"></div>
+        <div className="orb w-[300px] h-[300px] bg-[#df9e53] bottom-20 -right-20 parallax-layer z-0 opacity-10" data-speed="0.03"></div>
+
+        <div className="max-w-4xl mx-auto px-6 lg:px-12 relative z-10">
+          
+          <div className="text-center mb-12 reveal-up">
+            <h2 className="section-heading text-[clamp(1.8rem,4vw,3rem)] mb-4">
+              Transparencia y <span className="italic text-[#b3bda3]">Privacidad</span>
+            </h2>
+            <div className="organic-divider max-w-xs mx-auto mb-6"></div>
+            <p className="text-xs tracking-[0.3em] uppercase text-[#b3bda3]/60">Política de Cookies</p>
+          </div>
+
+          <div className="glass-card p-8 md:p-14 lg:p-20 reveal-up">
             
-            <h3 className="text-2xl font-bold text-dark mb-4">1. ¿QUÉ SON LAS COOKIES?</h3>
-            <p className="mb-8">
-              Una cookie es un fichero que se descarga en su ordenador al acceder a determinadas páginas web. Las cookies permiten a una página web, entre otras cosas, almacenar y recuperar información sobre los hábitos de navegación de un usuario o de su equipo y, dependiendo de la información que contengan y de la forma en que utilice su equipo, pueden utilizarse para reconocer al usuario.
-            </p>
+            {/* Bloque 1 */}
+            <div className="mb-12">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="font-serif text-2xl text-[#df9e53]">1.</span>
+                <h3 className="font-serif text-2xl text-[#e8ebe3]">¿Qué son las cookies?</h3>
+              </div>
+              <p className="text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed">
+                Una cookie es un fichero que se descarga en su ordenador al acceder a determinadas páginas web. Las cookies permiten a una página web, entre otras cosas, almacenar y recuperar información sobre los hábitos de navegación de un usuario o de su equipo y, dependiendo de la información que contengan y de la forma en que utilice su equipo, pueden utilizarse para reconocer al usuario.
+              </p>
+            </div>
 
-            <h3 className="text-2xl font-bold text-dark mb-4">2. ¿QUÉ TIPOS DE COOKIES UTILIZA ESTA WEB?</h3>
-            <ul className="list-disc pl-6 mb-8 space-y-4">
-              <li>
-                <strong>Cookies Técnicas (Necesarias):</strong> Son aquellas que permiten al usuario la navegación a través de la página web y la utilización de las diferentes opciones o servicios que en ella existen.
-              </li>
-              <li>
-                <strong>Cookies de Análisis (Opcionales):</strong> Son aquellas que, tratadas por nosotros o por terceros (como Google Analytics), nos permiten cuantificar el número de usuarios y así realizar la medición y análisis estadístico de la utilización que hacen los usuarios del servicio.
-              </li>
-            </ul>
+            {/* Bloque 2 */}
+            <div className="mb-12">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="font-serif text-2xl text-[#df9e53]">2.</span>
+                <h3 className="font-serif text-2xl text-[#e8ebe3]">¿Qué tipos de cookies utiliza esta web?</h3>
+              </div>
+              <ul className="space-y-6 text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed pl-4 border-l border-[#df9e53]/30">
+                <li>
+                  <strong className="text-[#e8ebe3] font-medium block mb-1">Cookies Técnicas (Necesarias):</strong> 
+                  Son aquellas que permiten al usuario la navegación a través de la página web y la utilización de las diferentes opciones o servicios que en ella existen. Sin ellas, la web podría no funcionar correctamente.
+                </li>
+                <li>
+                  <strong className="text-[#e8ebe3] font-medium block mb-1">Cookies de Análisis (Opcionales):</strong> 
+                  Son aquellas que, tratadas por nosotros o por terceros (como Google Analytics), nos permiten cuantificar el número de usuarios y así realizar la medición y análisis estadístico de la utilización que hacen los usuarios del servicio para mejorar nuestra oferta.
+                </li>
+              </ul>
+            </div>
 
-            <h3 className="text-2xl font-bold text-dark mb-4">3. ACEPTACIÓN, RECHAZO O CONFIGURACIÓN</h3>
-            <p className="mb-8">
-              Al entrar en este sitio web, usted visualizó un panel de configuración donde podía aceptar, rechazar o configurar las cookies. Puede modificar su consentimiento en cualquier momento eliminando las cookies de su navegador y recargando la página.
-            </p>
+            {/* Bloque 3 */}
+            <div className="mb-12">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="font-serif text-2xl text-[#df9e53]">3.</span>
+                <h3 className="font-serif text-2xl text-[#e8ebe3]">Aceptación, Rechazo o Configuración</h3>
+              </div>
+              <p className="text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed">
+                Al entrar en este sitio web, usted visualizó un panel emergente (Banner de Cookies) donde podía aceptar o rechazar el uso de cookies opcionales. Puede modificar su consentimiento en cualquier momento eliminando las cookies de su navegador y recargando la página.
+              </p>
+            </div>
 
-            <h3 className="text-2xl font-bold text-dark mb-4">4. CÓMO DESACTIVAR LAS COOKIES EN LOS NAVEGADORES</h3>
-            <p className="mb-4">
-              Usted puede permitir, bloquear o eliminar las cookies instaladas en su equipo mediante la configuración de las opciones del navegador instalado en su ordenador. Consulte la "Ayuda" de su navegador para más detalles:
-            </p>
-             <ul className="list-disc pl-6 space-y-2">
-              <li>Chrome</li>
-              <li>Firefox</li>
-              <li>Safari</li>
-              <li>Edge</li>
-            </ul>
+            {/* Bloque 4 */}
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="font-serif text-2xl text-[#df9e53]">4.</span>
+                <h3 className="font-serif text-2xl text-[#e8ebe3]">Cómo desactivar las cookies en los navegadores</h3>
+              </div>
+              <p className="text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed mb-4">
+                Usted puede permitir, bloquear o eliminar las cookies instaladas en su equipo mediante la configuración de las opciones del navegador instalado en su ordenador. Consulte la "Ayuda" de su navegador para más detalles:
+              </p>
+              <ul className="space-y-2 text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed pl-4 border-l border-[#df9e53]/30">
+                <li className="hover:text-[#e8ebe3] transition-colors">Google Chrome</li>
+                <li className="hover:text-[#e8ebe3] transition-colors">Mozilla Firefox</li>
+                <li className="hover:text-[#e8ebe3] transition-colors">Apple Safari</li>
+                <li className="hover:text-[#e8ebe3] transition-colors">Microsoft Edge</li>
+              </ul>
+            </div>
 
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 };
 

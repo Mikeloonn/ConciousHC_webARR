@@ -1,80 +1,165 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageHeader from '../components/PageHeader';
 import SEO from '../components/SEO';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const PrivacyPolicy: React.FC = () => {
+  
+  // Animación suave de aparición al hacer scroll
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray('.reveal-up').forEach((el: any) => {
+        gsap.fromTo(el,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1, 
+            y: 0, 
+            duration: 1.2, 
+            ease: 'power3.out',
+            scrollTrigger: { 
+              trigger: el, 
+              start: 'top 85%', 
+              toggleActions: 'play none none reverse' 
+            }
+          }
+        );
+      });
+    });
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div>
+    <main className="bg-[#0a0a08] text-[#e8ebe3] min-h-screen w-full overflow-hidden pb-24">
       <SEO 
         title="Política de Privacidad" 
-        description="Política de Privacidad de Medico Clínica. Cómo tratamos tus datos personales (RGPD)." 
+        description="Política de Privacidad del Centro de Acupuntura y Terapias Holísticas. Tratamiento seguro de tus datos personales (RGPD)." 
       />
       <PageHeader title="POLÍTICA DE PRIVACIDAD" breadcrumb="Privacidad" />
       
-      <section className="py-20 bg-white">
-        <div className="max-w-[1140px] mx-auto px-4">
-          <div className="prose prose-lg text-textGray max-w-none">
-            
-            <p className="mb-6">
-              En <strong>Medico - Terapias Holísticas</strong>, nos comprometemos a proteger la privacidad y la seguridad de sus datos personales, cumpliendo con el Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD).
+      <section className="relative py-16 md:py-24">
+        {/* Orbes decorativos de fondo */}
+        <div className="orb w-[400px] h-[400px] bg-[#93a07e] top-20 -left-32 parallax-layer z-0 opacity-10" data-speed="0.02"></div>
+        <div className="orb w-[300px] h-[300px] bg-[#df9e53] bottom-20 -right-20 parallax-layer z-0 opacity-10" data-speed="0.03"></div>
+
+        <div className="max-w-4xl mx-auto px-6 lg:px-12 relative z-10">
+          
+          <div className="text-center mb-12 reveal-up">
+            <h2 className="section-heading text-[clamp(1.8rem,4vw,3rem)] mb-4">
+              Protección de <span className="italic text-[#b3bda3]">Datos</span>
+            </h2>
+            <div className="organic-divider max-w-xs mx-auto mb-6"></div>
+            <p className="text-xs tracking-[0.3em] uppercase text-[#b3bda3]/60">Política de Privacidad</p>
+          </div>
+
+          <div className="glass-card p-8 md:p-14 lg:p-20 reveal-up">
+
+            <p className="text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed mb-12 border-b border-[#e8ebe3]/10 pb-8">
+              En el <strong className="text-[#e8ebe3] font-medium">Centro de Acupuntura y Terapias Holísticas</strong>, nos comprometemos a proteger la privacidad y la seguridad de sus datos personales, cumpliendo con el Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD).
             </p>
 
-            <h3 className="text-2xl font-bold text-dark mb-4">1. ¿QUIÉN ES EL RESPONSABLE DEL TRATAMIENTO DE SUS DATOS?</h3>
-            <ul className="list-disc pl-6 mb-8 space-y-2">
-              <li><strong>Identidad:</strong> [NOMBRE DEL DUEÑO O EMPRESA]</li>
-              <li><strong>NIF:</strong> [TU NIF]</li>
-              <li><strong>Dirección:</strong> Plaza Andalucía 4, C.C. España local 81, 29620 - Torremolinos, Málaga.</li>
-              <li><strong>Email:</strong> info@clinicamedico.com</li>
-            </ul>
+            {/* Bloque 1 */}
+            <div className="mb-12">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="font-serif text-2xl text-[#df9e53]">1.</span>
+                <h3 className="font-serif text-2xl text-[#e8ebe3]">¿Quién es el responsable del tratamiento?</h3>
+              </div>
+              <ul className="space-y-3 text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed pl-4 border-l border-[#df9e53]/30">
+                <li><strong className="text-[#e8ebe3] font-medium">Identidad:</strong> [NOMBRE DEL DUEÑO O EMPRESA]</li>
+                <li><strong className="text-[#e8ebe3] font-medium">NIF/CIF:</strong> [TU NIF]</li>
+                <li><strong className="text-[#e8ebe3] font-medium">Dirección:</strong> Plaza Andalucía 4, Centro Comercial España local 81, 29620 - Torremolinos, Málaga.</li>
+                <li><strong className="text-[#e8ebe3] font-medium">Email:</strong> acupunturaholisticayeni@gmail.com</li>
+              </ul>
+            </div>
 
-            <h3 className="text-2xl font-bold text-dark mb-4">2. ¿CON QUÉ FINALIDAD TRATAMOS SUS DATOS PERSONALES?</h3>
-            <p className="mb-4">Tratamos la información que nos facilitan las personas interesadas con el fin de:</p>
-            <ol className="list-decimal pl-6 mb-8 space-y-2">
-              <li>Gestionar las citas y reservas solicitadas a través de la web o teléfono.</li>
-              <li>Mantener la comunicación necesaria para la prestación del servicio terapéutico.</li>
-              <li>Facturación y gestión administrativa.</li>
-              <li>Envío de comunicaciones comerciales o boletines informativos (solo si nos ha dado su consentimiento explícito).</li>
-            </ol>
+            {/* Bloque 2 */}
+            <div className="mb-12">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="font-serif text-2xl text-[#df9e53]">2.</span>
+                <h3 className="font-serif text-2xl text-[#e8ebe3]">¿Con qué finalidad tratamos sus datos?</h3>
+              </div>
+              <p className="text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed mb-4">
+                Tratamos la información que nos facilitan las personas interesadas con el fin de:
+              </p>
+              <ol className="list-decimal space-y-3 text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed pl-8 border-l border-[#df9e53]/30 ml-1">
+                <li>Gestionar las citas y reservas solicitadas a través de la web o teléfono.</li>
+                <li>Mantener la comunicación necesaria para la prestación del servicio terapéutico.</li>
+                <li>Facturación y gestión administrativa.</li>
+                <li>Envío de comunicaciones comerciales o boletines informativos (solo si nos ha dado su consentimiento explícito).</li>
+              </ol>
+            </div>
 
-            <h3 className="text-2xl font-bold text-dark mb-4">3. DATOS DE CATEGORÍA ESPECIAL (SALUD)</h3>
-            <p className="mb-8">
-              Debido a la naturaleza de nuestros servicios, es posible que tratemos datos relacionados con su estado físico o bienestar general. Según el artículo 9 del RGPD, estos son "Datos de Categoría Especial". Nos comprometemos a tratarlos con la máxima confidencialidad, aplicando medidas de seguridad reforzadas y utilizándolos únicamente para la correcta prestación del servicio solicitado.
-            </p>
+            {/* Bloque 3 */}
+            <div className="mb-12">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="font-serif text-2xl text-[#df9e53]">3.</span>
+                <h3 className="font-serif text-2xl text-[#e8ebe3]">Datos de Categoría Especial (Salud)</h3>
+              </div>
+              <p className="text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed">
+                Debido a la naturaleza de nuestros servicios, es posible que tratemos datos relacionados con su estado físico o bienestar general. Según el artículo 9 del RGPD, estos son "Datos de Categoría Especial". Nos comprometemos a tratarlos con la máxima confidencialidad, aplicando medidas de seguridad reforzadas y utilizándolos únicamente para la correcta prestación del servicio solicitado.
+              </p>
+            </div>
 
-            <h3 className="text-2xl font-bold text-dark mb-4">4. ¿POR CUÁNTO TIEMPO CONSERVAREMOS SUS DATOS?</h3>
-            <p className="mb-8">
-              Los datos personales proporcionados se conservarán mientras se mantenga la relación comercial o durante los años necesarios para cumplir con las obligaciones legales (por ejemplo, a efectos fiscales).
-            </p>
+            {/* Bloque 4 */}
+            <div className="mb-12">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="font-serif text-2xl text-[#df9e53]">4.</span>
+                <h3 className="font-serif text-2xl text-[#e8ebe3]">¿Por cuánto tiempo conservaremos sus datos?</h3>
+              </div>
+              <p className="text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed">
+                Los datos personales proporcionados se conservarán mientras se mantenga la relación comercial o durante los años necesarios para cumplir con las obligaciones legales (por ejemplo, a efectos fiscales).
+              </p>
+            </div>
 
-            <h3 className="text-2xl font-bold text-dark mb-4">5. ¿CUÁL ES LA LEGITIMACIÓN PARA EL TRATAMIENTO DE SUS DATOS?</h3>
-            <p className="mb-8">
-              La base legal para el tratamiento de sus datos es el <strong>consentimiento</strong> que se le solicita (al marcar la casilla en el formulario de contacto) y/o la ejecución del contrato de prestación de servicios al acudir a nuestro centro.
-            </p>
+            {/* Bloque 5 */}
+            <div className="mb-12">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="font-serif text-2xl text-[#df9e53]">5.</span>
+                <h3 className="font-serif text-2xl text-[#e8ebe3]">Legitimación para el tratamiento</h3>
+              </div>
+              <p className="text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed">
+                La base legal para el tratamiento de sus datos es el <strong className="text-[#e8ebe3] font-medium">consentimiento</strong> que se le solicita (al marcar la casilla en el formulario de contacto) y/o la ejecución del contrato de prestación de servicios al acudir a nuestro centro.
+              </p>
+            </div>
 
-            <h3 className="text-2xl font-bold text-dark mb-4">6. ¿A QUÉ DESTINATARIOS SE COMUNICARÁN SUS DATOS?</h3>
-            <p className="mb-8">
-              No se cederán datos a terceros, salvo obligación legal (Hacienda, Jueces y Tribunales) o a proveedores de servicios necesarios para el funcionamiento del negocio (encargados de tratamiento), como gestorías fiscales o proveedores de servicios informáticos, que cumplen con la normativa de privacidad.
-            </p>
+            {/* Bloque 6 */}
+            <div className="mb-12">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="font-serif text-2xl text-[#df9e53]">6.</span>
+                <h3 className="font-serif text-2xl text-[#e8ebe3]">Destinatarios</h3>
+              </div>
+              <p className="text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed">
+                No se cederán datos a terceros, salvo obligación legal (Hacienda, Jueces y Tribunales) o a proveedores de servicios necesarios para el funcionamiento del negocio (encargados de tratamiento), como gestorías fiscales o proveedores de servicios informáticos, que cumplen con la normativa de privacidad.
+              </p>
+            </div>
 
-            <h3 className="text-2xl font-bold text-dark mb-4">7. ¿CUÁLES SON SUS DERECHOS?</h3>
-            <p className="mb-4">
-              Cualquier persona tiene derecho a obtener confirmación sobre si estamos tratando sus datos personales. Las personas interesadas tienen derecho a:
-            </p>
-            <ul className="list-disc pl-6 mb-8 space-y-2">
-              <li>Acceder a sus datos personales.</li>
-              <li>Solicitar la rectificación de los datos inexactos.</li>
-              <li>Solicitar su supresión cuando los datos ya no sean necesarios.</li>
-              <li>Oponerse al tratamiento.</li>
-              <li>Solicitar la limitación del tratamiento.</li>
-            </ul>
-            <p>
-              Para ejercer estos derechos, puede enviar un correo electrónico a <strong>info@clinicamedico.com</strong> adjuntando copia de su DNI.
-            </p>
+            {/* Bloque 7 */}
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="font-serif text-2xl text-[#df9e53]">7.</span>
+                <h3 className="font-serif text-2xl text-[#e8ebe3]">¿Cuáles son sus derechos?</h3>
+              </div>
+              <p className="text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed mb-4">
+                Cualquier persona tiene derecho a obtener confirmación sobre si estamos tratando sus datos personales. Las personas interesadas tienen derecho a:
+              </p>
+              <ul className="space-y-2 text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed pl-4 border-l border-[#df9e53]/30 mb-6">
+                <li className="hover:text-[#e8ebe3] transition-colors">Acceder a sus datos personales.</li>
+                <li className="hover:text-[#e8ebe3] transition-colors">Solicitar la rectificación de los datos inexactos.</li>
+                <li className="hover:text-[#e8ebe3] transition-colors">Solicitar su supresión cuando los datos ya no sean necesarios.</li>
+                <li className="hover:text-[#e8ebe3] transition-colors">Oponerse al tratamiento.</li>
+                <li className="hover:text-[#e8ebe3] transition-colors">Solicitar la limitación del tratamiento.</li>
+              </ul>
+              <p className="text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed">
+                Para ejercer estos derechos, puede enviar un correo electrónico a <strong className="text-[#e8ebe3] font-medium">acupunturaholisticayeni@gmail.com</strong> adjuntando copia de su DNI.
+              </p>
+            </div>
 
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 };
 

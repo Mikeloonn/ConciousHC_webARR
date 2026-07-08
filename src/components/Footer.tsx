@@ -47,10 +47,10 @@ const Footer: React.FC = () => {
     <footer ref={footerRef} className="relative pt-24 pb-12 overflow-hidden border-t border-sage-200/5 bg-[#0a0a08]" role="contentinfo">
       {/* Esfera de luz decorativa en el fondo */}
       <div className="orb w-[300px] h-[300px] bg-[#5c694d] top-0 left-1/3 opacity-5 pointer-events-none" aria-hidden="true"></div>
-      
+
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20">
-          
+
           {/* Columna 1: Marca & Redes */}
           <div className="footer-col opacity-0 text-left">
             <Link to="/" className="flex items-center gap-3 mb-6 focus:outline-none" data-hoverable="true">
@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
                 className="h-10 w-10 rounded-full object-cover border border-[#e8ebe3]/20 shadow-sm"
               />
               <div className="flex flex-col text-left">
-                <span className="font-serif text-base tracking-widest text-[#e8ebe3] leading-none">
+                <span className="font-serif font-semibold text-base tracking-widest text-[#e8ebe3] leading-none">
                   Centro de Acupuntura
                 </span>
                 <span className="text-[8px] font-sans font-medium uppercase tracking-[0.25em] text-[#b3bda3] mt-1">
@@ -120,7 +120,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="organic-divider mb-8"></div>
-        
+
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-sage-300/30">© {new Date().getFullYear()} Centro de Terapias Holísticas. Todos los derechos reservados.</p>
           <div className="flex gap-6">
