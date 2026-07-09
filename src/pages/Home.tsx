@@ -3,25 +3,25 @@ import { Link } from 'react-router-dom';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
 import { ChevronDown, CheckCircle } from 'lucide-react';
 import SEO from '../components/SEO';
 import { IMAGES } from '../constants/images';
 import { servicesList } from '../data/services';
 import TestimonialCarousel from '../components/TestimonialCarousel';
 import heroVideo from '../assets/videos/videostudioloop.mp4';
+import { useTheme } from '../context/ThemeContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Home: React.FC = () => {
-  const cursorDotRef = useRef<HTMLDivElement>(null);
-  const cursorRingRef = useRef<HTMLDivElement>(null);
   const servicesCanvasRef = useRef<HTMLCanvasElement>(null);
   const therapistCanvasRef = useRef<HTMLCanvasElement>(null);
   const loaderRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
 
   useEffect(() => {
-    // 1. Three.js Services Canvas
+    // 1. Three.js Services Canvas (Líneas dinámicas del tema)
     let srvRenderer: THREE.WebGLRenderer, srvScene: THREE.Scene, srvCamera: THREE.PerspectiveCamera;
     let srvAnimId: number;
     let resizeObserverSrv: ResizeObserver;
@@ -38,7 +38,11 @@ const Home: React.FC = () => {
 
         const planeGeo = new THREE.PlaneGeometry(30, 30, 80, 80);
         const srvPlaneMat = new THREE.ShaderMaterial({
-          uniforms: { uTime: { value: 0 }, uColor1: { value: new THREE.Color(0xb3bda3) }, uColor2: { value: new THREE.Color(0xdf9e53) } },
+          uniforms: { 
+            uTime: { value: 0 }, 
+            uColor1: { value: new THREE.Color(isLight ? 0x6B7B54 : 0xb3bda3) }, 
+            uColor2: { value: new THREE.Color(0xdf9e53) } 
+          },
           vertexShader: `
             uniform float uTime; varying vec2 vUv; varying float vElevation;
             void main() {
@@ -85,7 +89,7 @@ const Home: React.FC = () => {
       }
     }
 
-    // 2. Three.js Therapist Canvas (Fondo de luciérnagas/energía)
+    // 2. Three.js Therapist Canvas (Partículas siempre doradas)
     let therRenderer: THREE.WebGLRenderer, therScene: THREE.Scene, therCamera: THREE.PerspectiveCamera;
     let therAnimId: number;
     let resizeObserverTher: ResizeObserver;
@@ -95,6 +99,8 @@ const Home: React.FC = () => {
       const section = canvas.parentElement;
       if (section) {
         therScene = new THREE.Scene();
+        therScene.fog = new THREE.Fog(isLight ? '#F4F5F0' : '#0a0a08', 2, 12);
+        
         therCamera = new THREE.PerspectiveCamera(60, section.clientWidth / section.clientHeight, 0.1, 1000);
         therRenderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
         therRenderer.setSize(section.clientWidth, section.clientHeight);
@@ -121,7 +127,7 @@ const Home: React.FC = () => {
         const therMaterial = new THREE.ShaderMaterial({
           uniforms: {
             uTime: { value: 0 },
-            uColor: { value: new THREE.Color(0xdf9e53) } 
+            uColor: { value: new THREE.Color(0xdf9e53) } // Partículas siempre en dorado mágico
           },
           vertexShader: `
             attribute float size;
@@ -174,7 +180,7 @@ const Home: React.FC = () => {
       }
     }
 
-    // 3. GSAP Animations Function
+    // 3. GSAP
     const initGSAPAnimations = () => {
       const heroTL = gsap.timeline({ delay: 0.2 });
       heroTL
@@ -230,13 +236,11 @@ const Home: React.FC = () => {
       );
     };
 
-    // 4. Loader Sequence
+    // 4. Loader
     if (loaderRef.current) {
-      // COMPROBAMOS SI YA HA VISTO LA INTRO EN ESTA SESIÓN
       const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
 
       if (!hasSeenIntro) {
-        // ES LA PRIMERA VEZ: Mostramos animación completa
         const loaderText = loaderRef.current.querySelector('.loader-text');
         const loaderLine = loaderRef.current.querySelector('.loader-line');
         const loaderCounter = loaderRef.current.querySelector('.loader-counter');
@@ -252,12 +256,11 @@ const Home: React.FC = () => {
             yPercent: -100, duration: 1, ease: 'power4.inOut',
             onComplete: () => {
               if (loaderRef.current) loaderRef.current.style.display = 'none';
-              sessionStorage.setItem('hasSeenIntro', 'true'); // Guardamos para que no se repita
+              sessionStorage.setItem('hasSeenIntro', 'true');
               initGSAPAnimations();
             }
           });
       } else {
-        // YA LA VIO: Ocultamos el loader inmediatamente y lanzamos las animaciones de Hero
         loaderRef.current.style.display = 'none';
         initGSAPAnimations();
       }
@@ -271,34 +274,35 @@ const Home: React.FC = () => {
       if (srvRenderer) srvRenderer.dispose();
       if (therRenderer) therRenderer.dispose();
     };
-  }, []);
+  }, [theme, isLight]);
 
   return (
     <>
       <SEO title="Inicio" description="Bienvenido al Centro de Terapias Holísticas..." />
 
       <div ref={loaderRef} className="loader">
-        <div className="loader-text font-serif text-[clamp(1.5rem,4vw,3rem)] text-[#e8ebe3] opacity-0 tracking-[0.3em]">
+        <div className="loader-text font-serif text-[clamp(1.5rem,4vw,3rem)] text-text-main opacity-0 tracking-[0.3em]">
           TERAPIAS HOLÍSTICAS
         </div>
-        <div className="loader-line w-0 h-px bg-gradient-to-r from-transparent via-[#b3bda3] to-transparent mt-8"></div>
-        <div className="loader-counter font-sans text-xs text-[#e8ebe3]/40 mt-6 tracking-widest">0%</div>
+        <div className="loader-line w-0 h-px bg-gradient-to-r from-transparent via-accent-sage to-transparent mt-8"></div>
+        <div className="loader-counter font-sans text-xs text-text-main/40 mt-6 tracking-widest">0%</div>
       </div>
 
       <main className="w-full overflow-hidden">
         
         {/* HERO SECTION */}
         <section id="inicio" className="relative min-h-[100svh] flex items-center justify-center overflow-hidden w-full">
+          {/* Conservamos el overlay oscuro estático en el vídeo para máxima nitidez de letras y evitar palidez */}
           <div className="absolute inset-0 bg-[#0a0a08]/70 z-10 pointer-events-none"></div>
-          
+
           <div className="absolute inset-0 z-0">
             <video autoPlay loop muted playsInline className="w-full h-full object-cover">
               <source src={heroVideo} type="video/mp4" />
             </video>
           </div>
           
-          <div className="orb w-[500px] h-[500px] bg-[#93a07e] top-1/4 -left-48 parallax-layer z-10" data-speed="0.02"></div>
-          <div className="orb w-[400px] h-[400px] bg-[#df9e53] bottom-1/4 -right-32 parallax-layer z-10" data-speed="0.03"></div>
+          <div className="orb w-[500px] h-[500px] bg-accent-sage top-1/4 -left-48 parallax-layer z-10" data-speed="0.02"></div>
+          <div className="orb w-[400px] h-[400px] bg-accent-gold bottom-1/4 -right-32 parallax-layer z-10" data-speed="0.03"></div>
 
           <svg className="sacred-svg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] lg:w-[800px] lg:h-[800px] z-20 pointer-events-none" viewBox="0 0 400 400">
             <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(179,189,163,0.3)" strokeWidth="0.3" />
@@ -308,32 +312,33 @@ const Home: React.FC = () => {
             <polygon points="200,350 50,125 350,125" fill="none" stroke="rgba(179,189,163,0.15)" strokeWidth="0.3" />
           </svg>
 
+          {/* El contenido del Hero utiliza colores estáticos claros con sombreado de alta definición */}
           <div className="hero-content text-center px-6 w-full max-w-4xl mx-auto z-30 pt-20">
-            <div className="hero-subtitle mb-6 opacity-0 translate-y-[60px] text-xs tracking-[0.35em] uppercase text-[#e8ebe3]/50" id="hero-sub">Bienvenido a tu transformación</div>
-            <div className="hero-line mx-auto mb-8 w-[60px] h-px bg-gradient-to-r from-[#b3bda3] to-transparent opacity-0 translate-y-[60px]" id="hero-line"></div>
-            <h1 className="hero-title text-[clamp(2.2rem,6vw,5.5rem)] mb-8 text-[#e8ebe3]">
+            <div className="hero-subtitle mb-6 opacity-0 translate-y-[60px] text-xs tracking-[0.35em] uppercase text-[#e8ebe3]/70 text-shadow-subtle" id="hero-sub">Bienvenido a tu transformación</div>
+            <div className="hero-line mx-auto mb-8 w-[60px] h-px bg-gradient-to-r from-accent-sage to-transparent opacity-0 translate-y-[60px]" id="hero-line"></div>
+            <h1 className="hero-title text-[clamp(2.2rem,6vw,5.5rem)] mb-8 text-[#e8ebe3] text-shadow-subtle">
               <span className="block opacity-0 translate-y-[60px]" id="hero-line1">Acupuntura</span>
               <span className="block italic text-[#b3bda3] opacity-0 translate-y-[60px]" id="hero-line2">y Terapias Holísticas</span>
-              <span className="block opacity-0 translate-y-[60px] text-lg lg:text-xl font-sans tracking-[0.3em] uppercase text-[#e8ebe3]/70 mt-6" id="hero-line3">con Yeni Arriarán</span>
+              <span className="block opacity-0 translate-y-[60px] text-lg lg:text-xl font-sans tracking-[0.3em] uppercase text-[#e8ebe3]/80 mt-6" id="hero-line3">con Yeni Arriarán</span>
             </h1>
-            <p className="text-sm lg:text-base text-[#d1d7c7] max-w-2xl mx-auto leading-relaxed mb-10 opacity-0 translate-y-[60px]" id="hero-desc">
+            <p className="text-sm lg:text-base text-[#d1d7c7] max-w-2xl mx-auto leading-relaxed mb-10 opacity-0 translate-y-[60px] text-shadow-subtle" id="hero-desc">
               Te acompañamos en tu camino hacia el bienestar integral a través de la acupuntura y un abordaje terapéutico personalizado.
             </p>
-            <Link to="/services" className="inline-flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-[#b3bda3] hover:text-[#e8ebe3] transition-all duration-500 opacity-0 translate-y-[60px]" id="hero-cta" data-hoverable="true">
+            <Link to="/services" className="inline-flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-[#b3bda3] hover:text-[#e8ebe3] transition-all duration-500 opacity-0 translate-y-[60px] text-shadow-subtle" id="hero-cta" data-hoverable="true">
               <span>Descubre nuestras terapias</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </Link>
           </div>
 
           <div className="hero-scroll-indicator absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-30">
-            <span className="text-[0.6rem] tracking-[0.3em] uppercase text-[#b3bda3]/60">Scroll</span>
-            <div className="scroll-line bg-gradient-to-b from-[#e8ebe3]/60 to-transparent"></div>
+            <span className="text-[0.6rem] tracking-[0.3em] uppercase text-accent-sage/60">Scroll</span>
+            <div className="scroll-line bg-gradient-to-b from-[#e8ebe3]/40 to-transparent"></div>
           </div>
         </section>
 
-        {/* ABOUT SECTION (Padding, centrado, video de YouTube con rotación) */}
+        {/* ABOUT SECTION */}
         <section id="nosotros" className="relative py-24 md:py-32 lg:py-48 overflow-hidden w-full flex justify-center">
-          <div className="orb w-[400px] h-[400px] bg-[#768463] top-0 right-0 parallax-layer" data-speed="0.02"></div>
+          <div className="orb w-[400px] h-[400px] bg-accent-sage top-0 right-0 parallax-layer" data-speed="0.02"></div>
 
           <div className="w-full max-w-[1140px] px-6 lg:px-12 relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -341,43 +346,43 @@ const Home: React.FC = () => {
                 <span className="section-label reveal-up">Nuestra Esencia</span>
                 <h2 className="section-heading text-[clamp(2rem,5vw,3.5rem)] mt-4 mb-8 reveal-up">
                   Sanación que<br />
-                  <span className="italic text-[#b3bda3]">trasciende</span> lo<br />
+                  <span className="italic text-accent-sage">trasciende</span> lo<br />
                   convencional
                 </h2>
                 <div className="organic-divider mb-8 reveal-up"></div>
-                <p className="text-[#d1d7c7]/60 text-sm md:text-base leading-relaxed mb-6 reveal-up">
+                <p className="text-text-muted/80 text-sm md:text-base leading-relaxed mb-6 reveal-up">
                   En el Centro de Acupuntura y Terapias Holísticas nos dedicamos a restaurar tu bienestar y vitalidad de forma natural. Creemos que la salud real se logra cuando equilibramos el cuerpo, la mente y la energía, brindándote un espacio cálido y profesional diseñado para que encuentres el alivio y la paz que necesitas en tu día a día.
                 </p>
                 
-                {/* Viñetas horizontales apiladas elegantes con CheckCircle */}
+                {/* Viñetas horizontales */}
                 <div className="flex flex-row justify-between md:justify-start gap-4 md:gap-10 reveal-up mb-10 w-full mt-10">
                   <div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle size={22} className="text-[#b3bda3]" strokeWidth={2} />
-                      <span className="font-serif text-xl md:text-2xl lg:text-3xl text-[#e8ebe3]">Profesionales</span>
+                      <CheckCircle size={22} className="text-accent-sage" strokeWidth={2} />
+                      <span className="font-serif text-xl md:text-2xl lg:text-3xl text-text-main">Profesionales</span>
                     </div>
-                    <div className="text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-[#b3bda3]/50 mt-1 ml-8">certificados</div>
+                    <div className="text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-accent-sage/50 mt-1 ml-8">certificados</div>
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle size={22} className="text-[#b3bda3]" strokeWidth={2} />
-                      <span className="font-serif text-xl md:text-2xl lg:text-3xl text-[#e8ebe3]">Atención</span>
+                      <CheckCircle size={22} className="text-accent-sage" strokeWidth={2} />
+                      <span className="font-serif text-xl md:text-2xl lg:text-3xl text-text-main">Atención</span>
                     </div>
-                    <div className="text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-[#b3bda3]/50 mt-1 ml-8">personalizada</div>
+                    <div className="text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-accent-sage/50 mt-1 ml-8">personalizada</div>
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle size={22} className="text-[#b3bda3]" strokeWidth={2} />
-                      <span className="font-serif text-xl md:text-2xl lg:text-3xl text-[#e8ebe3]">Ambiente</span>
+                      <CheckCircle size={22} className="text-accent-sage" strokeWidth={2} />
+                      <span className="font-serif text-xl md:text-2xl lg:text-3xl text-text-main">Ambiente</span>
                     </div>
-                    <div className="text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-[#b3bda3]/50 mt-1 ml-8">relajante</div>
+                    <div className="text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-accent-sage/50 mt-1 ml-8">relajante</div>
                   </div>
                 </div>
               </div>
               
               {/* Contenedor del video de YouTube */}
               <div className="order-1 lg:order-2 reveal-up w-full flex justify-center">
-                <div className="relative w-full max-w-[320px] aspect-[9/16] rounded-3xl overflow-hidden shadow-2xl transform rotate-1 hover:rotate-0 transition-all duration-500">
+                <div className="relative w-full max-w-[320px] aspect-[9/16] rounded-3xl overflow-hidden shadow-2xl transform rotate-1 hover:rotate-0 transition-all duration-500 border border-text-main/10">
                   <iframe
                     className="w-full h-full border-0"
                     src="https://www.youtube.com/embed/geJt7ahL1-E?autoplay=0&mute=1"
@@ -396,28 +401,28 @@ const Home: React.FC = () => {
           <div className="w-full max-w-[1140px] px-6 md:px-12 text-center">
             <div className="quote-mark reveal-blur">"</div>
             <blockquote className="section-heading text-[clamp(1.5rem,4vw,3rem)] leading-snug mt-4 mb-8 reveal-blur">
-              La verdadera sanación comienza cuando nos permitimos <span className="italic text-[#df9e53]">escuchar</span> lo que nuestro cuerpo y alma necesitan decirnos.
+              La verdadera sanación comienza cuando nos permitimos <span className="italic text-accent-gold">escuchar</span> lo que nuestro cuerpo y alma necesitan decirnos.
             </blockquote>
             <div className="organic-divider max-w-xs mx-auto mb-6 reveal-up"></div>
-            <p className="text-xs tracking-[0.3em] uppercase text-[#b3bda3]/60 reveal-up">Nuestra Filosofía</p>
+            <p className="text-xs tracking-[0.3em] uppercase text-accent-sage/60 reveal-up">Nuestra Filosofía</p>
           </div>
         </section>
 
         {/* SERVICES SECTION */}
-        <section id="servicios" className="relative py-24 md:py-32 lg:py-48 overflow-hidden w-full flex justify-center border-t border-[#e8ebe3]/5">
+        <section id="servicios" className="relative py-24 md:py-32 lg:py-48 overflow-hidden w-full flex justify-center border-t border-text-main/5">
           <canvas ref={servicesCanvasRef} id="services-canvas" className="absolute inset-0 z-0 opacity-40"></canvas>
-          <div className="orb w-[500px] h-[500px] bg-[#d88533] -bottom-48 left-1/4 parallax-layer" data-speed="0.02"></div>
+          <div className="orb w-[500px] h-[500px] bg-accent-gold -bottom-48 left-1/4 parallax-layer" data-speed="0.02"></div>
 
           <div className="relative z-10 w-full max-w-[1140px] px-6 lg:px-12">
             <div className="text-center mb-20">
               <span className="section-label reveal-up">Nuestras Terapias</span>
               <h2 className="section-heading text-[clamp(2rem,5vw,3.5rem)] mt-4 reveal-up">
                 Caminos hacia tu<br />
-                <span className="italic text-[#b3bda3]">bienestar</span>
+                <span className="italic text-accent-sage">bienestar</span>
               </h2>
             </div>
 
-            {/* Acordeón Interactivo */}
+            {/* Acordeón Interactivo Centrado Original con Sombreado Antipalidez */}
             <div className="flex flex-col gap-6 w-full">
               {/* Fila 1 */}
               <div className="flex flex-col md:flex-row h-[600px] md:h-[420px] gap-4 w-full">
@@ -425,7 +430,7 @@ const Home: React.FC = () => {
                   <Link
                     key={service.id}
                     to={`/services#${service.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').replace(/[()]/g, '')}`}
-                    className="group relative flex-[1] hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-2xl border border-[#e8ebe3]/5 shadow-lg"
+                    className="group relative flex-[1] hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-2xl border border-text-main/5 shadow-lg"
                   >
                     <img
                       src={service.image}
@@ -433,23 +438,25 @@ const Home: React.FC = () => {
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a08]/90 via-[#0a0a08]/50 to-transparent group-hover:via-[#0a0a08]/70 transition-all duration-700"></div>
+                    {/* Filtro oscuro fijo para no debilitar ni blanquear la imagen de fondo en tema claro */}
+                    <div className="absolute inset-0 bg-[#0a0a08]/40 group-hover:bg-transparent transition-colors duration-500"></div>
 
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10">
-                      <h3 className="font-serif text-xl md:text-2xl font-normal text-[#e8ebe3] uppercase tracking-[0.2em] transition-transform duration-700 group-hover:-translate-y-2 group-hover:scale-105">
+                    {/* Contenedor del texto totalmente centrado con sombreado de alta nitidez */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a08]/90 via-[#0a0a08]/20 to-transparent flex flex-col items-center justify-center p-6 text-center z-10">
+                      <h3 className="font-serif text-xl md:text-2xl font-normal text-[#e8ebe3] uppercase tracking-[0.2em] transition-transform duration-700 group-hover:-translate-y-2 group-hover:scale-105 text-shadow-subtle">
                         {service.title}
                       </h3>
                       
-                      <div className="w-12 h-[1px] bg-gradient-to-r from-[#b3bda3] to-[#df9e53] mb-4 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100"></div>
+                      <div className="w-12 h-[1px] bg-gradient-to-r from-accent-sage to-accent-gold mb-4 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100"></div>
 
                       <div className="relative max-h-0 group-hover:max-h-40 overflow-hidden transition-all duration-700 ease-in-out px-4">
-                        <p className="text-[#d1d7c7]/70 text-xs md:text-sm leading-relaxed mb-4">
+                        <p className="text-[#e8ebe3]/90 text-xs md:text-sm leading-relaxed mb-4 text-shadow-subtle font-medium">
                           {service.description}
                         </p>
                       </div>
 
                       <div className="opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-700 delay-200">
-                        <span className="inline-flex items-center gap-2 border border-[#b3bda3]/30 text-[#e8ebe3] text-[9px] tracking-[0.2em] uppercase py-2 px-4 rounded-full hover:bg-[#b3bda3]/10 hover:border-[#b3bda3]/60 transition-all duration-300">
+                        <span className="inline-flex items-center gap-2 border border-accent-sage/30 text-[#e8ebe3] text-[9px] tracking-[0.2em] uppercase py-2 px-4 rounded-full hover:bg-accent-sage/10 hover:border-accent-sage/60 transition-all duration-300">
                           Ver más <ChevronDown size={12} className="animate-bounce" />
                         </span>
                       </div>
@@ -464,7 +471,7 @@ const Home: React.FC = () => {
                   <Link
                     key={service.id}
                     to={`/services#${service.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').replace(/[()]/g, '')}`}
-                    className="group relative flex-[1] hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-2xl border border-[#e8ebe3]/5 shadow-lg"
+                    className="group relative flex-[1] hover:flex-[3] transition-all duration-700 ease-in-out overflow-hidden rounded-2xl border border-text-main/5 shadow-lg"
                   >
                     <img
                       src={service.image}
@@ -472,23 +479,23 @@ const Home: React.FC = () => {
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a08]/90 via-[#0a0a08]/50 to-transparent group-hover:via-[#0a0a08]/70 transition-all duration-700"></div>
+                    <div className="absolute inset-0 bg-[#0a0a08]/40 group-hover:bg-transparent transition-colors duration-500"></div>
 
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10">
-                      <h3 className="font-serif text-xl md:text-2xl font-normal text-[#e8ebe3] uppercase tracking-[0.2em] transition-transform duration-700 group-hover:-translate-y-2 group-hover:scale-105">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a08]/90 via-[#0a0a08]/20 to-transparent flex flex-col items-center justify-center p-6 text-center z-10">
+                      <h3 className="font-serif text-xl md:text-2xl font-normal text-[#e8ebe3] uppercase tracking-[0.2em] transition-transform duration-700 group-hover:-translate-y-2 group-hover:scale-105 text-shadow-subtle">
                         {service.title}
                       </h3>
                       
-                      <div className="w-12 h-[1px] bg-gradient-to-r from-[#b3bda3] to-[#df9e53] mb-4 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100"></div>
+                      <div className="w-12 h-[1px] bg-gradient-to-r from-accent-sage to-accent-gold mb-4 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100"></div>
 
                       <div className="relative max-h-0 group-hover:max-h-40 overflow-hidden transition-all duration-700 ease-in-out px-4">
-                        <p className="text-[#d1d7c7]/70 text-xs md:text-sm leading-relaxed mb-4">
+                        <p className="text-[#e8ebe3]/90 text-xs md:text-sm leading-relaxed mb-4 text-shadow-subtle font-medium">
                           {service.description}
                         </p>
                       </div>
 
                       <div className="opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-700 delay-200">
-                        <span className="inline-flex items-center gap-2 border border-[#b3bda3]/30 text-[#e8ebe3] text-[9px] tracking-[0.2em] uppercase py-2 px-4 rounded-full hover:bg-[#b3bda3]/10 hover:border-[#b3bda3]/60 transition-all duration-300">
+                        <span className="inline-flex items-center gap-2 border border-accent-sage/30 text-[#e8ebe3] text-[9px] tracking-[0.2em] uppercase py-2 px-4 rounded-full hover:bg-accent-sage/10 hover:border-accent-sage/60 transition-all duration-300">
                           Ver más <ChevronDown size={12} className="animate-bounce" />
                         </span>
                       </div>
@@ -499,29 +506,25 @@ const Home: React.FC = () => {
             </div>
             
             <div className="mt-16 text-center reveal-up">
-              <Link to="/services" className="inline-flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-[#b3bda3] hover:text-[#e8ebe3] transition-colors duration-300 border border-[#b3bda3]/30 px-8 py-4 rounded-full hover:bg-[#b3bda3]/10" data-hoverable="true">
+              <Link to="/services" className="inline-flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-accent-sage hover:text-text-main transition-colors duration-300 border border-accent-sage/30 px-8 py-4 rounded-full hover:bg-accent-sage/10" data-hoverable="true">
                 Ver catálogo completo
               </Link>
             </div>
           </div>
         </section>
 
-        {/* NUEVA SECCIÓN TERAPEUTA */}
-        <section className="relative py-24 md:py-32 lg:py-48 overflow-hidden w-full flex justify-center border-t border-[#e8ebe3]/5">
-          {/* Fondo animado 3D de energía/luciérnagas */}
+        {/* SECCIÓN TERAPEUTA */}
+        <section className="relative py-24 md:py-32 lg:py-48 overflow-hidden w-full flex justify-center border-t border-text-main/5">
           <canvas ref={therapistCanvasRef} className="absolute inset-0 z-0 opacity-80 pointer-events-none"></canvas>
-          <div className="orb w-[500px] h-[500px] bg-[#768463] top-1/2 -left-48 parallax-layer" data-speed="0.015"></div>
+          <div className="orb w-[500px] h-[500px] bg-accent-sage top-1/2 -left-48 parallax-layer" data-speed="0.015"></div>
 
           <div className="w-full max-w-[1140px] px-6 lg:px-12 relative z-10">
             <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
               
-              {/* Imagen de la Especialista con Efecto "Offset Frame" */}
               <div className="lg:col-span-5 reveal-up w-full flex justify-center lg:justify-start">
                 <div className="relative w-full max-w-md aspect-[4/5] mx-auto lg:mx-0 group">
-                  {/* Marco desplazado */}
-                  <div className="absolute inset-0 border border-[#b3bda3]/40 rounded-3xl translate-x-4 translate-y-4 z-0 transition-transform duration-700 group-hover:translate-x-5 group-hover:translate-y-5"></div>
+                  <div className="absolute inset-0 border border-accent-sage/40 rounded-3xl translate-x-4 translate-y-4 z-0 transition-transform duration-700 group-hover:translate-x-5 group-hover:translate-y-5"></div>
                   
-                  {/* Contenedor de la Imagen */}
                   <div className="relative z-10 w-full h-full rounded-3xl overflow-hidden shadow-2xl">
                     <img 
                       src={IMAGES.specialistHome} 
@@ -529,29 +532,28 @@ const Home: React.FC = () => {
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out" 
                       loading="lazy" 
                     />
-                    {/* Degradado para que el texto resalte */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a08]/90 via-transparent to-transparent pointer-events-none"></div>
                     
+                    {/* Texto sobre imagen configurado en claro fijo y con text-shadow para que resalte nítido sobre cualquier tema */}
                     <div className="absolute bottom-8 left-8 pointer-events-none">
-                      <p className="font-serif text-3xl text-[#e8ebe3] mb-1">Yeni Arriarán</p>
-                      <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-[#df9e53]">Terapeuta Especializada</p>
+                      <p className="font-serif text-3xl text-[#e8ebe3] mb-1 font-semibold text-shadow-subtle">Yeni Arriarán</p>
+                      <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-[#df9e53] font-medium text-shadow-subtle">Terapeuta Especializada</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Texto de la Especialista (Animación Stagger) */}
               <div className="lg:col-span-7" id="terapeuta-trigger">
                 <div className="flex items-center gap-3 mb-6 therapist-stagger">
-                  <div className="h-[1px] w-12 bg-gradient-to-r from-[#df9e53] to-transparent"></div>
-                  <span className="text-[0.65rem] tracking-[0.4em] uppercase text-[#df9e53]/80">Nuestra Terapeuta</span>
+                  <div className="h-[1px] w-12 bg-gradient-to-r from-accent-gold to-transparent"></div>
+                  <span className="text-[0.65rem] tracking-[0.4em] uppercase text-accent-gold/80">Nuestra Terapeuta</span>
                 </div>
-                <h2 className="font-serif text-[clamp(2rem,4vw,3.5rem)] font-light leading-snug text-[#e8ebe3] mb-8 therapist-stagger">
+                <h2 className="font-serif text-[clamp(2rem,4vw,3.5rem)] font-light leading-snug text-text-main mb-8 therapist-stagger">
                   De la exigencia a la<br />
-                  <span className="italic text-[#b3bda3]">sanación consciente</span>
+                  <span className="italic text-accent-sage">sanación consciente</span>
                 </h2>
                 
-                <div className="space-y-6 text-[#d1d7c7]/70 text-sm md:text-base leading-relaxed">
+                <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed">
                   <p className="therapist-stagger">
                     "Soy Yeni Arriarán, terapeuta especializada en Medicina Tradicional China y terapias energéticas. Tras años de alta exigencia en el sector financiero, un diagnóstico de adenoma hipofisario marcó un antes y un después en mi vida, impulsándome a buscar un camino de sanación más integral."
                   </p>
@@ -560,9 +562,8 @@ const Home: React.FC = () => {
                   </p>
                 </div>
                 
-                {/* Firma elegante */}
                 <div className="mt-12 therapist-stagger">
-                   <p className="font-serif text-4xl italic text-[#b3bda3]/60">Yeni Arriarán</p>
+                   <p className="font-serif text-4xl italic text-accent-sage/60">Yeni Arriarán</p>
                 </div>
               </div>
 
@@ -570,19 +571,19 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* TESTIMONIALS (Componente Reutilizable con Animación y Drag) */}
-        <section className="relative py-24 md:py-32 lg:py-40 overflow-hidden w-full flex flex-col items-center border-t border-[#e8ebe3]/5">
+        {/* TESTIMONIALS */}
+        <section className="relative py-24 md:py-32 lg:py-40 overflow-hidden w-full flex flex-col items-center border-t border-text-main/5">
           <div className="w-full max-w-5xl mx-auto px-6 lg:px-8 mb-16 text-center">
             <span className="section-label reveal-up">Testimonios</span>
             <h2 className="section-heading text-[clamp(2rem,4vw,3rem)] mt-4 reveal-up">
-              Voces de <span className="italic text-[#b3bda3]">transformación</span>
+              Voces de <span className="italic text-accent-sage">transformación</span>
             </h2>
           </div>
           
           <TestimonialCarousel />
             
           <div className="mt-20 text-center reveal-up">
-             <Link to="/contact" className="inline-block bg-gradient-to-br from-[#b3bda3]/20 to-[#df9e53]/15 border border-[#b3bda3]/30 text-[#e8ebe3] px-10 py-4 rounded-xl text-sm tracking-[0.2em] uppercase hover:border-[#b3bda3]/60 hover:-translate-y-1 transition-all duration-300 shadow-[0_10px_40px_rgba(179,189,163,0.1)]" data-hoverable="true">
+             <Link to="/contact" className="inline-block bg-gradient-to-br from-accent-sage/20 to-accent-gold/15 border border-accent-sage/30 text-text-main px-10 py-4 rounded-xl text-sm tracking-[0.2em] uppercase hover:border-accent-sage/60 hover:-translate-y-1 transition-all duration-300 shadow-[0_10px_40px_var(--shadow-color)]" data-hoverable="true">
                Agendar Cita
              </Link>
           </div>

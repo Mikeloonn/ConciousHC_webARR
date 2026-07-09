@@ -27,30 +27,35 @@ const CookieBanner: React.FC = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t-4 border-primary shadow-[0_-4px_20px_rgba(0,0,0,0.1)] z-[60] p-6 md:p-8 animate-fade-in-up">
-      <div className="max-w-[1140px] mx-auto flex flex-col md:flex-row gap-6 items-center justify-between">
-        <div className="text-sm text-textGray md:w-2/3">
-          <h3 className="font-bold text-dark text-lg mb-2">Respetamos tu privacidad</h3>
+    <div className="fixed bottom-0 left-0 right-0 bg-bg-base/95 backdrop-blur-md border-t border-text-main/10 shadow-[0_-10px_40px_var(--shadow-color)] z-[9995] p-6 md:p-8 transition-colors duration-600 animate-fade-in-up">
+      <div className="max-w-[1140px] mx-auto flex flex-col md:flex-row gap-8 items-center justify-between">
+        
+        <div className="text-sm text-text-muted/80 md:w-2/3">
+          <h3 className="font-serif font-medium text-text-main text-2xl mb-3">Privacidad y Cookies</h3>
           <p className="leading-relaxed">
-            Utilizamos cookies propias y de terceros para analizar nuestros servicios y mostrarte publicidad relacionada con tus preferencias en base a un perfil elaborado a partir de tus hábitos de navegación (por ejemplo, páginas visitadas). 
-            Puedes aceptar todas las cookies pulsando el botón "Aceptar todo" o rechazarlas pulsando "Rechazar todo". 
-            Para más información consulta nuestra <Link to="/cookies" className="text-primary underline font-bold hover:text-accent">Política de Cookies</Link>.
+            Utilizamos cookies propias y de terceros para analizar nuestros servicios y mostrarte publicidad relacionada con tus preferencias en base a un perfil elaborado a partir de tus hábitos de navegación. 
+            Puedes aceptar todas las cookies pulsando "Aceptar todo" o rechazarlas pulsando "Rechazar todo". 
+            Para más información consulta nuestra <Link to="/cookies" className="text-accent-gold underline underline-offset-4 hover:text-text-main transition-colors font-medium">Política de Cookies</Link>.
           </p>
         </div>
-        <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+
+        <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto shrink-0">
           <button 
             onClick={handleReject}
-            className="px-6 py-3 rounded border border-gray-300 text-dark font-bold hover:bg-gray-100 transition-colors duration-200 text-sm uppercase tracking-wide text-center"
+            className="px-8 py-3 rounded-full border border-text-main/20 text-text-main font-sans font-medium hover:bg-text-main/5 hover:border-text-main/40 transition-all duration-300 text-[10px] tracking-[0.2em] uppercase text-center w-full md:w-auto cursor-pointer"
+            data-hoverable="true"
           >
             Rechazar todo
           </button>
           <button 
             onClick={handleAccept}
-            className="px-6 py-3 rounded bg-primary text-white font-bold hover:bg-dark transition-colors duration-200 text-sm uppercase tracking-wide text-center shadow-lg hover:shadow-xl"
+            className="px-8 py-3 rounded-full bg-gradient-to-r from-accent-sage to-accent-gold text-bg-base font-sans font-bold hover:opacity-90 hover:-translate-y-0.5 transition-all duration-300 text-[10px] tracking-[0.2em] uppercase text-center shadow-lg w-full md:w-auto cursor-pointer"
+            data-hoverable="true"
           >
             Aceptar todo
           </button>
         </div>
+
       </div>
     </div>
   );

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Sun, Moon } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 import logo from '../assets/images/logohc.jpg';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
-  // Controla el fondo de la cabecera al hacer scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -16,12 +18,10 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Cierra el menú móvil al cambiar de ruta
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
-  // Bloquea el scroll del fondo cuando el menú móvil está abierto
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -41,13 +41,15 @@ const Navbar: React.FC = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-[9990] transition-all duration-500 border-b ${isScrolled || isMenuOpen
+        className={`fixed top-0 left-0 w-full z-[9990] transition-all duration-500 border-b ${
+          isScrolled || isMenuOpen
             ? 'bg-[#0a0a08]/85 backdrop-blur-md py-2.5 border-[#e8ebe3]/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]'
             : 'bg-[#0a0a08]/40 backdrop-blur-sm py-4 border-[#e8ebe3]/5'
-          }`}
+        }`}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center relative">
-          {/* Logo minimalista */}
+          
+          {/* Logo - Estático en tonos claros del menú */}
           <Link to="/" className="flex items-center gap-3 group focus:outline-none">
             <img
               src={logo}
@@ -64,7 +66,7 @@ const Navbar: React.FC = () => {
             </div>
           </Link>
 
-          {/* Desktop Nav */}
+          {/* Desktop Nav - Estático en paleta oscura original */}
           <nav className="hidden md:flex items-center gap-8 lg:gap-12 relative z-10">
             <ul className="flex gap-6 lg:gap-8">
               {navLinks.map((link) => (
@@ -78,31 +80,56 @@ const Navbar: React.FC = () => {
                 </li>
               ))}
             </ul>
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center border border-[#b3bda3]/30 text-[#e8ebe3] text-[10px] tracking-[0.2em] uppercase px-5 py-2 rounded-full hover:bg-[#b3bda3]/10 hover:border-[#b3bda3]/60 transition-all duration-300 focus:outline-none"
-            >
-              Agendar
-            </Link>
+
+            <div className="flex items-center gap-5 border-l border-[#e8ebe3]/20 pl-5">
+              {/* Botón de cambio de tema (Estético en barra oscura) */}
+              <button
+                onClick={toggleTheme}
+                className="text-[#e8ebe3]/60 hover:text-[#df9e53] transition-colors duration-300 focus:outline-none cursor-pointer"
+                aria-label="Cambiar Tema"
+                data-hoverable="true"
+              >
+                {theme === 'dark' ? <Sun size={18} strokeWidth={1.8} /> : <Moon size={18} strokeWidth={1.8} />}
+              </button>
+
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center border border-[#b3bda3]/30 text-[#e8ebe3] text-[10px] tracking-[0.2em] uppercase px-5 py-2 rounded-full hover:bg-[#b3bda3]/10 hover:border-[#b3bda3]/60 transition-all duration-300 focus:outline-none"
+              >
+                Agendar
+              </Link>
+            </div>
           </nav>
 
-          {/* Hamburger (Menú móvil animado a 'X') */}
-          <button
-            className="md:hidden flex flex-col gap-[5.5px] cursor-pointer p-2 z-[9996] focus:outline-none relative"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Abrir menú"
-          >
-            <span className={`w-6 h-[1.5px] bg-[#e8ebe3] transition-all duration-300 origin-center ${isMenuOpen ? 'rotate-45 translate-y-[7px]' : ''}`}></span>
-            <span className={`w-6 h-[1.5px] bg-[#e8ebe3] transition-all duration-300 ${isMenuOpen ? 'opacity-0 translate-x-2' : ''}`}></span>
-            <span className={`w-6 h-[1.5px] bg-[#e8ebe3] transition-all duration-300 origin-center ${isMenuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`}></span>
-          </button>
+          {/* Hamburger (Móvil) */}
+          <div className="md:hidden flex items-center gap-4">
+            {/* Botón de tema para móvil (Estético sobre barra oscura) */}
+            <button
+              onClick={toggleTheme}
+              className="text-[#e8ebe3]/80 p-2 z-[9996] focus:outline-none cursor-pointer"
+              aria-label="Cambiar Tema"
+            >
+              {theme === 'dark' ? <Sun size={19} /> : <Moon size={19} />}
+            </button>
+
+            <button
+              className="flex flex-col gap-[5.5px] cursor-pointer p-2 z-[9996] focus:outline-none relative"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Abrir menú"
+            >
+              <span className={`w-6 h-[1.5px] bg-[#e8ebe3] transition-all duration-300 origin-center ${isMenuOpen ? 'rotate-45 translate-y-[7px]' : ''}`}></span>
+              <span className={`w-6 h-[1.5px] bg-[#e8ebe3] transition-all duration-300 ${isMenuOpen ? 'opacity-0 translate-x-2' : ''}`}></span>
+              <span className={`w-6 h-[1.5px] bg-[#e8ebe3] transition-all duration-300 origin-center ${isMenuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`}></span>
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* Mobile Menu Overlay - Movido AFUERA del header para que ocupe toda la pantalla */}
+      {/* Mobile Menu Overlay - Estático en negro original */}
       <nav
-        className={`fixed inset-0 z-[9980] bg-[#0a0a08]/98 backdrop-blur-xl flex flex-col items-center justify-center transition-all duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-          }`}
+        className={`fixed inset-0 z-[9980] bg-[#0a0a08]/98 backdrop-blur-xl flex flex-col items-center justify-center transition-all duration-500 ${
+          isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
       >
         <ul className="flex flex-col items-center gap-8 mt-12 w-full px-6">
           {navLinks.map((link, index) => (
@@ -110,8 +137,9 @@ const Navbar: React.FC = () => {
               <Link
                 to={link.path}
                 onClick={() => setIsMenuOpen(false)}
-                className={`font-serif text-3xl md:text-4xl font-light transition-all duration-500 block py-2 ${location.pathname === link.path ? 'text-[#df9e53]' : 'text-[#e8ebe3]/60 hover:text-[#e8ebe3]'
-                  } ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                className={`font-serif text-3xl md:text-4xl font-light transition-all duration-500 block py-2 ${
+                  location.pathname === link.path ? 'text-[#df9e53]' : 'text-[#e8ebe3]/60 hover:text-[#e8ebe3]'
+                } ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
                 style={{ transitionDelay: isMenuOpen ? `${index * 100}ms` : '0ms' }}
               >
                 {link.name}
@@ -122,8 +150,9 @@ const Navbar: React.FC = () => {
             <Link
               to="/contact"
               onClick={() => setIsMenuOpen(false)}
-              className={`inline-flex items-center justify-center border border-[#b3bda3]/30 text-[#e8ebe3] text-xs tracking-[0.2em] uppercase px-10 py-4 rounded-full bg-gradient-to-r hover:from-[#b3bda3]/20 hover:to-[#df9e53]/10 transition-all duration-500 shadow-lg ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-                }`}
+              className={`inline-flex items-center justify-center border border-[#b3bda3]/30 text-[#e8ebe3] text-xs tracking-[0.2em] uppercase px-10 py-4 rounded-full bg-gradient-to-r hover:from-[#b3bda3]/20 hover:to-[#df9e53]/10 transition-all duration-500 shadow-lg ${
+                isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+              }`}
               style={{ transitionDelay: isMenuOpen ? `${navLinks.length * 100}ms` : '0ms' }}
             >
               Agendar Cita

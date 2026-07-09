@@ -1,7 +1,61 @@
 @import "tailwindcss";
 
+:root {
+  /* ==========================================
+     TEMA OSCURO (Por defecto)
+     ========================================== */
+  --bg-base: #0a0a08;
+  --text-main: #e8ebe3;
+  --text-muted: #d1d7c7;
+  --accent-gold: #df9e53;
+  --accent-sage: #b3bda3;
+  
+  /* Glassmorphism & UI */
+  --glass-bg: rgba(232, 235, 227, 0.03);
+  --glass-border: rgba(232, 235, 227, 0.06);
+  --glass-hover: rgba(232, 235, 227, 0.08);
+  --nav-bg: rgba(10, 10, 8, 0.85);
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  
+  /* Scrollbar & Efectos */
+  --scrollbar-track: #0a0a08;
+  --scrollbar-thumb: rgba(179, 189, 163, 0.3);
+  --orb-opacity: 0.15;
+}
+
+[data-theme='light'] {
+  /* ==========================================
+     TEMA CLARO ("Luz Holística")
+     ========================================== */
+  --bg-base: #F4F5F0;         
+  --text-main: #2A3222;       
+  --text-muted: #5C6A48;      
+  --accent-gold: #C27A27;     
+  --accent-sage: #6B7B54;     
+  
+  /* Glassmorphism & UI adaptados */
+  --glass-bg: rgba(42, 50, 34, 0.04);
+  --glass-border: rgba(42, 50, 34, 0.1);
+  --glass-hover: rgba(42, 50, 34, 0.08);
+  --nav-bg: rgba(244, 245, 240, 0.85);
+  --shadow-color: rgba(42, 50, 34, 0.12);
+  
+  /* Scrollbar & Efectos adaptados */
+  --scrollbar-track: #F4F5F0;
+  --scrollbar-thumb: rgba(107, 123, 84, 0.3);
+  --orb-opacity: 0.08;        
+}
+
 @theme {
-  /* Nuevos colores del tema holístico */
+  /* Registramos las variables dinámicas en el motor de Tailwind v4 */
+  --color-bg-base: var(--bg-base);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-accent-gold: var(--accent-gold);
+  --color-accent-sage: var(--accent-sage);
+  --color-nav-bg: var(--nav-bg);
+
+  /* Nuevos colores estáticos del tema holístico */
   --color-sage-50: #f6f7f4;
   --color-sage-100: #e8ebe3;
   --color-sage-200: #d1d7c7;
@@ -45,10 +99,12 @@ html.lenis, html.lenis body { height: auto; }
 
 body {
     font-family: 'Inter', sans-serif;
-    background: #0a0a08;
-    color: #e8ebe3;
+    background: var(--bg-base);
+    color: var(--text-main);
     overflow-x: hidden;
-    cursor: none; 
+    cursor: default; /* RESTAURADO EL CURSOR NATIVO DEL SISTEMA OPERATIVO */
+    /* Transición cinematográfica al alternar de tema */
+    transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s ease;
 }
 
 @media (max-width: 768px) { body { cursor: auto; } }
@@ -62,40 +118,25 @@ body {
   }
 }
 
-/* Custom Cursor */
-.cursor-dot {
-    width: 8px; height: 8px;
-    background: rgba(232, 235, 227, 0.9);
-    border-radius: 50%;
-    position: fixed;
-    top: 0; left: 0;
-    pointer-events: none;
-    z-index: 99999;
-    mix-blend-mode: difference;
-    transition: transform 0.1s ease;
-}
-.cursor-ring {
-    width: 40px; height: 40px;
-    border: 1.5px solid rgba(232, 235, 227, 0.4);
-    border-radius: 50%;
-    position: fixed;
-    top: 0; left: 0;
-    pointer-events: none;
-    z-index: 99998;
-    mix-blend-mode: difference;
-    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
-}
-.cursor-ring.hover {
-    width: 60px; height: 60px;
-    border-color: rgba(232, 235, 227, 0.8);
+/* Sombreado de alta definición para texto sobre imágenes (Garantiza legibilidad 100%) */
+.text-shadow-subtle {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.95);
 }
 
-/* Pantalla de Carga (Loader) */
+/* Desactivamos el cursor customizado antiguo que causaba el bloqueo visual */
+.cursor-dot {
+    display: none !important;
+}
+.cursor-ring {
+    display: none !important;
+}
+
+/* Pantalla de Carga (Loader - Dinámica según el tema seleccionado) */
 .loader {
     position: fixed;
     inset: 0;
     z-index: 10000;
-    background: #0a0a08;
+    background: var(--bg-base);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -104,20 +145,21 @@ body {
 .loader-text {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(1.5rem, 4vw, 3rem);
-    color: #e8ebe3;
+    color: var(--text-main);
     opacity: 0;
     letter-spacing: 0.3em;
 }
 .loader-line {
     width: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, #b3bda3, transparent);
+    background: linear-gradient(90deg, transparent, var(--accent-sage), transparent);
     margin-top: 2rem;
 }
 .loader-counter {
     font-family: 'Inter', sans-serif;
     font-size: 0.75rem;
-    color: rgba(232, 235, 227, 0.4);
+    color: var(--text-muted);
+    opacity: 0.4;
     margin-top: 1.5rem;
     letter-spacing: 0.2em;
 }
@@ -134,13 +176,13 @@ body {
     background-size: 256px 256px;
 }
 
-/* Enlaces del Menú */
+/* Enlaces del Menú (Siempre oscuros para que el Navbar destaque) */
 .nav-link {
     position: relative;
     font-size: 0.65rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: rgba(232, 235, 227, 0.5);
+    color: rgba(232, 235, 227, 0.55);
     transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     padding: 0.25rem 0;
     display: inline-block;
@@ -181,7 +223,7 @@ body {
 
 .scroll-line {
     width: 1px; height: 60px;
-    background: linear-gradient(180deg, rgba(232,235,227,0.4), transparent);
+    background: linear-gradient(180deg, var(--text-main), transparent);
     animation: scrollPulse 2s ease-in-out infinite;
 }
 @keyframes scrollPulse {
@@ -193,7 +235,8 @@ body {
     font-size: 0.65rem;
     letter-spacing: 0.4em;
     text-transform: uppercase;
-    color: rgba(179, 189, 163, 0.6);
+    color: var(--text-muted);
+    opacity: 0.8;
 }
 .section-heading {
     font-family: 'Cormorant Garamond', serif;
@@ -201,51 +244,52 @@ body {
     line-height: 1.1;
 }
 
-/* Tarjetas de Cristal (Servicios) */
+/* Tarjetas de Cristal (Servicios y Bloques - Reactivas al tema) */
 .glass-card {
-    background: rgba(232, 235, 227, 0.03);
+    background: var(--glass-bg);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(232, 235, 227, 0.06);
+    border: 1px solid var(--glass-border);
     border-radius: 1.5rem;
     transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .glass-card:hover {
-    background: rgba(232, 235, 227, 0.06);
-    border-color: rgba(232, 235, 227, 0.12);
+    background: var(--glass-hover);
+    border-color: var(--glass-border);
     transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    box-shadow: 0 20px 60px var(--shadow-color);
 }
 
 .service-icon {
     width: 56px; height: 56px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(179,189,163,0.15), transparent);
+    background: radial-gradient(circle, var(--accent-sage), transparent);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.5s ease;
 }
 .glass-card:hover .service-icon {
-    background: radial-gradient(circle, rgba(223,158,83,0.2), transparent);
-    box-shadow: 0 0 30px rgba(223,158,83,0.1);
+    background: radial-gradient(circle, var(--accent-gold), transparent);
+    box-shadow: 0 0 30px rgba(223, 158, 83, 0.1);
 }
 
 .organic-divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(179,189,163,0.2), transparent);
+    background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
 }
 
 .gold-line {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(223,158,83,0.3), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
 }
 
 .orb {
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
-    opacity: 0.15;
+    opacity: var(--orb-opacity);
     pointer-events: none;
+    transition: opacity 0.6s ease;
 }
 
 /* Geometría Sagrada */
@@ -262,18 +306,20 @@ body {
     font-family: 'Cormorant Garamond', serif;
     font-size: 8rem;
     line-height: 0.5;
-    color: rgba(179, 189, 163, 0.15);
+    color: var(--accent-sage);
+    opacity: 0.15;
 }
 
 /* Tarjetas de Testimonios */
 .testimonial-card {
-    background: linear-gradient(135deg, rgba(232,235,227,0.03), rgba(232,235,227,0.01));
-    border: 1px solid rgba(232,235,227,0.05);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: 1.5rem;
     padding: 2.5rem;
     position: relative;
     display: flex;
     flex-direction: column;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .testimonial-card::before {
     content: '"';
@@ -281,7 +327,8 @@ body {
     font-size: 5rem;
     position: absolute;
     top: 1rem; left: 1.5rem;
-    color: rgba(179,189,163,0.1);
+    color: var(--accent-sage);
+    opacity: 0.15;
     line-height: 1;
 }
 
@@ -290,7 +337,8 @@ body {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(4rem, 8vw, 7rem);
     font-weight: 200;
-    color: rgba(179, 189, 163, 0.08);
+    color: var(--accent-sage);
+    opacity: 0.08;
     line-height: 1;
 }
 
@@ -304,7 +352,7 @@ body {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(179,189,163,0.1), transparent);
+    background: linear-gradient(135deg, var(--glass-border), transparent);
     pointer-events: none;
 }
 .about-image-container img {
@@ -314,7 +362,7 @@ body {
     transform: scale(1.05);
 }
 
-/* Scrollbar personalizada */
+/* Scrollbar personalizada reactiva */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #0a0a08; }
-::-webkit-scrollbar-thumb { background: rgba(179,189,163,0.3); border-radius: 10px; }
+::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 10px; }

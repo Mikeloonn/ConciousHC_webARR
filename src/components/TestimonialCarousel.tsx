@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Star } from 'lucide-react';
 
-// Datos de reseñas reales de Google
 const googleReviews = [
   {
     id: 1,
@@ -26,7 +25,6 @@ const googleReviews = [
   }
 ];
 
-// Triplicamos el array para que el efecto de scroll infinito funcione a la perfección sin saltos
 const displayReviews = [...googleReviews, ...googleReviews, ...googleReviews];
 
 const TestimonialCarousel: React.FC = () => {
@@ -35,10 +33,9 @@ const TestimonialCarousel: React.FC = () => {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [dragDistance, setDragDistance] = useState(0); // Para diferenciar entre "clic" y "arrastre"
+  const [dragDistance, setDragDistance] = useState(0);
   const animationRef = useRef<number>(0);
 
-  // Lógica de Autoplay Infinito
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
     
@@ -46,14 +43,12 @@ const TestimonialCarousel: React.FC = () => {
       if (scrollContainer && !isDown && !isPaused) {
         const singleSetWidth = scrollContainer.scrollWidth / 3;
 
-        // Configuración inicial de posición
         if (scrollContainer.scrollLeft === 0) {
             scrollContainer.scrollLeft = singleSetWidth;
         }
 
-        scrollContainer.scrollLeft += 1; // Velocidad del auto-scroll
+        scrollContainer.scrollLeft += 1;
 
-        // Reseteo transparente para hacer el loop infinito
         if (scrollContainer.scrollLeft >= singleSetWidth * 2) {
           scrollContainer.scrollLeft = singleSetWidth;
         } else if (scrollContainer.scrollLeft <= 0) {
@@ -68,7 +63,6 @@ const TestimonialCarousel: React.FC = () => {
     return () => cancelAnimationFrame(animationRef.current);
   }, [isDown, isPaused]);
 
-  // Manejadores para Arrastrar (Desktop)
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDown(true);
     setDragDistance(0);
@@ -82,12 +76,11 @@ const TestimonialCarousel: React.FC = () => {
     if (!isDown || !scrollContainerRef.current) return;
     e.preventDefault();
     const x = e.pageX - scrollContainerRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5; // Multiplicador de velocidad de arrastre
+    const walk = (x - startX) * 1.5;
     setDragDistance(Math.abs(walk));
     scrollContainerRef.current.scrollLeft = scrollLeft - walk;
   };
 
-  // Manejadores para Arrastrar (Mobile Touch)
   const handleTouchStart = (e: React.TouchEvent) => {
     setIsDown(true);
     setDragDistance(0);
@@ -105,7 +98,6 @@ const TestimonialCarousel: React.FC = () => {
     scrollContainerRef.current.scrollLeft = scrollLeft - walk;
   };
 
-  // Clic en la tarjeta (Si arrastramos mucho, cancelamos el clic para que no abra la pestaña)
   const handleClick = (e: React.MouseEvent, url: string) => {
     e.preventDefault();
     if (dragDistance < 10) {
@@ -115,9 +107,9 @@ const TestimonialCarousel: React.FC = () => {
 
   return (
     <div className="relative w-full overflow-hidden reveal-up">
-      {/* Sombras laterales para el efecto de desvanecimiento */}
-      <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#0a0a08] to-transparent z-10 pointer-events-none"></div>
-      <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#0a0a08] to-transparent z-10 pointer-events-none"></div>
+      {/* Sombras de desvanecimiento dinámicas que reaccionan al modo de tema */}
+      <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-bg-base to-transparent z-10 pointer-events-none transition-colors duration-600"></div>
+      <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-bg-base to-transparent z-10 pointer-events-none transition-colors duration-600"></div>
 
       <div
         ref={scrollContainerRef}
@@ -135,26 +127,26 @@ const TestimonialCarousel: React.FC = () => {
           <a
             key={i}
             href={review.link}
-            draggable={false} // Evita el fantasma de la URL en Chrome
-            onDragStart={(e) => e.preventDefault()} // Bloquea el drag nativo del HTML
+            draggable={false}
+            onDragStart={(e) => e.preventDefault()}
             onClick={(e) => handleClick(e, review.link)}
-            className="testimonial-card block w-[320px] md:w-[450px] shrink-0 transform transition-colors duration-500 hover:border-[#b3bda3]/30 select-none"
+            className="testimonial-card block w-[320px] md:w-[450px] shrink-0 transform transition-all duration-500 hover:border-accent-sage/30 select-none"
           >
             <div className="flex gap-1 mb-4 relative z-10 pointer-events-none">
               {[...Array(5)].map((_, idx) => (
                 <Star key={idx} size={16} className="text-[#df9e53] fill-[#df9e53]" />
               ))}
             </div>
-            <p className="text-[#d1d7c7]/60 text-sm leading-relaxed mb-8 relative z-10 line-clamp-6 pointer-events-none">
+            <p className="text-text-muted/70 text-sm leading-relaxed mb-8 relative z-10 line-clamp-6 pointer-events-none">
               "{review.text}"
             </p>
             <div className="flex items-center gap-3 relative z-10 mt-auto pointer-events-none">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#93a07e]/20 to-[#df9e53]/20 flex items-center justify-center">
-                <span className="font-serif text-sm text-[#d1d7c7]">{review.initials}</span>
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent-sage/20 to-accent-gold/20 flex items-center justify-center">
+                <span className="font-serif text-sm text-text-main">{review.initials}</span>
               </div>
               <div>
-                <div className="text-sm text-[#e8ebe3]">{review.author}</div>
-                <div className="text-xs text-[#b3bda3]/50">Reseña en Google</div>
+                <div className="text-sm text-text-main">{review.author}</div>
+                <div className="text-xs text-accent-sage/50">Reseña en Google</div>
               </div>
             </div>
           </a>
