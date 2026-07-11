@@ -173,17 +173,17 @@ const Services: React.FC = () => {
     // Animaciones de revelado suave al hacer scroll
     const ctx = gsap.context(() => {
       gsap.utils.toArray('.reveal-up').forEach((el: any) => {
-        gsap.fromTo(el, 
-          { opacity: 0, y: 50 }, 
+        gsap.fromTo(el,
+          { opacity: 0, y: 50 },
           {
-            opacity: 1, 
-            y: 0, 
-            duration: 1.2, 
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
             ease: 'power3.out',
-            scrollTrigger: { 
-              trigger: el, 
-              start: 'top 85%', 
-              toggleActions: 'play none none reverse' 
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse'
             }
           }
         );
@@ -210,14 +210,14 @@ const Services: React.FC = () => {
 
   return (
     <main className="bg-bg-base text-text-main min-h-screen w-full overflow-hidden pb-20 transition-colors duration-600">
-      <SEO 
-        title="Nuestros Servicios" 
-        description="Especialistas en Medicina Tradicional China, Coaching Transformacional y Terapias Energéticas para un bienestar integral." 
+      <SEO
+        title="Nuestros Servicios"
+        description="Especialistas en Medicina Tradicional China, Coaching Transformacional y Terapias Energéticas para un bienestar integral."
       />
       <PageHeader title="SERVICIOS" breadcrumb="Servicios">
         <nav className="flex flex-col gap-3 mt-8 md:mt-0">
-          <a 
-            href="#medicina-tradicional-china" 
+          <a
+            href="#medicina-tradicional-china"
             onClick={(e) => scrollToSection(e, 'medicina-tradicional-china')}
             className="group flex items-center md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-text-muted/60 hover:text-text-main transition-all outline-none"
             data-hoverable="true"
@@ -225,8 +225,8 @@ const Services: React.FC = () => {
             <span>Medicina Tradicional China</span>
             <span className="w-1.5 h-1.5 bg-accent-sage rounded-full group-hover:scale-150 transition-transform"></span>
           </a>
-          <a 
-            href="#coaching-transformacional" 
+          <a
+            href="#coaching-transformacional"
             onClick={(e) => scrollToSection(e, 'coaching-transformacional')}
             className="group flex items-center md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-text-muted/60 hover:text-text-main transition-all outline-none"
             data-hoverable="true"
@@ -234,8 +234,8 @@ const Services: React.FC = () => {
             <span>Coaching Transformacional</span>
             <span className="w-1.5 h-1.5 bg-accent-gold rounded-full group-hover:scale-150 transition-transform"></span>
           </a>
-          <a 
-            href="#terapias-energeticas" 
+          <a
+            href="#terapias-energeticas"
             onClick={(e) => scrollToSection(e, 'terapias-energeticas')}
             className="group flex items-center md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-text-muted/60 hover:text-text-main transition-all outline-none"
             data-hoverable="true"
@@ -252,7 +252,7 @@ const Services: React.FC = () => {
         <div className="orb w-[500px] h-[500px] bg-accent-sage top-40 -left-48 parallax-layer z-0 opacity-10" data-speed="0.02"></div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-          
+
           <div className="text-center mb-32 reveal-up">
             <h2 className="section-heading text-[clamp(2rem,5vw,4rem)] mb-6">
               Medicina <span className="italic text-accent-sage">Tradicional</span> China
@@ -265,17 +265,17 @@ const Services: React.FC = () => {
             {servicesData.map((service, index) => {
               const isEven = index % 2 === 0;
               return (
-                <div 
-                  key={service.id} 
+                <div
+                  key={service.id}
                   id={service.id}
                   className="block scroll-mt-32 w-full"
                 >
                   {/* Etiqueta Superior */}
                   <div className="flex items-center gap-3 mb-6 reveal-up">
-                     <div className="h-[1px] w-12 bg-gradient-to-r from-accent-gold to-transparent"></div>
-                     <span className="text-[0.65rem] tracking-[0.4em] uppercase text-accent-gold/80">Terapia Holística</span>
+                    <div className="h-[1px] w-12 bg-gradient-to-r from-accent-gold to-transparent"></div>
+                    <span className="text-[0.65rem] tracking-[0.4em] uppercase text-accent-gold/80">Terapia Holística</span>
                   </div>
-                  
+
                   {/* Título */}
                   <h3 className="font-serif text-[clamp(2.5rem,4vw,4rem)] font-light leading-none text-text-main mb-10 reveal-up">
                     {service.title}
@@ -283,17 +283,17 @@ const Services: React.FC = () => {
 
                   {/* Contenedor Principal Editorial */}
                   <div className="block w-full relative">
-                    
+
                     {/* Imagen Flotante sin overlays claros para evitar palidez (Overlays oscuros estáticos) */}
                     <div className={`relative z-20 w-full md:w-[45vw] lg:w-[500px] mb-12 md:mb-10 reveal-up ${isEven ? 'md:float-left md:mr-10' : 'md:float-right md:ml-10'}`}>
                       <div className="relative group block">
                         {/* Marco desplazado */}
                         <div className="absolute inset-0 border border-accent-sage/40 rounded-3xl translate-x-4 translate-y-4 z-0 transition-transform duration-500 ease-out group-hover:translate-x-6 group-hover:translate-y-6"></div>
                         <div className="relative z-10 about-image-container rounded-3xl shadow-2xl overflow-hidden aspect-[4/3] md:aspect-auto md:h-[400px]">
-                          <img 
-                            src={service.image} 
-                            alt={service.title} 
-                            className="w-full h-full object-cover grayscale-[20%] transform group-hover:scale-105 transition-transform duration-1000 ease-out" 
+                          <img
+                            src={service.image}
+                            alt={service.title}
+                            className="w-full h-full object-cover grayscale-[20%] transform group-hover:scale-105 transition-transform duration-1000 ease-out"
                             loading="lazy"
                           />
                           {/* El gradiente oscuro sobre la imagen es fijo para conservar profundidad y calidad */}
@@ -363,11 +363,11 @@ const Services: React.FC = () => {
                 <p className="text-xl text-text-main font-serif leading-relaxed mb-8 italic border-l-2 border-accent-gold pl-6">
                   Un espacio diseñado para personas que se encuentran en un punto de inflexión vital, buscando superar miedos limitantes y autosabotaje.
                 </p>
-                
+
                 <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed">
                   <h4 className="font-serif text-2xl text-text-main pt-4">La Fusión de Cuatro Pilares</h4>
                   <div className="gold-line mb-6"></div>
-                  
+
                   <ul className="space-y-8 !pl-0">
                     <li className="flex gap-5">
                       <div className="flex-shrink-0 w-10 h-10 border border-accent-gold/30 rounded-full flex items-center justify-center text-accent-gold">
@@ -402,9 +402,9 @@ const Services: React.FC = () => {
 
               <div className="lg:col-span-5 space-y-8">
                 <div className="about-image-container rounded-3xl shadow-xl">
-                  <img src="https://picsum.photos/600/800?image=66" alt="Coaching Session" className="w-full h-[400px] object-cover grayscale-[20%]" />
+                  <img src={IMAGES.workshops.coaching} alt="Sesión de Coaching Transformacional" className="w-full h-[400px] object-cover grayscale-[20%]" />
                 </div>
-                
+
                 {/* Caja de áreas de trabajo adaptativa */}
                 <div className="bg-text-main/5 border border-text-main/10 p-8 rounded-3xl">
                   <h4 className="font-serif text-xl text-text-main mb-4">Áreas de trabajo</h4>

@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin } from 'lucide-react';
-import { IMAGES } from '../constants/images';
+import headerVideo from '../assets/videos/conversacionterapistaloop.mp4';
+
+// 1. Variable global fuera del componente. 
+// "Sobrevive" a los cambios de página y guarda el segundo exacto del video.
+let globalVideoTime = 0;
 
 interface PageHeaderProps {
   title: string;
@@ -10,15 +14,55 @@ interface PageHeaderProps {
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({ title, breadcrumb, children }) => {
+  // 2. Referencia para poder manipular el video directamente
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Función para sincronizar el tiempo del video con nuestra variable guardada
+    const syncTime = () => {
+      video.currentTime = globalVideoTime;
+    };
+
+    // Si el video ya cargó, le ponemos el tiempo guardado, sino esperamos a que cargue
+    if (video.readyState >= 1) {
+      syncTime();
+    } else {
+      video.addEventListener('loadedmetadata', syncTime, { once: true });
+    }
+
+    // 3. Mientras el video se reproduce, actualizamos nuestra variable global
+    const handleTimeUpdate = () => {
+      globalVideoTime = video.currentTime;
+    };
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+
+    // Limpieza al cambiar de página
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+    };
+  }, []);
+
   return (
-    <div 
-      className="relative bg-cover bg-center h-[350px] flex items-center text-[#e8ebe3]"
-      style={{
-        backgroundImage: `url(${IMAGES.pageHeaderBg})`
-      }}
-    >
-      {/* Overlay oscuro para integrar con el tema de la web */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a08] via-[#0a0a08]/80 to-[#0a0a08]/40 z-0"></div>
+    <div className="relative h-[350px] flex items-center text-[#e8ebe3] overflow-hidden">
+      
+      {/* 4. Le añadimos ref={videoRef} a la etiqueta de video */}
+      <video 
+        ref={videoRef}
+        autoPlay 
+        loop 
+        muted 
+        playsInline 
+        /* Nota: mantén tu valor de object-position aquí abajo si lo cambiaste */
+        className="absolute inset-0 w-full h-full object-cover object-[50%_30%] z-0"
+      >
+        <source src={headerVideo} type="video/mp4" />
+      </video>
+
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a08] via-[#0a0a08]/80 to-[#0a0a08]/40 z-0 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full pt-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6 relative z-10">
         <div className="reveal-up">

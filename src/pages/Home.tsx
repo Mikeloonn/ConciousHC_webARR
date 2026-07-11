@@ -555,10 +555,10 @@ const Home: React.FC = () => {
                 
                 <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed">
                   <p className="therapist-stagger">
-                    "Soy Yeni Arriarán, terapeuta especializada en Medicina Tradicional China y terapias energéticas. Tras años de alta exigencia en el sector financiero, un diagnóstico de adenoma hipofisario marcó un antes y un después en mi vida, impulsándome a buscar un camino de sanación más integral."
+                    "Soy Yeni Arriarán, terapeuta especializada en Medicina Tradicional China y terapias energéticas. Tras años de alta exigencia en el sector financiero, un diagnóstico de adenoma hipofisario marcó un antes y un después en mi vida, impulsándome a buscar un camino de sanación más integral.
                   </p>
                   <p className="therapist-stagger">
-                    "Así descubrí la Medicina Tradicional China, un enfoque que observa a la persona como un todo: cuerpo, emociones y energía. Hoy, mi misión es acompañarte a recuperar tu equilibrio y bienestar con un abordaje profesional, consciente y sobre todo, humano."
+                    Así descubrí la Medicina Tradicional China, un enfoque que observa a la persona como un todo: cuerpo, emociones y energía. Hoy, mi misión es acompañarte a recuperar tu equilibrio y bienestar con un abordaje profesional, consciente y sobre todo, humano."
                   </p>
                 </div>
                 

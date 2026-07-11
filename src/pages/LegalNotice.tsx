@@ -7,7 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const LegalNotice: React.FC = () => {
-  
+
   // Animación suave de aparición al hacer scroll
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -15,14 +15,14 @@ const LegalNotice: React.FC = () => {
         gsap.fromTo(el,
           { opacity: 0, y: 40 },
           {
-            opacity: 1, 
-            y: 0, 
-            duration: 1.2, 
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
             ease: 'power3.out',
-            scrollTrigger: { 
-              trigger: el, 
-              start: 'top 85%', 
-              toggleActions: 'play none none reverse' 
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse'
             }
           }
         );
@@ -33,19 +33,19 @@ const LegalNotice: React.FC = () => {
 
   return (
     <main className="bg-bg-base text-text-main min-h-screen w-full overflow-hidden pb-24 transition-colors duration-600">
-      <SEO 
-        title="Aviso Legal" 
-        description="Aviso Legal y Condiciones de Uso del Centro de Acupuntura y Terapias Holísticas. Cumplimiento con la LSSI." 
+      <SEO
+        title="Aviso Legal"
+        description="Aviso Legal y Condiciones de Uso del Centro de Acupuntura y Terapias Holísticas. Cumplimiento con la LSSI."
       />
       <PageHeader title="AVISO LEGAL" breadcrumb="Legal" />
-      
+
       <section className="relative py-16 md:py-24">
         {/* Orbes decorativos de fondo (su opacidad ahora la controla el CSS según el tema) */}
         <div className="orb w-[400px] h-[400px] bg-accent-sage top-20 -left-32 parallax-layer z-0" data-speed="0.02"></div>
         <div className="orb w-[300px] h-[300px] bg-accent-gold bottom-20 -right-20 parallax-layer z-0" data-speed="0.03"></div>
 
         <div className="max-w-4xl mx-auto px-6 lg:px-12 relative z-10">
-          
+
           <div className="text-center mb-12 reveal-up">
             <h2 className="section-heading text-[clamp(1.8rem,4vw,3rem)] mb-4">
               Términos y <span className="italic text-accent-sage">Condiciones</span>
@@ -55,7 +55,7 @@ const LegalNotice: React.FC = () => {
           </div>
 
           <div className="glass-card p-8 md:p-14 lg:p-20 reveal-up">
-            
+
             {/* Bloque 1 */}
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-4">
@@ -66,13 +66,11 @@ const LegalNotice: React.FC = () => {
                 En cumplimiento con el deber de información recogido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI), se reflejan los siguientes datos:
               </p>
               <ul className="space-y-3 text-text-muted/80 text-sm md:text-base leading-relaxed pl-4 border-l border-accent-gold/30">
-                <li><strong className="text-text-main font-medium">Titular del sitio web:</strong> [NOMBRE COMPLETO DEL AUTÓNOMO O RAZÓN SOCIAL S.L.]</li>
-                <li><strong className="text-text-main font-medium">NIF/CIF:</strong> [NÚMERO DE IDENTIFICACIÓN FISCAL]</li>
-                <li><strong className="text-text-main font-medium">Domicilio:</strong> Plaza Andalucía 4, Centro Comercial España local 81, 29620 - Torremolinos, Málaga.</li>
+                <li><strong className="text-text-main font-medium">Titular del sitio web:</strong> Yeni Gladys Arriarán Gutiérrez</li>
+                <li><strong className="text-text-main font-medium">NIF/CIF:</strong> 043249104J</li>
+                <li><strong className="text-text-main font-medium">Domicilio:</strong> Plaza Andalucía 4, Centro Comercial España, local 81, 29620, Torremolinos, Málaga.</li>
                 <li><strong className="text-text-main font-medium">Correo electrónico:</strong> acupunturaholisticayeni@gmail.com</li>
-                <li><strong className="text-text-main font-medium">Teléfono:</strong> +34 624 253 470</li>
-                <li><strong className="text-text-main font-medium">Datos Registrales:</strong> <em>(Solo si es empresa S.L.)</em> Inscrita en el Registro Mercantil de Málaga, Tomo [X], Folio [X], Hoja [X].</li>
-                <li><strong className="text-text-main font-medium">Autorización Administrativa:</strong> <em>(Solo si aplica)</em> NICA: [NÚMERO DE AUTORIZACIÓN SANITARIA]</li>
+                <li><strong className="text-text-main font-medium">Teléfono:</strong> (+34) 624 253 470</li>
               </ul>
             </div>
 
@@ -94,7 +92,7 @@ const LegalNotice: React.FC = () => {
                 <h3 className="font-serif text-2xl text-text-main">Descargo de Responsabilidad (Naturaleza de los Servicios)</h3>
               </div>
               <p className="text-text-muted/80 text-sm md:text-base leading-relaxed mb-4">
-                Los servicios ofrecidos en este sitio web (acupuntura, fitoterapia, terapias holísticas) tienen como finalidad el bienestar, la relajación y el reequilibrio energético del usuario. <strong className="text-text-main font-medium">Estos servicios son técnicas parasanitarias o complementarias y NO sustituyen en ningún caso al diagnóstico, tratamiento o prescripción médica convencional.</strong>
+                Los servicios ofrecidos en este sitio web (acupuntura, fitoterapia, terapias holísticas) tienen como finalidad el bienestar, la relajación y el reequilibrio energético del usuario. Estos servicios son técnicas parasanitarias o complementarias y no sustituyen en ningún caso al diagnóstico, tratamiento o prescripción médica convencional.
               </p>
               <p className="text-text-muted/80 text-sm md:text-base leading-relaxed">
                 El usuario reconoce que no debe abandonar ningún tratamiento médico impuesto por un facultativo colegiado para realizar estas terapias. En caso de duda sobre su salud física o mental, recomendamos encarecidamente consultar con su médico de cabecera o especialista.
@@ -119,7 +117,7 @@ const LegalNotice: React.FC = () => {
                 <h3 className="font-serif text-2xl text-text-main">Ley Aplicable y Jurisdicción</h3>
               </div>
               <p className="text-text-muted/80 text-sm md:text-base leading-relaxed">
-                La relación entre el Titular y el Usuario se regirá por la normativa española vigente y cualquier controversia se someterá a los Juzgados y tribunales de la ciudad de <strong className="text-text-main font-medium">Torremolinos (Málaga)</strong>.
+                La relación entre el Titular y el Usuario se regirá por la normativa española vigente y cualquier controversia se someterá a los Juzgados y tribunales de la ciudad de Torremolinos (Málaga).
               </p>
             </div>
 

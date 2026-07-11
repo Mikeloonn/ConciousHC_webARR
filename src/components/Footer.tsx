@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Facebook, Youtube, Instagram } from 'lucide-react';
+import { Facebook, Youtube, Instagram, Clock } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import logo from '../assets/images/logohc.jpg';
@@ -108,12 +108,11 @@ const Footer: React.FC = () => {
             <h3 className="font-serif text-xl mb-4 text-sage-100">Horarios</h3>
             <div className="space-y-3">
               <div>
-                <div className="text-sm text-sage-100">Lun. - Sáb.</div>
-                <div className="text-sm text-sage-200/40">8:00AM - 8:00PM</div>
-              </div>
-              <div>
-                <div className="text-sm text-sage-100">Dom. - Festivos</div>
-                <div className="text-sm text-sage-200/40">10:00AM - 5:00PM</div>
+                <div className="text-sm text-sage-100 mb-2 flex items-center gap-2">
+                  <Clock size={16} className="text-sage-200/60" /> Lun. - Vie.
+                </div>
+                <div className="text-sm text-sage-200/40">9:30 h a 14:00 h</div>
+                <div className="text-sm text-sage-200/40 mt-1">17:00 h a 19:00 h</div>
               </div>
             </div>
           </div>

@@ -67,9 +67,9 @@ const PrivacyPolicy: React.FC = () => {
                 <h3 className="font-serif text-2xl text-text-main">¿Quién es el responsable del tratamiento?</h3>
               </div>
               <ul className="space-y-3 text-text-muted/80 text-sm md:text-base leading-relaxed pl-4 border-l border-accent-gold/30">
-                <li><strong className="text-text-main font-medium">Identidad:</strong> [NOMBRE DEL DUEÑO O EMPRESA]</li>
-                <li><strong className="text-text-main font-medium">NIF/CIF:</strong> [TU NIF]</li>
-                <li><strong className="text-text-main font-medium">Dirección:</strong> Plaza Andalucía 4, Centro Comercial España local 81, 29620 - Torremolinos, Málaga.</li>
+                <li><strong className="text-text-main font-medium">Identidad:</strong> Yeni Gladys Arriarán Gutiérrez</li>
+                <li><strong className="text-text-main font-medium">NIF/CIF:</strong> 043249104J</li>
+                <li><strong className="text-text-main font-medium">Dirección:</strong> Plaza Andalucía 4, Centro Comercial España, local 81, 29620, Torremolinos, Málaga.</li>
                 <li><strong className="text-text-main font-medium">Email:</strong> acupunturaholisticayeni@gmail.com</li>
               </ul>
             </div>
@@ -120,7 +120,7 @@ const PrivacyPolicy: React.FC = () => {
                 <h3 className="font-serif text-2xl text-text-main">Legitimación para el tratamiento</h3>
               </div>
               <p className="text-text-muted/80 text-sm md:text-base leading-relaxed">
-                La base legal para el tratamiento de sus datos es el <strong className="text-text-main font-medium">consentimiento</strong> que se le solicita (al marcar la casilla en el formulario de contacto) y/o la ejecución del contrato de prestación de servicios al acudir a nuestro centro.
+                La base legal para el tratamiento de sus datos es el consentimiento que se le solicita (al marcar la casilla en el formulario de contacto) y/o la ejecución del contrato de prestación de servicios al acudir a nuestro centro.
               </p>
             </div>
 

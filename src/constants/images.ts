@@ -22,6 +22,8 @@ import review6 from '../assets/images/reseña6.png';
 import caratula1 from '../assets/images/caratula1.jpg';
 import caratula2 from '../assets/images/caratula2.jpg';
 import caratula3 from '../assets/images/caratula3.jpg';
+import caratula4 from '../assets/images/caratula4.jpg';
+import caratula5 from '../assets/images/caratula5.jpg';
 
 export const IMAGES = {
   // Global
@@ -60,7 +62,9 @@ export const IMAGES = {
   blogs: [
     caratula1,
     caratula2,
-    caratula3
+    caratula3,
+    caratula4,
+    caratula5
   ],
 
   // Workshops (Talleres)
