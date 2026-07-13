@@ -38,10 +38,10 @@ const Home: React.FC = () => {
 
         const planeGeo = new THREE.PlaneGeometry(30, 30, 80, 80);
         const srvPlaneMat = new THREE.ShaderMaterial({
-          uniforms: { 
-            uTime: { value: 0 }, 
-            uColor1: { value: new THREE.Color(isLight ? 0x6B7B54 : 0xb3bda3) }, 
-            uColor2: { value: new THREE.Color(0xdf9e53) } 
+          uniforms: {
+            uTime: { value: 0 },
+            uColor1: { value: new THREE.Color(isLight ? 0x6B7B54 : 0xb3bda3) },
+            uColor2: { value: new THREE.Color(0xdf9e53) }
           },
           vertexShader: `
             uniform float uTime; varying vec2 vUv; varying float vElevation;
@@ -100,7 +100,7 @@ const Home: React.FC = () => {
       if (section) {
         therScene = new THREE.Scene();
         therScene.fog = new THREE.Fog(isLight ? '#F4F5F0' : '#0a0a08', 2, 12);
-        
+
         therCamera = new THREE.PerspectiveCamera(60, section.clientWidth / section.clientHeight, 0.1, 1000);
         therRenderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
         therRenderer.setSize(section.clientWidth, section.clientHeight);
@@ -112,9 +112,9 @@ const Home: React.FC = () => {
         const speeds = new Float32Array(particleCount);
 
         for (let i = 0; i < particleCount; i++) {
-          positions[i * 3] = (Math.random() - 0.5) * 20; 
-          positions[i * 3 + 1] = (Math.random() - 0.5) * 15; 
-          positions[i * 3 + 2] = (Math.random() - 0.5) * 10 - 5; 
+          positions[i * 3] = (Math.random() - 0.5) * 20;
+          positions[i * 3 + 1] = (Math.random() - 0.5) * 15;
+          positions[i * 3 + 2] = (Math.random() - 0.5) * 10 - 5;
           sizes[i] = Math.random() * 2.0 + 0.5;
           speeds[i] = Math.random() * 0.01 + 0.002;
         }
@@ -173,7 +173,7 @@ const Home: React.FC = () => {
         const animateTher = () => {
           therAnimId = requestAnimationFrame(animateTher);
           therMaterial.uniforms.uTime.value += 0.02;
-          particles.rotation.y += 0.001; 
+          particles.rotation.y += 0.001;
           therRenderer.render(therScene, therCamera);
         };
         animateTher();
@@ -219,12 +219,12 @@ const Home: React.FC = () => {
         gsap.fromTo(card, { opacity: 0, y: 80, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 1, delay: i * 0.1, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 88%' } });
       });
 
-      gsap.fromTo('.therapist-stagger', 
+      gsap.fromTo('.therapist-stagger',
         { opacity: 0, y: 40 },
         {
-          opacity: 1, 
-          y: 0, 
-          duration: 1, 
+          opacity: 1,
+          y: 0,
+          duration: 1,
           stagger: 0.2,
           ease: 'power3.out',
           scrollTrigger: {
@@ -281,7 +281,7 @@ const Home: React.FC = () => {
       <SEO title="Inicio" description="Bienvenido al Centro de Terapias Holísticas..." />
 
       <div ref={loaderRef} className="loader">
-        <div className="loader-text font-serif text-[clamp(1.5rem,4vw,3rem)] text-text-main opacity-0 tracking-[0.3em]">
+        <div className="loader-text font-serif text-[clamp(1.2rem,5vw,3rem)] text-text-main opacity-0 tracking-[0.2em] md:tracking-[0.3em] text-center w-full px-6 leading-snug">
           TERAPIAS HOLÍSTICAS
         </div>
         <div className="loader-line w-0 h-px bg-gradient-to-r from-transparent via-accent-sage to-transparent mt-8"></div>
@@ -289,7 +289,7 @@ const Home: React.FC = () => {
       </div>
 
       <main className="w-full overflow-hidden">
-        
+
         {/* HERO SECTION */}
         <section id="inicio" className="relative min-h-[100svh] flex items-center justify-center overflow-hidden w-full">
           {/* Conservamos el overlay oscuro estático en el vídeo para máxima nitidez de letras y evitar palidez */}
@@ -300,7 +300,7 @@ const Home: React.FC = () => {
               <source src={heroVideo} type="video/mp4" />
             </video>
           </div>
-          
+
           <div className="orb w-[500px] h-[500px] bg-accent-sage top-1/4 -left-48 parallax-layer z-10" data-speed="0.02"></div>
           <div className="orb w-[400px] h-[400px] bg-accent-gold bottom-1/4 -right-32 parallax-layer z-10" data-speed="0.03"></div>
 
@@ -316,7 +316,7 @@ const Home: React.FC = () => {
           <div className="hero-content text-center px-6 w-full max-w-4xl mx-auto z-30 pt-20">
             <div className="hero-subtitle mb-6 opacity-0 translate-y-[60px] text-xs tracking-[0.35em] uppercase text-[#e8ebe3]/70 text-shadow-subtle" id="hero-sub">Bienvenido a tu transformación</div>
             <div className="hero-line mx-auto mb-8 w-[60px] h-px bg-gradient-to-r from-accent-sage to-transparent opacity-0 translate-y-[60px]" id="hero-line"></div>
-           <h1 className="hero-title text-[clamp(2.6rem,8vw,5.5rem)] mb-8 text-[#e8ebe3] text-shadow-subtle">
+            <h1 className="hero-title text-[clamp(2.6rem,8vw,5.5rem)] mb-8 text-[#e8ebe3] text-shadow-subtle">
               <span className="block opacity-0 translate-y-[60px]" id="hero-line1">Acupuntura</span>
               <span className="block italic text-[#b3bda3] opacity-0 translate-y-[60px]" id="hero-line2">y Terapias Holísticas</span>
               <span className="block opacity-0 translate-y-[60px] text-xs md:text-sm lg:text-lg font-sans tracking-[0.3em] uppercase text-[#e8ebe3]/80 mt-4 md:mt-6" id="hero-line3">con Yeni Arriarán</span>
@@ -353,7 +353,7 @@ const Home: React.FC = () => {
                 <p className="text-text-muted/80 text-sm md:text-base leading-relaxed mb-6 reveal-up">
                   En el Centro de Acupuntura y Terapias Holísticas nos dedicamos a restaurar tu bienestar y vitalidad de forma natural. Creemos que la salud real se logra cuando equilibramos el cuerpo, la mente y la energía, brindándote un espacio cálido y profesional diseñado para que encuentres el alivio y la paz que necesitas en tu día a día.
                 </p>
-                
+
                 {/* Viñetas horizontales */}
                 {/* Viñetas (Corregido para Móvil) */}
                 <div className="flex flex-col md:flex-row justify-start gap-6 md:gap-10 reveal-up mb-10 w-full mt-10">
@@ -380,7 +380,7 @@ const Home: React.FC = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* Contenedor del video de YouTube */}
               <div className="order-1 lg:order-2 reveal-up w-full flex justify-center">
                 {/* Se añadió w-[85%] en móvil para que nunca desborde en pantallas muy pequeñas */}
@@ -448,7 +448,7 @@ const Home: React.FC = () => {
                       <h3 className="font-serif text-xl md:text-2xl font-normal text-[#e8ebe3] uppercase tracking-[0.2em] transition-transform duration-700 group-hover:-translate-y-2 group-hover:scale-105 text-shadow-subtle">
                         {service.title}
                       </h3>
-                      
+
                       <div className="w-12 h-[1px] bg-gradient-to-r from-accent-sage to-accent-gold mb-4 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100"></div>
 
                       <div className="relative max-h-0 group-hover:max-h-40 overflow-hidden transition-all duration-700 ease-in-out px-4">
@@ -487,7 +487,7 @@ const Home: React.FC = () => {
                       <h3 className="font-serif text-xl md:text-2xl font-normal text-[#e8ebe3] uppercase tracking-[0.2em] transition-transform duration-700 group-hover:-translate-y-2 group-hover:scale-105 text-shadow-subtle">
                         {service.title}
                       </h3>
-                      
+
                       <div className="w-12 h-[1px] bg-gradient-to-r from-accent-sage to-accent-gold mb-4 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100"></div>
 
                       <div className="relative max-h-0 group-hover:max-h-40 overflow-hidden transition-all duration-700 ease-in-out px-4">
@@ -506,7 +506,7 @@ const Home: React.FC = () => {
                 ))}
               </div>
             </div>
-            
+
             <div className="mt-16 text-center reveal-up">
               <Link to="/services" className="inline-flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-accent-sage hover:text-text-main transition-colors duration-300 border border-accent-sage/30 px-8 py-4 rounded-full hover:bg-accent-sage/10" data-hoverable="true">
                 Ver catálogo completo
@@ -522,20 +522,20 @@ const Home: React.FC = () => {
 
           <div className="w-full max-w-[1140px] px-6 lg:px-12 relative z-10">
             <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-              
+
               <div className="lg:col-span-5 reveal-up w-full flex justify-center lg:justify-start">
                 <div className="relative w-full max-w-md aspect-[4/5] mx-auto lg:mx-0 group">
                   <div className="absolute inset-0 border border-accent-sage/40 rounded-3xl translate-x-4 translate-y-4 z-0 transition-transform duration-700 group-hover:translate-x-5 group-hover:translate-y-5"></div>
-                  
+
                   <div className="relative z-10 w-full h-full rounded-3xl overflow-hidden shadow-2xl">
-                    <img 
-                      src={IMAGES.specialistHome} 
-                      alt="Yeni Arriarán" 
-                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out" 
-                      loading="lazy" 
+                    <img
+                      src={IMAGES.specialistHome}
+                      alt="Yeni Arriarán"
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a08]/90 via-transparent to-transparent pointer-events-none"></div>
-                    
+
                     {/* Texto sobre imagen configurado en claro fijo y con text-shadow para que resalte nítido sobre cualquier tema */}
                     <div className="absolute bottom-8 left-8 pointer-events-none">
                       <p className="font-serif text-3xl text-[#e8ebe3] mb-1 font-semibold text-shadow-subtle">Yeni Arriarán</p>
@@ -554,7 +554,7 @@ const Home: React.FC = () => {
                   De la exigencia a la<br />
                   <span className="italic text-accent-sage">sanación consciente</span>
                 </h2>
-                
+
                 <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed">
                   <p className="therapist-stagger">
                     "Soy Yeni Arriarán, terapeuta especializada en Medicina Tradicional China y terapias energéticas. Tras años de alta exigencia en el sector financiero, un diagnóstico de adenoma hipofisario marcó un antes y un después en mi vida, impulsándome a buscar un camino de sanación más integral.
@@ -563,9 +563,9 @@ const Home: React.FC = () => {
                     Así descubrí la Medicina Tradicional China, un enfoque que observa a la persona como un todo: cuerpo, emociones y energía. Hoy, mi misión es acompañarte a recuperar tu equilibrio y bienestar con un abordaje profesional, consciente y sobre todo, humano."
                   </p>
                 </div>
-                
+
                 <div className="mt-12 therapist-stagger">
-                   <p className="font-serif text-4xl italic text-accent-sage/60">Yeni Arriarán</p>
+                  <p className="font-serif text-4xl italic text-accent-sage/60">Yeni Arriarán</p>
                 </div>
               </div>
 
@@ -581,22 +581,22 @@ const Home: React.FC = () => {
               Voces de <span className="italic text-accent-sage">transformación</span>
             </h2>
           </div>
-          
+
           <TestimonialCarousel />
-            
+
           <div className="mt-20 text-center reveal-up">
-             <Link 
-               to="/contact" 
-               className="group relative inline-flex items-center justify-center px-10 py-4 rounded-full border border-text-main/30 overflow-hidden transition-all duration-300" 
-             >
-               {/* Fondo animado que se carga de izquierda a derecha */}
-               <div className="absolute inset-0 w-full h-full bg-accent-gold -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
-               
-               {/* Texto que cambia de color para contrastar con el fondo dorado */}
-               <span className="relative z-10 text-xs tracking-[0.2em] uppercase text-text-main group-hover:text-bg-base font-bold transition-colors duration-500">
-                 Agendar Cita
-               </span>
-             </Link>
+            <Link
+              to="/contact"
+              className="group relative inline-flex items-center justify-center px-10 py-4 rounded-full border border-text-main/30 overflow-hidden transition-all duration-300"
+            >
+              {/* Fondo animado que se carga de izquierda a derecha */}
+              <div className="absolute inset-0 w-full h-full bg-accent-gold -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
+
+              {/* Texto que cambia de color para contrastar con el fondo dorado */}
+              <span className="relative z-10 text-xs tracking-[0.2em] uppercase text-text-main group-hover:text-bg-base font-bold transition-colors duration-500">
+                Agendar Cita
+              </span>
+            </Link>
           </div>
         </section>
 
