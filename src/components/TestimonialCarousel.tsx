@@ -25,7 +25,12 @@ const googleReviews = [
   }
 ];
 
-const displayReviews = [...googleReviews, ...googleReviews, ...googleReviews];
+// SOLUCIÓN: Multiplicamos el array 10 veces. Esto crea un ancho de scroll gigantesco 
+// que garantiza que el loop funcione incluso en monitores ultrawide o 4K.
+const displayReviews = [
+  ...googleReviews, ...googleReviews, ...googleReviews, ...googleReviews, ...googleReviews,
+  ...googleReviews, ...googleReviews, ...googleReviews, ...googleReviews, ...googleReviews
+];
 
 const TestimonialCarousel: React.FC = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -41,18 +46,24 @@ const TestimonialCarousel: React.FC = () => {
     
     const animate = () => {
       if (scrollContainer && !isDown && !isPaused) {
-        const singleSetWidth = scrollContainer.scrollWidth / 3;
+        // Ahora dividimos entre 10 porque tenemos 10 sets
+        const singleSetWidth = scrollContainer.scrollWidth / 10;
 
+        // Inicializamos el scroll exactamente en la mitad (set 5) para tener margen infinito a los lados
         if (scrollContainer.scrollLeft === 0) {
-            scrollContainer.scrollLeft = singleSetWidth;
+            scrollContainer.scrollLeft = singleSetWidth * 5;
         }
 
         scrollContainer.scrollLeft += 1;
 
-        if (scrollContainer.scrollLeft >= singleSetWidth * 2) {
-          scrollContainer.scrollLeft = singleSetWidth;
-        } else if (scrollContainer.scrollLeft <= 0) {
-          scrollContainer.scrollLeft = singleSetWidth;
+        // Si avanza exactamente un bloque completo hacia la derecha (llega al set 6),
+        // le restamos ese ancho y lo devolvemos de manera imperceptible al set 5.
+        if (scrollContainer.scrollLeft >= singleSetWidth * 6) {
+          scrollContainer.scrollLeft -= singleSetWidth;
+        } 
+        // Lógica inversa por si el usuario arrastra las tarjetas hacia la izquierda
+        else if (scrollContainer.scrollLeft <= singleSetWidth * 4) {
+          scrollContainer.scrollLeft += singleSetWidth;
         }
       }
       animationRef.current = requestAnimationFrame(animate);
