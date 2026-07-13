@@ -337,25 +337,25 @@ const Contact: React.FC = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-[10px] tracking-[0.2em] uppercase text-accent-sage/60 mb-2">Nombre completo</label>
+                    <label className="block text-[10px] tracking-[0.2em] uppercase text-text-muted mb-2">Nombre completo</label>
                     <input type="text" name="Nombre" maxLength={50} required placeholder="Tu nombre" 
                       className="w-full bg-text-main/5 border border-text-main/10 rounded-xl px-5 py-4 text-text-main font-sans text-sm outline-none focus:border-accent-sage/40 focus:bg-text-main/10 focus:shadow-[0_0_20px_rgba(179,189,163,0.05)] transition-all placeholder:text-text-main/20" />
                   </div>
                   <div>
-                    <label className="block text-[10px] tracking-[0.2em] uppercase text-accent-sage/60 mb-2">Email</label>
+                    <label className="block text-[10px] tracking-[0.2em] uppercase text-text-muted mb-2">Email</label>
                     <input type="email" name="Email" maxLength={100} required placeholder="tu@email.com" 
                       className="w-full bg-text-main/5 border border-text-main/10 rounded-xl px-5 py-4 text-text-main font-sans text-sm outline-none focus:border-accent-sage/40 focus:bg-text-main/10 focus:shadow-[0_0_20px_rgba(179,189,163,0.05)] transition-all placeholder:text-text-main/20" />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] tracking-[0.2em] uppercase text-accent-sage/60 mb-2">Asunto</label>
+                  <label className="block text-[10px] tracking-[0.2em] uppercase text-text-muted mb-2">Asunto</label>
                   <input type="text" name="Asunto" maxLength={100} required placeholder="¿En qué te podemos ayudar?" 
                     className="w-full bg-text-main/5 border border-text-main/10 rounded-xl px-5 py-4 text-text-main font-sans text-sm outline-none focus:border-accent-sage/40 focus:bg-text-main/10 focus:shadow-[0_0_20px_rgba(179,189,163,0.05)] transition-all placeholder:text-text-main/20" />
                 </div>
                 
                 <div>
-                  <label className="block text-[10px] tracking-[0.2em] uppercase text-accent-sage/60 mb-2">Mensaje</label>
+                  <label className="block text-[10px] tracking-[0.2em] uppercase text-text-muted mb-2">Mensaje</label>
                   <textarea
                     rows={4}
                     name="Mensaje"

@@ -86,7 +86,9 @@ const Footer: React.FC = () => {
 
           {/* Columna 2: Nosotros (Breve Intro) */}
           <div className="footer-col opacity-0 text-left">
-            <h3 className="font-serif text-xl mb-4 text-sage-100">Nosotros</h3>
+            <h3 className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-accent-gold mb-6 flex items-center gap-4">
+              Nosotros <span className="h-[1px] w-12 bg-accent-gold/20"></span>
+            </h3>
             <p className="text-[#d1d7c7]/40 text-sm leading-relaxed mb-6">
               Inspirados en la alquimia del bienestar natural, nos enfocamos en el potencial humano y el autoconocimiento. Creemos que la salud física es solo la puerta de entrada para una vida plenamente consciente.
             </p>
@@ -94,7 +96,9 @@ const Footer: React.FC = () => {
 
           {/* Columna 3: Enlaces Legales */}
           <div className="footer-col opacity-0 text-left">
-            <h3 className="font-serif text-xl mb-4 text-sage-100">Legal</h3>
+            <h3 className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-accent-gold mb-6 flex items-center gap-4">
+              Legal <span className="h-[1px] w-12 bg-accent-gold/20"></span>
+            </h3>
             <nav className="flex flex-col gap-3" aria-label="Enlaces legales">
               <Link to="/legal" className="footer-link text-sm text-[#d1d7c7]/40 hover:text-[#e8ebe3] transition-colors" data-hoverable="true">Aviso Legal</Link>
               <Link to="/privacy" className="footer-link text-sm text-[#d1d7c7]/40 hover:text-[#e8ebe3] transition-colors" data-hoverable="true">Política de Privacidad</Link>
@@ -105,7 +109,9 @@ const Footer: React.FC = () => {
 
           {/* Columna 4: Horarios */}
           <div className="footer-col opacity-0 text-left">
-            <h3 className="font-serif text-xl mb-4 text-sage-100">Horarios</h3>
+            <h3 className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-accent-gold mb-6 flex items-center gap-4">
+              Horarios <span className="h-[1px] w-12 bg-accent-gold/20"></span>
+            </h3>
             <div className="space-y-3">
               <div>
                 <div className="text-sm text-sage-100 mb-2 flex items-center gap-2">

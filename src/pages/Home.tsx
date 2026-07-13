@@ -316,10 +316,10 @@ const Home: React.FC = () => {
           <div className="hero-content text-center px-6 w-full max-w-4xl mx-auto z-30 pt-20">
             <div className="hero-subtitle mb-6 opacity-0 translate-y-[60px] text-xs tracking-[0.35em] uppercase text-[#e8ebe3]/70 text-shadow-subtle" id="hero-sub">Bienvenido a tu transformación</div>
             <div className="hero-line mx-auto mb-8 w-[60px] h-px bg-gradient-to-r from-accent-sage to-transparent opacity-0 translate-y-[60px]" id="hero-line"></div>
-            <h1 className="hero-title text-[clamp(2.2rem,6vw,5.5rem)] mb-8 text-[#e8ebe3] text-shadow-subtle">
+           <h1 className="hero-title text-[clamp(2.6rem,8vw,5.5rem)] mb-8 text-[#e8ebe3] text-shadow-subtle">
               <span className="block opacity-0 translate-y-[60px]" id="hero-line1">Acupuntura</span>
               <span className="block italic text-[#b3bda3] opacity-0 translate-y-[60px]" id="hero-line2">y Terapias Holísticas</span>
-              <span className="block opacity-0 translate-y-[60px] text-lg lg:text-xl font-sans tracking-[0.3em] uppercase text-[#e8ebe3]/80 mt-6" id="hero-line3">con Yeni Arriarán</span>
+              <span className="block opacity-0 translate-y-[60px] text-xs md:text-sm lg:text-lg font-sans tracking-[0.3em] uppercase text-[#e8ebe3]/80 mt-4 md:mt-6" id="hero-line3">con Yeni Arriarán</span>
             </h1>
             <p className="text-sm lg:text-base text-[#d1d7c7] max-w-2xl mx-auto leading-relaxed mb-10 opacity-0 translate-y-[60px] text-shadow-subtle" id="hero-desc">
               Te acompañamos en tu camino hacia el bienestar integral a través de la acupuntura y un abordaje terapéutico personalizado.
@@ -355,7 +355,8 @@ const Home: React.FC = () => {
                 </p>
                 
                 {/* Viñetas horizontales */}
-                <div className="flex flex-row justify-between md:justify-start gap-4 md:gap-10 reveal-up mb-10 w-full mt-10">
+                {/* Viñetas (Corregido para Móvil) */}
+                <div className="flex flex-col md:flex-row justify-start gap-6 md:gap-10 reveal-up mb-10 w-full mt-10">
                   <div>
                     <div className="flex items-center gap-2">
                       <CheckCircle size={22} className="text-accent-sage" strokeWidth={2} />
@@ -382,7 +383,8 @@ const Home: React.FC = () => {
               
               {/* Contenedor del video de YouTube */}
               <div className="order-1 lg:order-2 reveal-up w-full flex justify-center">
-                <div className="relative w-full max-w-[320px] aspect-[9/16] rounded-3xl overflow-hidden shadow-2xl transform rotate-1 hover:rotate-0 transition-all duration-500 border border-text-main/10">
+                {/* Se añadió w-[85%] en móvil para que nunca desborde en pantallas muy pequeñas */}
+                <div className="relative w-[85%] md:w-full max-w-[320px] aspect-[9/16] rounded-3xl overflow-hidden shadow-2xl transform rotate-1 hover:rotate-0 transition-all duration-500 border border-text-main/10">
                   <iframe
                     className="w-full h-full border-0"
                     src="https://www.youtube.com/embed/geJt7ahL1-E?autoplay=0&mute=1"
@@ -583,8 +585,17 @@ const Home: React.FC = () => {
           <TestimonialCarousel />
             
           <div className="mt-20 text-center reveal-up">
-             <Link to="/contact" className="inline-block bg-gradient-to-br from-accent-sage/20 to-accent-gold/15 border border-accent-sage/30 text-text-main px-10 py-4 rounded-xl text-sm tracking-[0.2em] uppercase hover:border-accent-sage/60 hover:-translate-y-1 transition-all duration-300 shadow-[0_10px_40px_var(--shadow-color)]" data-hoverable="true">
-               Agendar Cita
+             <Link 
+               to="/contact" 
+               className="group relative inline-flex items-center justify-center px-10 py-4 rounded-full border border-text-main/30 overflow-hidden transition-all duration-300" 
+             >
+               {/* Fondo animado que se carga de izquierda a derecha */}
+               <div className="absolute inset-0 w-full h-full bg-accent-gold -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
+               
+               {/* Texto que cambia de color para contrastar con el fondo dorado */}
+               <span className="relative z-10 text-xs tracking-[0.2em] uppercase text-text-main group-hover:text-bg-base font-bold transition-colors duration-500">
+                 Agendar Cita
+               </span>
              </Link>
           </div>
         </section>

@@ -20,22 +20,26 @@ import { ThemeProvider } from './context/ThemeContext';
 gsap.registerPlugin(ScrollTrigger);
 
 // Controla el Scroll al cambiar de página
+// Controla el Scroll al cambiar de página
 const ScrollToTopRoute = () => {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
     if (hash) {
       const id = hash.replace('#', '');
-      const element = document.getElementById(id);
-      if (element) {
-        setTimeout(() => {
+      
+      // Aumentamos el tiempo a 600ms para dar tiempo a que las imágenes carguen 
+      // y la página calcule su altura real antes de hacer el scroll.
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
           const offset = 120;
           const bodyRect = document.body.getBoundingClientRect().top;
           const elementRect = element.getBoundingClientRect().top;
           const offsetPosition = (elementRect - bodyRect) - offset;
           window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-        }, 100);
-      }
+        }
+      }, 600);
     } else {
       window.scrollTo(0, 0);
     }

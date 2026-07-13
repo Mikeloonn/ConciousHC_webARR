@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
 import SEO from '../components/SEO';
 import { IMAGES } from '../constants/images';
-import { Check } from 'lucide-react';
+import { Check, Leaf } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// 1. ESTRUCTURA DE DATOS ORIGINAL 100% CONSERVADA
+// 1. ESTRUCTURA DE DATOS MEDICINA TRADICIONAL CHINA
 const servicesData = [
   {
     id: 'acupuntura',
@@ -29,7 +30,7 @@ const servicesData = [
     ),
     benefitsTitle: 'Beneficios de la Acupuntura',
     benefits: [
-      { title: 'Alivio del dolor', desc: 'Es especially eficaz en dolores musculares y articulares, cervicalgias, lumbalgias, migrañas, ciáticas, lesiones deportivas y dolores crónicos.' },
+      { title: 'Alivio del dolor', desc: 'Es especialmente eficaz en dolores musculares y articulares, cervicalgias, lumbalgias, migrañas, ciáticas, lesiones deportivas y dolores crónicos.' },
       { title: 'Regulación del sistema nervioso', desc: 'Ayuda a reducir el estrés, la ansiedad, el insomnio, el agotamiento mental y los estados de tensión emocional.' },
       { title: 'Mejora del funcionamiento interno', desc: 'Favorece el equilibrio del sistema digestivo, hormonal, respiratorio e inmunológico.' }
     ],
@@ -89,7 +90,7 @@ const servicesData = [
     outro: 'Las fórmulas pueden ajustarse a lo largo del proceso, respetando los ritmos del cuerpo y favoreciendo una recuperación consciente. Es segura y puede utilizarse de forma complementaria.'
   },
   {
-    id: 'ventosas',
+    id: 'ventosas-cupping',
     title: 'Ventosas (Cupping)',
     image: IMAGES.services.ventosas,
     intro: (
@@ -168,6 +169,82 @@ const servicesData = [
   }
 ];
 
+// 2. ESTRUCTURA DE DATOS TERAPIAS ENERGÉTICAS
+const energeticasData = [
+  {
+    id: 'pendulo-hebreo',
+    title: 'Péndulo Hebreo',
+    image: IMAGES.energeticas.penduloHebreo,
+    intro: (
+      <>
+        <p>
+          El Péndulo Hebreo es una herramienta de trabajo energético que utiliza etiquetas en hebreo para detectar, liberar y armonizar bloqueos en el campo energético de la persona.
+        </p>
+        <p>
+          A través de esta técnica se puede trabajar la limpieza energética, la armonización de chakras, el desbloqueo emocional, la protección energética, el cierre de ciclos y la reprogramación de patrones que pueden estar interfiriendo en el bienestar personal.
+        </p>
+        <p>
+          Mi formación en Péndulo Hebreo está realizada en la Escuela Internacional de Péndulo Hebreo de Cristina Vicente, integrando protocolos de trabajo profundo, ordenado y respetuoso.
+        </p>
+      </>
+    ),
+    benefitsTitle: 'Programa Reseteo Energético',
+    benefits: [
+      { title: 'Reprogramación', desc: 'Libera bloqueos, cargas, memorias o patrones para abrir espacio a una energía más clara y coherente.' },
+      { title: 'Alineación de chakras', desc: 'Revisa y favorece una mayor armonía entre cuerpo, emoción, mente y energía. Aporta calma y ligereza.' },
+      { title: 'Sellado áurico', desc: 'Ayuda a fortalecer y proteger el campo energético después del proceso de limpieza y armonización.' }
+    ],
+    outroTitle: 'Sesiones Complementarias',
+    outro: 'Según el proceso, se pueden realizar sesiones de Ataduras del Pasado, Misil de Luz o Limpieza energética de espacios (presencial o a distancia).'
+  },
+  {
+    id: 'sanacion-cuantica',
+    title: 'Sanación Cuántica y Sintergética',
+    image: IMAGES.energeticas.sanacionCuantica,
+    intro: (
+      <>
+        <p>
+          La Sanación Cuántica, la Sintergética y las técnicas de "Manos para Sanar" permiten acompañar a la persona desde una mirada integrativa, considerando la estrecha relación entre cuerpo, energía, emoción, mente y conciencia.
+        </p>
+        <p>
+          Son sesiones suaves, respetuosas y no invasivas, orientadas a favorecer la coherencia interna, la profunda calma, la conexión personal y la capacidad natural de autorregulación de tu organismo.
+        </p>
+      </>
+    ),
+    benefitsTitle: '¿Cuándo se recomiendan?',
+    benefits: [
+      { title: 'Momentos de Estrés', desc: 'Ideal para reducir el estrés, el agotamiento acumulado y la fatiga física o mental crónica.' },
+      { title: 'Procesos Emocionales', desc: 'Acompañamiento sutil en etapas de cambios personales, duelos, separaciones o procesos intensos.' },
+      { title: 'Agotamiento Profundo', desc: 'Recomendado cuando sientes falta de energía, desconexión interior o dificultad para avanzar.' }
+    ],
+    outroTitle: 'Acompañamiento sutil y profundo',
+    outro: 'Una terapia no invasiva perfecta cuando la persona siente que necesita un soporte más compasivo, profundo y consciente para recuperar su bienestar.'
+  },
+  {
+    id: 'biomagnetismo',
+    title: 'Biomagnetismo Cuántico',
+    image: IMAGES.energeticas.biomagnetismo,
+    intro: (
+      <>
+        <p>
+          El Biomagnetismo Cuántico y el Par Biomagnético se utilizan como potentes herramientas energéticas complementarias mediante la aplicación de imanes en puntos específicos del cuerpo.
+        </p>
+        <p>
+          En mi consulta lo integro desde una mirada sumamente prudente y personalizada, actuando como un sólido apoyo al equilibrio bioenergético y al bienestar general de la persona.
+        </p>
+      </>
+    ),
+    benefitsTitle: 'Apoyo Bioenergético',
+    benefits: [
+      { title: 'Equilibrio General', desc: 'Sirve como apoyo integral para recuperar la vitalidad, armonía y el equilibrio natural del organismo.' },
+      { title: 'Herramienta Complementaria', desc: 'Se integra estratégicamente en la sesión sin generar dolor ni molestias físicas.' },
+      { title: 'Enfoque Prudente', desc: 'Siempre se trabaja respetando el proceso y las indicaciones sanitarias que cada persona pueda estar siguiendo.' }
+    ],
+    outroTitle: 'Aviso Importante',
+    outro: 'Esta terapia no sustituye un diagnóstico ni un tratamiento médico o psicológico. Se ofrece como acompañamiento complementario para favorecer tu bienestar.'
+  }
+];
+
 const Services: React.FC = () => {
   useEffect(() => {
     // Animaciones de revelado suave al hacer scroll
@@ -219,29 +296,29 @@ const Services: React.FC = () => {
           <a
             href="#medicina-tradicional-china"
             onClick={(e) => scrollToSection(e, 'medicina-tradicional-china')}
-            className="group flex items-center md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-text-muted/60 hover:text-text-main transition-all outline-none"
+            className="group flex items-center md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle"
             data-hoverable="true"
           >
             <span>Medicina Tradicional China</span>
-            <span className="w-1.5 h-1.5 bg-accent-sage rounded-full group-hover:scale-150 transition-transform"></span>
+            <span className="w-1.5 h-1.5 bg-[#b3bda3] rounded-full group-hover:scale-150 transition-transform shadow-[0_0_5px_rgba(179,189,163,0.8)]"></span>
           </a>
           <a
             href="#coaching-transformacional"
             onClick={(e) => scrollToSection(e, 'coaching-transformacional')}
-            className="group flex items-center md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-text-muted/60 hover:text-text-main transition-all outline-none"
+            className="group flex items-center md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle"
             data-hoverable="true"
           >
             <span>Coaching Transformacional</span>
-            <span className="w-1.5 h-1.5 bg-accent-gold rounded-full group-hover:scale-150 transition-transform"></span>
+            <span className="w-1.5 h-1.5 bg-[#df9e53] rounded-full group-hover:scale-150 transition-transform shadow-[0_0_5px_rgba(223,158,83,0.8)]"></span>
           </a>
           <a
             href="#terapias-energeticas"
             onClick={(e) => scrollToSection(e, 'terapias-energeticas')}
-            className="group flex items-center md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-text-muted/60 hover:text-text-main transition-all outline-none"
+            className="group flex items-center md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle"
             data-hoverable="true"
           >
             <span>Terapias Energéticas</span>
-            <span className="w-1.5 h-1.5 bg-accent-sage/60 rounded-full group-hover:scale-150 transition-transform"></span>
+            <span className="w-1.5 h-1.5 bg-[#b3bda3] rounded-full group-hover:scale-150 transition-transform shadow-[0_0_5px_rgba(179,189,163,0.8)]"></span>
           </a>
         </nav>
       </PageHeader>
@@ -314,7 +391,10 @@ const Services: React.FC = () => {
                       <ul className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {service.benefits.map((benefit, i) => (
                           <li key={i} className="flex flex-col">
-                            <span className="text-accent-gold font-serif italic text-xl lg:text-2xl mb-2">🌿 {benefit.title}</span>
+                            <div className="flex items-center gap-2 mb-2">
+                              <Leaf size={22} className="text-accent-sage shrink-0" fill="currentColor" />
+                              <span className="text-accent-gold font-serif italic text-xl lg:text-2xl">{benefit.title}</span>
+                            </div>
                             <span className="text-text-muted/60 text-sm leading-relaxed">{benefit.desc}</span>
                           </li>
                         ))}
@@ -329,11 +409,20 @@ const Services: React.FC = () => {
                       </p>
                     </div>
 
-                    {/* Botón de Acción */}
+                    {/* Botón de Acción con Link - EFECTO ANIMADO */}
                     <div className="mt-10 reveal-up relative z-10">
-                      <button className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-text-main border border-accent-sage/30 px-8 py-4 rounded-full hover:bg-accent-sage/10 hover:border-accent-sage/60 transition-all duration-300" data-hoverable="true">
-                        Agendar Sesión de {service.title}
-                      </button>
+                      <Link 
+                        to="/contact" 
+                        className="group relative inline-flex items-center justify-center px-10 py-4 rounded-full border border-text-main/30 overflow-hidden transition-all duration-300"
+                      >
+                        {/* Fondo animado que se carga de izquierda a derecha */}
+                        <div className="absolute inset-0 w-full h-full bg-accent-gold -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
+                        
+                        {/* Texto que cambia de color para contrastar con el fondo dorado */}
+                        <span className="relative z-10 text-xs tracking-[0.2em] uppercase text-text-main group-hover:text-bg-base font-bold transition-colors duration-500">
+                          Agendar Sesión de {service.title}
+                        </span>
+                      </Link>
                     </div>
 
                   </div>
@@ -424,10 +513,20 @@ const Services: React.FC = () => {
                 <p className="text-text-muted/80 leading-relaxed text-sm md:text-base mb-10">
                   A través de la comunicación con el subconsciente (test muscular) y técnicas de integración cerebral, identificamos los obstáculos invisibles y los desactivamos en la misma sesión. Sales con el permiso y la capacidad real de ejecutar tus cambios.
                 </p>
-                {/* Botón adaptado a base para contraste impecable */}
-                <button className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-bg-base bg-gradient-to-r from-accent-sage to-accent-gold px-8 py-4 rounded-full hover:opacity-90 transition-all duration-300 font-bold" data-hoverable="true">
-                  Agendar Mentoría
-                </button>
+                
+                {/* Botón con Link - EFECTO ANIMADO */}
+                <Link 
+                  to="/contact" 
+                  className="group relative inline-flex items-center justify-center px-10 py-4 rounded-full border border-text-main/30 overflow-hidden transition-all duration-300"
+                >
+                  {/* Fondo animado que se carga de izquierda a derecha */}
+                  <div className="absolute inset-0 w-full h-full bg-accent-gold -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
+                  
+                  {/* Texto que cambia de color para contrastar con el fondo dorado */}
+                  <span className="relative z-10 text-xs tracking-[0.2em] uppercase text-text-main group-hover:text-bg-base font-bold transition-colors duration-500">
+                    Agendar Mentoría
+                  </span>
+                </Link>
               </div>
             </div>
           </div>
@@ -437,20 +536,165 @@ const Services: React.FC = () => {
       {/* BLOQUE 3: TERAPIAS ENERGÉTICAS */}
       <section id="terapias-energeticas" className="relative py-24 md:py-32 border-t border-text-main/5 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
+
           <div className="text-center mb-16 reveal-up">
             <h2 className="section-heading text-[clamp(2rem,5vw,4rem)] mb-4">
-              Terapias <span className="italic text-accent-sage">Energéticas</span>
+              Terapias <span className="italic text-accent-sage">Energéticas</span> e Integrativas
             </h2>
             <div className="organic-divider max-w-xs mx-auto mb-6"></div>
+            <p className="text-xs tracking-[0.3em] uppercase text-accent-sage/60">Recupera tu equilibrio, calma y claridad</p>
           </div>
-          <div className="glass-card border border-dashed border-text-main/10 rounded-3xl p-20 flex flex-col items-center justify-center text-center reveal-up">
-            <div className="text-accent-sage/40 mb-6">
-              <Check size={48} strokeWidth={1} />
+
+          {/* INTRODUCCIÓN GENERAL */}
+          <div className="glass-card p-8 md:p-14 mb-24 reveal-up">
+            <p className="text-xl text-text-main font-serif leading-relaxed mb-6 italic border-l-2 border-accent-sage pl-6">
+              Las terapias energéticas son un espacio de acompañamiento profundo para personas que desean recuperar equilibrio, calma, claridad interior y conexión consigo mismas.
+            </p>
+            <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed mb-10">
+              <p>
+                A veces el malestar no se expresa únicamente en el cuerpo. También puede sentirse como cansancio emocional, bloqueo, ansiedad, sensación de carga, dificultad para avanzar, pensamientos repetitivos, tristeza, falta de energía o desconexión interna.
+              </p>
+              <p>
+                En mi consulta trabajo con diferentes herramientas energéticas e integrativas que permiten acompañar estos procesos de forma personalizada, respetuosa y consciente. Cada sesión se adapta al momento de la persona, a su historia, a su sensibilidad y al objetivo que desea trabajar.
+              </p>
             </div>
-            <p className="text-text-muted/80 text-lg md:text-xl font-serif italic">
-              Próximamente estaremos detallando nuestros servicios de equilibrio energético.
+
+            <h4 className="font-serif text-2xl text-text-main mb-6 pt-4 border-t border-text-main/10">¿Para quién están recomendadas?</h4>
+            <p className="text-text-muted/80 text-sm md:text-base mb-6">Las terapias energéticas pueden acompañarte si sientes:</p>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-text-muted/80 text-sm md:text-base mb-8">
+              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> Cansancio físico, mental o emocional.</li>
+              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> Estrés, ansiedad o sensación de saturación.</li>
+              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> Bloqueos personales o dificultad para avanzar.</li>
+              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> Etapas de cambio, duelo, separación o transformación.</li>
+              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> Sensación de carga energética o ambientes densos.</li>
+              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> Necesidad de cerrar ciclos del pasado.</li>
+              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> Falta de claridad, dispersión o desconexión interior.</li>
+              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> Deseo de armonizar tu energía y recuperar equilibrio.</li>
+            </ul>
+            <p className="text-xs text-text-muted/50 italic bg-text-main/5 p-4 rounded-xl border border-text-main/10">
+              * Este trabajo no sustituye un tratamiento médico, psicológico o psiquiátrico cuando sea necesario. Se ofrece como acompañamiento complementario para favorecer tu bienestar, tu calma y tu proceso personal.
             </p>
           </div>
+
+          {/* LISTA DE TERAPIAS ENERGÉTICAS (DISEÑO REVISTA) */}
+          <div className="flex flex-col gap-32 md:gap-48">
+            {energeticasData.map((service, index) => {
+              const isEven = index % 2 === 0;
+              return (
+                <div key={service.id} id={service.id} className="block scroll-mt-32 w-full">
+                  <div className="flex items-center gap-3 mb-6 reveal-up">
+                    <div className="h-[1px] w-12 bg-gradient-to-r from-accent-sage to-transparent"></div>
+                    <span className="text-[0.65rem] tracking-[0.4em] uppercase text-accent-sage/80">Herramienta Energética</span>
+                  </div>
+
+                  <h3 className="font-serif text-[clamp(2.5rem,4vw,4rem)] font-light leading-none text-text-main mb-10 reveal-up">
+                    {service.title}
+                  </h3>
+
+                  <div className="block w-full relative">
+                    <div className={`relative z-20 w-full md:w-[45vw] lg:w-[500px] mb-12 md:mb-10 reveal-up ${isEven ? 'md:float-left md:mr-10' : 'md:float-right md:ml-10'}`}>
+                      <div className="relative group block">
+                        <div className="absolute inset-0 border border-accent-sage/40 rounded-3xl translate-x-4 translate-y-4 z-0 transition-transform duration-500 ease-out group-hover:translate-x-6 group-hover:translate-y-6"></div>
+                        <div className="relative z-10 about-image-container rounded-3xl shadow-2xl overflow-hidden aspect-[4/3] md:aspect-auto md:h-[400px]">
+                          <img
+                            src={service.image}
+                            alt={service.title}
+                            className="w-full h-full object-cover grayscale-[20%] transform group-hover:scale-105 transition-transform duration-1000 ease-out"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a08] via-[#0a0a08]/10 to-transparent opacity-60 pointer-events-none"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="relative z-10 space-y-6 text-text-muted/80 text-base lg:text-lg leading-relaxed reveal-up">
+                      {service.intro}
+                    </div>
+
+                    <div className="relative z-10 glass-card clear-both mt-16 lg:mt-20 p-8 lg:p-12 reveal-up">
+                      <h4 className="font-serif text-text-main text-2xl lg:text-3xl mb-6">{service.benefitsTitle}</h4>
+                      <div className="gold-line mb-8"></div>
+                      <ul className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {service.benefits.map((benefit, i) => (
+                          <li key={i} className="flex flex-col">
+                            <span className="text-accent-sage font-serif italic text-xl lg:text-2xl mb-2">✦ {benefit.title}</span>
+                            <span className="text-text-muted/60 text-sm leading-relaxed">{benefit.desc}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="mt-10 reveal-up max-w-4xl relative z-10">
+                      <h4 className="font-serif text-xl lg:text-2xl text-text-main mb-4">{service.outroTitle}</h4>
+                      <p className="italic border-l-2 border-accent-sage pl-5 text-text-muted/70 leading-relaxed">
+                        {service.outro}
+                      </p>
+                    </div>
+
+                    {/* Botón de Acción con Link - EFECTO ANIMADO */}
+                    <div className="mt-10 reveal-up relative z-10">
+                      <Link 
+                        to="/contact" 
+                        className="group relative inline-flex items-center justify-center px-10 py-4 rounded-full border border-text-main/30 overflow-hidden transition-all duration-300"
+                      >
+                        {/* Fondo animado que se carga de izquierda a derecha */}
+                        <div className="absolute inset-0 w-full h-full bg-accent-gold -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
+                        
+                        {/* Texto que cambia de color para contrastar con el fondo dorado */}
+                        <span className="relative z-10 text-xs tracking-[0.2em] uppercase text-text-main group-hover:text-bg-base font-bold transition-colors duration-500">
+                          Agendar Sesión de {service.title}
+                        </span>
+                      </Link>
+                    </div>
+
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* METODOLOGÍA FINAL (CIERRE DE SECCIÓN) */}
+          <div className="glass-card p-8 md:p-14 mt-32 reveal-up bg-text-main/5 border-none">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <div>
+                <h4 className="font-serif text-2xl text-text-main mb-6">¿Cómo es una sesión?</h4>
+                <p className="text-text-muted/80 text-sm md:text-base leading-relaxed mb-4">
+                  Primero conversamos sobre el motivo de consulta y el objetivo que deseas trabajar. Después realizo una valoración energética y aplico la técnica más adecuada según tu caso.
+                </p>
+                <p className="text-text-muted/80 text-sm md:text-base leading-relaxed">
+                  Al finalizar, te explico de forma sencilla qué se ha trabajado y qué puedes observar en los días posteriores. Cada sesión se realiza con respeto, cuidado y confidencialidad. Mi objetivo es acompañarte para que puedas sentirte con más calma, claridad y equilibrio en tu proceso.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-serif text-2xl text-text-main mb-6">Mi forma de trabajar</h4>
+                <p className="text-text-muted/80 text-sm md:text-base leading-relaxed mb-4">
+                  Trabajo desde una visión integrativa: cuerpo, mente, emoción y energía forman parte de una misma historia. Por eso, cada persona necesita un acompañamiento único.
+                </p>
+                <p className="text-text-main text-sm md:text-base leading-relaxed font-medium bg-gradient-to-r from-accent-sage/20 to-transparent p-4 rounded-xl border-l-2 border-accent-sage">
+                  No trabajo con promesas ni soluciones mágicas. Trabajo con presencia, escucha, experiencia y herramientas que ayudan a ordenar, liberar y fortalecer tu energía de forma consciente.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-12 text-center">
+              <p className="text-text-muted/80 mb-6 italic">Si sientes que estás en un momento de cambio, bloqueo o cansancio interno, estas terapias pueden ayudarte a reconectar contigo y avanzar con más claridad.</p>
+              
+              {/* Botón con Link - EFECTO ANIMADO */}
+              <Link 
+                to="/contact" 
+                className="group relative inline-flex items-center justify-center px-10 py-4 rounded-full border border-text-main/30 overflow-hidden transition-all duration-300"
+              >
+                {/* Fondo animado que se carga de izquierda a derecha */}
+                <div className="absolute inset-0 w-full h-full bg-accent-gold -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
+                
+                {/* Texto que cambia de color para contrastar con el fondo dorado */}
+                <span className="relative z-10 text-xs tracking-[0.2em] uppercase text-text-main group-hover:text-bg-base font-bold transition-colors duration-500">
+                  Agendar Acompañamiento
+                </span>
+              </Link>
+            </div>
+          </div>
+
         </div>
       </section>
     </main>

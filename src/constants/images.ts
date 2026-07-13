@@ -24,6 +24,9 @@ import caratula2 from '../assets/images/caratula2.jpg';
 import caratula3 from '../assets/images/caratula3.jpg';
 import caratula4 from '../assets/images/caratula4.jpg';
 import caratula5 from '../assets/images/caratula5.jpg';
+import pendulohebreoImg from '../assets/images/pendulohebreo.jpg';
+import biomagnetismoImg from '../assets/images/biomagnetismo.jpg';
+import sanacioncuanticaImg from '../assets/images/sanacioncuantica.jpg';
 
 export const IMAGES = {
   // Global
@@ -58,7 +61,13 @@ export const IMAGES = {
     tuina: tuinaImg,
     moxibustion: moxibustionImg,
   },
-  
+
+  energeticas: {
+    penduloHebreo: pendulohebreoImg,
+    sanacionCuantica: sanacioncuanticaImg,
+    biomagnetismo: biomagnetismoImg,
+  },
+
   blogs: [
     caratula1,
     caratula2,
