@@ -24,6 +24,12 @@ import caratula2 from '../assets/images/caratula2.jpg';
 import caratula3 from '../assets/images/caratula3.jpg';
 import caratula4 from '../assets/images/caratula4.jpg';
 import caratula5 from '../assets/images/caratula5.jpg';
+import caratula6 from '../assets/images/caratula6.jpg';
+import caratula7 from '../assets/images/caratula7.jpg';
+import caratula8 from '../assets/images/caratula8.jpg';
+import caratula9 from '../assets/images/caratula9.jpg';
+import caratula10 from '../assets/images/caratula10.jpg';
+import caratula11 from '../assets/images/caratula11.jpg';
 import pendulohebreoImg from '../assets/images/pendulohebreo.jpg';
 import biomagnetismoImg from '../assets/images/biomagnetismo.jpg';
 import sanacioncuanticaImg from '../assets/images/sanacioncuantica.jpg';
@@ -73,7 +79,13 @@ export const IMAGES = {
     caratula2,
     caratula3,
     caratula4,
-    caratula5
+    caratula5,
+    caratula6,
+    caratula7,
+    caratula8,
+    caratula9,
+    caratula10,
+    caratula11
   ],
 
   // Workshops (Talleres)
