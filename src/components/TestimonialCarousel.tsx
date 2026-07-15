@@ -20,7 +20,28 @@ const googleReviews = [
     id: 3,
     author: 'Edurne MGA',
     initials: 'EM',
-    text: 'He ido a varios terapeutas de acupuntura, la técnica que utiliza Yeni me gustó mucho porque con 1 sola aguja, como mucho 2, es capaz de reducir en la misma sesión notoriamente la dolencia con la que llegas. El trato es muy humano y cercano.',
+    text: 'He ido a varios terapeutas de acupuntura, la técnica que utilizan Yeni me gustó mucho porque con 1 sola aguja, como mucho 2 es capaz de reducir en la misma sesión notoriamente la dolencia con la que llegas... luego cada cual ha de poner de su parte para mejorar... pero ella hace gran parte de esa mejoría con la magia de sus manos. Super recomendada... el primer día que acudes con ella ve con tiempo, ha de hacerte ficha y es muy concienzuda para poder luego tratar a cada paciente con lo que cada cual necesita. 100% recomendada.',
+    link: 'https://www.google.com/search?q=Acupuntura+en+Torremolinos+-+Yeni+Arriar%C3%A1n#lrd=0x0:0x0,1,,,'
+  },
+  {
+    id: 4,
+    author: 'Ingri Maria Tejada',
+    initials: 'IT',
+    text: 'Yeni es una terapeuta muy sensible y cuidadosa. Me sentí en todo momento muy bien y a gusto. Se toma el tiempo necesario para que los pacientes se sientan mejor. En cuanto vuelva de vacaciones me pasaré a tratarme con Yeni. La recomiendo al 100 %',
+    link: 'https://www.google.com/search?q=Acupuntura+en+Torremolinos+-+Yeni+Arriar%C3%A1n#lrd=0x0:0x0,1,,,'
+  },
+  {
+    id: 5,
+    author: 'Jesus Gomez',
+    initials: 'JG',
+    text: 'Fui a acupuntura para aliviar un golpe que sufrí en el hombro. En tan sólo dos sesiones se me ha reducido el dolor casi al completo. Estoy super contento con la atención cuidadosa recibida por Yeni, buen trato humano y por cómo enfocó la situación. No dudaré en volver a ella para tratar otros síntomas en el futuro.',
+    link: 'https://www.google.com/search?q=Acupuntura+en+Torremolinos+-+Yeni+Arriar%C3%A1n#lrd=0x0:0x0,1,,,'
+  },
+  {
+    id: 6,
+    author: 'Claude Delile',
+    initials: 'CD',
+    text: 'Durante una estancia en Torremolinos, descubrí este centro de acupuntura. Fui allí para tratarme una tendinitis. Después de tres sesiones, tres semanas después, ya no siento ninguna molestia. Gracias por la cálida bienvenida. Claude D.',
     link: 'https://www.google.com/search?q=Acupuntura+en+Torremolinos+-+Yeni+Arriar%C3%A1n#lrd=0x0:0x0,1,,,'
   }
 ];
