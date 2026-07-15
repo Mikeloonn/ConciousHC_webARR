@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
 import SEO from '../components/SEO';
 import { IMAGES } from '../constants/images';
-import { Check, Leaf } from 'lucide-react';
+import { Check, Leaf, ChevronDown } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -169,7 +169,14 @@ const servicesData = [
   }
 ];
 
-// 2. ESTRUCTURA DE DATOS TERAPIAS ENERGÉTICAS
+// 2. SUB-MENÚ DE COACHING (Para el índice del PageHeader)
+const coachingSubItems = [
+  { id: 'coaching-pilares', title: 'Cuatro Pilares' },
+  { id: 'coaching-areas', title: 'Áreas de trabajo' },
+  { id: 'coaching-sesion', title: '¿Cómo es una sesión?' }
+];
+
+// 3. ESTRUCTURA DE DATOS TERAPIAS ENERGÉTICAS
 const energeticasData = [
   {
     id: 'pendulo-hebreo',
@@ -246,6 +253,9 @@ const energeticasData = [
 ];
 
 const Services: React.FC = () => {
+  // Estado para controlar qué acordeón está abierto
+  const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
+
   useEffect(() => {
     // Animaciones de revelado suave al hacer scroll
     const ctx = gsap.context(() => {
@@ -269,8 +279,17 @@ const Services: React.FC = () => {
     return () => ctx.revert();
   }, []);
 
+  // Función para abrir/cerrar el menú en el Header
+  const toggleMenu = (e: React.MouseEvent<HTMLAnchorElement>, menuId: string) => {
+    e.preventDefault();
+    setExpandedMenu(prev => prev === menuId ? null : menuId);
+  };
+
+  // Función para scrollear a la sección específica y cerrar el menú
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
+    setExpandedMenu(null); // Al dar click en un enlace, contraemos el menú de nuevo
+    
     const element = document.getElementById(id);
     if (element) {
       const offset = 120; // Ajuste para el Navbar flotante
@@ -292,34 +311,110 @@ const Services: React.FC = () => {
         description="Especialistas en Medicina Tradicional China, Coaching Transformacional y Terapias Energéticas para un bienestar integral."
       />
       <PageHeader title="SERVICIOS" breadcrumb="Servicios">
-        <nav className="flex flex-col gap-3 mt-8 md:mt-0">
-          <a
-            href="#medicina-tradicional-china"
-            onClick={(e) => scrollToSection(e, 'medicina-tradicional-china')}
-            className="group flex items-center md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle"
-            data-hoverable="true"
-          >
-            <span>Medicina Tradicional China</span>
-            <span className="w-1.5 h-1.5 bg-[#b3bda3] rounded-full group-hover:scale-150 transition-transform shadow-[0_0_5px_rgba(179,189,163,0.8)]"></span>
-          </a>
-          <a
-            href="#coaching-transformacional"
-            onClick={(e) => scrollToSection(e, 'coaching-transformacional')}
-            className="group flex items-center md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle"
-            data-hoverable="true"
-          >
-            <span>Coaching Transformacional</span>
-            <span className="w-1.5 h-1.5 bg-[#df9e53] rounded-full group-hover:scale-150 transition-transform shadow-[0_0_5px_rgba(223,158,83,0.8)]"></span>
-          </a>
-          <a
-            href="#terapias-energeticas"
-            onClick={(e) => scrollToSection(e, 'terapias-energeticas')}
-            className="group flex items-center md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle"
-            data-hoverable="true"
-          >
-            <span>Terapias Energéticas</span>
-            <span className="w-1.5 h-1.5 bg-[#b3bda3] rounded-full group-hover:scale-150 transition-transform shadow-[0_0_5px_rgba(179,189,163,0.8)]"></span>
-          </a>
+        
+        {/* Usamos h-[120px] fijo. Al ocultar 2 items, liberamos espacio para el acordeón 
+            con scroll, evitando al 100% que el título de la página salte. */}
+        <nav className="flex flex-col gap-4 mt-8 md:mt-0 w-full md:w-auto h-[120px] justify-start md:justify-end">
+          
+          {/* MENU 1: MEDICINA TRADICIONAL CHINA */}
+          <div className={`flex-col md:items-end w-full ${expandedMenu && expandedMenu !== 'mtc' ? 'hidden' : 'flex'}`}>
+            <a
+              href="#medicina-tradicional-china"
+              onClick={(e) => toggleMenu(e, 'mtc')}
+              className="group flex items-center justify-start md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle w-full cursor-pointer"
+            >
+              <div className="flex items-center gap-2">
+                <span>Medicina Tradicional China</span>
+                <ChevronDown size={14} className={`transition-transform duration-300 ${expandedMenu === 'mtc' ? 'rotate-180 text-[#b3bda3]' : ''}`} />
+              </div>
+              <span className="w-1.5 h-1.5 bg-[#b3bda3] rounded-full group-hover:scale-150 transition-transform shadow-[0_0_5px_rgba(179,189,163,0.8)] shrink-0"></span>
+            </a>
+            
+            {/* Dropdown MTC con scroll (max-h-[95px]) */}
+            <div className={`grid transition-all duration-500 ease-in-out w-full md:w-auto ${expandedMenu === 'mtc' ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
+              <div className="overflow-hidden">
+                <div className="overflow-y-auto max-h-[95px] flex flex-col gap-3 text-left md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#b3bda3]/40 pl-4 md:pl-0 md:pr-4 ml-1 md:ml-0 md:mr-1.5 py-1 pr-2">
+                  {servicesData.map(service => (
+                    <a
+                      key={service.id}
+                      href={`#${service.id}`}
+                      onClick={(e) => scrollToSection(e, service.id)}
+                      className="text-[10px] tracking-[0.15em] uppercase text-[#e8ebe3]/60 hover:text-[#e8ebe3] transition-colors cursor-pointer text-shadow-subtle"
+                    >
+                      {service.title}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* MENU 2: COACHING TRANSFORMACIONAL */}
+          <div className={`flex-col md:items-end w-full ${expandedMenu && expandedMenu !== 'coaching' ? 'hidden' : 'flex'}`}>
+            <a
+              href="#coaching-transformacional"
+              onClick={(e) => toggleMenu(e, 'coaching')}
+              className="group flex items-center justify-start md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle w-full cursor-pointer"
+            >
+              <div className="flex items-center gap-2">
+                <span>Coaching Transformacional</span>
+                <ChevronDown size={14} className={`transition-transform duration-300 ${expandedMenu === 'coaching' ? 'rotate-180 text-[#df9e53]' : ''}`} />
+              </div>
+              <span className="w-1.5 h-1.5 bg-[#df9e53] rounded-full group-hover:scale-150 transition-transform shadow-[0_0_5px_rgba(223,158,83,0.8)] shrink-0"></span>
+            </a>
+
+            {/* Dropdown Coaching con scroll (max-h-[95px]) */}
+            <div className={`grid transition-all duration-500 ease-in-out w-full md:w-auto ${expandedMenu === 'coaching' ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
+              <div className="overflow-hidden">
+                <div className="overflow-y-auto max-h-[95px] flex flex-col gap-3 text-left md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#df9e53]/40 pl-4 md:pl-0 md:pr-4 ml-1 md:ml-0 md:mr-1.5 py-1 pr-2">
+                  {coachingSubItems.map(item => (
+                    <a
+                      key={item.id}
+                      href={`#${item.id}`}
+                      onClick={(e) => scrollToSection(e, item.id)}
+                      className="text-[10px] tracking-[0.15em] uppercase text-[#e8ebe3]/60 hover:text-[#e8ebe3] transition-colors cursor-pointer text-shadow-subtle"
+                    >
+                      {item.title}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* MENU 3: TERAPIAS ENERGÉTICAS */}
+          <div className={`flex-col md:items-end w-full ${expandedMenu && expandedMenu !== 'energeticas' ? 'hidden' : 'flex'}`}>
+            <a
+              href="#terapias-energeticas"
+              onClick={(e) => toggleMenu(e, 'energeticas')}
+              className="group flex items-center justify-start md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle w-full cursor-pointer"
+            >
+              <div className="flex items-center gap-2">
+                <span>Terapias Energéticas</span>
+                <ChevronDown size={14} className={`transition-transform duration-300 ${expandedMenu === 'energeticas' ? 'rotate-180 text-[#b3bda3]' : ''}`} />
+              </div>
+              <span className="w-1.5 h-1.5 bg-[#b3bda3] rounded-full group-hover:scale-150 transition-transform shadow-[0_0_5px_rgba(179,189,163,0.8)] shrink-0"></span>
+            </a>
+
+            {/* Dropdown Energéticas con scroll (max-h-[95px]) */}
+            <div className={`grid transition-all duration-500 ease-in-out w-full md:w-auto ${expandedMenu === 'energeticas' ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
+              <div className="overflow-hidden">
+                <div className="overflow-y-auto max-h-[95px] flex flex-col gap-3 text-left md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#b3bda3]/40 pl-4 md:pl-0 md:pr-4 ml-1 md:ml-0 md:mr-1.5 py-1 pr-2">
+                  {energeticasData.map(service => (
+                    <a
+                      key={service.id}
+                      href={`#${service.id}`}
+                      onClick={(e) => scrollToSection(e, service.id)}
+                      className="text-[10px] tracking-[0.15em] uppercase text-[#e8ebe3]/60 hover:text-[#e8ebe3] transition-colors cursor-pointer text-shadow-subtle"
+                    >
+                      {service.title}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
         </nav>
       </PageHeader>
 
@@ -454,7 +549,7 @@ const Services: React.FC = () => {
                 </p>
 
                 <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed">
-                  <h4 className="font-serif text-2xl text-text-main pt-4">La Fusión de Cuatro Pilares</h4>
+                  <h4 id="coaching-pilares" className="font-serif text-2xl text-text-main pt-4 scroll-mt-32">La Fusión de Cuatro Pilares</h4>
                   <div className="gold-line mb-6"></div>
 
                   <ul className="space-y-8 !pl-0">
@@ -496,7 +591,7 @@ const Services: React.FC = () => {
 
                 {/* Caja de áreas de trabajo adaptativa */}
                 <div className="bg-text-main/5 border border-text-main/10 p-8 rounded-3xl">
-                  <h4 className="font-serif text-xl text-text-main mb-4">Áreas de trabajo</h4>
+                  <h4 id="coaching-areas" className="font-serif text-xl text-text-main mb-4 scroll-mt-32">Áreas de trabajo</h4>
                   <ul className="space-y-4 text-sm text-text-muted/80">
                     <li><strong className="text-accent-gold">● Emprendimiento:</strong> Síndrome del impostor.</li>
                     <li><strong className="text-accent-gold">● Autoestima:</strong> Autocrítica y desvalorización.</li>
@@ -509,7 +604,7 @@ const Services: React.FC = () => {
 
             <div className="mt-16 pt-12 border-t border-text-main/10">
               <div className="max-w-3xl">
-                <h4 className="font-serif text-2xl text-text-main mb-6">¿Cómo es una sesión?</h4>
+                <h4 id="coaching-sesion" className="font-serif text-2xl text-text-main mb-6 scroll-mt-32">¿Cómo es una sesión?</h4>
                 <p className="text-text-muted/80 leading-relaxed text-sm md:text-base mb-10">
                   A través de la comunicación con el subconsciente (test muscular) y técnicas de integración cerebral, identificamos los obstáculos invisibles y los desactivamos en la misma sesión. Sales con el permiso y la capacidad real de ejecutar tus cambios.
                 </p>
@@ -630,8 +725,8 @@ const Services: React.FC = () => {
                         {service.outro}
                       </p>
                     </div>
-
-                    {/* Botón de Acción con Link - EFECTO ANIMADO */}
+                    
+                    {/* Botón de Acción con Link */}
                     <div className="mt-10 reveal-up relative z-10">
                       <Link 
                         to="/contact" 
@@ -678,19 +773,8 @@ const Services: React.FC = () => {
 
             <div className="mt-12 text-center">
               <p className="text-text-muted/80 mb-6 italic">Si sientes que estás en un momento de cambio, bloqueo o cansancio interno, estas terapias pueden ayudarte a reconectar contigo y avanzar con más claridad.</p>
-              
-              {/* Botón con Link - EFECTO ANIMADO */}
-              <Link 
-                to="/contact" 
-                className="group relative inline-flex items-center justify-center px-10 py-4 rounded-full border border-text-main/30 overflow-hidden transition-all duration-300"
-              >
-                {/* Fondo animado que se carga de izquierda a derecha */}
-                <div className="absolute inset-0 w-full h-full bg-accent-gold -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
-                
-                {/* Texto que cambia de color para contrastar con el fondo dorado */}
-                <span className="relative z-10 text-xs tracking-[0.2em] uppercase text-text-main group-hover:text-bg-base font-bold transition-colors duration-500">
-                  Agendar Acompañamiento
-                </span>
+              <Link to="/contact" className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-bg-base bg-gradient-to-r from-accent-sage to-accent-gold px-8 py-4 rounded-full hover:opacity-90 transition-all duration-300 font-bold" data-hoverable="true">
+                Agendar Acompañamiento
               </Link>
             </div>
           </div>
