@@ -292,9 +292,8 @@ const Home: React.FC = () => {
 
         {/* HERO SECTION */}
         <section id="inicio" className="relative min-h-[100svh] flex items-center justify-center overflow-hidden w-full">
-          {/* Conservamos el overlay oscuro estático en el vídeo para máxima nitidez de letras y evitar palidez */}
-          <div className="absolute inset-0 bg-[#0a0a08]/70 z-10 pointer-events-none"></div>
-
+          {/* Overlay oscuro: menos intenso en móvil (40%), intensidad original en desktop (70%) */}
+          <div className="absolute inset-0 bg-[#0a0a08]/40 md:bg-[#0a0a08]/70 z-10 pointer-events-none transition-colors duration-500"></div>
           <div className="absolute inset-0 z-0">
             <video autoPlay loop muted playsInline className="w-full h-full object-cover">
               <source src={heroVideo} type="video/mp4" />
