@@ -9,7 +9,7 @@ import { useTheme } from '../context/ThemeContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Estructura de los datos de los blogs
+// 1. Datos para la sección: "NUESTRAS HISTORIAS" (Testimonios y Tratamientos)
 const blogPosts = [
   {
     id: 1,
@@ -307,7 +307,83 @@ const blogPosts = [
   }
 ];
 
+// 2. Datos para la sección: "CONOCE MÁS" (Mitos e Historia)
+const conoceMasPosts = [
+  {
+    id: 10,
+    title: 'Lo que necesitas saber antes de tu primera sesión',
+    date: 'Mitos vs. Realidades de la Acupuntura',
+    category: 'Mitos',
+    image: IMAGES.blogs[9],
+    embedHtml: `<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@yeni_arriaran/video/7541361996956994838" data-video-id="7541361996956994838" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@yeni_arriaran" href="https://www.tiktok.com/@yeni_arriaran?refer=embed">@yeni_arriaran</a> ✨ MITOS vs REALIDAD en la acupuntura y sanación natural 🧠 Mito: &#34;Sanar depende solo del terapeuta&#34; ✅ Realidad: ¡No! Es 50% el terapeuta y 50% tú. Sin tu compromiso, no hay transformación real. 💥 Mito: &#34;Con una sesión basta&#34; ✅ Realidad: Cada cuerpo es diferente. Edad, cronicidad, historia... todo influye. Sanar lleva su tiempo. 💉 Mito: &#34;Las agujas duelen&#34; ✅ Realidad: Son ultra finas. Lo que sentirás no es dolor… ¡es alivio! 🌿 La sanación no es mágica, pero cuando te implicas… los resultados sí lo parecen. 📍 Torremolinos – Plaza Andalucía 4 📲 624 253 470 <a title="yeniacupuntura" target="_blank" href="https://www.tiktok.com/tag/yeniacupuntura?refer=embed">#YeniAcupuntura</a> <a title="sanardesdedentro" target="_blank" href="https://www.tiktok.com/tag/sanardesdedentro?refer=embed">#SanarDesdeDentro</a> <a title="mitosvsrealidad" target="_blank" href="https://www.tiktok.com/tag/mitosvsrealidad?refer=embed">#MitosVsRealidad</a> <a title="acupunturasinmiedo" target="_blank" href="https://www.tiktok.com/tag/acupunturasinmiedo?refer=embed">#AcupunturaSinMiedo</a> <a title="medicinachina" target="_blank" href="https://www.tiktok.com/tag/medicinachina?refer=embed">#MedicinaChina</a> <a title="consultaholística" target="_blank" href="https://www.tiktok.com/tag/consultahol%C3%ADstica?refer=embed">#ConsultaHolística</a> <a title="tiktoksalud" target="_blank" href="https://www.tiktok.com/tag/tiktoksalud?refer=embed">#TikTokSalud</a> <a title="acupunturamálaga" target="_blank" href="https://www.tiktok.com/tag/acupunturam%C3%A1laga?refer=embed">#AcupunturaMálaga</a> <a target="_blank" title="♬ sonido original - yeni_arriaran" href="https://www.tiktok.com/music/sonido-original-7541362024639417110?refer=embed">♬ sonido original - yeni_arriaran</a> </section> </blockquote>`,
+    content: (
+      <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed pb-12">
+        <p>Alrededor de las terapias holísticas y la acupuntura existen numerosas creencias que pueden generar dudas o falsas expectativas cuando decidimos dar el paso hacia el bienestar natural. En este video, la especialista <strong>Yeni Arriarán</strong>, desde su centro en Torremolinos (Málaga), nos ayuda a desmontar los 3 mitos más comunes para entender realmente cómo funciona este proceso de sanación.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Mito 1: La sanación depende al 100% del terapeuta</h4>
+        <p>Uno de los errores más frecuentes es pensar que al acudir a una consulta, el terapeuta o el médico tienen la responsabilidad absoluta de curarnos mediante una técnica.</p>
+        <ul className="list-disc pl-6 space-y-2 marker:text-accent-gold">
+          <li><strong>La Realidad:</strong> El éxito de una terapia holística es un trabajo en equipo: <strong>50% del terapeuta y 50% del paciente</strong>. El especialista aporta el conocimiento, la técnica y la guía, pero el paciente debe comprometerse activamente con su proceso, adoptar hábitos saludables y contribuir conscientemente a su propia sanación integral.</li>
+        </ul>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Mito 2: En una sola sesión desaparecerán todos los problemas de salud</h4>
+        <p>A menudo se espera que una sola cita sea suficiente para resolver dolencias que llevan meses o incluso años afectando al organismo.</p>
+        <ul className="list-disc pl-6 space-y-2 marker:text-accent-gold">
+          <li><strong>La Realidad:</strong> Cada cuerpo es un mundo y cada caso clínico es completamente único. El tiempo de recuperación va a depender de factores clave como la <strong>edad del paciente, el tiempo que lleva con el problema, la cronicidad de la enfermedad</strong> y el estilo de vida que esté llevando. Como toda terapia profunda, requiere su propio tiempo y un proceso personalizado.</li>
+        </ul>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Mito 3: Las agujas de acupuntura duelen mucho</h4>
+        <p>El miedo al dolor es el principal freno que impide a muchas personas probar esta milenaria técnica, asociando las agujas de acupuntura con las inyecciones médicas tradicionales.</p>
+        <ul className="list-disc pl-6 space-y-2 marker:text-accent-gold">
+          <li><strong>La Realidad:</strong> Es totalmente incorrecto comparar una aguja de acupuntura con una de inyección o extracción de sangre. Las agujas utilizadas en esta terapia son <strong>ultrafinas y sumamente flexibles</strong>. Si bien puedes llegar a percibir una leve sensación o un micro-pinchazo en el segundo inicial de la inserción, el efecto inmediato posterior es de relajación profunda y un alivio notable del dolor general.</li>
+        </ul>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Despeja tus dudas y toma el control de tu salud</h4>
+        <p>Conocer la realidad detrás de estos mitos nos permite abordar las terapias naturales con mayor confianza, realismo y tranquilidad. Te invitamos a darle al <em>play</em> para escuchar la explicación detallada de Yeni Arriarán y descubrir cómo un enfoque consciente puede transform tu bienestar.</p>
+
+        <hr className="border-text-main/10 my-8" />
+        <p className="text-sm italic">Si estás en la provincia de Málaga y deseas iniciar un tratamiento holístico personalizado y profesional, te esperamos en el Centro de Terapias Naturales de Yeni Arriarán, ubicado en la Plaza Andalucía 4 (Centro Comercial España, Local 81), en Torremolinos. Puedes contactar o pedir tu cita llamando o escribiendo al teléfono <strong>+34 624 253 470</strong>.</p>
+      </div>
+    )
+  },
+  {
+    id: 11,
+    title: '¿Cómo llegué al mundo de la acupuntura?',
+    date: 'El origen de mi vocación',
+    category: 'Historia',
+    image: IMAGES.blogs[10],
+    embedHtml: `<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@yeni_arriaran/video/7543949228452711702" data-video-id="7543949228452711702" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@yeni_arriaran" href="https://www.tiktok.com/@yeni_arriaran?refer=embed">@yeni_arriaran</a> 🌿✨ &#34;Todo está bien&#34;... pero tú sabes que no lo está. Durante años fui directora financiera. Hasta que me diagnosticaron un adenoma hipofisario inoperable. Dolores, sueño extremo, malestar constante... Y en cada revisión, lo mismo: “Estás bien.” Pero mi cuerpo decía otra cosa. Desesperada, llegué a la Medicina China. Y ahí empezó mi verdadera sanación. Hoy no solo me escucho… también te acompaño a ti. 💬 Si alguna vez te han dicho que todo está bien… pero tú sabes que no, este espacio es para ti. 📍 Torremolinos – Plaza Andalucía 4 📲 624 253 470 <a title="yeniacupuntura" target="_blank" href="https://www.tiktok.com/tag/yeniacupuntura?refer=embed">#YeniAcupuntura</a> <a title="sanardesdedentro" target="_blank" href="https://www.tiktok.com/tag/sanardesdedentro?refer=embed">#SanarDesdeDentro</a> <a title="mihistoria" target="_blank" href="https://www.tiktok.com/tag/mihistoria?refer=embed">#MiHistoria</a> <a title="tiktoksalud" target="_blank" href="https://www.tiktok.com/tag/tiktoksalud?refer=embed">#TikTokSalud</a> <a title="adenomahipofisario" target="_blank" href="https://www.tiktok.com/tag/adenomahipofisario?refer=embed">#AdenomaHipofisario</a> <a title="consultaholística" target="_blank" href="https://www.tiktok.com/tag/consultahol%C3%ADstica?refer=embed">#ConsultaHolística</a> <a title="medicinachina" target="_blank" href="https://www.tiktok.com/tag/medicinachina?refer=embed">#MedicinaChina</a> <a title="escuchatucuerpo" target="_blank" href="https://www.tiktok.com/tag/escuchatucuerpo?refer=embed">#EscuchaTuCuerpo</a> <a title="acupunturamálaga" target="_blank" href="https://www.tiktok.com/tag/acupunturam%C3%A1laga?refer=embed">#AcupunturaMálaga</a> <a title="torremolinos" target="_blank" href="https://www.tiktok.com/tag/torremolinos?refer=embed">#Torremolinos</a> <a target="_blank" title="♬ sonido original - yeni_arriaran" href="https://www.tiktok.com/music/sonido-original-7543949309645998870?refer=embed">♬ sonido original - yeni_arriaran</a> </section> </blockquote>`,
+    content: (
+      <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed pb-12">
+        <p>Detrás de cada terapeuta comprometido suele haber una historia profunda de transformación personal. A diario vemos a la especialista <strong>Yeni Arriarán</strong> ayudando a decenas de pacientes en su consulta de Torremolinos (Málaga) a aliviar dolores crónicos y recuperar su equilibrio; pero, ¿qué fue exactamente lo que la inspiró a dedicarse a las terapias holísticas? En este íntimo y revelador video, Yeni nos abre su corazón para contarnos su propio viaje de sanación.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">De una vida corporativa a un diagnóstico difícil</h4>
+        <p>Antes de dedicarse a la medicina tradicional china, Yeni llevaba una vida completamente diferente trabajando como directora. Fue en esa etapa de alto ritmo profesional cuando su cuerpo le dio una señal de alarma definitiva: le diagnosticaron un <strong>adenoma hipofisario inoperable</strong>.</p>
+        <p>A partir de ese momento, comenzó a experimentar síntomas muy debilitantes que afectaban profundamente su calidad de vida:</p>
+        <ul className="list-disc pl-6 space-y-2 marker:text-accent-gold">
+          <li>Dolores constantes y difusos.</li>
+          <li>Un sueño y cansancio excesivos que la dejaban sin energía.</li>
+          <li>Una sensación generalizada de malestar intenso.</li>
+        </ul>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">La frustración del "todo está bien"</h4>
+        <p>Como cualquier paciente, Yeni acudió a innumerables revisiones médicas, sometiéndose a pruebas una tras otra. Sin embargo, se encontró con una de las experiencias más frustrantes y solitarias que puede vivir una persona enferma: los médicos le aseguraban una y otra vez que <strong>"todo estaba bien"</strong>, a pesar de que ella sentía claramente que su cuerpo no funcionaba como debía.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">El encuentro con la acupuntura y el inicio de una misión</h4>
+        <p>Cansada de no obtener respuestas y buscando desesperadamente recuperar su bienestar, Yeni decidió explorar caminos alternativos. Fue así como descubrió el poder de las terapias complementarias y la <strong>acupuntura</strong>, un enfoque que por fin escuchó a su organismo, le devolvió la salud y transformó el rumbo de su vida profesional para siempre.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">¿Sientes que algo anda mal aunque las pruebas digan lo contrario?</h4>
+        <p>El testimonio de Yeni nos deja una reflexión vital: nuestro cuerpo tiene su propia sabiduría. Si alguna vez te han dicho que "todo está bien" pero dentro de ti sientes que algo no marcha como debería, no ignores esas señales. Te invitamos a darle al <em>play</em> para conocer su inspiradora historia de primera mano y a unirte a esta comunidad donde cada síntoma es verdaderamente escuchado.</p>
+
+        <hr className="border-text-main/10 my-8" />
+        <p className="text-sm italic">Si te sientes identificado con esta historia y buscas un espacio donde tu malestar sea tratado desde la raíz, te esperamos en el Centro de Terapias Naturales de Yeni Arriarán, ubicado en la Plaza Andalucía 4 (Centro Comercial España, Local 81), en Torremolinos (Málaga). Puedes comunicarte o agendar tu cita llamando o escribiendo al teléfono <strong>+34 624 253 470</strong>.</p>
+      </div>
+    )
+  }
+];
+
 const Blogs: React.FC = () => {
+  // Ahora el tipo permite objetos tanto del primer array como del segundo
   const [selectedPost, setSelectedPost] = useState<typeof blogPosts[0] | null>(null);
   const { theme } = useTheme();
 
@@ -352,8 +428,6 @@ const Blogs: React.FC = () => {
 
       // 2. Cargar Script de TikTok
       const loadTikTokScript = () => {
-        // En SPA's (React), TikTok requiere que eliminemos y volvamos a inyectar el script
-        // para que detecte correctamente el nuevo video (blockquote) al abrir el modal.
         const oldScript = document.getElementById('tiktok-embed-script');
         if (oldScript) {
           oldScript.remove();
@@ -385,6 +459,7 @@ const Blogs: React.FC = () => {
       />
       <PageHeader title="NUESTRO BLOG" breadcrumb="Historias" />
       
+      {/* SECCIÓN 1: NUESTRAS HISTORIAS */}
       <section className="relative py-24 md:py-32">
         <div className="orb w-[400px] h-[400px] bg-accent-gold top-1/3 -left-32 parallax-layer z-0 opacity-10" data-speed="0.025"></div>
         
@@ -400,7 +475,7 @@ const Blogs: React.FC = () => {
             </div>
           </div>
 
-          {/* Grilla de Blogs */}
+          {/* Grilla de Blogs Principales */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post) => (
               <article 
@@ -424,6 +499,58 @@ const Blogs: React.FC = () => {
                 </div>
                 
                 {/* Contenedor de Texto */}
+                <div className="pt-6 flex flex-col flex-grow">
+                  <span className="text-[0.65rem] tracking-[0.2em] uppercase text-accent-gold/80">{post.date}</span>
+                  <h3 className="font-serif text-lg lg:text-xl mt-3 mb-4 leading-snug text-text-main group-hover:text-accent-sage transition-colors line-clamp-3">
+                    {post.title}
+                  </h3>
+                  <div className="mt-auto flex items-center gap-3 pt-6 border-t border-text-main/10 text-[0.65rem] text-accent-sage/50 uppercase tracking-widest">
+                    <User size={14} />
+                    <span>Por: Yeni Arriarán</span>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECCIÓN 2: CONOCE MÁS */}
+      <section className="relative py-24 md:py-32 border-t border-text-main/5">
+        <div className="orb w-[350px] h-[350px] bg-accent-sage bottom-0 -right-20 parallax-layer z-0 opacity-10" data-speed="0.03"></div>
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
+            <div className="reveal-up">
+              <span className="section-label">Descubre y Aprende</span>
+              <h2 className="section-heading text-[clamp(2rem,5vw,4rem)] mt-4">
+                Conoce <span className="italic text-accent-gold">Más</span>
+              </h2>
+              <div className="organic-divider max-w-xs mt-6"></div>
+            </div>
+          </div>
+
+          {/* Grilla Centrada para 2 Elementos */}
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
+            {conoceMasPosts.map((post) => (
+              <article 
+                key={post.id} 
+                className="reveal-up cursor-pointer flex flex-col h-full group"
+                onClick={() => setSelectedPost(post)}
+                data-hoverable="true"
+              >
+                <div className="relative w-full h-[450px] lg:h-[550px] shrink-0 overflow-hidden">
+                  <img 
+                    src={post.image} 
+                    alt={post.title} 
+                    className="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-4 left-4 bg-bg-base/80 backdrop-blur-md text-accent-gold text-[0.65rem] tracking-[0.2em] uppercase px-3 py-1.5 rounded-full border border-accent-gold/30 z-10">
+                    {post.category}
+                  </div>
+                </div>
+                
                 <div className="pt-6 flex flex-col flex-grow">
                   <span className="text-[0.65rem] tracking-[0.2em] uppercase text-accent-gold/80">{post.date}</span>
                   <h3 className="font-serif text-lg lg:text-xl mt-3 mb-4 leading-snug text-text-main group-hover:text-accent-sage transition-colors line-clamp-3">
