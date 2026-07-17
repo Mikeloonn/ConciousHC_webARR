@@ -46,8 +46,10 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, breadcrumb, children }) 
     };
   }, []);
 
+  // - h-[40vh] max-h-[500px]: Para tu laptop (1366x768) y menores.
+  // - 2xl:h-[50vh] 2xl:max-h-[700px]: Exclusivo para monitores 1920x1080 o superiores.
   return (
-    <div className="relative h-[40vh] min-h-[350px] max-h-[500px] flex items-center text-[#e8ebe3] overflow-hidden">
+    <div className="relative h-[40vh] min-h-[350px] max-h-[500px] 2xl:h-[50vh] 2xl:max-h-[700px] flex items-center text-[#e8ebe3] overflow-hidden">
       
       {/* 4. Le añadimos ref={videoRef} a la etiqueta de video */}
       <video 
