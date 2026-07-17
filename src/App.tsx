@@ -80,7 +80,14 @@ const MagneticEffectHandler = () => {
       });
     }, 100);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      const hoverables = document.querySelectorAll('[data-hoverable="true"]');
+      hoverables.forEach((el) => {
+        el.removeEventListener('mousemove', handleMouseMove);
+        el.removeEventListener('mouseleave', handleMouseLeave);
+      });
+    };
   }, [pathname]);
 
   return null;

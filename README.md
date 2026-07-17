@@ -1,6 +1,6 @@
-# Medico - Clínica de Fisioterapia
+# Yeni Arriarán - Centro de Acupuntura y Terapias Holísticas
 
-Proyecto desarrollado con React, TypeScript y Tailwind CSS.
+Proyecto desarrollado con React, TypeScript, Tailwind CSS y GSAP.
 
 ## Requisitos previos
 
