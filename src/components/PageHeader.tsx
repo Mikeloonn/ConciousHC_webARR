@@ -47,7 +47,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, breadcrumb, children }) 
   }, []);
 
   return (
-    <div className="relative h-[350px] flex items-center text-[#e8ebe3] overflow-hidden">
+    <div className="relative h-[40vh] min-h-[350px] max-h-[500px] flex items-center text-[#e8ebe3] overflow-hidden">
       
       {/* 4. Le añadimos ref={videoRef} a la etiqueta de video */}
       <video 
@@ -62,8 +62,8 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, breadcrumb, children }) 
         <source src={headerVideo} type="video/mp4" />
       </video>
 
-      {/* Overlay oscuro: gradiente más suave en móvil, intensidad original en desktop */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a08]/80 md:from-[#0a0a08] via-[#0a0a08]/40 md:via-[#0a0a08]/80 to-transparent md:to-[#0a0a08]/40 z-0 pointer-events-none transition-colors duration-500"></div>
+      {/* Overlay oscuro: mismo gradiente suave para móviles y escritorio */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a08]/80 via-[#0a0a08]/40 to-transparent z-0 pointer-events-none transition-colors duration-500"></div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full pt-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6 relative z-10">
         <div className="reveal-up">
