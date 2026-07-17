@@ -244,41 +244,41 @@ const Contact: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
 
           {/* TARJETAS DE INFORMACIÓN */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-24">
             
             {/* Tarjeta 1: WhatsApp */}
-            <div className="reveal-up h-full">
-              <a href="https://wa.me/34624253470" target="_blank" rel="noopener noreferrer" className="glass-card p-10 text-center flex flex-col items-center justify-center h-full block group">
+            <div className="reveal-up">
+              <a href="https://wa.me/34624253470" target="_blank" rel="noopener noreferrer" className="glass-card p-8 md:p-10 text-center flex flex-col items-center justify-center h-full block group">
                 <div className="w-16 h-16 bg-gradient-to-br from-accent-sage/20 to-transparent rounded-full flex items-center justify-center mb-6 text-accent-sage border border-accent-sage/30 group-hover:scale-110 transition-transform duration-500">
                   <WhatsappIcon size={28} />
                 </div>
                 <h3 className="font-serif text-2xl text-text-main mb-3">
                   <AnimatedText text="WhatsApp" />
                 </h3>
-                <span className="text-text-muted group-hover:text-text-main transition-colors font-sans tracking-widest text-sm">
+                <span className="text-text-muted group-hover:text-text-main transition-colors font-sans tracking-widest text-sm break-all">
                   +34 624 253 470
                 </span>
               </a>
             </div>
             
             {/* Tarjeta 2: Email */}
-            <div className="reveal-up h-full" style={{ transitionDelay: '100ms' }}>
-              <a href="mailto:acupunturaholisticayeni@gmail.com" className="glass-card p-10 text-center flex flex-col items-center justify-center h-full block group">
+            <div className="reveal-up">
+              <a href="mailto:acupunturaholisticayeni@gmail.com" className="glass-card p-8 md:p-10 text-center flex flex-col items-center justify-center h-full block group">
                 <div className="w-16 h-16 bg-gradient-to-br from-accent-gold/20 to-transparent rounded-full flex items-center justify-center mb-6 text-accent-gold border border-accent-gold/30 group-hover:scale-110 transition-transform duration-500">
                   <Mail size={28} strokeWidth={1.5} />
                 </div>
                 <h3 className="font-serif text-2xl text-text-main mb-3">
                   <AnimatedText text="Email" delay={0.1} />
                 </h3>
-                <span className="text-text-muted group-hover:text-text-main transition-colors font-sans text-sm">
+                <span className="text-text-muted group-hover:text-text-main transition-colors font-sans text-sm break-all">
                   acupunturaholisticayeni@gmail.com
                 </span>
               </a>
             </div>
             
             {/* Tarjeta 3: Dirección */}
-            <div className="reveal-up h-full" style={{ transitionDelay: '200ms' }}>
-              <a href="https://maps.google.com/?q=Plaza+Andalucía+4,+Torremolinos,+Málaga" target="_blank" rel="noopener noreferrer" className="glass-card p-10 text-center flex flex-col items-center justify-center h-full block group">
+            <div className="reveal-up">
+              <a href="https://maps.google.com/?q=Plaza+Andalucía+4,+Torremolinos,+Málaga" target="_blank" rel="noopener noreferrer" className="glass-card p-8 md:p-10 text-center flex flex-col items-center justify-center h-full block group">
                 <div className="w-16 h-16 bg-gradient-to-br from-accent-sage/20 to-transparent rounded-full flex items-center justify-center mb-6 text-accent-sage border border-accent-sage/30 group-hover:scale-110 transition-transform duration-500">
                   <MapPin size={28} strokeWidth={1.5} />
                 </div>

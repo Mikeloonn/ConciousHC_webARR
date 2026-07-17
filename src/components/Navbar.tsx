@@ -77,18 +77,18 @@ const Navbar: React.FC = () => {
               className="h-9 w-9 rounded-full object-cover border border-[#e8ebe3]/20 transition-transform duration-500 group-hover:scale-110 shadow-sm"
             />
             <div className="flex flex-col relative z-10">
-              <span className="font-serif font-bold text-[13px] md:text-sm tracking-widest text-[#e8ebe3] leading-none">
+              <span className="font-serif font-bold text-[11px] sm:text-[13px] lg:text-sm tracking-widest text-[#e8ebe3] leading-none">
                 Centro de Acupuntura
               </span>
-              <span className="text-[7px] md:text-[8px] font-sans font-medium uppercase tracking-[0.25em] text-[#b3bda3] mt-1">
+              <span className="text-[6px] sm:text-[7px] lg:text-[8px] font-sans font-medium uppercase tracking-[0.25em] text-[#b3bda3] mt-1">
                 y Terapias Holísticas
               </span>
             </div>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8 lg:gap-12 relative z-10">
-            <ul className="flex gap-6 lg:gap-8">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-12 relative z-10">
+            <ul className="flex gap-4 xl:gap-8">
               {navLinks.map((link) => (
                 <li key={link.name} className="relative group">
                   
@@ -96,7 +96,7 @@ const Navbar: React.FC = () => {
                   <div className="flex items-center gap-1 h-full py-2">
                     <Link
                       to={link.path}
-                      className={`nav-link ${location.pathname === link.path ? 'active' : ''}`}
+                      className={`nav-link text-[10px] xl:text-[11px] ${location.pathname === link.path ? 'active' : ''}`}
                     >
                       {link.name}
                     </Link>
@@ -129,7 +129,7 @@ const Navbar: React.FC = () => {
               ))}
             </ul>
 
-            <div className="flex items-center gap-5 border-l border-[#e8ebe3]/20 pl-5">
+            <div className="flex items-center gap-3 xl:gap-5 border-l border-[#e8ebe3]/20 pl-3 xl:pl-5">
               <button
                 onClick={toggleTheme}
                 className="text-[#e8ebe3]/60 hover:text-[#df9e53] transition-colors duration-300 focus:outline-none cursor-pointer"
@@ -141,7 +141,7 @@ const Navbar: React.FC = () => {
 
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center border border-[#b3bda3]/30 text-[#e8ebe3] text-[10px] tracking-[0.2em] uppercase px-5 py-2 rounded-full hover:bg-[#b3bda3]/10 hover:border-[#b3bda3]/60 transition-all duration-300 focus:outline-none"
+                className="inline-flex items-center justify-center border border-[#b3bda3]/30 text-[#e8ebe3] text-[9px] xl:text-[10px] tracking-[0.2em] uppercase px-4 xl:px-5 py-2 rounded-full hover:bg-[#b3bda3]/10 hover:border-[#b3bda3]/60 transition-all duration-300 focus:outline-none"
               >
                 Agendar
               </Link>
@@ -149,7 +149,7 @@ const Navbar: React.FC = () => {
           </nav>
 
           {/* Hamburger (Móvil) */}
-          <div className="md:hidden flex items-center gap-4">
+          <div className="lg:hidden flex items-center gap-4">
             <button
               onClick={toggleTheme}
               className="text-[#e8ebe3]/80 p-2 z-[9996] focus:outline-none cursor-pointer"

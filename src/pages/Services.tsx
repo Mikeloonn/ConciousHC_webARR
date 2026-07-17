@@ -314,14 +314,14 @@ const Services: React.FC = () => {
         
         {/* Usamos h-[120px] fijo. Al ocultar 2 items, liberamos espacio para el acordeón 
             con scroll, evitando al 100% que el título de la página salte. */}
-        <nav className="flex flex-col gap-4 mt-8 md:mt-0 w-full md:w-auto h-[120px] justify-start md:justify-end">
+        <nav className="flex flex-col gap-4 mt-8 lg:mt-0 w-full lg:w-auto h-[120px] justify-start lg:justify-end">
           
           {/* MENU 1: MEDICINA TRADICIONAL CHINA */}
-          <div className={`flex-col md:items-end w-full ${expandedMenu && expandedMenu !== 'mtc' ? 'hidden' : 'flex'}`}>
+          <div className={`flex-col lg:items-end w-full ${expandedMenu && expandedMenu !== 'mtc' ? 'hidden' : 'flex'}`}>
             <a
               href="#medicina-tradicional-china"
               onClick={(e) => toggleMenu(e, 'mtc')}
-              className="group flex items-center justify-start md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle w-full cursor-pointer"
+              className="group flex items-center justify-start lg:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle w-full cursor-pointer"
             >
               <div className="flex items-center gap-2">
                 <span>Medicina Tradicional China</span>
@@ -331,9 +331,9 @@ const Services: React.FC = () => {
             </a>
             
             {/* Dropdown MTC con scroll (max-h-[95px]) */}
-            <div className={`grid transition-all duration-500 ease-in-out w-full md:w-auto ${expandedMenu === 'mtc' ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
+            <div className={`grid transition-all duration-500 ease-in-out w-full lg:w-auto ${expandedMenu === 'mtc' ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
               <div className="overflow-hidden">
-                <div className="overflow-y-auto max-h-[95px] flex flex-col gap-3 text-left md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#b3bda3]/40 pl-4 md:pl-0 md:pr-4 ml-1 md:ml-0 md:mr-1.5 py-1 pr-2">
+                <div className="overflow-y-auto max-h-[95px] flex flex-col gap-3 text-left lg:text-right border-l-2 lg:border-l-0 lg:border-r-2 border-[#b3bda3]/40 pl-4 lg:pl-0 lg:pr-4 ml-1 lg:ml-0 lg:mr-1.5 py-1 pr-2">
                   {servicesData.map(service => (
                     <a
                       key={service.id}
@@ -350,11 +350,11 @@ const Services: React.FC = () => {
           </div>
 
           {/* MENU 2: COACHING TRANSFORMACIONAL */}
-          <div className={`flex-col md:items-end w-full ${expandedMenu && expandedMenu !== 'coaching' ? 'hidden' : 'flex'}`}>
+          <div className={`flex-col lg:items-end w-full ${expandedMenu && expandedMenu !== 'coaching' ? 'hidden' : 'flex'}`}>
             <a
               href="#coaching-transformacional"
               onClick={(e) => toggleMenu(e, 'coaching')}
-              className="group flex items-center justify-start md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle w-full cursor-pointer"
+              className="group flex items-center justify-start lg:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle w-full cursor-pointer"
             >
               <div className="flex items-center gap-2">
                 <span>Coaching Transformacional</span>
@@ -364,9 +364,9 @@ const Services: React.FC = () => {
             </a>
 
             {/* Dropdown Coaching con scroll (max-h-[95px]) */}
-            <div className={`grid transition-all duration-500 ease-in-out w-full md:w-auto ${expandedMenu === 'coaching' ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
+            <div className={`grid transition-all duration-500 ease-in-out w-full lg:w-auto ${expandedMenu === 'coaching' ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
               <div className="overflow-hidden">
-                <div className="overflow-y-auto max-h-[95px] flex flex-col gap-3 text-left md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#df9e53]/40 pl-4 md:pl-0 md:pr-4 ml-1 md:ml-0 md:mr-1.5 py-1 pr-2">
+                <div className="overflow-y-auto max-h-[95px] flex flex-col gap-3 text-left lg:text-right border-l-2 lg:border-l-0 lg:border-r-2 border-[#df9e53]/40 pl-4 lg:pl-0 lg:pr-4 ml-1 lg:ml-0 lg:mr-1.5 py-1 pr-2">
                   {coachingSubItems.map(item => (
                     <a
                       key={item.id}
@@ -383,11 +383,11 @@ const Services: React.FC = () => {
           </div>
 
           {/* MENU 3: TERAPIAS ENERGÉTICAS */}
-          <div className={`flex-col md:items-end w-full ${expandedMenu && expandedMenu !== 'energeticas' ? 'hidden' : 'flex'}`}>
+          <div className={`flex-col lg:items-end w-full ${expandedMenu && expandedMenu !== 'energeticas' ? 'hidden' : 'flex'}`}>
             <a
               href="#terapias-energeticas"
               onClick={(e) => toggleMenu(e, 'energeticas')}
-              className="group flex items-center justify-start md:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle w-full cursor-pointer"
+              className="group flex items-center justify-start lg:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle w-full cursor-pointer"
             >
               <div className="flex items-center gap-2">
                 <span>Terapias Energéticas</span>
@@ -397,9 +397,9 @@ const Services: React.FC = () => {
             </a>
 
             {/* Dropdown Energéticas con scroll (max-h-[95px]) */}
-            <div className={`grid transition-all duration-500 ease-in-out w-full md:w-auto ${expandedMenu === 'energeticas' ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
+            <div className={`grid transition-all duration-500 ease-in-out w-full lg:w-auto ${expandedMenu === 'energeticas' ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
               <div className="overflow-hidden">
-                <div className="overflow-y-auto max-h-[95px] flex flex-col gap-3 text-left md:text-right border-l-2 md:border-l-0 md:border-r-2 border-[#b3bda3]/40 pl-4 md:pl-0 md:pr-4 ml-1 md:ml-0 md:mr-1.5 py-1 pr-2">
+                <div className="overflow-y-auto max-h-[95px] flex flex-col gap-3 text-left lg:text-right border-l-2 lg:border-l-0 lg:border-r-2 border-[#b3bda3]/40 pl-4 lg:pl-0 lg:pr-4 ml-1 lg:ml-0 lg:mr-1.5 py-1 pr-2">
                   {energeticasData.map(service => (
                     <a
                       key={service.id}
