@@ -306,10 +306,10 @@ const Services: React.FC = () => {
 
   return (
     <main className="bg-bg-base text-text-main min-h-screen w-full overflow-hidden pb-20 transition-colors duration-600">
-      <SEO
-        title="Nuestros Servicios"
-        description="Especialistas en Medicina Tradicional China, Coaching Transformacional y Terapias Energéticas para un bienestar integral."
-      />
+<SEO
+          title="Medicina China y Terapias Holísticas en Málaga"
+          description="Acupuntura, auriculoterapia, moxibustión, ventosas, fitoterapia, masaje tuina, coaching y terapias energéticas en Torremolinos, Málaga."
+        />
       <PageHeader title="SERVICIOS" breadcrumb="Servicios">
         
         {/* Usamos h-[120px] fijo. Al ocultar 2 items, liberamos espacio para el acordeón 

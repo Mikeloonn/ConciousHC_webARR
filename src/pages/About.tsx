@@ -35,10 +35,10 @@ const About: React.FC = () => {
 
   return (
     <main className="bg-bg-base text-text-main min-h-screen w-full overflow-hidden pb-20 transition-colors duration-600">
-      <SEO
-        title="Sobre Nosotros"
-        description="Conoce a Yeni Arriarán y la historia detrás del Centro de Acupuntura y Terapias Holísticas."
-      />
+<SEO
+          title="Yeni Arriarán - Terapeuta Holística en Torremolinos, Málaga"
+          description="Conoce a Yeni Arriarán, acupuntora y terapeuta holística en Torremolinos, Málaga. Más de 12 años de experiencia en medicina tradicional china y terapias naturales."
+        />
       <PageHeader title="SOBRE NOSOTROS" breadcrumb="Nosotros" />
 
       {/* SECCIÓN ESPECIALISTA */}

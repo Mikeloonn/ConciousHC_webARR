@@ -33,10 +33,10 @@ const LegalNotice: React.FC = () => {
 
   return (
     <main className="bg-bg-base text-text-main min-h-screen w-full overflow-hidden pb-24 transition-colors duration-600">
-      <SEO
-        title="Aviso Legal"
-        description="Aviso Legal y Condiciones de Uso del Centro de Acupuntura y Terapias Holísticas. Cumplimiento con la LSSI."
-      />
+<SEO
+          title="Aviso Legal"
+          description="Aviso legal y condiciones de uso del sitio web de acupuntura y terapias holísticas en Torremolinos, Málaga. Cumplimiento con la LSSI."
+        />
       <PageHeader title="AVISO LEGAL" breadcrumb="Legal" />
 
       <section className="relative py-16 md:py-24">

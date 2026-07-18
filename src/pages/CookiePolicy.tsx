@@ -33,10 +33,10 @@ const CookiePolicy: React.FC = () => {
 
   return (
     <main className="bg-bg-base text-text-main min-h-screen w-full overflow-hidden pb-24 transition-colors duration-600">
-      <SEO 
-        title="Política de Cookies" 
-        description="Política de Cookies del Centro de Acupuntura y Terapias Holísticas. Información detallada sobre el uso de cookies en nuestra web." 
-      />
+<SEO
+          title="Política de Cookies"
+          description="Política de cookies del centro de acupuntura y terapias holísticas de Yeni Arriarán en Torremolinos, Málaga. Información sobre el uso de cookies."
+        />
       <PageHeader title="POLÍTICA DE COOKIES" breadcrumb="Cookies" />
       
       <section className="relative py-16 md:py-24">

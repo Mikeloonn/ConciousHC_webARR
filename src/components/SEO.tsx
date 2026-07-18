@@ -9,17 +9,17 @@ interface SEOProps {
 const SEO: React.FC<SEOProps> = ({ title, description }) => {
   return (
     <Helmet>
-      <title>{title} | Yeni Arriarán - Terapias Holísticas</title>
+      <title>{title} | Yeni Arriarán | Acupuntura en Torremolinos, Málaga</title>
       <meta name="description" content={description} />
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content="website" />
-      <meta property="og:title" content={`${title} | Yeni Arriarán - Terapias Holísticas`} />
+      <meta property="og:title" content={`${title} | Yeni Arriarán | Acupuntura en Torremolinos, Málaga`} />
       <meta property="og:description" content={description} />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={`${title} | Yeni Arriarán - Terapias Holísticas`} />
+      <meta name="twitter:title" content={`${title} | Yeni Arriarán | Acupuntura en Torremolinos, Málaga`} />
       <meta name="twitter:description" content={description} />
     </Helmet>
   );

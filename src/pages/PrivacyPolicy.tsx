@@ -33,10 +33,10 @@ const PrivacyPolicy: React.FC = () => {
 
   return (
     <main className="bg-bg-base text-text-main min-h-screen w-full overflow-hidden pb-24 transition-colors duration-600">
-      <SEO 
-        title="Política de Privacidad" 
-        description="Política de Privacidad del Centro de Acupuntura y Terapias Holísticas. Tratamiento seguro de tus datos personales (RGPD)." 
-      />
+<SEO
+          title="Política de Privacidad"
+          description="Política de privacidad según RGPD del centro de acupuntura de Yeni Arriarán en Torremolinos, Málaga. Tratamiento seguro de tus datos personales."
+        />
       <PageHeader title="POLÍTICA DE PRIVACIDAD" breadcrumb="Privacidad" />
       
       <section className="relative py-16 md:py-24">

@@ -231,10 +231,10 @@ const Contact: React.FC = () => {
 
   return (
     <main className="bg-bg-base text-text-main min-h-screen w-full overflow-hidden pb-20 transition-colors duration-600">
-      <SEO
-        title="Contacto"
-        description="Contáctanos para agendar tu cita. Estamos ubicados en Torremolinos, Málaga. Llámanos o escríbenos para iniciar tu terapia."
-      />
+<SEO
+          title="Contacto | Acupuntura en Torremolinos, Málaga"
+          description="Agenda tu cita de acupuntura en Torremolinos, Málaga. Teléfono +34 624 253 470. Plaza Andalucía 4, Centro Comercial España, Local 81."
+        />
       <PageHeader title="CONTACTO" breadcrumb="Contacto" />
 
       <section className="relative py-24 md:py-32">

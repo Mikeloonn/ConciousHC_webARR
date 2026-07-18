@@ -89,10 +89,10 @@ const Blogs: React.FC = () => {
 
   return (
     <main className="bg-bg-base text-text-main min-h-screen w-full overflow-hidden pb-20 transition-colors duration-600">
-      <SEO 
-        title="Nuestras Historias" 
-        description="Lee nuestras historias, testimonios y mira nuestros reels sobre salud, acupuntura y vida holística." 
-      />
+<SEO
+          title="Blog de Acupuntura y Salud Holística en Torremolinos"
+          description="Testimonios reales de pacientes y artículos sobre acupuntura, medicina china y terapias holísticas en Torremolinos, Málaga."
+        />
       <PageHeader title="NUESTRO BLOG" breadcrumb="Historias" />
       
       <section className="relative py-24 md:py-32">

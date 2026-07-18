@@ -278,7 +278,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <SEO title="Inicio" description="Bienvenido al Centro de Terapias Holísticas..." />
+      <SEO title="Acupuntura en Torremolinos - Terapias Holísticas" description="Acupuntura en Torremolinos, Málaga. Terapias holísticas, medicina china, coaching transformacional y biomagnetismo. Tu centro de bienestar en la Costa del Sol." />
 
       <div ref={loaderRef} className="loader">
         <div className="loader-text font-serif text-[clamp(1.2rem,5vw,3rem)] text-text-main opacity-0 tracking-[0.2em] md:tracking-[0.3em] text-center w-full px-6 leading-snug">
