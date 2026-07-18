@@ -586,7 +586,7 @@ const Services: React.FC = () => {
 
               <div className="lg:col-span-5 space-y-8">
                 <div className="about-image-container rounded-3xl shadow-xl">
-                  <img src={IMAGES.workshops.coaching} alt="Sesión de Coaching Transformacional" className="w-full h-[400px] object-cover grayscale-[20%]" />
+                  <img src={IMAGES.coaching} alt="Sesión de Coaching Transformacional" className="w-full h-[400px] object-cover grayscale-[20%]" />
                 </div>
 
                 {/* Caja de áreas de trabajo adaptativa */}

@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom';
 import { MapPin } from 'lucide-react';
 import headerVideo from '../assets/videos/conversacionterapistaloop.mp4';
 
-// 1. Variable global fuera del componente. 
-// "Sobrevive" a los cambios de página y guarda el segundo exacto del video.
-let globalVideoTime = 0;
-
+// 1. Sincronización del video persistente entre cambios de ruta
 interface PageHeaderProps {
   title: string;
   breadcrumb: string;
@@ -21,9 +18,12 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, breadcrumb, children }) 
     const video = videoRef.current;
     if (!video) return;
 
-    // Función para sincronizar el tiempo del video con nuestra variable guardada
+    // Función para sincronizar el tiempo del video con sessionStorage
     const syncTime = () => {
-      video.currentTime = globalVideoTime;
+      const savedTime = sessionStorage.getItem('hc_header_video_time');
+      if (savedTime) {
+        video.currentTime = parseFloat(savedTime);
+      }
     };
 
     // Si el video ya cargó, le ponemos el tiempo guardado, sino esperamos a que cargue
@@ -33,9 +33,9 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, breadcrumb, children }) 
       video.addEventListener('loadedmetadata', syncTime, { once: true });
     }
 
-    // 3. Mientras el video se reproduce, actualizamos nuestra variable global
+    // 3. Mientras el video se reproduce, actualizamos sessionStorage
     const handleTimeUpdate = () => {
-      globalVideoTime = video.currentTime;
+      sessionStorage.setItem('hc_header_video_time', video.currentTime.toString());
     };
 
     video.addEventListener('timeupdate', handleTimeUpdate);

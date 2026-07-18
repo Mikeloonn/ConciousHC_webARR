@@ -5,8 +5,6 @@ import fitoterapiaImg from '../assets/images/Fitoterapia.jpg';
 import ventosasImg from '../assets/images/Ventosas.jpg';
 import tuinaImg from '../assets/images/masajetuina.jpg';
 import moxibustionImg from '../assets/images/moxibustion.jpg';
-import yogaImg from '../assets/images/hathayoga.jpg';
-import pilatesImg from '../assets/images/Pilates.jpg';
 import coachingImg from '../assets/images/Coaching.jpg';
 import specialistImg from '../assets/images/foto1.jpg';
 import specialistHomeImg from '../assets/images/foto2.jpg';
@@ -88,12 +86,8 @@ export const IMAGES = {
     caratula11
   ],
 
-  // Workshops (Talleres)
-  workshops: {
-    yoga: yogaImg,
-    pilates: pilatesImg,
-    coaching: coachingImg,
-  },
+  // Coaching
+  coaching: coachingImg,
 
   // About Page
   clinicInterior: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&auto=format&fit=crop",

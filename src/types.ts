@@ -21,7 +21,9 @@ export interface Testimonial {
 export interface BlogPost {
   id: number;
   title: string;
-  excerpt: string;
   date: string;
+  category: string;
   image: string;
+  embedHtml: string;
+  content: React.ReactNode;
 }
