@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Sun, Moon, ChevronDown } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
-import logo from '../assets/images/logohc.jpg';
+import logo from '../assets/images/logo-conscious-healing-center.jpg';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -73,7 +73,7 @@ const Navbar: React.FC = () => {
           <Link to="/" className="flex items-center gap-3 group focus:outline-none">
             <img
               src={logo}
-              alt="Logo Conscious Healing Center"
+              alt="Conscious Healing Center - Terapias Holísticas en Torremolinos"
               className="h-9 w-9 rounded-full object-cover border border-[#e8ebe3]/20 transition-transform duration-500 group-hover:scale-110 shadow-sm"
             />
             <div className="flex flex-col relative z-10">

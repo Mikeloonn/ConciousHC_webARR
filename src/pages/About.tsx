@@ -58,7 +58,7 @@ const About: React.FC = () => {
                 <div className="relative z-10 about-image-container rounded-3xl shadow-2xl overflow-hidden">
                   <img
                     src={IMAGES.specialist}
-                    alt="Yeni Arriarán - Terapeuta"
+                    alt="Yeni Arriarán, terapeuta holística en Torremolinos, Málaga"
                     className="w-full h-[500px] md:h-[650px] object-cover grayscale-[20%] transform group-hover:scale-105 transition-transform duration-1000 ease-out"
                   />
                   {/* Filtro oscuro fijo para no blanquear la foto y conservar un contraste sublime */}

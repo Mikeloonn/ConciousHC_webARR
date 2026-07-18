@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Facebook, Youtube, Instagram, Clock } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import logo from '../assets/images/logohc.jpg';
+import logo from '../assets/images/logo-conscious-healing-center.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
             <Link to="/" className="flex items-center gap-3 mb-6 focus:outline-none" data-hoverable="true">
               <img
                 src={logo}
-                alt="Logo Conscious Healing Center"
+                alt="Conscious Healing Center - Terapias Holísticas en Torremolinos"
                 className="h-10 w-10 rounded-full object-cover border border-[#e8ebe3]/20 shadow-sm"
               />
               <div className="flex flex-col text-left">

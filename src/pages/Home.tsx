@@ -529,7 +529,7 @@ const Home: React.FC = () => {
                   <div className="relative z-10 w-full h-full rounded-3xl overflow-hidden shadow-2xl">
                     <img
                       src={IMAGES.specialistHome}
-                      alt="Yeni Arriarán"
+                      alt="Yeni Arriarán, acupuntora en Torremolinos, Málaga"
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out"
                       loading="lazy"
                     />
