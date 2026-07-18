@@ -5,23 +5,28 @@ const CookieBanner: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Comprobar si ya existe una decisión guardada
     const consent = localStorage.getItem('medico_cookie_consent');
     if (!consent) {
       setIsVisible(true);
     }
   }, []);
 
+  useEffect(() => {
+    const handleReopen = () => setIsVisible(true);
+    window.addEventListener('reopen-cookie-banner', handleReopen);
+    return () => window.removeEventListener('reopen-cookie-banner', handleReopen);
+  }, []);
+
   const handleAccept = () => {
     localStorage.setItem('medico_cookie_consent', 'accepted');
     setIsVisible(false);
-    // Aquí se activarían los scripts de terceros (GA4, Pixel, etc.)
+    window.dispatchEvent(new Event('consent-updated'));
   };
 
   const handleReject = () => {
     localStorage.setItem('medico_cookie_consent', 'rejected');
     setIsVisible(false);
-    // Aquí nos aseguramos de que NO se carguen cookies no esenciales
+    window.dispatchEvent(new Event('consent-updated'));
   };
 
   if (!isVisible) return null;

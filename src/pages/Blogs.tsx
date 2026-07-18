@@ -7,12 +7,24 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '../context/ThemeContext';
 import { BlogPost } from '../types';
 import { blogPosts, conoceMasPosts } from '../data/blogs';
+import { Cookie } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Blogs: React.FC = () => {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const { theme } = useTheme();
+  const [consentAccepted, setConsentAccepted] = useState(
+    () => localStorage.getItem('medico_cookie_consent') === 'accepted'
+  );
+
+  useEffect(() => {
+    const handleConsent = () => {
+      setConsentAccepted(localStorage.getItem('medico_cookie_consent') === 'accepted');
+    };
+    window.addEventListener('consent-updated', handleConsent);
+    return () => window.removeEventListener('consent-updated', handleConsent);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -61,8 +73,10 @@ const Blogs: React.FC = () => {
         document.body.appendChild(script);
       };
 
-      loadInstagramScript();
-      loadTikTokScript();
+      if (consentAccepted) {
+        loadInstagramScript();
+        loadTikTokScript();
+      }
       
     } else {
       document.body.style.overflow = 'unset';
@@ -71,7 +85,7 @@ const Blogs: React.FC = () => {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [selectedPost]);
+  }, [selectedPost, consentAccepted]);
 
   return (
     <main className="bg-bg-base text-text-main min-h-screen w-full overflow-hidden pb-20 transition-colors duration-600">
@@ -204,11 +218,26 @@ const Blogs: React.FC = () => {
 
             <div className="flex flex-col lg:flex-row w-full min-h-full">
               
-              <div className="w-full lg:w-5/12 bg-bg-base/30 flex items-start justify-center p-6 lg:p-10 border-b lg:border-b-0 lg:border-r border-text-main/5 pt-12">
-                <div 
-                  className="w-full max-w-[350px] mx-auto"
-                  dangerouslySetInnerHTML={{ __html: selectedPost.embedHtml }}
-                />
+                <div className="w-full lg:w-5/12 bg-bg-base/30 flex items-start justify-center p-6 lg:p-10 border-b lg:border-b-0 lg:border-r border-text-main/5 pt-12">
+                {consentAccepted ? (
+                  <div 
+                    className="w-full max-w-[350px] mx-auto"
+                    dangerouslySetInnerHTML={{ __html: selectedPost.embedHtml }}
+                  />
+                ) : (
+                  <div className="w-full max-w-[350px] mx-auto text-center py-12">
+                    <Cookie size={40} className="mx-auto mb-4 text-accent-sage/50" />
+                    <p className="text-sm text-text-main/60 leading-relaxed mb-4">
+                      Para ver este contenido de redes sociales, necesitas aceptar las cookies.
+                    </p>
+                    <button
+                      onClick={() => window.dispatchEvent(new Event('reopen-cookie-banner'))}
+                      className="px-6 py-2.5 rounded-full bg-gradient-to-r from-accent-sage to-accent-gold text-bg-base text-[10px] tracking-[0.2em] uppercase font-bold cursor-pointer hover:opacity-90 transition-opacity"
+                    >
+                      Configurar cookies
+                    </button>
+                  </div>
+                )}
               </div>
 
               <div className="w-full lg:w-7/12 p-8 lg:p-12 flex flex-col justify-start pt-12">
