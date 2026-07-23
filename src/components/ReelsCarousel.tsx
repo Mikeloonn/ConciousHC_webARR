@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Play } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export interface ReelItem {
   id: number;
@@ -14,6 +15,7 @@ interface ReelsCarouselProps {
 }
 
 const ReelsCarousel: React.FC<ReelsCarouselProps> = ({ title, items, direction = 'left' }) => {
+  const { t } = useTranslation();
   // Triplicamos los items para el efecto infinito
   const displayItems = [...items, ...items, ...items];
   
@@ -172,7 +174,7 @@ const ReelsCarousel: React.FC<ReelsCarouselProps> = ({ title, items, direction =
                      <div className="bg-white/20 p-2 rounded-full backdrop-blur-sm">
                         <Play size={16} className="text-white fill-white" />
                      </div>
-                     <span className="text-xs text-white font-medium uppercase tracking-wider">Reel</span>
+                     <span className="text-xs text-white font-medium uppercase tracking-wider">{t('reels.label')}</span>
                    </div>
                    <h3 className="text-white font-bold leading-tight">{item.title}</h3>
                 </div>

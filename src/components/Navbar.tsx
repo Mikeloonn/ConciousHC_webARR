@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Sun, Moon, ChevronDown } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '../context/ThemeContext';
 import logo from '../assets/images/logo-conscious-healing-center.jpg';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
@@ -34,28 +37,27 @@ const Navbar: React.FC = () => {
     }
   }, [isMenuOpen]);
 
-  // Estructura de Navegación con Sub-menú para Servicios
   const navLinks = [
-    { name: 'INICIO', path: '/' },
-    { name: 'SOBRE NOSOTROS', path: '/about' },
+    { key: 'nav.home', path: '/' },
+    { key: 'nav.about', path: '/about' },
     { 
-      name: 'SERVICIOS', 
+      key: 'nav.services', 
       path: '/services',
       subItems: [
-        { name: 'Acupuntura', hash: '#acupuntura' },
-        { name: 'Auriculoterapia', hash: '#auriculoterapia' },
-        { name: 'Fitoterapia', hash: '#fitoterapia' },
-        { name: 'Ventosas (Cupping)', hash: '#ventosas-cupping' },
-        { name: 'Masaje Tuina', hash: '#masaje-tuina' },
-        { name: 'Moxibustión', hash: '#moxibustion' },
-        { name: 'Coaching Transformacional', hash: '#coaching-transformacional' },
-        { name: 'Péndulo Hebreo', hash: '#pendulo-hebreo' },
-        { name: 'Sanación Cuántica', hash: '#sanacion-cuantica' },
-        { name: 'Biomagnetismo', hash: '#biomagnetismo' },
+        { key: 'nav.subAcupuntura', hash: '#acupuntura' },
+        { key: 'nav.subAuriculoterapia', hash: '#auriculoterapia' },
+        { key: 'nav.subFitoterapia', hash: '#fitoterapia' },
+        { key: 'nav.subVentosas', hash: '#ventosas-cupping' },
+        { key: 'nav.subTuina', hash: '#masaje-tuina' },
+        { key: 'nav.subMoxibustion', hash: '#moxibustion' },
+        { key: 'nav.subCoaching', hash: '#coaching-transformacional' },
+        { key: 'nav.subPendulo', hash: '#pendulo-hebreo' },
+        { key: 'nav.subSanacion', hash: '#sanacion-cuantica' },
+        { key: 'nav.subBiomagnetismo', hash: '#biomagnetismo' },
       ]
     },
-    { name: 'BLOGS', path: '/blogs' },
-    { name: 'CONTACTO', path: '/contact' },
+    { key: 'nav.blogs', path: '/blogs' },
+    { key: 'nav.contact', path: '/contact' },
   ];
 
   return (
@@ -73,15 +75,15 @@ const Navbar: React.FC = () => {
           <Link to="/" className="flex items-center gap-3 group focus:outline-none">
             <img
               src={logo}
-              alt="Conscious Healing Center - Terapias Holísticas en Torremolinos"
+              alt={t('nav.logoAlt')}
               className="h-9 w-9 rounded-full object-cover border border-[#e8ebe3]/20 transition-transform duration-500 group-hover:scale-110 shadow-sm"
             />
             <div className="flex flex-col relative z-10">
               <span className="font-serif font-bold text-[11px] sm:text-[13px] lg:text-sm tracking-widest text-[#e8ebe3] leading-none">
-                Centro de Acupuntura
+                {t('nav.brand')}
               </span>
               <span className="text-[6px] sm:text-[7px] lg:text-[8px] font-sans font-medium uppercase tracking-[0.25em] text-[#b3bda3] mt-1">
-                y Terapias Holísticas
+                {t('nav.brandSub')}
               </span>
             </div>
           </Link>
@@ -90,15 +92,14 @@ const Navbar: React.FC = () => {
           <nav className="hidden lg:flex items-center gap-5 xl:gap-12 relative z-10">
             <ul className="flex gap-4 xl:gap-8">
               {navLinks.map((link) => (
-                <li key={link.name} className="relative group">
-                  
-                  {/* Título Principal (Clicable) */}
+                <li key={link.key} className="relative group">
+                   
                   <div className="flex items-center gap-1 h-full py-2">
                     <Link
                       to={link.path}
                       className={`nav-link text-[10px] xl:text-[11px] ${location.pathname === link.path ? 'active' : ''}`}
                     >
-                      {link.name}
+                      {t(link.key)}
                     </Link>
                     {link.subItems && (
                       <ChevronDown size={14} className="text-[#e8ebe3]/60 group-hover:rotate-180 transition-transform duration-300 mt-0.5" />
@@ -113,11 +114,11 @@ const Navbar: React.FC = () => {
                         <div className="overflow-y-auto max-h-[320px] flex flex-col pr-1">
                           {link.subItems.map(subItem => (
                             <Link
-                              key={subItem.name}
+                              key={subItem.key}
                               to={`${link.path}${subItem.hash}`}
                               className="text-[10px] tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#df9e53] hover:bg-[#e8ebe3]/5 px-4 py-3.5 rounded-xl transition-colors text-center w-full block"
                             >
-                              {subItem.name}
+                              {t(subItem.key)}
                             </Link>
                           ))}
                         </div>
@@ -133,17 +134,19 @@ const Navbar: React.FC = () => {
               <button
                 onClick={toggleTheme}
                 className="text-[#e8ebe3]/60 hover:text-[#df9e53] transition-colors duration-300 focus:outline-none cursor-pointer"
-                aria-label="Cambiar Tema"
+                aria-label={t('nav.themeToggle')}
                 data-hoverable="true"
               >
                 {theme === 'dark' ? <Sun size={18} strokeWidth={1.8} /> : <Moon size={18} strokeWidth={1.8} />}
               </button>
 
+              <LanguageSwitcher />
+
               <Link
                 to="/contact"
                 className="inline-flex items-center justify-center border border-[#b3bda3]/30 text-[#e8ebe3] text-[9px] xl:text-[10px] tracking-[0.2em] uppercase px-4 xl:px-5 py-2 rounded-full hover:bg-[#b3bda3]/10 hover:border-[#b3bda3]/60 transition-all duration-300 focus:outline-none"
               >
-                Agendar
+                {t('nav.cta')}
               </Link>
             </div>
           </nav>
@@ -153,7 +156,7 @@ const Navbar: React.FC = () => {
             <button
               onClick={toggleTheme}
               className="text-[#e8ebe3]/80 p-2 z-[9996] focus:outline-none cursor-pointer"
-              aria-label="Cambiar Tema"
+              aria-label={t('nav.themeToggle')}
             >
               {theme === 'dark' ? <Sun size={19} /> : <Moon size={19} />}
             </button>
@@ -161,7 +164,7 @@ const Navbar: React.FC = () => {
             <button
               className="flex flex-col gap-[5.5px] cursor-pointer p-2 z-[9996] focus:outline-none relative"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Abrir menú"
+              aria-label={t('nav.menuToggle')}
             >
               <span className={`w-6 h-[1.5px] bg-[#e8ebe3] transition-all duration-300 origin-center ${isMenuOpen ? 'rotate-45 translate-y-[7px]' : ''}`}></span>
               <span className={`w-6 h-[1.5px] bg-[#e8ebe3] transition-all duration-300 ${isMenuOpen ? 'opacity-0 translate-x-2' : ''}`}></span>
@@ -179,8 +182,8 @@ const Navbar: React.FC = () => {
       >
         <ul className="flex flex-col items-center gap-6 mt-12 w-full px-6 pb-20">
           {navLinks.map((link, index) => (
-            <li key={link.name} className="overflow-hidden w-full text-center flex flex-col items-center">
-              
+            <li key={link.key} className="overflow-hidden w-full text-center flex flex-col items-center">
+             
               <div className="flex items-center justify-center gap-3 relative w-full">
                 <Link
                   to={link.path}
@@ -190,7 +193,7 @@ const Navbar: React.FC = () => {
                   } ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
                   style={{ transitionDelay: isMenuOpen ? `${index * 100}ms` : '0ms' }}
                 >
-                  {link.name}
+                  {t(link.key)}
                 </Link>
                 
                 {/* Botón para desplegar submenú en móvil */}
@@ -212,12 +215,12 @@ const Navbar: React.FC = () => {
                     <div className="overflow-y-auto max-h-[220px] flex flex-col gap-5 w-full px-4 border-l-2 border-r-2 border-[#df9e53]/30 py-3 mx-auto max-w-[280px]">
                       {link.subItems.map(subItem => (
                         <Link
-                          key={subItem.name}
+                          key={subItem.key}
                           to={`${link.path}${subItem.hash}`}
                           onClick={() => setIsMenuOpen(false)}
                           className="text-[10px] tracking-[0.2em] uppercase text-[#e8ebe3]/50 hover:text-[#df9e53] transition-colors"
                         >
-                          {subItem.name}
+                          {t(subItem.key)}
                         </Link>
                       ))}
                     </div>
@@ -227,16 +230,22 @@ const Navbar: React.FC = () => {
 
             </li>
           ))}
-          <li className="mt-8 overflow-hidden w-full flex justify-center">
+          <li className="mt-6 overflow-hidden w-full flex justify-center">
+            <div className={`flex items-center gap-4 ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                 style={{ transitionDelay: isMenuOpen ? `${navLinks.length * 100}ms` : '0ms' }}>
+              <LanguageSwitcher />
+            </div>
+          </li>
+          <li className="mt-6 overflow-hidden w-full flex justify-center">
             <Link
               to="/contact"
               onClick={() => setIsMenuOpen(false)}
               className={`inline-flex items-center justify-center border border-[#b3bda3]/30 text-[#e8ebe3] text-xs tracking-[0.2em] uppercase px-10 py-4 rounded-full bg-gradient-to-r hover:from-[#b3bda3]/20 hover:to-[#df9e53]/10 transition-all duration-500 shadow-lg ${
                 isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
               }`}
-              style={{ transitionDelay: isMenuOpen ? `${navLinks.length * 100}ms` : '0ms' }}
+              style={{ transitionDelay: isMenuOpen ? `${(navLinks.length + 1) * 100}ms` : '0ms' }}
             >
-              Agendar Cita
+              {t('nav.ctaMobile')}
             </Link>
           </li>
         </ul>

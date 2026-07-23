@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Facebook, Youtube, Instagram, Clock } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -8,6 +9,7 @@ import logo from '../assets/images/logo-conscious-healing-center.jpg';
 gsap.registerPlugin(ScrollTrigger);
 
 const Footer: React.FC = () => {
+  const { t } = useTranslation();
   const footerRef = useRef<HTMLElement>(null);
   const location = useLocation();
 
@@ -56,29 +58,29 @@ const Footer: React.FC = () => {
             <Link to="/" className="flex items-center gap-3 mb-6 focus:outline-none" data-hoverable="true">
               <img
                 src={logo}
-                alt="Conscious Healing Center - Terapias Holísticas en Torremolinos"
+                alt={t('footer.logoAlt')}
                 className="h-10 w-10 rounded-full object-cover border border-[#e8ebe3]/20 shadow-sm"
               />
               <div className="flex flex-col text-left">
                 <span className="font-serif font-semibold text-base tracking-widest text-[#e8ebe3] leading-none">
-                  Centro de Acupuntura
+                  {t('footer.brand')}
                 </span>
                 <span className="text-[8px] font-sans font-medium uppercase tracking-[0.25em] text-[#b3bda3] mt-1">
-                  y Terapias Holísticas
+                  {t('footer.brandSub')}
                 </span>
               </div>
             </Link>
             <p className="text-[#d1d7c7]/40 text-sm leading-relaxed mb-6 text-left">
-              Tu espacio de confianza para el equilibrio y bienestar integral. Combinamos la sabiduría de la Medicina Tradicional China y terapias holísticas para acompañarte a sanar y vivir en armonía.
+              {t('footer.description')}
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-9 h-9 rounded-full border border-sage-200/10 flex items-center justify-center hover:border-sage-200/30 text-sage-200/60 hover:text-[#e8ebe3] transition-all duration-300" aria-label="Instagram" data-hoverable="true">
+              <a href="#" className="w-9 h-9 rounded-full border border-sage-200/10 flex items-center justify-center hover:border-sage-200/30 text-sage-200/60 hover:text-[#e8ebe3] transition-all duration-300" aria-label={t('footer.socialInstagram')} data-hoverable="true">
                 <Instagram size={14} />
               </a>
-              <a href="#" className="w-9 h-9 rounded-full border border-sage-200/10 flex items-center justify-center hover:border-sage-200/30 text-sage-200/60 hover:text-[#e8ebe3] transition-all duration-300" aria-label="Facebook" data-hoverable="true">
+              <a href="#" className="w-9 h-9 rounded-full border border-sage-200/10 flex items-center justify-center hover:border-sage-200/30 text-sage-200/60 hover:text-[#e8ebe3] transition-all duration-300" aria-label={t('footer.socialFacebook')} data-hoverable="true">
                 <Facebook size={14} />
               </a>
-              <a href="#" className="w-9 h-9 rounded-full border border-sage-200/10 flex items-center justify-center hover:border-sage-200/30 text-sage-200/60 hover:text-[#e8ebe3] transition-all duration-300" aria-label="Youtube" data-hoverable="true">
+              <a href="#" className="w-9 h-9 rounded-full border border-sage-200/10 flex items-center justify-center hover:border-sage-200/30 text-sage-200/60 hover:text-[#e8ebe3] transition-all duration-300" aria-label={t('footer.socialYoutube')} data-hoverable="true">
                 <Youtube size={14} />
               </a>
             </div>
@@ -87,38 +89,38 @@ const Footer: React.FC = () => {
           {/* Columna 2: Nosotros (Breve Intro) */}
           <div className="footer-col opacity-0 text-left">
             <h3 className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-accent-gold mb-6 flex items-center gap-4">
-              Nosotros <span className="h-[1px] w-12 bg-accent-gold/20"></span>
+              {t('footer.sectionAbout')} <span className="h-[1px] w-12 bg-accent-gold/20"></span>
             </h3>
             <p className="text-[#d1d7c7]/40 text-sm leading-relaxed mb-6">
-              Inspirados en la alquimia del bienestar natural, nos enfocamos en el potencial humano y el autoconocimiento. Creemos que la salud física es solo la puerta de entrada para una vida plenamente consciente.
+              {t('footer.aboutText')}
             </p>
           </div>
 
           {/* Columna 3: Enlaces Legales */}
           <div className="footer-col opacity-0 text-left">
             <h3 className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-accent-gold mb-6 flex items-center gap-4">
-              Legal <span className="h-[1px] w-12 bg-accent-gold/20"></span>
+              {t('footer.sectionLegal')} <span className="h-[1px] w-12 bg-accent-gold/20"></span>
             </h3>
-            <nav className="flex flex-col gap-3" aria-label="Enlaces legales">
-              <Link to="/legal" className="footer-link text-sm text-[#d1d7c7]/40 hover:text-[#e8ebe3] transition-colors" data-hoverable="true">Aviso Legal</Link>
-              <Link to="/privacy" className="footer-link text-sm text-[#d1d7c7]/40 hover:text-[#e8ebe3] transition-colors" data-hoverable="true">Política de Privacidad</Link>
-              <Link to="/cookies" className="footer-link text-sm text-[#d1d7c7]/40 hover:text-[#e8ebe3] transition-colors" data-hoverable="true">Política de Cookies</Link>
-              <Link to="/services" className="footer-link text-sm text-[#d1d7c7]/40 hover:text-[#e8ebe3] transition-colors" data-hoverable="true">Servicios</Link>
+            <nav className="flex flex-col gap-3" aria-label={t('footer.legalNavLabel')}>
+              <Link to="/legal" className="footer-link text-sm text-[#d1d7c7]/40 hover:text-[#e8ebe3] transition-colors" data-hoverable="true">{t('footer.legalNotice')}</Link>
+              <Link to="/privacy" className="footer-link text-sm text-[#d1d7c7]/40 hover:text-[#e8ebe3] transition-colors" data-hoverable="true">{t('footer.privacyPolicy')}</Link>
+              <Link to="/cookies" className="footer-link text-sm text-[#d1d7c7]/40 hover:text-[#e8ebe3] transition-colors" data-hoverable="true">{t('footer.cookiePolicy')}</Link>
+              <Link to="/services" className="footer-link text-sm text-[#d1d7c7]/40 hover:text-[#e8ebe3] transition-colors" data-hoverable="true">{t('footer.services')}</Link>
             </nav>
           </div>
 
           {/* Columna 4: Horarios */}
           <div className="footer-col opacity-0 text-left">
             <h3 className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-accent-gold mb-6 flex items-center gap-4">
-              Horarios <span className="h-[1px] w-12 bg-accent-gold/20"></span>
+              {t('footer.sectionHours')} <span className="h-[1px] w-12 bg-accent-gold/20"></span>
             </h3>
             <div className="space-y-3">
               <div>
                 <div className="text-sm text-sage-100 mb-2 flex items-center gap-2">
-                  <Clock size={16} className="text-sage-200/60" /> Lun. - Vie.
+                  <Clock size={16} className="text-sage-200/60" /> {t('footer.weekdays')}
                 </div>
-                <div className="text-sm text-sage-200/40">9:30 h a 14:00 h</div>
-                <div className="text-sm text-sage-200/40 mt-1">17:00 h a 19:00 h</div>
+                <div className="text-sm text-sage-200/40">{t('footer.morningHours')}</div>
+                <div className="text-sm text-sage-200/40 mt-1">{t('footer.afternoonHours')}</div>
               </div>
             </div>
           </div>
@@ -127,16 +129,16 @@ const Footer: React.FC = () => {
         <div className="organic-divider mb-8"></div>
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-sage-300/30">© {new Date().getFullYear()} Centro de Terapias Holísticas. Todos los derechos reservados.</p>
+          <p className="text-xs text-sage-300/30">{t('footer.copyright', { year: new Date().getFullYear() })}</p>
           <div className="flex gap-6">
             <Link to="/" className="text-xs font-bold text-sage-200/30 hover:text-[#e8ebe3]" data-hoverable="true">
-              INICIO
+              {t('nav.home')}
             </Link>
             <Link to="/about" className="text-xs font-bold text-sage-200/30 hover:text-[#e8ebe3]" data-hoverable="true">
-              SOBRE NOSOTROS
+              {t('nav.about')}
             </Link>
             <Link to="/contact" className="text-xs font-bold text-sage-200/30 hover:text-[#e8ebe3]" data-hoverable="true">
-              CONTACTO
+              {t('nav.contact')}
             </Link>
           </div>
         </div>

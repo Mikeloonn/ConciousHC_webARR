@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 
 interface SEOProps {
   title: string;
@@ -7,19 +8,21 @@ interface SEOProps {
 }
 
 const SEO: React.FC<SEOProps> = ({ title, description }) => {
+  const { t } = useTranslation();
+  const suffix = t('seo.titleSuffix');
   return (
     <Helmet>
-      <title>{title} | Yeni Arriarán | Acupuntura en Torremolinos, Málaga</title>
+      <title>{title} | {suffix}</title>
       <meta name="description" content={description} />
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content="website" />
-      <meta property="og:title" content={`${title} | Yeni Arriarán | Acupuntura en Torremolinos, Málaga`} />
+      <meta property="og:title" content={`${title} | ${suffix}`} />
       <meta property="og:description" content={description} />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={`${title} | Yeni Arriarán | Acupuntura en Torremolinos, Málaga`} />
+      <meta name="twitter:title" content={`${title} | ${suffix}`} />
       <meta name="twitter:description" content={description} />
     </Helmet>
   );

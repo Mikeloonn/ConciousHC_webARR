@@ -5,12 +5,6 @@ export interface Service {
   image: string;
 }
 
-export interface PriceItem {
-  name: string;
-  duration: string;
-  price: string;
-}
-
 export interface Testimonial {
   id: number;
   name: string;

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { MapPin } from 'lucide-react';
 import headerVideo from '../assets/videos/conversacionterapistaloop.mp4';
@@ -11,6 +12,7 @@ interface PageHeaderProps {
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({ title, breadcrumb, children }) => {
+  const { t } = useTranslation();
   // 2. Referencia para poder manipular el video directamente
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -72,7 +74,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, breadcrumb, children }) 
           <h1 className="font-serif text-[clamp(2.5rem,5vw,4.5rem)] font-light leading-none mb-4">{title}</h1>
           <div className="text-xs tracking-[0.2em] uppercase flex items-center gap-2 text-[#b3bda3]">
             <Link to="/" className="hover:text-[#e8ebe3] flex items-center gap-1 transition-colors" data-hoverable="true">
-              <MapPin size={14} /> INICIO
+              <MapPin size={14} /> {t('pageHeader.home')}
             </Link>
             <span className="text-[#e8ebe3]/30">/</span>
             <span className="text-[#e8ebe3]/60">{breadcrumb}</span>

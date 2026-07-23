@@ -373,3 +373,390 @@ export const conoceMasPosts = [
     )
   }
 ];
+
+// ─── ENGLISH BLOG POSTS ──────────────────────────────────────────────
+
+export const blogPostsEn = [
+  {
+    id: 1,
+    title: 'What is your first holistic therapy consultation like?',
+    date: 'Part 1 - Paula',
+    category: 'Experience',
+    image: IMAGES.blogs[0],
+    embedHtml: blogPosts[0].embedHtml,
+    content: (
+      <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed pb-12">
+        <p>Taking the first step toward holistic wellness can sometimes raise doubts. What exactly happens when you walk through the door of a natural therapies center? What is the experience like? In this short but revealing video, we invite you to accompany a patient on her first visit to the practice of <strong>Yeni Arriarán</strong>, specialist in acupuncture and holistic therapies located in Torremolinos, Málaga.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">The value of being truly heard</h4>
+        <p>The first thing that stands out in the video is the atmosphere of calm and welcome. Unlike traditional consultations where the clock always seems to be ticking, the philosophy of this space is very different and liberating: <em className="text-accent-gold">"Here you come to let go, not to explain in a hurry"</em>.</p>
+        <p>The video shows us that the first big step toward healing is establishing a trusting connection. Before any needle or treatment, the priority is <strong>active and empathetic listening</strong>.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Connecting the symptoms</h4>
+        <p>During the consultation, we see how the patient shares her daily discomforts:</p>
+        <ul className="list-disc pl-6 space-y-2 marker:text-accent-gold">
+          <li>Constant feeling of bloating.</li>
+          <li>Very heavy digestion.</li>
+          <li>Persistent pain in the pit of the stomach.</li>
+        </ul>
+        <p>Faced with this, the therapist's message is clear and reassuring: <em className="text-accent-gold">"Everything you feel... matters"</em>. In holistic medicine, no symptom is isolated; all are key pieces to understanding the general state of the body and mind.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">The beginning of the diagnosis</h4>
+        <p>Finally, the clip gives us a small glimpse of the evaluation techniques, beginning with the traditional <strong>pulse diagnosis</strong>. This is an ancient and fundamental tool in acupuncture for reading how energy is flowing and which organs need to restore their balance.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Ready to take the step?</h4>
+        <p>If you have ever wondered what a session like this feels like, this video will give you a close, professional, and very human perspective. We invite you to hit <em>play</em> to see this healing process up close.</p>
+      </div>
+    )
+  },
+  {
+    id: 2,
+    title: 'Your body holds the answers: Diagnosis in holistic therapy',
+    date: 'Part 2 - Paula',
+    category: 'Diagnosis',
+    image: IMAGES.blogs[1],
+    embedHtml: blogPosts[1].embedHtml,
+    content: (
+      <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed pb-12">
+        <p>If you joined us in the first part of this series, you already know that the first step in specialist <strong>Yeni Arriarán</strong>'s practice is active listening. But what happens once we have shared our discomforts? In this second video, we dive into the evaluation phase, discovering a fascinating truth: our body speaks and holds answers that sometimes even we did not know about.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">The silent language of your body</h4>
+        <p>The video shows how the therapist goes beyond Paula's words. Through traditional and ancient techniques such as <strong>tongue and pulse reading</strong>, Yeni begins to decipher the patient's internal state. As the video reminds us: <em className="text-accent-gold">"The tongue, the pulse, the points of tension... everything speaks"</em>. For holistic medicine, these tools are the perfect map to understand how our energy flows.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Deciphering messages, not enemies</h4>
+        <p>One of the most powerful messages of this session is changing our perspective on pain: <em className="text-accent-gold">"Every symptom is a message, not an enemy"</em>. During the evaluation, Yeni and Paula connect the puzzle pieces:</p>
+        <ul className="list-disc pl-6 space-y-2 marker:text-accent-gold">
+          <li>Digestion that still feels slow.</li>
+          <li>Excess internal heat causing night waking.</li>
+          <li>Deep sensitivity and tension in the lower lumbar area and sacrum (in the area of vertebrae L5 and S1).</li>
+        </ul>
+        <p>What in traditional medicine might seem like isolated problems (insomnia, digestion, and back pain) are here observed, listened to, and connected to find the true root of the imbalance.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">From diagnosis to action</h4>
+        <p>The key moment arrives when all the signals fit together. With a phrase full of empathy and confidence, Yeni tells the patient: <em className="text-accent-gold">"And now that I know what you need... I start helping you"</em>. It is the moment to leave words behind and begin the real healing work.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Ready to discover what your body says?</h4>
+        <p>We invite you to hit <em>play</em> to see up close how this personalized evaluation is performed.</p>
+      </div>
+    )
+  },
+  {
+    id: 3,
+    title: 'Treating abdominal inflammation: The power of a single needle',
+    date: 'Part 3 - Paula',
+    category: 'Treatment',
+    image: IMAGES.blogs[2],
+    embedHtml: blogPosts[2].embedHtml,
+    content: (
+      <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed pb-12">
+        <p>If you have followed this series from the beginning, you already know the importance of active listening and body diagnosis in specialist Yeni Arriarán's practice. Now, in this third installment, we move to the most anticipated phase: the treatment on the table. Join Paula to discover how digestive inflammation is addressed effectively and surprisingly.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">The map of pain through palpation</h4>
+        <p>The video begins with Yeni performing a detailed check through abdominal palpation. The goal is clear: to locate the exact points of tension. Through gentle pressure, both manage to identify that the sharpest pain is concentrated in the upper abdomen, confirming the symptoms of heaviness and bloating that Paula mentioned upon arrival.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Surprising results in seconds</h4>
+        <p>This is where we witness the fascinating aspect of acupuncture and holistic therapies. Instead of treating the painful stomach area directly, Yeni places a single needle on Paula's calf. Upon palpating the abdomen again almost immediately, the body's response is incredible: the pain decreases significantly and the patient confirms feeling <em className="text-accent-gold">"much better"</em>. This demonstrates how our body's channels are interconnected in amazing ways.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">The "cleansing" points for total relief</h4>
+        <p>To eliminate the last bit of discomfort remaining in the belly, the therapist resorts to a final adjustment: she stimulates a specific point on the foot. Once again, relief is instantaneous and tension disappears completely. She then places a needle on that foot point, acting as a "cleanser" to consolidate balance in the body.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">A quick and effective methodology</h4>
+        <p>At the end of the clip, Yeni summarizes the effectiveness of this methodology:</p>
+        <ul className="list-disc pl-6 space-y-2 marker:text-accent-gold">
+          <li>Check and palpation of the abdomen to find the physical root.</li>
+          <li>Use of a single main needle to remove the largest percentage of pain.</li>
+          <li>Application of "cleansing" points (such as those on the foot) to finish the process.</li>
+        </ul>
+        <p>The most surprising part? It is a deep treatment that, in this phase, takes only about 10 minutes to provide real relief.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Discover relief for yourself</h4>
+        <p>If you suffer from digestive inflammation or chronic pain, this video will show you that a natural, quick, and respectful alternative for your body is possible. Hit <em>play</em> to see this fascinating healing process with your own eyes!</p>
+      </div>
+    )
+  },
+  {
+    id: 4,
+    title: 'Paula\'s testimony: "Like magic?" The results of holistic therapy',
+    date: 'Part 4 - Paula',
+    category: 'Testimonial',
+    image: IMAGES.blogs[3],
+    embedHtml: blogPosts[3].embedHtml,
+    content: (
+      <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed pb-12">
+        <p>After having walked the path of active listening, body diagnosis, and acupuncture treatment at <strong>Yeni Arriarán</strong>'s practice, the most important moment arrives: hearing how the patient feels after her first session. In this final video of the series, Paula shares her real experience and the feelings this wellness alternative has left her with.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">The starting point: Why come to the consultation?</h4>
+        <p>To understand the value of the result, it is essential to remember the state Paula was in when she arrived. In her own words, she came because she suffered from two very persistent discomforts affecting her quality of life:</p>
+        <ul className="list-disc pl-6 space-y-2 marker:text-accent-gold">
+          <li>Strong and bothersome inflammation in the pit of the stomach.</li>
+          <li>Persistent pain in the lower back and sacrum.</li>
+        </ul>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Immediate relief: "It seems like Yeni does magic"</h4>
+        <p>When asked if she noticed improvement after the session, Paula's response is immediate and accompanied by a big smile of relief: <em className="text-accent-gold">"Honestly, it seems like Yeni does magic"</em>. This testimony reflects how stimulating the right body points through acupuncture can release tension and reduce pain almost instantly, restoring lightness to the body in a single visit.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">A conscious process toward 100% wellbeing</h4>
+        <p>Despite the rapid improvement, one of the most valuable lessons Paula takes from the consultation is understanding how holistic healing truly works. As she explains, Yeni has shown her that restoring balance <strong>is a process</strong>.</p>
+        <p>Immediate relief is the first big step, but consistency and follow-up sessions are the key to deep healing. Paula says goodbye motivated and very happy, with the certainty and peace of mind that, by following her treatment, she will reach <em className="text-accent-gold">"100% wellbeing"</em>.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">When will you start your process?</h4>
+        <p>Paula's journey shows us that we do not have to resign ourselves to living with inflammation or chronic pain. Your body also has the ability to restore its natural balance if you give it the right tools. We invite you to hit <em>play</em> to hear her full testimony.</p>
+
+        <hr className="border-text-main/10 my-8" />
+
+        <p className="text-sm italic">If you wish to start your own journey toward wellbeing in the Málaga area, you can find Yeni Arriarán's Natural Therapies Center at Plaza Andalucía 4 (Centro Comercial España, No. 81), in Torremolinos.</p>
+      </div>
+    )
+  },
+  {
+    id: 5,
+    title: 'Why choose acupuncture? Paula\'s healing story',
+    date: 'Part 5 - Paula',
+    category: 'Testimonial',
+    image: IMAGES.blogs[4],
+    embedHtml: blogPosts[4].embedHtml,
+    content: (
+      <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed pb-12">
+        <p>In the previous videos, we saw how an acupuncture session unfolds at <strong>Yeni Arriarán</strong>'s practice and the immediate relief it can provide for physical tension and digestive issues. However, in this special installment, Paula opens her heart to tell us <strong>the real underlying reason</strong> that led her to seek holistic therapies: a hard battle against endometriosis.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">A difficult diagnosis and a discouraging prognosis</h4>
+        <p>Paula's story began 6 years ago, shortly after her first pregnancy, when she was diagnosed with <strong>endometriosis</strong>. The message she received from conventional medicine was extremely inflexible:</p>
+        <ul className="list-disc pl-6 space-y-2 marker:text-accent-gold">
+          <li>She was told it was a chronic disease that would inevitably accompany her until menopause.</li>
+          <li>They said she would not be able to have more children.</li>
+        </ul>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">The path toward Traditional Chinese Medicine</h4>
+        <p>Driven by desperation and a deep desire to regain her quality of life, Paula decided to seek other options. Although she had never tried it before, she decided to trust <strong>Traditional Chinese Medicine</strong>, combining acupuncture treatment with the use of medicinal herbs.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">A result that surprises even doctors</h4>
+        <p>The outcome of her testimony is as moving as it is inspiring. Today, Paula shares with immense joy and peace of mind that:</p>
+        <ul className="list-disc pl-6 space-y-2 marker:text-accent-gold">
+          <li>She has been able to <strong>completely stop taking pills</strong> for endometriosis.</li>
+          <li>She has been <strong>given definitive discharge</strong> from the maternal-infant unit of her hospital.</li>
+        </ul>
+        <p>In her own words, even her specialist doctor cannot explain how the disease has completely disappeared from her body.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">A door open to hope</h4>
+        <p>This powerful testimony reminds us that holistic therapies not only help alleviate everyday ailments but can work at a very deep and transformative level on conditions considered chronic, helping the body restore its natural balance. We invite you to hit <em>play</em> to hear this inspiring story of overcoming from its very protagonist.</p>
+
+        <hr className="border-text-main/10 my-8" />
+
+        <p className="text-sm italic">If you are going through a similar situation or are looking for an integrative and respectful medical approach for your wellbeing in Málaga, Yeni Arriarán's Natural Therapies Center is located at Plaza Andalucía 4 (Centro Comercial España, No. 81), in Torremolinos.</p>
+      </div>
+    )
+  },
+  {
+    id: 6,
+    title: 'From level 10 pain to level 2 in just 30 minutes: Roscoe\'s experience',
+    date: 'Part 6 - Roscoe',
+    category: 'Testimonial',
+    image: IMAGES.blogs[5],
+    embedHtml: blogPosts[5].embedHtml,
+    content: (
+      <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed pb-12">
+        <p>When we suffer from severe neck or back pain, even the simplest daily tasks can become a titanic effort. We often think that such acute pain will require months of treatment or heavy medication to begin subsiding. However, in this video we share the case of <strong>Roscoe</strong>, a patient who came to the practice seeking relief and got a pleasant surprise in just one session.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">The starting point: Pain at maximum level</h4>
+        <p>During the video, Roscoe shares how he felt before lying on the table. He had been dealing with strong tension and persistent pain in his back and, especially, in his neck. When asked about the intensity of that discomfort on a scale of 1 to 10, his initial response was clear: the pain was at a <strong>level 10</strong>.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">The power of 30 minutes of holistic therapy</h4>
+        <p>The truly impactful part of this testimony is the speed and effectiveness of the acupuncture treatment. With just <strong>30 minutes</strong> of session, Roscoe's relaxed face says it all. When evaluating his progress at the end of the therapy, he tells us his pain dropped dramatically to <strong>level 2 or 3</strong>.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">"Very effective": Relief that transcends borders</h4>
+        <p>Roscoe's words of gratitude reflect the impact of receiving an accurate and respectful treatment: <em className="text-accent-gold">"I feel really good... it's been very effective. You've helped me so much today"</em>. His case is an excellent example of how traditional medicine and precise stimulation of energy points can deactivate contractures and acute pain naturally and without invasive methods.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Dealing with neck or back pain?</h4>
+        <p>If you also feel that cervical or lumbar pain is limiting your routine and you are at a "level 10," your body is asking for a pause and a root solution. Hit <em>play</em> to hear Roscoe's full testimony and see how acupuncture can restore your wellbeing in record time.</p>
+
+        <hr className="border-text-main/10 my-8" />
+        <p className="text-sm italic">Remember you can find our acupuncture and holistic therapies center at Plaza Andalucía 4 (Centro Comercial España, No. 81), in Torremolinos (Málaga).</p>
+      </div>
+    )
+  },
+  {
+    id: 7,
+    title: 'Period pain "like childbirth"? How integrative acupuncture can change your cycle',
+    date: 'Part 7 - Anita',
+    category: 'Testimonial',
+    image: IMAGES.blogs[6],
+    embedHtml: blogPosts[6].embedHtml,
+    content: (
+      <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed pb-12">
+        <p>For many women, the arrival of menstruation — and even ovulation days — is synonymous with incapacitating suffering. Spending the day in bed, relying on heating pads and high doses of painkillers like naproxen becomes an exhausting routine. In this video we accompany Anita (@anita_madre_emprendedora), who tired of living with pain she herself describes as <em className="text-accent-gold">"childbirth level"</em>, decided to seek a definitive solution at <strong>Yeni Arriarán</strong>'s holistic therapies center in Torremolinos, Málaga.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">From desperation to trust</h4>
+        <p>One of the biggest fears when approaching acupuncture is the fear of needles. Anita confesses she was very apprehensive about the <em className="text-accent-gold">"poking thing"</em>, but Yeni's warmth and empathetic treatment dispelled any fear from the very first moment. It all begins with a thorough assessment where not only the local pain is discussed, but also rest, energy levels, and the general state of the body to create a personalized plan.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">The power of combining techniques in one session</h4>
+        <p>What makes Yeni's methodology truly special is that it is not limited to a single tool. Depending on the patient's real needs, various ancient and modern techniques can be integrated in one session:</p>
+        <ul className="list-disc pl-6 space-y-2 marker:text-accent-gold">
+          <li><strong>Scalp Acupuncture:</strong> Strategic points on the head to relax the nervous system and relieve migraines or tension headaches.</li>
+          <li><strong>Auriculotherapy:</strong> Stimulation of reflex points on the ear using specialized devices.</li>
+          <li><strong>Moxibustion:</strong> Application of therapeutic heat (with the traditional mugwort box) on the abdomen or extremities to mobilize energy and calm the uterus.</li>
+          <li><strong>Neoclassical Acupuncture and abdominal palpation:</strong> An immediate abdominal check to find energetic imbalances and verify in real time how pain decreases when placing a distal needle.</li>
+        </ul>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Results felt instantly: 90% less pain</h4>
+        <p>During the session, the change was astonishing: after abdominal palpation and application of the correct needle, the sharp abdominal pain was reduced by almost <strong>90%</strong>. But the benefit was not only physical; Anita, who considers herself a naturally restless person, ended up falling deeply asleep on the table, leaving in a state of absolute relaxation without the typical lumbar burden of those days.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">An accessible investment in your wellbeing</h4>
+        <p>In addition to effectiveness, the testimony highlights the transparency and accessibility of the treatment: a first complete assessment and treatment session for €70, and follow-up sessions for €50. A natural alternative that seeks to get to the root of the problem so you can leave behind the monthly dependence on strong medication.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Ready to live your cycle in peace?</h4>
+        <p>If you also suffer from intense pain during ovulation or with your period, your body is asking for a different approach. Hit <em>play</em> to see the complete process of this integrative session and discover how you can regain your quality of life.</p>
+
+        <hr className="border-text-main/10 my-8" />
+        <p className="text-sm italic">If you are in the province of Málaga and want to start your treatment, you can visit Yeni Arriarán's Natural Therapies Center at Plaza Andalucía 4 (Centro Comercial España, Local 81), in Torremolinos.</p>
+      </div>
+    )
+  },
+  {
+    id: 8,
+    title: 'Accelerating post-surgical recovery: Lucia\'s radical change with acupuncture',
+    date: 'Part 8 - Lucia',
+    category: 'Testimonial',
+    image: IMAGES.blogs[7],
+    embedHtml: blogPosts[7].embedHtml,
+    content: (
+      <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed pb-12">
+        <p>Undergoing maxillofacial surgery is a complex process that does not end in the operating room. The postoperative period is usually accompanied by severe inflammation, discomfort, and extensive bruising that can take weeks to disappear naturally. However, Traditional Chinese Medicine offers very powerful resources to accelerate this process. In this video we show the case of <strong>Lucía</strong>, who after her operation decided to complement her recovery at <strong>Yeni Arriarán</strong>'s center in Torremolinos, Málaga.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">The visible impact of maxillofacial surgery</h4>
+        <p>At the beginning of the clip we can see Lucía's starting point: very pronounced inflammation in the jaw and cheek area (which she herself colloquially describes as <em className="text-accent-gold">"I had an egg on my face"</em>), accompanied by a bruise that covered a large part of her face. This type of inflammation is not only aesthetically uncomfortable but also generates painful tension in the muscular and joint tissues of the face.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Surprising results in just two sessions</h4>
+        <p>The truly impactful part of this testimony is the speed of recovery. After receiving only <strong>two acupuncture sessions</strong>, Lucía's face looks completely transformed. Smiling at the camera, we can appreciate how:</p>
+        <ul className="list-disc pl-6 space-y-2 marker:text-accent-gold">
+          <li>The general facial inflammation has drastically decreased, restoring natural definition to her face.</li>
+          <li>The extensive dark bruise has reduced to a small, faint yellowish mark on the lower jaw area.</li>
+        </ul>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">"Wonderful": A painless recovery at an accelerated pace</h4>
+        <p>When asked about her experience with the treatment, Lucía's response is direct and full of relief: <em className="text-accent-gold">"Wonderful"</em>. Post-surgical acupuncture works by stimulating key points that activate blood circulation and lymphatic drainage. This allows the body to reabsorb fluids and bruises much faster, reducing pain and shortening recovery times naturally and respectfully.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Going through surgery or in postoperative recovery?</h4>
+        <p>If you or a loved one are facing a surgical intervention (dental, maxillofacial, or aesthetic) and want inflammation and pain to disappear much faster, acupuncture is an exceptional clinical ally. Hit <em>play</em> to see the incredible change in Lucía's face with your own eyes.</p>
+
+        <hr className="border-text-main/10 my-8" />
+        <p className="text-sm italic">If you are looking to accelerate your recovery in the province of Málaga, Yeni Arriarán's Natural Therapies Center is located at Plaza Andalucía 4 (Centro Comercial España, Local 81), in Torremolinos.</p>
+      </div>
+    )
+  },
+  {
+    id: 9,
+    title: 'Goodbye to knee pain: From level 6 to 0 in just 30 minutes',
+    date: 'Part 9 - Alfonso',
+    category: 'Testimonial',
+    image: IMAGES.blogs[8],
+    embedHtml: blogPosts[8].embedHtml,
+    content: (
+      <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed pb-12">
+        <p>Knee pain is one of the most limiting joint discomforts; it can hinder everyday actions like walking, climbing stairs, or simply bending your legs to sit down. We often assume that this type of wear and tear or inflammation will take weeks to improve. However, in this new video we present the case of <strong>Alfonso</strong>, who came to <strong>Yeni Arriarán</strong>'s practice in Torremolinos (Málaga) and experienced total relief in a single session.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">The starting point: Limiting joint pain</h4>
+        <p>At the beginning of the video we see Alfonso lying on the table explaining the reason for his visit: a bothersome pain in his left knee. When evaluating the intensity of this ailment on a scale of 1 to 10 before starting, Alfonso confirms he arrived with a <strong>level 6 of pain</strong>, discomfort strong enough to interfere with his daily wellbeing.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">The effectiveness of 30 minutes of holistic treatment</h4>
+        <p>Through precise stimulation of energy channels using acupuncture and holistic therapies, it is possible to reduce inflammation in the joint, relax surrounding muscles, and restore energy flow to the affected area without resorting to invasive methods or medication.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">The result: A smile of total relief (Level 0)</h4>
+        <p>The most impactful part of this testimony occurs after only <strong>30 minutes of treatment</strong>. When Yeni asks about his pain level at that moment, Alfonso's broad smile of satisfaction says absolutely everything: <strong>the pain has been reduced to level 0</strong>. The discomfort disappeared completely, restoring mobility and lightness to his leg in record time.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Does joint pain slow down your daily life?</h4>
+        <p>Alfonso's case shows us that our body has an incredible capacity for response and healing when the right techniques are applied. If you also suffer from knee, back, or any other joint pain, you do not have to resign yourself to living with discomfort. Hit <em>play</em> to see the relief on Alfonso's face and discover everything holistic medicine can do for you!</p>
+
+        <hr className="border-text-main/10 my-8" />
+        <p className="text-sm italic">If you want to book your appointment and start enjoying the health and mobility you deserve, we are waiting for you at Yeni Arriarán's Natural Therapies Center, located at Plaza Andalucía 4 (Centro Comercial España, Local 81), in Torremolinos (Málaga).</p>
+      </div>
+    )
+  }
+];
+
+export const conoceMasPostsEn = [
+  {
+    id: 10,
+    title: 'What you need to know before your first session',
+    date: 'Myths vs. Realities of Acupuncture',
+    category: 'Myths',
+    image: IMAGES.blogs[9],
+    embedHtml: conoceMasPosts[0].embedHtml,
+    content: (
+      <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed pb-12">
+        <p>Around holistic therapies and acupuncture, there are many beliefs that can create doubts or false expectations when we decide to take the step toward natural wellbeing. In this video, specialist <strong>Yeni Arriarán</strong>, from her center in Torremolinos (Málaga), helps us debunk the 3 most common myths to truly understand how this healing process works.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Myth 1: Healing depends 100% on the therapist</h4>
+        <p>One of the most frequent mistakes is thinking that when attending a consultation, the therapist has the absolute responsibility to cure us through a technique.</p>
+        <ul className="list-disc pl-6 space-y-2 marker:text-accent-gold">
+          <li><strong>The Reality:</strong> The success of holistic therapy is teamwork: <strong>50% therapist and 50% patient</strong>. The specialist brings knowledge, technique, and guidance, but the patient must actively commit to their process, adopt healthy habits, and consciously contribute to their own comprehensive healing.</li>
+        </ul>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Myth 2: One session will make all health problems disappear</h4>
+        <p>It is often expected that a single appointment is enough to resolve ailments that have been affecting the body for months or even years.</p>
+        <ul className="list-disc pl-6 space-y-2 marker:text-accent-gold">
+          <li><strong>The Reality:</strong> Each body is a world and each clinical case is completely unique. Recovery time depends on key factors such as the <strong>patient's age, how long they have had the problem, the chronicity of the disease</strong>, and their lifestyle. Like any deep therapy, it requires its own time and a personalized process.</li>
+        </ul>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Myth 3: Acupuncture needles hurt a lot</h4>
+        <p>The fear of pain is the main barrier preventing many people from trying this ancient technique, associating acupuncture needles with traditional medical injections.</p>
+        <ul className="list-disc pl-6 space-y-2 marker:text-accent-gold">
+          <li><strong>The Reality:</strong> It is completely incorrect to compare an acupuncture needle to an injection or blood draw needle. The needles used in this therapy are <strong>ultra-fine and extremely flexible</strong>. While you may perceive a slight sensation or micro-pinch in the initial second of insertion, the immediate subsequent effect is deep relaxation and notable overall pain relief.</li>
+        </ul>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Clear your doubts and take control of your health</h4>
+        <p>Knowing the reality behind these myths allows us to approach natural therapies with greater confidence, realism, and tranquility. Hit <em>play</em> to hear Yeni Arriarán's detailed explanation and discover how a conscious approach can transform your wellbeing.</p>
+
+        <hr className="border-text-main/10 my-8" />
+        <p className="text-sm italic">If you are in the province of Málaga and wish to start a personalized and professional holistic treatment, we are waiting for you at Yeni Arriarán's Natural Therapies Center, located at Plaza Andalucía 4 (Centro Comercial España, Local 81), in Torremolinos.</p>
+      </div>
+    )
+  },
+  {
+    id: 11,
+    title: 'How I came to the world of acupuncture',
+    date: 'The origin of my vocation',
+    category: 'Story',
+    image: IMAGES.blogs[10],
+    embedHtml: conoceMasPosts[1].embedHtml,
+    content: (
+      <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed pb-12">
+        <p>Behind every committed therapist, there is usually a deep story of personal transformation. We see specialist <strong>Yeni Arriarán</strong> helping dozens of patients in her Torremolinos (Málaga) practice relieve chronic pain and restore balance; but what exactly inspired her to dedicate herself to holistic therapies? In this intimate and revealing video, Yeni opens her heart to tell us her own healing journey.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">From a corporate life to a difficult diagnosis</h4>
+        <p>Before dedicating herself to Traditional Chinese Medicine, Yeni led a completely different life working as a director. It was in this period of high professional rhythm that her body gave her a definitive alarm signal: she was diagnosed with an <strong>inoperable pituitary adenoma</strong>.</p>
+        <p>From that moment, she began to experience very debilitating symptoms that profoundly affected her quality of life:</p>
+        <ul className="list-disc pl-6 space-y-2 marker:text-accent-gold">
+          <li>Constant and diffuse pain.</li>
+          <li>Excessive sleep and fatigue that left her without energy.</li>
+          <li>A generalized feeling of intense discomfort.</li>
+        </ul>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">The frustration of "everything is fine"</h4>
+        <p>Like any patient, Yeni went to countless medical check-ups, undergoing test after test. However, she encountered one of the most frustrating and lonely experiences a sick person can face: doctors assured her time and again that <strong>"everything was fine"</strong>, even though she clearly felt her body was not functioning as it should.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">The encounter with acupuncture and the start of a mission</h4>
+        <p>Tired of not getting answers and desperately seeking to regain her wellbeing, Yeni decided to explore alternative paths. That is how she discovered the power of complementary therapies and <strong>acupuncture</strong>, an approach that finally listened to her body, restored her health, and transformed the course of her professional life forever.</p>
+
+        <h4 className="font-serif text-2xl lg:text-3xl text-text-main mt-10 mb-4">Do you feel something is wrong even though tests say otherwise?</h4>
+        <p>Yeni's testimony leaves us with a vital reflection: our body has its own wisdom. If someone has ever told you that "everything is fine" but inside you feel something is not right, do not ignore those signals. We invite you to hit <em>play</em> to hear her inspiring first-hand story and join this community where every symptom is truly heard.</p>
+
+        <hr className="border-text-main/10 my-8" />
+        <p className="text-sm italic">If you identify with this story and are looking for a space where your discomfort is treated from the root, we are waiting for you at Yeni Arriarán's Natural Therapies Center, located at Plaza Andalucía 4 (Centro Comercial España, Local 81), in Torremolinos (Málaga).</p>
+      </div>
+    )
+  }
+];
+
+export function getBlogPosts(): typeof blogPosts {
+  if (typeof window !== 'undefined' && localStorage.getItem('medico_lang') === 'en') {
+    return blogPostsEn;
+  }
+  return blogPosts;
+}
+
+export function getConoceMasPosts(): typeof conoceMasPosts {
+  if (typeof window !== 'undefined' && localStorage.getItem('medico_lang') === 'en') {
+    return conoceMasPostsEn;
+  }
+  return conoceMasPosts;
+}

@@ -19,30 +19,52 @@ import { ThemeProvider } from './context/ThemeContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Controla el Scroll al cambiar de página
-// Controla el Scroll al cambiar de página
 const ScrollToTopRoute = () => {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    if (hash) {
-      const id = hash.replace('#', '');
-      
-      // Aumentamos el tiempo a 600ms para dar tiempo a que las imágenes carguen 
-      // y la página calcule su altura real antes de hacer el scroll.
-      setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) {
-          const offset = 120;
-          const bodyRect = document.body.getBoundingClientRect().top;
-          const elementRect = element.getBoundingClientRect().top;
-          const offsetPosition = (elementRect - bodyRect) - offset;
-          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-        }
-      }, 600);
+    // Scroll via Lenis para coherencia con el smooth scroll global.
+    // Se usa el evento 'lenis-ready' disparado tras inicialización en App.
+    const scrollViaLenis = (target: number | string, offset: number = 0) => {
+      if ((window as any).__lenisInstance) {
+        (window as any).__lenisInstance.scrollTo(target, { offset, duration: 1.2 });
+      } else {
+        typeof target === 'number'
+          ? window.scrollTo({ top: target, behavior: 'smooth' })
+          : (() => {
+              const el = document.getElementById(target);
+              if (el) {
+                const top = el.getBoundingClientRect().top + window.scrollY - offset;
+                window.scrollTo({ top, behavior: 'smooth' });
+              }
+            })();
+      }
+    };
+
+    const navigate = () => {
+      if (hash) {
+        const id = hash.replace('#', '');
+        setTimeout(() => {
+          scrollViaLenis(id, 120);
+        }, 600);
+      } else {
+        scrollViaLenis(0);
+      }
+    };
+
+    if ((window as any).__lenisInstance) {
+      navigate();
     } else {
-      window.scrollTo(0, 0);
+      const onReady = () => {
+        window.removeEventListener('lenis-ready', onReady);
+        navigate();
+      };
+      window.addEventListener('lenis-ready', onReady);
     }
+
+    return () => {
+      window.removeEventListener('lenis-ready', () => {});
+    };
   }, [pathname, hash]);
 
   return null;
@@ -96,6 +118,30 @@ const MagneticEffectHandler = () => {
 const App: React.FC = () => {
   const cursorDotRef = useRef<HTMLDivElement>(null);
   const cursorRingRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    (window as any).__lenisInstance = lenis;
+    window.dispatchEvent(new Event('lenis-ready'));
+
+    lenis.on('scroll', () => ScrollTrigger.update());
+
+    gsap.ticker.add((time: number) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      lenis.destroy();
+      delete (window as any).__lenisInstance;
+    };
+  }, []);
 
   return (
     <ThemeProvider>

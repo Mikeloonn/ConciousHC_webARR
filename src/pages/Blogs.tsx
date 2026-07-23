@@ -6,14 +6,19 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '../context/ThemeContext';
 import { BlogPost } from '../types';
-import { blogPosts, conoceMasPosts } from '../data/blogs';
+import { getBlogPosts, getConoceMasPosts } from '../data/blogs';
 import { Cookie } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Blogs: React.FC = () => {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const { theme } = useTheme();
+  const { t } = useTranslation();
+  const blogPosts = getBlogPosts();
+  const conoceMasPosts = getConoceMasPosts();
+
   const [consentAccepted, setConsentAccepted] = useState(
     () => localStorage.getItem('medico_cookie_consent') === 'accepted'
   );
@@ -93,7 +98,7 @@ const Blogs: React.FC = () => {
           title="Blog de Acupuntura y Salud Holística en Torremolinos"
           description="Testimonios reales de pacientes y artículos sobre acupuntura, medicina china y terapias holísticas en Torremolinos, Málaga."
         />
-      <PageHeader title="NUESTRO BLOG" breadcrumb="Historias" />
+      <PageHeader title={t('blogs.pageHeaderTitle')} breadcrumb={t('blogs.pageHeaderBreadcrumb')} />
       
       <section className="relative py-24 md:py-32">
         <div className="orb w-[400px] h-[400px] bg-accent-gold top-1/3 -left-32 parallax-layer z-0 opacity-10" data-speed="0.025"></div>
@@ -102,9 +107,9 @@ const Blogs: React.FC = () => {
           
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
             <div className="reveal-up">
-              <span className="section-label">Sabiduría & Conocimiento</span>
+              <span className="section-label">{t('blogs.section1Label')}</span>
               <h2 className="section-heading text-[clamp(2rem,5vw,4rem)] mt-4">
-                Nuestras <span className="italic text-accent-sage">Historias</span>
+                {t('blogs.section1Heading1')} <span className="italic text-accent-sage">{t('blogs.section1Heading2')}</span>
               </h2>
               <div className="organic-divider max-w-xs mt-6"></div>
             </div>
@@ -137,7 +142,7 @@ const Blogs: React.FC = () => {
                   </h3>
                   <div className="mt-auto flex items-center gap-3 pt-6 border-t border-text-main/10 text-[0.65rem] text-accent-sage/50 uppercase tracking-widest">
                     <User size={14} />
-                    <span>Por: Yeni Arriarán</span>
+                    <span>{t('blogs.author')}</span>
                   </div>
                 </div>
               </article>
@@ -152,9 +157,9 @@ const Blogs: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
             <div className="reveal-up">
-              <span className="section-label">Descubre y Aprende</span>
+              <span className="section-label">{t('blogs.section2Label')}</span>
               <h2 className="section-heading text-[clamp(2rem,5vw,4rem)] mt-4">
-                Conoce <span className="italic text-accent-gold">Más</span>
+                {t('blogs.section2Heading1')} <span className="italic text-accent-gold">{t('blogs.section2Heading2')}</span>
               </h2>
               <div className="organic-divider max-w-xs mt-6"></div>
             </div>
@@ -187,7 +192,7 @@ const Blogs: React.FC = () => {
                   </h3>
                   <div className="mt-auto flex items-center gap-3 pt-6 border-t border-text-main/10 text-[0.65rem] text-accent-sage/50 uppercase tracking-widest">
                     <User size={14} />
-                    <span>Por: Yeni Arriarán</span>
+                    <span>{t('blogs.author')}</span>
                   </div>
                 </div>
               </article>
@@ -210,7 +215,7 @@ const Blogs: React.FC = () => {
               <button 
                 onClick={() => setSelectedPost(null)} 
                 className="absolute top-4 right-4 bg-bg-base/80 hover:bg-accent-gold text-text-main rounded-full p-2 shadow-lg transition-colors border border-text-main/20 backdrop-blur-sm"
-                aria-label="Cerrar"
+                aria-label={t('blogs.closeModal')}
               >
                 <X size={20} />
               </button>
@@ -228,13 +233,13 @@ const Blogs: React.FC = () => {
                   <div className="w-full max-w-[350px] mx-auto text-center py-12">
                     <Cookie size={40} className="mx-auto mb-4 text-accent-sage/50" />
                     <p className="text-sm text-text-main/60 leading-relaxed mb-4">
-                      Para ver este contenido de redes sociales, necesitas aceptar las cookies.
+                      {t('blogs.cookieNotice')}
                     </p>
                     <button
                       onClick={() => window.dispatchEvent(new Event('reopen-cookie-banner'))}
                       className="px-6 py-2.5 rounded-full bg-gradient-to-r from-accent-sage to-accent-gold text-bg-base text-[10px] tracking-[0.2em] uppercase font-bold cursor-pointer hover:opacity-90 transition-opacity"
                     >
-                      Configurar cookies
+                      {t('blogs.cookieBtn')}
                     </button>
                   </div>
                 )}

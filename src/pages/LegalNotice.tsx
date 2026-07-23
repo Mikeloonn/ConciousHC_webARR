@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import PageHeader from '../components/PageHeader';
 import SEO from '../components/SEO';
 import gsap from 'gsap';
@@ -7,6 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const LegalNotice: React.FC = () => {
+  const { t } = useTranslation();
 
   // Animación suave de aparición al hacer scroll
   useEffect(() => {
@@ -37,7 +39,7 @@ const LegalNotice: React.FC = () => {
           title="Aviso Legal"
           description="Aviso legal y condiciones de uso del sitio web de acupuntura y terapias holísticas en Torremolinos, Málaga. Cumplimiento con la LSSI."
         />
-      <PageHeader title="AVISO LEGAL" breadcrumb="Legal" />
+      <PageHeader title={t('legal.pageHeaderTitle')} breadcrumb={t('legal.pageHeaderBreadcrumb')} />
 
       <section className="relative py-16 md:py-24">
         {/* Orbes decorativos de fondo (su opacidad ahora la controla el CSS según el tema) */}
@@ -48,10 +50,10 @@ const LegalNotice: React.FC = () => {
 
           <div className="text-center mb-12 reveal-up">
             <h2 className="section-heading text-[clamp(1.8rem,4vw,3rem)] mb-4">
-              Términos y <span className="italic text-accent-sage">Condiciones</span>
+              {t('legal.heading1')} <span className="italic text-accent-sage">{t('legal.heading2')}</span>
             </h2>
             <div className="organic-divider max-w-xs mx-auto mb-6"></div>
-            <p className="text-xs tracking-[0.3em] uppercase text-accent-sage/60">Información Legal</p>
+            <p className="text-xs tracking-[0.3em] uppercase text-accent-sage/60">{t('legal.subtitle')}</p>
           </div>
 
           <div className="glass-card p-8 md:p-14 lg:p-20 reveal-up">
@@ -60,17 +62,17 @@ const LegalNotice: React.FC = () => {
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-4">
                 <span className="font-serif text-2xl text-accent-gold">1.</span>
-                <h3 className="font-serif text-2xl text-text-main">Datos Identificativos</h3>
+                <h3 className="font-serif text-2xl text-text-main">{t('legal.block1title')}</h3>
               </div>
               <p className="text-text-muted/80 text-sm md:text-base leading-relaxed mb-6">
-                En cumplimiento con el deber de información recogido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI), se reflejan los siguientes datos:
+                {t('legal.block1intro')}
               </p>
               <ul className="space-y-3 text-text-muted/80 text-sm md:text-base leading-relaxed pl-4 border-l border-accent-gold/30">
-                <li><strong className="text-text-main font-medium">Titular del sitio web:</strong> Yeni Gladys Arriarán Gutiérrez</li>
-                <li><strong className="text-text-main font-medium">NIF/CIF:</strong> 043249104J</li>
-                <li><strong className="text-text-main font-medium">Domicilio:</strong> Plaza Andalucía 4, Centro Comercial España, local 81, 29620, Torremolinos, Málaga.</li>
-                <li><strong className="text-text-main font-medium">Correo electrónico:</strong> acupunturaholisticayeni@gmail.com</li>
-                <li><strong className="text-text-main font-medium">Teléfono:</strong> (+34) 624 253 470</li>
+                <li><strong className="text-text-main font-medium">{t('legal.fieldOwner')}</strong> {t('legal.ownerValue')}</li>
+                <li><strong className="text-text-main font-medium">{t('legal.fieldNif')}</strong> {t('legal.nifValue')}</li>
+                <li><strong className="text-text-main font-medium">{t('legal.fieldAddress')}</strong> {t('legal.addressValue')}</li>
+                <li><strong className="text-text-main font-medium">{t('legal.fieldEmail')}</strong> {t('legal.emailValue')}</li>
+                <li><strong className="text-text-main font-medium">{t('legal.fieldPhone')}</strong> {t('legal.phoneValue')}</li>
               </ul>
             </div>
 
@@ -78,10 +80,10 @@ const LegalNotice: React.FC = () => {
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-4">
                 <span className="font-serif text-2xl text-accent-gold">2.</span>
-                <h3 className="font-serif text-2xl text-text-main">Usuarios</h3>
+                <h3 className="font-serif text-2xl text-text-main">{t('legal.block2title')}</h3>
               </div>
               <p className="text-text-muted/80 text-sm md:text-base leading-relaxed">
-                El acceso y/o uso de este portal atribuye la condición de USUARIO, que acepta, desde dicho acceso y/o uso, las Condiciones Generales de Uso aquí reflejadas.
+                {t('legal.block2text')}
               </p>
             </div>
 
@@ -89,13 +91,13 @@ const LegalNotice: React.FC = () => {
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-4">
                 <span className="font-serif text-2xl text-accent-gold">3.</span>
-                <h3 className="font-serif text-2xl text-text-main">Descargo de Responsabilidad (Naturaleza de los Servicios)</h3>
+                <h3 className="font-serif text-2xl text-text-main">{t('legal.block3title')}</h3>
               </div>
               <p className="text-text-muted/80 text-sm md:text-base leading-relaxed mb-4">
-                Los servicios ofrecidos en este sitio web (acupuntura, fitoterapia, terapias holísticas) tienen como finalidad el bienestar, la relajación y el reequilibrio energético del usuario. Estos servicios son técnicas parasanitarias o complementarias y no sustituyen en ningún caso al diagnóstico, tratamiento o prescripción médica convencional.
+                {t('legal.block3text1')}
               </p>
               <p className="text-text-muted/80 text-sm md:text-base leading-relaxed">
-                El usuario reconoce que no debe abandonar ningún tratamiento médico impuesto por un facultativo colegiado para realizar estas terapias. En caso de duda sobre su salud física o mental, recomendamos encarecidamente consultar con su médico de cabecera o especialista.
+                {t('legal.block3text2')}
               </p>
             </div>
 
@@ -103,10 +105,10 @@ const LegalNotice: React.FC = () => {
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-4">
                 <span className="font-serif text-2xl text-accent-gold">4.</span>
-                <h3 className="font-serif text-2xl text-text-main">Propiedad Intelectual e Industrial</h3>
+                <h3 className="font-serif text-2xl text-text-main">{t('legal.block4title')}</h3>
               </div>
               <p className="text-text-muted/80 text-sm md:text-base leading-relaxed">
-                El Titular por sí o como cesionario, es titular de todos los derechos de propiedad intelectual e industrial de su página web, así como de los elementos contenidos en la misma (a título enunciativo: imágenes, sonido, audio, vídeo, software o textos; marcas o logotipos, combinaciones de colores, estructura y diseño, etc.). Quedan reservados todos los derechos.
+                {t('legal.block4text')}
               </p>
             </div>
 
@@ -114,10 +116,10 @@ const LegalNotice: React.FC = () => {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <span className="font-serif text-2xl text-accent-gold">5.</span>
-                <h3 className="font-serif text-2xl text-text-main">Ley Aplicable y Jurisdicción</h3>
+                <h3 className="font-serif text-2xl text-text-main">{t('legal.block5title')}</h3>
               </div>
               <p className="text-text-muted/80 text-sm md:text-base leading-relaxed">
-                La relación entre el Titular y el Usuario se regirá por la normativa española vigente y cualquier controversia se someterá a los Juzgados y tribunales de la ciudad de Torremolinos (Málaga).
+                {t('legal.block5text')}
               </p>
             </div>
 

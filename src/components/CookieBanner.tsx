@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const CookieBanner: React.FC = () => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -36,11 +38,9 @@ const CookieBanner: React.FC = () => {
       <div className="max-w-[1140px] mx-auto flex flex-col md:flex-row gap-8 items-center justify-between">
         
         <div className="text-sm text-text-muted/80 md:w-2/3">
-          <h3 className="font-serif font-medium text-text-main text-2xl mb-3">Privacidad y Cookies</h3>
+          <h3 className="font-serif font-medium text-text-main text-2xl mb-3">{t('cookieBanner.heading')}</h3>
           <p className="leading-relaxed">
-            Utilizamos cookies propias y de terceros para analizar nuestros servicios y mostrarte publicidad relacionada con tus preferencias en base a un perfil elaborado a partir de tus hábitos de navegación. 
-            Puedes aceptar todas las cookies pulsando "Aceptar todo" o rechazarlas pulsando "Rechazar todo". 
-            Para más información consulta nuestra <Link to="/cookies" className="text-accent-gold underline underline-offset-4 hover:text-text-main transition-colors font-medium">Política de Cookies</Link>.
+            {t('cookieBanner.text1')} {t('cookieBanner.text2')} {t('cookieBanner.text3')} <Link to="/cookies" className="text-accent-gold underline underline-offset-4 hover:text-text-main transition-colors font-medium">{t('cookieBanner.link')}</Link>.
           </p>
         </div>
 
@@ -50,14 +50,14 @@ const CookieBanner: React.FC = () => {
             className="px-8 py-3 rounded-full border border-text-main/20 text-text-main font-sans font-medium hover:bg-text-main/5 hover:border-text-main/40 transition-all duration-300 text-[10px] tracking-[0.2em] uppercase text-center w-full md:w-auto cursor-pointer"
             data-hoverable="true"
           >
-            Rechazar todo
+            {t('cookieBanner.reject')}
           </button>
           <button 
             onClick={handleAccept}
             className="px-8 py-3 rounded-full bg-gradient-to-r from-accent-sage to-accent-gold text-bg-base font-sans font-bold hover:opacity-90 hover:-translate-y-0.5 transition-all duration-300 text-[10px] tracking-[0.2em] uppercase text-center shadow-lg w-full md:w-auto cursor-pointer"
             data-hoverable="true"
           >
-            Aceptar todo
+            {t('cookieBanner.accept')}
           </button>
         </div>
 

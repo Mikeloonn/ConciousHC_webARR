@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import PageHeader from '../components/PageHeader';
 import SEO from '../components/SEO';
 import { IMAGES } from '../constants/images';
@@ -9,252 +10,203 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// 1. ESTRUCTURA DE DATOS MEDICINA TRADICIONAL CHINA
-const servicesData = [
-  {
-    id: 'acupuntura',
-    title: 'Acupuntura',
-    image: IMAGES.services.acupuntura,
-    intro: (
-      <>
-        <p>
-          La acupuntura es una terapia milenaria de la Medicina Tradicional China que busca restablecer el equilibrio natural del cuerpo, la mente y las emociones. Se basa en la estimulación de puntos específicos del cuerpo, a través de agujas muy finas y estériles, situadas a lo largo de los meridianos energéticos, por donde circula el Qi (energía vital).
-        </p>
-        <p>
-          Según la MTC, cuando el Qi fluye de forma armónica, el cuerpo se mantiene sano. Sin embargo, el estrés, las emociones, los hábitos de vida o los desequilibrios internos pueden bloquear ese flujo, generando dolor o enfermedad.
-        </p>
-        <p>
-          Desde una visión integrativa, la acupuntura también estimula el sistema nervioso, mejora la circulación, regula funciones orgánicas y favorece procesos de autorregulación y bienestar profundo.
-        </p>
-      </>
-    ),
-    benefitsTitle: 'Beneficios de la Acupuntura',
-    benefits: [
-      { title: 'Alivio del dolor', desc: 'Es especialmente eficaz en dolores musculares y articulares, cervicalgias, lumbalgias, migrañas, ciáticas, lesiones deportivas y dolores crónicos.' },
-      { title: 'Regulación del sistema nervioso', desc: 'Ayuda a reducir el estrés, la ansiedad, el insomnio, el agotamiento mental y los estados de tensión emocional.' },
-      { title: 'Mejora del funcionamiento interno', desc: 'Favorece el equilibrio del sistema digestivo, hormonal, respiratorio e inmunológico.' }
-    ],
-    outroTitle: 'Un tratamiento adaptado a ti',
-    outro: 'En consulta, la acupuntura se integra dentro de un enfoque de Medicina China y terapias holísticas, donde cada persona es única. El número de sesiones y la evolución del tratamiento dependen de la condición, el terreno y la respuesta individual.'
-  },
-  {
-    id: 'auriculoterapia',
-    title: 'Auriculoterapia',
-    image: IMAGES.services.auriculoterapia,
-    intro: (
-      <>
-        <p>
-          La auriculoterapia es una técnica terapéutica de la Medicina Tradicional China que utiliza el pabellón auricular como un microsistema que refleja todo el organismo. En la oreja se encuentran representados los órganos, sistemas y estructuras del cuerpo, así como puntos relacionados con el estado emocional y energético de la persona.
-        </p>
-        <p>
-          Mediante la estimulación de puntos específicos del oído —con semillas, esferas, agujas muy finas o imanes— se activan mecanismos de regulación que ayudan al cuerpo a recuperar su equilibrio natural.
-        </p>
-        <p>
-          La auriculoterapia puede utilizarse como tratamiento principal o como complemento de la acupuntura y otras terapias, potenciando y prolongando sus efectos a lo largo de los días posteriores a la sesión.
-        </p>
-      </>
-    ),
-    benefitsTitle: 'Beneficios de la Auriculoterapia',
-    benefits: [
-      { title: 'Alivio del dolor crónico', desc: 'Es especialmente útil en dolores musculares y articulares, cefaleas, migrañas y lumbalgias.' },
-      { title: 'Regulación del estrés y las emociones', desc: 'Contribuye a equilibrar el sistema nervioso, reduciendo ansiedad, nerviosismo e insomnio.' },
-      { title: 'Apoyo en procesos de cambio', desc: 'Se utiliza como apoyo en el control del apetito, gestión del peso, abandono del tabaco y procesos de desintoxicación.' }
-    ],
-    outroTitle: 'Efecto continuo y prolongado',
-    outro: 'Al utilizar semillas o imanes, el tratamiento sigue actuando entre sesiones, permitiendo que la persona participe activamente estimulando los puntos indicados en su día a día.'
-  },
-  {
-    id: 'fitoterapia',
-    title: 'Fitoterapia',
-    image: IMAGES.services.fitoterapia,
-    intro: (
-      <>
-        <p>
-          La Fitoterapia China es una de las principales ramas de la Medicina Tradicional China (MTC) y se basa en el uso terapéutico de plantas medicinales, minerales y sustancias naturales cuidadosamente seleccionadas para restablecer el equilibrio interno del organismo.
-        </p>
-        <p>
-          A diferencia de la fitoterapia occidental, no se centra únicamente en el síntoma, sino en el patrón energético de la persona. Cada fórmula se prescribe teniendo en cuenta la constitución, el estado físico, emocional y energético.
-        </p>
-        <p>
-          El objetivo no es forzar al cuerpo, sino acompañarlo en su proceso natural de autorregulación mediante sinergias de plantas que armonizan y nutren desde el interior.
-        </p>
-      </>
-    ),
-    benefitsTitle: 'Beneficios de la Fitoterapia',
-    benefits: [
-      { title: 'Tratamiento de la raíz', desc: 'Las fórmulas herbales trabajan sobre la causa del desequilibrio, ayudando al organismo a recuperar su funcionamiento óptimo de manera sostenida.' },
-      { title: 'Regulación de órganos y sistemas', desc: 'Especialmente eficaz en trastornos digestivos, desequilibrios hormonales, problemas menstruales y sistema inmunológico.' },
-      { title: 'Apoyo emocional y energético', desc: 'Ayuda a equilibrar emociones como la ansiedad, la irritabilidad, la tristeza o el agotamiento profundo.' }
-    ],
-    outroTitle: 'Tratamiento personalizado',
-    outro: 'Las fórmulas pueden ajustarse a lo largo del proceso, respetando los ritmos del cuerpo y favoreciendo una recuperación consciente. Es segura y puede utilizarse de forma complementaria.'
-  },
-  {
-    id: 'ventosas-cupping',
-    title: 'Ventosas (Cupping)',
-    image: IMAGES.services.ventosas,
-    intro: (
-      <>
-        <p>
-          La terapia con ventosas, conocida internacionalmente como Cupping, es una técnica ancestral que utiliza copas especiales (de vidrio, bambú o plástico) para crear un efecto de succión sobre la piel. Este vacío estimula la circulación sanguínea y linfática en zonas profundas.
-        </p>
-        <p>
-          En la MTC, se considera que el dolor y la tensión son causados por el estancamiento de Qi (energía) y Sangre. Las ventosas actúan "moviendo" este estancamiento, permitiendo que la energía fluya libremente de nuevo.
-        </p>
-        <p>
-          Es una técnica inmensamente valorada por su capacidad casi inmediata para aliviar dolores de espalda intensos, contracturas musculares severas y estados de tensión acumulada por el estrés.
-        </p>
-      </>
-    ),
-    benefitsTitle: 'Beneficios del Cupping',
-    benefits: [
-      { title: 'Descontracturante profundo', desc: 'Alivia la tensión muscular acumulada, especialmente en espalda, hombros y cuello, liberando nudos de forma más rápida que un masaje.' },
-      { title: 'Eliminación de toxinas', desc: 'Estimula el sistema linfático, ayudando al cuerpo a depurar sustancias de desecho acumuladas en los tejidos.' },
-      { title: 'Fortalecimiento inmunológico', desc: 'Tradicionalmente se utiliza para expresar factores patógenos como el frío y la humedad, siendo muy útil en resfriados incipientes.' }
-    ],
-    outroTitle: '¿Es doloroso? ¿Deja marcas?',
-    outro: 'No es dolorosa. Es común que queden marcas circulares (hematomas indoloros) que pueden durar unos días; esto es una excelente señal biológica de que se ha movilizado el estancamiento sanguíneo.'
-  },
-  {
-    id: 'masaje-tuina',
-    title: 'Masaje Tuina',
-    image: IMAGES.services.tuina,
-    intro: (
-      <>
-        <p>
-          El Tuina es una de las ramas terapéuticas más antiguas. Más que un simple masaje de relajación, es un sistema de terapia manual vigorosa y profunda que combina técnicas de masaje, acupresión (digitopuntura) y manipulaciones articulares.
-        </p>
-        <p>
-          Su nombre proviene de dos de sus técnicas principales: "Tui" (empujar) y "Na" (agarrar). El terapeuta utiliza las manos, dedos, codos y antebrazos para aplicar movimientos rítmicos y presiones para desbloquear el flujo de Qi (energía).
-        </p>
-        <p>
-          Es una terapia sumamente dinámica donde el terapeuta adapta constantemente la intensidad de las maniobras al diagnóstico energético y estructural del paciente.
-        </p>
-      </>
-    ),
-    benefitsTitle: 'Beneficios Terapéuticos',
-    benefits: [
-      { title: 'Alivio del dolor agudo y crónico', desc: 'Trata eficazmente contracturas, lumbalgias, ciáticas, tortícolis, tendinitis y apoya la recuperación de lesiones.' },
-      { title: 'Regulación de órganos internos', desc: 'A través de técnicas reflejas en la espalda y el abdomen, estimula el buen funcionamiento del sistema digestivo y respiratorio.' },
-      { title: 'Relajación profunda', desc: 'Reduce drásticamente los niveles de estrés, ansiedad e insomnio, induciendo un estado de calma mental.' }
-    ],
-    outroTitle: 'Dinámica de la sesión',
-    outro: 'A diferencia de otros masajes, el Tuina se realiza generalmente con ropa cómoda y ligera, o sobre una sábana de algodón. Es una terapia activa que a menudo se integra con ventosas o acupuntura.'
-  },
-  {
-    id: 'moxibustion',
-    title: 'Moxibustión',
-    image: IMAGES.services.moxibustion,
-    intro: (
-      <>
-        <p>
-          La Moxibustión (del japonés Mogusa) es una técnica de termoterapia profunda que utiliza la combustión de la planta Artemisia Vulgaris para restaurar la bioelectricidad y la dinámica térmica del organismo.
-        </p>
-        <p>
-          La elección de la Artemisa no es casual. Esta planta medicinal posee propiedades únicas: una vez procesada y envejecida, su combustión genera un espectro de radiación infrarroja que penetra en los tejidos profundos de manera que el calor superficial no puede igualar.
-        </p>
-        <p>
-          Sus aceites esenciales y resinas actúan de forma sinérgica, facilitando una respuesta biológica y celular inmediata para revitalizar órganos debilitados.
-        </p>
-      </>
-    ),
-    benefitsTitle: 'Mecanismos de Acción',
-    benefits: [
-      { title: 'Tonificación del Yang', desc: 'Es la herramienta por excelencia para recuperar la energía vital ante cuadros de agotamiento crónico o frío interno sostenido.' },
-      { title: 'Expulsión de Factores Patógenos', desc: 'Altamente eficaz para disolver el "Frío" y la "Humedad" estancada en las articulaciones y los huesos.' },
-      { title: 'Activación de la Sangre (Xue)', desc: 'Rompe el estancamiento sanguíneo profundo, promoviendo una circulación fluida que nutre los tejidos dañados.' }
-    ],
-    outroTitle: 'Perspectiva Científica',
-    outro: 'Clínicamente incrementa el flujo sanguíneo (efecto vasodilatador), eleva la producción de glóbulos blancos (modulación inmunitaria) y reduce la inflamación celular elevando el umbral del dolor.'
-  }
-];
-
-// 2. SUB-MENÚ DE COACHING (Para el índice del PageHeader)
-const coachingSubItems = [
-  { id: 'coaching-pilares', title: 'Cuatro Pilares' },
-  { id: 'coaching-areas', title: 'Áreas de trabajo' },
-  { id: 'coaching-sesion', title: '¿Cómo es una sesión?' }
-];
-
-// 3. ESTRUCTURA DE DATOS TERAPIAS ENERGÉTICAS
-const energeticasData = [
-  {
-    id: 'pendulo-hebreo',
-    title: 'Péndulo Hebreo',
-    image: IMAGES.energeticas.penduloHebreo,
-    intro: (
-      <>
-        <p>
-          El Péndulo Hebreo es una herramienta de trabajo energético que utiliza etiquetas en hebreo para detectar, liberar y armonizar bloqueos en el campo energético de la persona.
-        </p>
-        <p>
-          A través de esta técnica se puede trabajar la limpieza energética, la armonización de chakras, el desbloqueo emocional, la protección energética, el cierre de ciclos y la reprogramación de patrones que pueden estar interfiriendo en el bienestar personal.
-        </p>
-        <p>
-          Mi formación en Péndulo Hebreo está realizada en la Escuela Internacional de Péndulo Hebreo de Cristina Vicente, integrando protocolos de trabajo profundo, ordenado y respetuoso.
-        </p>
-      </>
-    ),
-    benefitsTitle: 'Programa Reseteo Energético',
-    benefits: [
-      { title: 'Reprogramación', desc: 'Libera bloqueos, cargas, memorias o patrones para abrir espacio a una energía más clara y coherente.' },
-      { title: 'Alineación de chakras', desc: 'Revisa y favorece una mayor armonía entre cuerpo, emoción, mente y energía. Aporta calma y ligereza.' },
-      { title: 'Sellado áurico', desc: 'Ayuda a fortalecer y proteger el campo energético después del proceso de limpieza y armonización.' }
-    ],
-    outroTitle: 'Sesiones Complementarias',
-    outro: 'Según el proceso, se pueden realizar sesiones de Ataduras del Pasado, Misil de Luz o Limpieza energética de espacios (presencial o a distancia).'
-  },
-  {
-    id: 'sanacion-cuantica',
-    title: 'Sanación Cuántica y Sintergética',
-    image: IMAGES.energeticas.sanacionCuantica,
-    intro: (
-      <>
-        <p>
-          La Sanación Cuántica, la Sintergética y las técnicas de "Manos para Sanar" permiten acompañar a la persona desde una mirada integrativa, considerando la estrecha relación entre cuerpo, energía, emoción, mente y conciencia.
-        </p>
-        <p>
-          Son sesiones suaves, respetuosas y no invasivas, orientadas a favorecer la coherencia interna, la profunda calma, la conexión personal y la capacidad natural de autorregulación de tu organismo.
-        </p>
-      </>
-    ),
-    benefitsTitle: '¿Cuándo se recomiendan?',
-    benefits: [
-      { title: 'Momentos de Estrés', desc: 'Ideal para reducir el estrés, el agotamiento acumulado y la fatiga física o mental crónica.' },
-      { title: 'Procesos Emocionales', desc: 'Acompañamiento sutil en etapas de cambios personales, duelos, separaciones o procesos intensos.' },
-      { title: 'Agotamiento Profundo', desc: 'Recomendado cuando sientes falta de energía, desconexión interior o dificultad para avanzar.' }
-    ],
-    outroTitle: 'Acompañamiento sutil y profundo',
-    outro: 'Una terapia no invasiva perfecta cuando la persona siente que necesita un soporte más compasivo, profundo y consciente para recuperar su bienestar.'
-  },
-  {
-    id: 'biomagnetismo',
-    title: 'Biomagnetismo Cuántico',
-    image: IMAGES.energeticas.biomagnetismo,
-    intro: (
-      <>
-        <p>
-          El Biomagnetismo Cuántico y el Par Biomagnético se utilizan como potentes herramientas energéticas complementarias mediante la aplicación de imanes en puntos específicos del cuerpo.
-        </p>
-        <p>
-          En mi consulta lo integro desde una mirada sumamente prudente y personalizada, actuando como un sólido apoyo al equilibrio bioenergético y al bienestar general de la persona.
-        </p>
-      </>
-    ),
-    benefitsTitle: 'Apoyo Bioenergético',
-    benefits: [
-      { title: 'Equilibrio General', desc: 'Sirve como apoyo integral para recuperar la vitalidad, armonía y el equilibrio natural del organismo.' },
-      { title: 'Herramienta Complementaria', desc: 'Se integra estratégicamente en la sesión sin generar dolor ni molestias físicas.' },
-      { title: 'Enfoque Prudente', desc: 'Siempre se trabaja respetando el proceso y las indicaciones sanitarias que cada persona pueda estar siguiendo.' }
-    ],
-    outroTitle: 'Aviso Importante',
-    outro: 'Esta terapia no sustituye un diagnóstico ni un tratamiento médico o psicológico. Se ofrece como acompañamiento complementario para favorecer tu bienestar.'
-  }
-];
-
 const Services: React.FC = () => {
+  const { t } = useTranslation();
   // Estado para controlar qué acordeón está abierto
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
+
+  // 1. ESTRUCTURA DE DATOS MEDICINA TRADICIONAL CHINA
+  const servicesData = [
+    {
+      id: 'acupuntura',
+      title: t('nav.subAcupuntura'),
+      image: IMAGES.services.acupuntura,
+      intro: (
+        <>
+          <p>{t('services.intro_acupuntura_p1')}</p>
+          <p>{t('services.intro_acupuntura_p2')}</p>
+          <p>{t('services.intro_acupuntura_p3')}</p>
+        </>
+      ),
+      benefitsTitle: t('services.benefitsTitle_acupuntura'),
+      benefits: [
+        { title: t('services.benefit_acupuntura_1_title'), desc: t('services.benefit_acupuntura_1_desc') },
+        { title: t('services.benefit_acupuntura_2_title'), desc: t('services.benefit_acupuntura_2_desc') },
+        { title: t('services.benefit_acupuntura_3_title'), desc: t('services.benefit_acupuntura_3_desc') }
+      ],
+      outroTitle: t('services.outroTitle_acupuntura'),
+      outro: t('services.outro_acupuntura')
+    },
+    {
+      id: 'auriculoterapia',
+      title: t('nav.subAuriculoterapia'),
+      image: IMAGES.services.auriculoterapia,
+      intro: (
+        <>
+          <p>{t('services.intro_auriculoterapia_p1')}</p>
+          <p>{t('services.intro_auriculoterapia_p2')}</p>
+          <p>{t('services.intro_auriculoterapia_p3')}</p>
+        </>
+      ),
+      benefitsTitle: t('services.benefitsTitle_auriculoterapia'),
+      benefits: [
+        { title: t('services.benefit_auriculoterapia_1_title'), desc: t('services.benefit_auriculoterapia_1_desc') },
+        { title: t('services.benefit_auriculoterapia_2_title'), desc: t('services.benefit_auriculoterapia_2_desc') },
+        { title: t('services.benefit_auriculoterapia_3_title'), desc: t('services.benefit_auriculoterapia_3_desc') }
+      ],
+      outroTitle: t('services.outroTitle_auriculoterapia'),
+      outro: t('services.outro_auriculoterapia')
+    },
+    {
+      id: 'fitoterapia',
+      title: t('nav.subFitoterapia'),
+      image: IMAGES.services.fitoterapia,
+      intro: (
+        <>
+          <p>{t('services.intro_fitoterapia_p1')}</p>
+          <p>{t('services.intro_fitoterapia_p2')}</p>
+          <p>{t('services.intro_fitoterapia_p3')}</p>
+        </>
+      ),
+      benefitsTitle: t('services.benefitsTitle_fitoterapia'),
+      benefits: [
+        { title: t('services.benefit_fitoterapia_1_title'), desc: t('services.benefit_fitoterapia_1_desc') },
+        { title: t('services.benefit_fitoterapia_2_title'), desc: t('services.benefit_fitoterapia_2_desc') },
+        { title: t('services.benefit_fitoterapia_3_title'), desc: t('services.benefit_fitoterapia_3_desc') }
+      ],
+      outroTitle: t('services.outroTitle_fitoterapia'),
+      outro: t('services.outro_fitoterapia')
+    },
+    {
+      id: 'ventosas-cupping',
+      title: t('nav.subVentosas'),
+      image: IMAGES.services.ventosas,
+      intro: (
+        <>
+          <p>{t('services.intro_ventosas_p1')}</p>
+          <p>{t('services.intro_ventosas_p2')}</p>
+          <p>{t('services.intro_ventosas_p3')}</p>
+        </>
+      ),
+      benefitsTitle: t('services.benefitsTitle_ventosas'),
+      benefits: [
+        { title: t('services.benefit_ventosas_1_title'), desc: t('services.benefit_ventosas_1_desc') },
+        { title: t('services.benefit_ventosas_2_title'), desc: t('services.benefit_ventosas_2_desc') },
+        { title: t('services.benefit_ventosas_3_title'), desc: t('services.benefit_ventosas_3_desc') }
+      ],
+      outroTitle: t('services.outroTitle_ventosas'),
+      outro: t('services.outro_ventosas')
+    },
+    {
+      id: 'masaje-tuina',
+      title: t('nav.subTuina'),
+      image: IMAGES.services.tuina,
+      intro: (
+        <>
+          <p>{t('services.intro_tuina_p1')}</p>
+          <p>{t('services.intro_tuina_p2')}</p>
+          <p>{t('services.intro_tuina_p3')}</p>
+        </>
+      ),
+      benefitsTitle: t('services.benefitsTitle_tuina'),
+      benefits: [
+        { title: t('services.benefit_tuina_1_title'), desc: t('services.benefit_tuina_1_desc') },
+        { title: t('services.benefit_tuina_2_title'), desc: t('services.benefit_tuina_2_desc') },
+        { title: t('services.benefit_tuina_3_title'), desc: t('services.benefit_tuina_3_desc') }
+      ],
+      outroTitle: t('services.outroTitle_tuina'),
+      outro: t('services.outro_tuina')
+    },
+    {
+      id: 'moxibustion',
+      title: t('nav.subMoxibustion'),
+      image: IMAGES.services.moxibustion,
+      intro: (
+        <>
+          <p>{t('services.intro_moxibustion_p1')}</p>
+          <p>{t('services.intro_moxibustion_p2')}</p>
+          <p>{t('services.intro_moxibustion_p3')}</p>
+        </>
+      ),
+      benefitsTitle: t('services.benefitsTitle_moxibustion'),
+      benefits: [
+        { title: t('services.benefit_moxibustion_1_title'), desc: t('services.benefit_moxibustion_1_desc') },
+        { title: t('services.benefit_moxibustion_2_title'), desc: t('services.benefit_moxibustion_2_desc') },
+        { title: t('services.benefit_moxibustion_3_title'), desc: t('services.benefit_moxibustion_3_desc') }
+      ],
+      outroTitle: t('services.outroTitle_moxibustion'),
+      outro: t('services.outro_moxibustion')
+    }
+  ];
+
+  // 2. SUB-MENÚ DE COACHING (Para el índice del PageHeader)
+  const coachingSubItems = [
+    { id: 'coaching-pilares', title: t('services.coachingSubItem_pilares') },
+    { id: 'coaching-areas', title: t('services.coachingSubItem_areas') },
+    { id: 'coaching-sesion', title: t('services.coachingSubItem_sesion') }
+  ];
+
+  // 3. ESTRUCTURA DE DATOS TERAPIAS ENERGÉTICAS
+  const energeticasData = [
+    {
+      id: 'pendulo-hebreo',
+      title: t('nav.subPendulo'),
+      image: IMAGES.energeticas.penduloHebreo,
+      intro: (
+        <>
+          <p>{t('services.intro_pendulo_p1')}</p>
+          <p>{t('services.intro_pendulo_p2')}</p>
+          <p>{t('services.intro_pendulo_p3')}</p>
+        </>
+      ),
+      benefitsTitle: t('services.benefitsTitle_pendulo'),
+      benefits: [
+        { title: t('services.benefit_pendulo_1_title'), desc: t('services.benefit_pendulo_1_desc') },
+        { title: t('services.benefit_pendulo_2_title'), desc: t('services.benefit_pendulo_2_desc') },
+        { title: t('services.benefit_pendulo_3_title'), desc: t('services.benefit_pendulo_3_desc') }
+      ],
+      outroTitle: t('services.outroTitle_pendulo'),
+      outro: t('services.outro_pendulo')
+    },
+    {
+      id: 'sanacion-cuantica',
+      title: t('nav.subSanacion'),
+      image: IMAGES.energeticas.sanacionCuantica,
+      intro: (
+        <>
+          <p>{t('services.intro_sanacion_p1')}</p>
+          <p>{t('services.intro_sanacion_p2')}</p>
+        </>
+      ),
+      benefitsTitle: t('services.benefitsTitle_sanacion'),
+      benefits: [
+        { title: t('services.benefit_sanacion_1_title'), desc: t('services.benefit_sanacion_1_desc') },
+        { title: t('services.benefit_sanacion_2_title'), desc: t('services.benefit_sanacion_2_desc') },
+        { title: t('services.benefit_sanacion_3_title'), desc: t('services.benefit_sanacion_3_desc') }
+      ],
+      outroTitle: t('services.outroTitle_sanacion'),
+      outro: t('services.outro_sanacion')
+    },
+    {
+      id: 'biomagnetismo',
+      title: t('nav.subBiomagnetismo'),
+      image: IMAGES.energeticas.biomagnetismo,
+      intro: (
+        <>
+          <p>{t('services.intro_biomagnetismo_p1')}</p>
+          <p>{t('services.intro_biomagnetismo_p2')}</p>
+        </>
+      ),
+      benefitsTitle: t('services.benefitsTitle_biomagnetismo'),
+      benefits: [
+        { title: t('services.benefit_biomagnetismo_1_title'), desc: t('services.benefit_biomagnetismo_1_desc') },
+        { title: t('services.benefit_biomagnetismo_2_title'), desc: t('services.benefit_biomagnetismo_2_desc') },
+        { title: t('services.benefit_biomagnetismo_3_title'), desc: t('services.benefit_biomagnetismo_3_desc') }
+      ],
+      outroTitle: t('services.outroTitle_biomagnetismo'),
+      outro: t('services.outro_biomagnetismo')
+    }
+  ];
 
   useEffect(() => {
     // Animaciones de revelado suave al hacer scroll
@@ -292,15 +244,15 @@ const Services: React.FC = () => {
     
     const element = document.getElementById(id);
     if (element) {
-      const offset = 120; // Ajuste para el Navbar flotante
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const offsetPosition = (elementRect - bodyRect) - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      const offset = 120;
+      if ((window as any).__lenisInstance) {
+        (window as any).__lenisInstance.scrollTo(element, { offset, duration: 1.2 });
+      } else {
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = element.getBoundingClientRect().top;
+        const offsetPosition = (elementRect - bodyRect) - offset;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
     }
   };
 
@@ -310,7 +262,7 @@ const Services: React.FC = () => {
           title="Medicina China y Terapias Holísticas en Málaga"
           description="Acupuntura, auriculoterapia, moxibustión, ventosas, fitoterapia, masaje tuina, coaching y terapias energéticas en Torremolinos, Málaga."
         />
-      <PageHeader title="SERVICIOS" breadcrumb="Servicios">
+      <PageHeader title={t('services.pageHeaderTitle')} breadcrumb={t('pageHeader.breadcrumb.Services')}>
         
         {/* Usamos h-[120px] fijo. Al ocultar 2 items, liberamos espacio para el acordeón 
             con scroll, evitando al 100% que el título de la página salte. */}
@@ -324,7 +276,7 @@ const Services: React.FC = () => {
               className="group flex items-center justify-start lg:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle w-full cursor-pointer"
             >
               <div className="flex items-center gap-2">
-                <span>Medicina Tradicional China</span>
+                <span>{t('services.accordionMtc')}</span>
                 <ChevronDown size={14} className={`transition-transform duration-300 ${expandedMenu === 'mtc' ? 'rotate-180 text-[#b3bda3]' : ''}`} />
               </div>
               <span className="w-1.5 h-1.5 bg-[#b3bda3] rounded-full group-hover:scale-150 transition-transform shadow-[0_0_5px_rgba(179,189,163,0.8)] shrink-0"></span>
@@ -357,7 +309,7 @@ const Services: React.FC = () => {
               className="group flex items-center justify-start lg:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle w-full cursor-pointer"
             >
               <div className="flex items-center gap-2">
-                <span>Coaching Transformacional</span>
+                <span>{t('services.accordionCoaching')}</span>
                 <ChevronDown size={14} className={`transition-transform duration-300 ${expandedMenu === 'coaching' ? 'rotate-180 text-[#df9e53]' : ''}`} />
               </div>
               <span className="w-1.5 h-1.5 bg-[#df9e53] rounded-full group-hover:scale-150 transition-transform shadow-[0_0_5px_rgba(223,158,83,0.8)] shrink-0"></span>
@@ -390,7 +342,7 @@ const Services: React.FC = () => {
               className="group flex items-center justify-start lg:justify-end gap-3 text-xs tracking-[0.15em] uppercase text-[#e8ebe3]/70 hover:text-[#e8ebe3] transition-all outline-none text-shadow-subtle w-full cursor-pointer"
             >
               <div className="flex items-center gap-2">
-                <span>Terapias Energéticas</span>
+                <span>{t('services.accordionEnergeticas')}</span>
                 <ChevronDown size={14} className={`transition-transform duration-300 ${expandedMenu === 'energeticas' ? 'rotate-180 text-[#b3bda3]' : ''}`} />
               </div>
               <span className="w-1.5 h-1.5 bg-[#b3bda3] rounded-full group-hover:scale-150 transition-transform shadow-[0_0_5px_rgba(179,189,163,0.8)] shrink-0"></span>
@@ -427,10 +379,10 @@ const Services: React.FC = () => {
 
           <div className="text-center mb-32 reveal-up">
             <h2 className="section-heading text-[clamp(2rem,5vw,4rem)] mb-6">
-              Medicina <span className="italic text-accent-sage">Tradicional</span> China
+              {t('services.sectionMtcHeading1')} <span className="italic text-accent-sage">{t('services.sectionMtcHeading2')}</span> {t('services.sectionMtcHeading3')}
             </h2>
             <div className="organic-divider max-w-xs mx-auto mb-6"></div>
-            <p className="text-xs tracking-[0.3em] uppercase text-accent-sage/60">Restaurando el flujo de energía</p>
+            <p className="text-xs tracking-[0.3em] uppercase text-accent-sage/60">{t('services.sectionMtcSubtitle')}</p>
           </div>
 
           <div className="flex flex-col gap-32 md:gap-48">
@@ -445,7 +397,7 @@ const Services: React.FC = () => {
                   {/* Etiqueta Superior */}
                   <div className="flex items-center gap-3 mb-6 reveal-up">
                     <div className="h-[1px] w-12 bg-gradient-to-r from-accent-gold to-transparent"></div>
-                    <span className="text-[0.65rem] tracking-[0.4em] uppercase text-accent-gold/80">Terapia Holística</span>
+                    <span className="text-[0.65rem] tracking-[0.4em] uppercase text-accent-gold/80">{t('services.terapyLabel')}</span>
                   </div>
 
                   {/* Título */}
@@ -515,7 +467,7 @@ const Services: React.FC = () => {
                         
                         {/* Texto que cambia de color para contrastar con el fondo dorado */}
                         <span className="relative z-10 text-xs tracking-[0.2em] uppercase text-text-main group-hover:text-bg-base font-bold transition-colors duration-500">
-                          Agendar Sesión de {service.title}
+                          {t('services.cta', { service: service.title })}
                         </span>
                       </Link>
                     </div>
@@ -535,21 +487,21 @@ const Services: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
           <div className="text-center mb-16 reveal-up">
             <h2 className="section-heading text-[clamp(2rem,5vw,4rem)] mb-4">
-              Coaching <span className="italic text-accent-gold">Transformacional</span>
+              {t('services.sectionCoachingHeading1')} <span className="italic text-accent-gold">{t('services.sectionCoachingHeading2')}</span>
             </h2>
             <div className="organic-divider max-w-md mx-auto mb-6"></div>
-            <p className="text-xs tracking-[0.3em] uppercase text-accent-gold/60">Reconfiguración Subconsciente</p>
+            <p className="text-xs tracking-[0.3em] uppercase text-accent-gold/60">{t('services.sectionCoachingSubtitle')}</p>
           </div>
 
           <div className="glass-card p-8 md:p-16 reveal-up">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
               <div className="lg:col-span-7">
                 <p className="text-xl text-text-main font-serif leading-relaxed mb-8 italic border-l-2 border-accent-gold pl-6">
-                  Un espacio diseñado para personas que se encuentran en un punto de inflexión vital, buscando superar miedos limitantes y autosabotaje.
+                  {t('services.coachingIntro')}
                 </p>
 
                 <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed">
-                  <h4 id="coaching-pilares" className="font-serif text-2xl text-text-main pt-4 scroll-mt-32">La Fusión de Cuatro Pilares</h4>
+                  <h4 id="coaching-pilares" className="font-serif text-2xl text-text-main pt-4 scroll-mt-32">{t('services.coachingPilaresHeading')}</h4>
                   <div className="gold-line mb-6"></div>
 
                   <ul className="space-y-8 !pl-0">
@@ -558,8 +510,8 @@ const Services: React.FC = () => {
                         <Check size={18} strokeWidth={2} />
                       </div>
                       <div>
-                        <strong className="text-text-main block text-lg font-serif mb-2">Coaching Estratégico</strong>
-                        Aporto experiencia en gestión y dirección para ofrecerte estructura y objetivos. No solo hablamos de sueños; trazamos planes de acción realistas.
+                        <strong className="text-text-main block text-lg font-serif mb-2">{t('services.coachingPilar1Title')}</strong>
+                        {t('services.coachingPilar1Desc')}
                       </div>
                     </li>
                     <li className="flex gap-5">
@@ -567,8 +519,8 @@ const Services: React.FC = () => {
                         <Check size={18} strokeWidth={2} />
                       </div>
                       <div>
-                        <strong className="text-text-main block text-lg font-serif mb-2">Reprogramación Subconsciente</strong>
-                        El subconsciente rige el 95% de nuestras conductas. Eliminamos bloqueos emocionales y grabamos nuevas creencias de forma rápida.
+                        <strong className="text-text-main block text-lg font-serif mb-2">{t('services.coachingPilar2Title')}</strong>
+                        {t('services.coachingPilar2Desc')}
                       </div>
                     </li>
                     <li className="flex gap-5">
@@ -576,8 +528,8 @@ const Services: React.FC = () => {
                         <Check size={18} strokeWidth={2} />
                       </div>
                       <div>
-                        <strong className="text-text-main block text-lg font-serif mb-2">Maestría Energética</strong>
-                        Entendemos que tu capacidad de logro depende de tu nivel de coherencia energética. Liberamos traumas antiguos que bloquean tu fuerza.
+                        <strong className="text-text-main block text-lg font-serif mb-2">{t('services.coachingPilar3Title')}</strong>
+                        {t('services.coachingPilar3Desc')}
                       </div>
                     </li>
                   </ul>
@@ -586,17 +538,17 @@ const Services: React.FC = () => {
 
               <div className="lg:col-span-5 space-y-8">
                 <div className="about-image-container rounded-3xl shadow-xl">
-                  <img src={IMAGES.coaching} alt="Sesión de coaching transformacional en Málaga" className="w-full h-[400px] object-cover grayscale-[20%]" />
+                  <img src={IMAGES.coaching} alt={t('services.coachingImageAlt')} className="w-full h-[400px] object-cover grayscale-[20%]" />
                 </div>
 
                 {/* Caja de áreas de trabajo adaptativa */}
                 <div className="bg-text-main/5 border border-text-main/10 p-8 rounded-3xl">
-                  <h4 id="coaching-areas" className="font-serif text-xl text-text-main mb-4 scroll-mt-32">Áreas de trabajo</h4>
+                  <h4 id="coaching-areas" className="font-serif text-xl text-text-main mb-4 scroll-mt-32">{t('services.coachingAreasHeading')}</h4>
                   <ul className="space-y-4 text-sm text-text-muted/80">
-                    <li><strong className="text-accent-gold">● Emprendimiento:</strong> Síndrome del impostor.</li>
-                    <li><strong className="text-accent-gold">● Autoestima:</strong> Autocrítica y desvalorización.</li>
-                    <li><strong className="text-accent-gold">● Transiciones:</strong> Rupturas, duelos o cambios.</li>
-                    <li><strong className="text-accent-gold">● Fobias:</strong> Desactivar respuestas de miedo.</li>
+                    <li><strong className="text-accent-gold">{t('services.coachingArea1Label')}</strong> {t('services.coachingArea1Desc')}</li>
+                    <li><strong className="text-accent-gold">{t('services.coachingArea2Label')}</strong> {t('services.coachingArea2Desc')}</li>
+                    <li><strong className="text-accent-gold">{t('services.coachingArea3Label')}</strong> {t('services.coachingArea3Desc')}</li>
+                    <li><strong className="text-accent-gold">{t('services.coachingArea4Label')}</strong> {t('services.coachingArea4Desc')}</li>
                   </ul>
                 </div>
               </div>
@@ -604,9 +556,9 @@ const Services: React.FC = () => {
 
             <div className="mt-16 pt-12 border-t border-text-main/10">
               <div className="max-w-3xl">
-                <h4 id="coaching-sesion" className="font-serif text-2xl text-text-main mb-6 scroll-mt-32">¿Cómo es una sesión?</h4>
+                <h4 id="coaching-sesion" className="font-serif text-2xl text-text-main mb-6 scroll-mt-32">{t('services.coachingSesionHeading')}</h4>
                 <p className="text-text-muted/80 leading-relaxed text-sm md:text-base mb-10">
-                  A través de la comunicación con el subconsciente (test muscular) y técnicas de integración cerebral, identificamos los obstáculos invisibles y los desactivamos en la misma sesión. Sales con el permiso y la capacidad real de ejecutar tus cambios.
+                  {t('services.coachingSesionDesc')}
                 </p>
                 
                 {/* Botón con Link - EFECTO ANIMADO */}
@@ -619,7 +571,7 @@ const Services: React.FC = () => {
                   
                   {/* Texto que cambia de color para contrastar con el fondo dorado */}
                   <span className="relative z-10 text-xs tracking-[0.2em] uppercase text-text-main group-hover:text-bg-base font-bold transition-colors duration-500">
-                    Agendar Mentoría
+                    {t('services.ctaMentoria')}
                   </span>
                 </Link>
               </div>
@@ -634,40 +586,40 @@ const Services: React.FC = () => {
 
           <div className="text-center mb-16 reveal-up">
             <h2 className="section-heading text-[clamp(2rem,5vw,4rem)] mb-4">
-              Terapias <span className="italic text-accent-sage">Energéticas</span> e Integrativas
+              {t('services.sectionEnergeticasHeading1')} <span className="italic text-accent-sage">{t('services.sectionEnergeticasHeading2')}</span>
             </h2>
             <div className="organic-divider max-w-xs mx-auto mb-6"></div>
-            <p className="text-xs tracking-[0.3em] uppercase text-accent-sage/60">Recupera tu equilibrio, calma y claridad</p>
+            <p className="text-xs tracking-[0.3em] uppercase text-accent-sage/60">{t('services.sectionEnergeticasSubtitle')}</p>
           </div>
 
           {/* INTRODUCCIÓN GENERAL */}
           <div className="glass-card p-8 md:p-14 mb-24 reveal-up">
             <p className="text-xl text-text-main font-serif leading-relaxed mb-6 italic border-l-2 border-accent-sage pl-6">
-              Las terapias energéticas son un espacio de acompañamiento profundo para personas que desean recuperar equilibrio, calma, claridad interior y conexión consigo mismas.
+              {t('services.energeticasIntroP1')}
             </p>
             <div className="space-y-6 text-text-muted/80 text-sm md:text-base leading-relaxed mb-10">
               <p>
-                A veces el malestar no se expresa únicamente en el cuerpo. También puede sentirse como cansancio emocional, bloqueo, ansiedad, sensación de carga, dificultad para avanzar, pensamientos repetitivos, tristeza, falta de energía o desconexión interna.
+                {t('services.energeticasIntroP2')}
               </p>
               <p>
-                En mi consulta trabajo con diferentes herramientas energéticas e integrativas que permiten acompañar estos procesos de forma personalizada, respetuosa y consciente. Cada sesión se adapta al momento de la persona, a su historia, a su sensibilidad y al objetivo que desea trabajar.
+                {t('services.energeticasIntroP3')}
               </p>
             </div>
 
-            <h4 className="font-serif text-2xl text-text-main mb-6 pt-4 border-t border-text-main/10">¿Para quién están recomendadas?</h4>
-            <p className="text-text-muted/80 text-sm md:text-base mb-6">Las terapias energéticas pueden acompañarte si sientes:</p>
+            <h4 className="font-serif text-2xl text-text-main mb-6 pt-4 border-t border-text-main/10">{t('services.energeticasRecomendadasHeading')}</h4>
+            <p className="text-text-muted/80 text-sm md:text-base mb-6">{t('services.energeticasRecomendadasIntro')}</p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-text-muted/80 text-sm md:text-base mb-8">
-              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> Cansancio físico, mental o emocional.</li>
-              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> Estrés, ansiedad o sensación de saturación.</li>
-              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> Bloqueos personales o dificultad para avanzar.</li>
-              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> Etapas de cambio, duelo, separación o transformación.</li>
-              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> Sensación de carga energética o ambientes densos.</li>
-              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> Necesidad de cerrar ciclos del pasado.</li>
-              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> Falta de claridad, dispersión o desconexión interior.</li>
-              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> Deseo de armonizar tu energía y recuperar equilibrio.</li>
+              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> {t('services.energeticasChecklist1')}</li>
+              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> {t('services.energeticasChecklist2')}</li>
+              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> {t('services.energeticasChecklist3')}</li>
+              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> {t('services.energeticasChecklist4')}</li>
+              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> {t('services.energeticasChecklist5')}</li>
+              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> {t('services.energeticasChecklist6')}</li>
+              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> {t('services.energeticasChecklist7')}</li>
+              <li className="flex items-start gap-3"><Check size={20} className="text-accent-sage shrink-0 mt-0.5" /> {t('services.energeticasChecklist8')}</li>
             </ul>
             <p className="text-xs text-text-muted/50 italic bg-text-main/5 p-4 rounded-xl border border-text-main/10">
-              * Este trabajo no sustituye un tratamiento médico, psicológico o psiquiátrico cuando sea necesario. Se ofrece como acompañamiento complementario para favorecer tu bienestar, tu calma y tu proceso personal.
+              {t('services.energeticasDisclaimer')}
             </p>
           </div>
 
@@ -679,7 +631,7 @@ const Services: React.FC = () => {
                 <div key={service.id} id={service.id} className="block scroll-mt-32 w-full">
                   <div className="flex items-center gap-3 mb-6 reveal-up">
                     <div className="h-[1px] w-12 bg-gradient-to-r from-accent-sage to-transparent"></div>
-                    <span className="text-[0.65rem] tracking-[0.4em] uppercase text-accent-sage/80">Herramienta Energética</span>
+                    <span className="text-[0.65rem] tracking-[0.4em] uppercase text-accent-sage/80">{t('services.herramientaEnergeticaLabel')}</span>
                   </div>
 
                   <h3 className="font-serif text-[clamp(2.5rem,4vw,4rem)] font-light leading-none text-text-main mb-10 reveal-up">
@@ -737,7 +689,7 @@ const Services: React.FC = () => {
                         
                         {/* Texto que cambia de color para contrastar con el fondo dorado */}
                         <span className="relative z-10 text-xs tracking-[0.2em] uppercase text-text-main group-hover:text-bg-base font-bold transition-colors duration-500">
-                          Agendar Sesión de {service.title}
+                          {t('services.cta', { service: service.title })}
                         </span>
                       </Link>
                     </div>
@@ -752,29 +704,29 @@ const Services: React.FC = () => {
           <div className="glass-card p-8 md:p-14 mt-32 reveal-up bg-text-main/5 border-none">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               <div>
-                <h4 className="font-serif text-2xl text-text-main mb-6">¿Cómo es una sesión?</h4>
+                <h4 className="font-serif text-2xl text-text-main mb-6">{t('services.sesionClosingHeading')}</h4>
                 <p className="text-text-muted/80 text-sm md:text-base leading-relaxed mb-4">
-                  Primero conversamos sobre el motivo de consulta y el objetivo que deseas trabajar. Después realizo una valoración energética y aplico la técnica más adecuada según tu caso.
+                  {t('services.sesionClosingP1')}
                 </p>
                 <p className="text-text-muted/80 text-sm md:text-base leading-relaxed">
-                  Al finalizar, te explico de forma sencilla qué se ha trabajado y qué puedes observar en los días posteriores. Cada sesión se realiza con respeto, cuidado y confidencialidad. Mi objetivo es acompañarte para que puedas sentirte con más calma, claridad y equilibrio en tu proceso.
+                  {t('services.sesionClosingP2')}
                 </p>
               </div>
               <div>
-                <h4 className="font-serif text-2xl text-text-main mb-6">Mi forma de trabajar</h4>
+                <h4 className="font-serif text-2xl text-text-main mb-6">{t('services.miFormaHeading')}</h4>
                 <p className="text-text-muted/80 text-sm md:text-base leading-relaxed mb-4">
-                  Trabajo desde una visión integrativa: cuerpo, mente, emoción y energía forman parte de una misma historia. Por eso, cada persona necesita un acompañamiento único.
+                  {t('services.miFormaP1')}
                 </p>
                 <p className="text-text-main text-sm md:text-base leading-relaxed font-medium bg-gradient-to-r from-accent-sage/20 to-transparent p-4 rounded-xl border-l-2 border-accent-sage">
-                  No trabajo con promesas ni soluciones mágicas. Trabajo con presencia, escucha, experiencia y herramientas que ayudan a ordenar, liberar y fortalecer tu energía de forma consciente.
+                  {t('services.miFormaP2')}
                 </p>
               </div>
             </div>
 
             <div className="mt-12 text-center">
-              <p className="text-text-muted/80 mb-6 italic">Si sientes que estás en un momento de cambio, bloqueo o cansancio interno, estas terapias pueden ayudarte a reconectar contigo y avanzar con más claridad.</p>
+              <p className="text-text-muted/80 mb-6 italic">{t('services.closingText')}</p>
               <Link to="/contact" className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-bg-base bg-gradient-to-r from-accent-sage to-accent-gold px-8 py-4 rounded-full hover:opacity-90 transition-all duration-300 font-bold" data-hoverable="true">
-                Agendar Acompañamiento
+                {t('services.ctaAcompanamiento')}
               </Link>
             </div>
           </div>

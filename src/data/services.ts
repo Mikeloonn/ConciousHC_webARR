@@ -1,4 +1,4 @@
-import { Service, PriceItem } from '../types';
+import { Service } from '../types';
 import { IMAGES } from '../constants/images';
 
 export const servicesList: Service[] = [
@@ -40,8 +40,3 @@ export const servicesList: Service[] = [
   }
 ];
 
-export const pricesList: PriceItem[] = [
-  { name: 'Consulta Inicial', duration: '60 min', price: 'S/. 100' },
-  { name: 'Sesión de Acupuntura', duration: '45 min', price: 'S/. 80' },
-  { name: 'Masaje Terapéutico', duration: '50 min', price: 'S/. 90' },
-];

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import * as THREE from 'three';
+import { useTranslation } from 'react-i18next';
 import PageHeader from '../components/PageHeader';
 import { Mail, MapPin } from 'lucide-react';
 import SEO from '../components/SEO';
@@ -87,6 +88,7 @@ const Contact: React.FC = () => {
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const MAX_CHARS = 500;
+  const { t } = useTranslation();
   const { theme } = useTheme();
   const isLight = theme === 'light';
 
@@ -235,7 +237,7 @@ const Contact: React.FC = () => {
           title="Contacto | Acupuntura en Torremolinos, Málaga"
           description="Agenda tu cita de acupuntura en Torremolinos, Málaga. Teléfono +34 624 253 470. Plaza Andalucía 4, Centro Comercial España, Local 81."
         />
-      <PageHeader title="CONTACTO" breadcrumb="Contacto" />
+      <PageHeader title={t('contact.pageHeaderTitle')} breadcrumb={t('contact.pageHeaderBreadcrumb')} />
 
       <section className="relative py-24 md:py-32">
         <canvas ref={canvasRef} className="absolute inset-0 z-0 w-full h-full pointer-events-none"></canvas>
@@ -253,10 +255,10 @@ const Contact: React.FC = () => {
                   <WhatsappIcon size={28} />
                 </div>
                 <h3 className="font-serif text-2xl text-text-main mb-3">
-                  <AnimatedText text="WhatsApp" />
+                  <AnimatedText text={t('contact.whatsapp')} />
                 </h3>
                 <span className="text-text-muted group-hover:text-text-main transition-colors font-sans tracking-widest text-sm break-all">
-                  +34 624 253 470
+                  {t('contact.phone')}
                 </span>
               </a>
             </div>
@@ -268,10 +270,10 @@ const Contact: React.FC = () => {
                   <Mail size={28} strokeWidth={1.5} />
                 </div>
                 <h3 className="font-serif text-2xl text-text-main mb-3">
-                  <AnimatedText text="Email" delay={0.1} />
+                  <AnimatedText text={t('contact.email')} delay={0.1} />
                 </h3>
                 <span className="text-text-muted group-hover:text-text-main transition-colors font-sans text-sm break-all">
-                  acupunturaholisticayeni@gmail.com
+                  {t('contact.emailAddr')}
                 </span>
               </a>
             </div>
@@ -283,10 +285,10 @@ const Contact: React.FC = () => {
                   <MapPin size={28} strokeWidth={1.5} />
                 </div>
                 <h3 className="font-serif text-2xl text-text-main mb-3">
-                  <AnimatedText text="Dirección" delay={0.2} />
+                  <AnimatedText text={t('contact.address')} delay={0.2} />
                 </h3>
                 <p className="text-text-muted leading-relaxed font-sans text-sm transition-colors group-hover:text-text-main">
-                  Plaza Andalucía 4, Centro Comercial España local 81, 29620 - Torremolinos, Málaga.
+                  {t('contact.addressText')}
                 </p>
               </a>
             </div>
@@ -297,15 +299,15 @@ const Contact: React.FC = () => {
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
             
             <div>
-              <span className="section-label reveal-up block">Conecta con Nosotros</span>
+              <span className="section-label reveal-up block">{t('contact.formLabel')}</span>
               <h2 className="section-heading text-[clamp(2.5rem,5vw,4rem)] mt-4 mb-8">
-                <AnimatedText text="Comienza tu" className="block" />
+                <AnimatedText text={t('contact.formHeading1')} className="block" />
                 <br />
-                <AnimatedText text="camino" className="italic text-accent-gold" delay={0.2} /> <AnimatedText text="hoy" delay={0.4} />
+                <AnimatedText text={t('contact.formHeading2')} className="italic text-accent-gold" delay={0.2} /> <AnimatedText text={t('contact.formHeading3')} delay={0.4} />
               </h2>
               <div className="organic-divider mb-8 reveal-up"></div>
               <p className="text-text-muted leading-relaxed mb-10 reveal-up">
-                Estamos aquí para acompañarte. Cuéntanos cómo te sientes y juntos encontraremos el camino hacia tu equilibrio. Tu primera consulta es el primer paso hacia una nueva versión de ti.
+                {t('contact.formDesc')}
               </p>
 
               <div className="glass-card p-2 rounded-3xl h-[350px] md:h-[400px] overflow-hidden group reveal-up">
@@ -316,7 +318,7 @@ const Contact: React.FC = () => {
                   style={{ border: 0, borderRadius: '1.25rem', filter: 'grayscale(0.6) contrast(1.1) opacity(0.8)' }}
                   allowFullScreen={true}
                   loading="lazy"
-                  title="Ubicación de la Clínica"
+                  title={t('contact.mapTitle')}
                   className="transition-all duration-700 group-hover:filter-none"
                 ></iframe>
               </div>
@@ -327,47 +329,47 @@ const Contact: React.FC = () => {
                 <div className="absolute top-0 right-0 w-32 h-32 bg-accent-gold rounded-full blur-[80px] opacity-10 pointer-events-none"></div>
 
                 <h3 className="font-serif text-3xl text-text-main mb-8">
-                  <AnimatedText text="Envíanos un mensaje" delay={0.1} />
+                  <AnimatedText text={t('contact.formTitle')} delay={0.1} />
                 </h3>
 
-                <input type="hidden" name="_subject" value="¡Nuevo mensaje desde tu web de Acupuntura!" />
+                <input type="hidden" name="_subject" value={t('contact.formSubject')} />
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="_captcha" value="false" />
                 <input type="text" name="_honey" style={{ display: 'none' }} />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-[10px] tracking-[0.2em] uppercase text-text-muted mb-2">Nombre completo</label>
-                    <input type="text" name="Nombre" maxLength={50} required placeholder="Tu nombre" 
+                    <label className="block text-[10px] tracking-[0.2em] uppercase text-text-muted mb-2">{t('contact.nameLabel')}</label>
+                    <input type="text" name="Nombre" maxLength={50} required placeholder={t('contact.namePlaceholder')} 
                       className="w-full bg-text-main/5 border border-text-main/10 rounded-xl px-5 py-4 text-text-main font-sans text-sm outline-none focus:border-accent-sage/40 focus:bg-text-main/10 focus:shadow-[0_0_20px_rgba(179,189,163,0.05)] transition-all placeholder:text-text-main/20" />
                   </div>
                   <div>
-                    <label className="block text-[10px] tracking-[0.2em] uppercase text-text-muted mb-2">Email</label>
-                    <input type="email" name="Email" maxLength={100} required placeholder="tu@email.com" 
+                    <label className="block text-[10px] tracking-[0.2em] uppercase text-text-muted mb-2">{t('contact.emailLabel')}</label>
+                    <input type="email" name="Email" maxLength={100} required placeholder={t('contact.emailPlaceholder')} 
                       className="w-full bg-text-main/5 border border-text-main/10 rounded-xl px-5 py-4 text-text-main font-sans text-sm outline-none focus:border-accent-sage/40 focus:bg-text-main/10 focus:shadow-[0_0_20px_rgba(179,189,163,0.05)] transition-all placeholder:text-text-main/20" />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] tracking-[0.2em] uppercase text-text-muted mb-2">Asunto</label>
-                  <input type="text" name="Asunto" maxLength={100} required placeholder="¿En qué te podemos ayudar?" 
+                  <label className="block text-[10px] tracking-[0.2em] uppercase text-text-muted mb-2">{t('contact.subjectLabel')}</label>
+                  <input type="text" name="Asunto" maxLength={100} required placeholder={t('contact.subjectPlaceholder')} 
                     className="w-full bg-text-main/5 border border-text-main/10 rounded-xl px-5 py-4 text-text-main font-sans text-sm outline-none focus:border-accent-sage/40 focus:bg-text-main/10 focus:shadow-[0_0_20px_rgba(179,189,163,0.05)] transition-all placeholder:text-text-main/20" />
                 </div>
                 
                 <div>
-                  <label className="block text-[10px] tracking-[0.2em] uppercase text-text-muted mb-2">Mensaje</label>
+                  <label className="block text-[10px] tracking-[0.2em] uppercase text-text-muted mb-2">{t('contact.messageLabel')}</label>
                   <textarea
                     rows={4}
                     name="Mensaje"
                     required
-                    placeholder="Cuéntanos tus síntomas o dudas..."
+                    placeholder={t('contact.messagePlaceholder')}
                     maxLength={MAX_CHARS}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     className="w-full bg-text-main/5 border border-text-main/10 rounded-xl px-5 py-4 text-text-main font-sans text-sm outline-none focus:border-accent-sage/40 focus:bg-text-main/10 focus:shadow-[0_0_20px_rgba(179,189,163,0.05)] transition-all resize-none placeholder:text-text-main/20"
                   ></textarea>
                   <div className="text-right text-[10px] tracking-[0.1em] text-text-muted/40 mt-2 uppercase">
-                    {MAX_CHARS - message.length} caracteres restantes
+                    {t('contact.charsRemaining', { count: MAX_CHARS - message.length })}
                   </div>
                 </div>
 
@@ -386,14 +388,14 @@ const Contact: React.FC = () => {
                     </svg>
                   </div>
                   <label htmlFor="terms" className="text-xs text-text-muted/60 leading-relaxed cursor-pointer select-none">
-                    He leído y acepto la <Link to="/privacy" className="text-accent-gold hover:text-text-main transition-colors underline underline-offset-4">Política de Privacidad</Link> y consiento el tratamiento de mis datos.
+                    {t('contact.privacyCheckPrefix')} <Link to="/privacy" className="text-accent-gold hover:text-text-main transition-colors underline underline-offset-4">{t('contact.privacyCheckLink')}</Link> {t('contact.privacyCheckSuffix')}
                   </label>
                 </div>
 
                 {/* Alerta de Éxito */}
                 {isSubmitted && (
                   <div className="p-4 bg-gradient-to-r from-accent-sage/20 to-transparent border-l-2 border-accent-sage text-text-main rounded-r-lg text-sm font-medium animate-fade-in">
-                    ¡Mensaje enviado con éxito! Nos pondremos en contacto contigo muy pronto.
+                    {t('contact.successMsg')}
                   </div>
                 )}
 
@@ -407,7 +409,7 @@ const Contact: React.FC = () => {
                       : 'hover:border-accent-sage/60 hover:-translate-y-1 transition-all duration-300 shadow-[0_10px_40px_rgba(179,189,163,0.15)] cursor-pointer'
                     }`}
                 >
-                  <span className="relative z-10 font-bold">{isSubmitting ? 'ENVIANDO...' : 'ENVIAR MENSAJE'}</span>
+                  <span className="relative z-10 font-bold">{isSubmitting ? t('contact.submitting') : t('contact.submit')}</span>
                 </button>
               </form>
             </div>
