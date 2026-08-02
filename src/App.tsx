@@ -23,7 +23,11 @@ const ScrollToTopRoute = () => {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    const NAV_OFFSET = 120;
+    // El navbar fijo mide ~56px (img h-9 + py-2.5) y los elementos target
+    // tienen scroll-mt-32 (128px) en el CSS. Lenis respeta scroll-margin-top,
+    // por lo que un offset de -100 reduce el aire final entre navbar y título
+    // dejando ~28px de respiro visible bajo el navbar.
+    const NAV_OFFSET = 0;
 
     // Scroll via Lenis para coherencia con el smooth scroll global.
     const scrollToTarget = (id: string) => {
