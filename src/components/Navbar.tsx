@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '../context/ThemeContext';
 import logo from '../assets/images/logo-conscious-healing-center.jpg';
 import LanguageSwitcher from './LanguageSwitcher';
+import { trapWheelScroll } from '../utils/scrollTrap';
 
 const Navbar: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -111,7 +112,7 @@ const Navbar: React.FC = () => {
                     <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 w-[280px] z-50">
                       {/* Contenedor tipo ventanita con scroll interno */}
                       <div className="bg-[#0a0a08]/95 backdrop-blur-xl border border-[#e8ebe3]/10 rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.6)] p-2 w-full">
-                        <div className="overflow-y-auto max-h-[320px] flex flex-col pr-1">
+                        <div className="overflow-y-auto max-h-[320px] flex flex-col pr-1" onWheel={trapWheelScroll}>
                           {link.subItems.map(subItem => (
                             <Link
                               key={subItem.key}

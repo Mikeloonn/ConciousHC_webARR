@@ -7,6 +7,7 @@ import { IMAGES } from '../constants/images';
 import { Check, Leaf, ChevronDown } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { trapWheelScroll } from '../utils/scrollTrap';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -290,7 +291,7 @@ if (element) {
             {/* Dropdown MTC con scroll (max-h-[95px]) */}
             <div className={`grid transition-all duration-500 ease-in-out w-full lg:w-auto ${expandedMenu === 'mtc' ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
               <div className="overflow-hidden">
-                <div className="overflow-y-auto max-h-[95px] flex flex-col gap-3 text-left lg:text-right border-l-2 lg:border-l-0 lg:border-r-2 border-[#b3bda3]/40 pl-4 lg:pl-0 lg:pr-4 ml-1 lg:ml-0 lg:mr-1.5 py-1 pr-2">
+                <div className="overflow-y-auto max-h-[95px] flex flex-col gap-3 text-left lg:text-right border-l-2 lg:border-l-0 lg:border-r-2 border-[#b3bda3]/40 pl-4 lg:pl-0 lg:pr-4 ml-1 lg:ml-0 lg:mr-1.5 py-1 pr-2" onWheel={trapWheelScroll}>
                   {servicesData.map(service => (
                     <a
                       key={service.id}
@@ -323,7 +324,7 @@ if (element) {
             {/* Dropdown Coaching con scroll (max-h-[95px]) */}
             <div className={`grid transition-all duration-500 ease-in-out w-full lg:w-auto ${expandedMenu === 'coaching' ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
               <div className="overflow-hidden">
-                <div className="overflow-y-auto max-h-[95px] flex flex-col gap-3 text-left lg:text-right border-l-2 lg:border-l-0 lg:border-r-2 border-[#df9e53]/40 pl-4 lg:pl-0 lg:pr-4 ml-1 lg:ml-0 lg:mr-1.5 py-1 pr-2">
+                <div className="overflow-y-auto max-h-[95px] flex flex-col gap-3 text-left lg:text-right border-l-2 lg:border-l-0 lg:border-r-2 border-[#df9e53]/40 pl-4 lg:pl-0 lg:pr-4 ml-1 lg:ml-0 lg:mr-1.5 py-1 pr-2" onWheel={trapWheelScroll}>
                   {coachingSubItems.map(item => (
                     <a
                       key={item.id}
@@ -356,7 +357,7 @@ if (element) {
             {/* Dropdown Energéticas con scroll (max-h-[95px]) */}
             <div className={`grid transition-all duration-500 ease-in-out w-full lg:w-auto ${expandedMenu === 'energeticas' ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
               <div className="overflow-hidden">
-                <div className="overflow-y-auto max-h-[95px] flex flex-col gap-3 text-left lg:text-right border-l-2 lg:border-l-0 lg:border-r-2 border-[#b3bda3]/40 pl-4 lg:pl-0 lg:pr-4 ml-1 lg:ml-0 lg:mr-1.5 py-1 pr-2">
+                <div className="overflow-y-auto max-h-[95px] flex flex-col gap-3 text-left lg:text-right border-l-2 lg:border-l-0 lg:border-r-2 border-[#b3bda3]/40 pl-4 lg:pl-0 lg:pr-4 ml-1 lg:ml-0 lg:mr-1.5 py-1 pr-2" onWheel={trapWheelScroll}>
                   {energeticasData.map(service => (
                     <a
                       key={service.id}
