@@ -42,15 +42,25 @@ const ScrollToTopRoute = () => {
       const el = document.getElementById(id);
       if (!el) return;
 
-      // Las animaciones de ScrollTrigger modifican el layout/altura de la página
-      // (elementos `.reveal-up` con opacity:0/y:60 al montarse). Si scrolleamos antes
-      // de que la geometría del documento sea estable, el offset medido será erróneo.
-      // Forzamos un recálculo de ScrollTrigger y luego scrolleamos.
-      // El requestAnimationFrame asegura que el navegador haya hecho layout/paint
-      // del contenido de la nueva ruta antes de medir getBoundingClientRect().
+      // Cuando navegamos a Services con hash desde otra página, el contenido
+      // se monta y Lenis cachea `this.limit` (altura máxima de scroll) en
+      // el momento del mount. Pero Services tiene imágenes con loading="lazy"
+      // y elementos `.reveal-up` que cambian la altura del documento después.
+      // Sin `lenis.resize()`, el `limit` queda obsoleto y `clamp(0, target, limit)`
+      // trunca targets que están al final del documento (masaje-tuina, moxibustion,
+      // coaching, péndulo, sanación, biomagnetismo). El objeto del target existe
+      // pero Lenis se queda corto y no llega.
+      //
+      // Doble rAF: permite que React termine de pintar el contenido de la nueva
+      // ruta y que el navegador haga layout/paint antes de medir. Luego forzamos
+      // recálculo de Lenis y ScrollTrigger, y el scrollTo usa `force: true`
+      // para cortar cualquier animación previa.
       requestAnimationFrame(() => {
-        ScrollTrigger.refresh();
-        lenis.scrollTo(el, { offset: -NAV_OFFSET, duration: 1.2 });
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh();
+          lenis.resize();
+          lenis.scrollTo(el, { offset: -NAV_OFFSET, force: true, duration: 1.2 });
+        });
       });
     };
 

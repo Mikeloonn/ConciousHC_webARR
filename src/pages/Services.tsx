@@ -243,17 +243,22 @@ const Services: React.FC = () => {
     setExpandedMenu(null); // Al dar click en un enlace, contraemos el menú de nuevo
     
     const element = document.getElementById(id);
-    if (element) {
-      const offset = 120;
-      if ((window as any).__lenisInstance) {
-        (window as any).__lenisInstance.scrollTo(element, { offset, duration: 1.2 });
-      } else {
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = element.getBoundingClientRect().top;
-        const offsetPosition = (elementRect - bodyRect) - offset;
-        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-      }
+if (element) {
+    if ((window as any).__lenisInstance) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh();
+          (window as any).__lenisInstance.resize();
+          (window as any).__lenisInstance.scrollTo(element, { offset: 0, force: true, duration: 1.2 });
+        });
+      });
+    } else {
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const offsetPosition = elementRect - bodyRect;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
+  }
   };
 
   return (
