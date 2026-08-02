@@ -23,48 +23,50 @@ const ScrollToTopRoute = () => {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    const NAV_OFFSET = 120;
+
     // Scroll via Lenis para coherencia con el smooth scroll global.
-    // Se usa el evento 'lenis-ready' disparado tras inicialización en App.
-    const scrollViaLenis = (target: number | string, offset: number = 0) => {
-      if ((window as any).__lenisInstance) {
-        (window as any).__lenisInstance.scrollTo(target, { offset, duration: 1.2 });
-      } else {
-        typeof target === 'number'
-          ? window.scrollTo({ top: target, behavior: 'smooth' })
-          : (() => {
-              const el = document.getElementById(target);
-              if (el) {
-                const top = el.getBoundingClientRect().top + window.scrollY - offset;
-                window.scrollTo({ top, behavior: 'smooth' });
-              }
-            })();
+    const scrollToTarget = (id: string) => {
+      const lenis = (window as any).__lenisInstance;
+      if (!lenis) return;
+
+      if (id === '') {
+        lenis.scrollTo(0, { duration: 1.2 });
+        return;
       }
+
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      // Las animaciones de ScrollTrigger modifican el layout/altura de la página
+      // (elementos `.reveal-up` con opacity:0/y:60 al montarse). Si scrolleamos antes
+      // de que la geometría del documento sea estable, el offset medido será erróneo.
+      // Forzamos un recálculo de ScrollTrigger y luego scrolleamos.
+      // El requestAnimationFrame asegura que el navegador haya hecho layout/paint
+      // del contenido de la nueva ruta antes de medir getBoundingClientRect().
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+        lenis.scrollTo(el, { offset: -NAV_OFFSET, duration: 1.2 });
+      });
     };
 
-    const navigate = () => {
-      if (hash) {
-        const id = hash.replace('#', '');
-        setTimeout(() => {
-          scrollViaLenis(id, 120);
-        }, 600);
-      } else {
-        scrollViaLenis(0);
-      }
+    const performNavigation = () => {
+      const id = hash.replace('#', '');
+      scrollToTarget(id);
     };
 
+    // Si Lenis ya está inicializado (caso normal tras primera carga),
+    // navegamos directamente. Si no, esperamos al evento 'lenis-ready'.
     if ((window as any).__lenisInstance) {
-      navigate();
+      performNavigation();
     } else {
       const onReady = () => {
         window.removeEventListener('lenis-ready', onReady);
-        navigate();
+        performNavigation();
       };
       window.addEventListener('lenis-ready', onReady);
+      return () => window.removeEventListener('lenis-ready', onReady);
     }
-
-    return () => {
-      window.removeEventListener('lenis-ready', () => {});
-    };
   }, [pathname, hash]);
 
   return null;
